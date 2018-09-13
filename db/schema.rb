@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180712104413) do
+ActiveRecord::Schema.define(version: 20180816103754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,22 @@ ActiveRecord::Schema.define(version: 20180712104413) do
     t.index ["regime_id"], name: "index_sequence_counters_on_regime_id"
   end
 
+  create_table "suggested_categories", force: :cascade do |t|
+    t.bigint "transaction_detail_id"
+    t.string "category"
+    t.integer "confidence_level"
+    t.boolean "admin_lock", default: false, null: false
+    t.boolean "overridden", default: false, null: false
+    t.string "suggestion_stage", null: false
+    t.string "logic", null: false
+    t.bigint "matched_transaction_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["confidence_level"], name: "index_suggested_categories_on_confidence_level"
+    t.index ["matched_transaction_id"], name: "index_suggested_categories_on_matched_transaction_id"
+    t.index ["transaction_detail_id"], name: "index_suggested_categories_on_transaction_detail_id"
+  end
+
   create_table "system_configs", force: :cascade do |t|
     t.boolean "importing", default: false, null: false
     t.datetime "import_started_at"
@@ -204,7 +220,6 @@ ActiveRecord::Schema.define(version: 20180712104413) do
     t.boolean "excluded", default: false, null: false
     t.string "excluded_reason"
     t.string "category_description"
-    t.string "category_logic"
     t.index ["customer_reference"], name: "index_transaction_details_on_customer_reference"
     t.index ["sequence_number"], name: "index_transaction_details_on_sequence_number"
     t.index ["transaction_file_id"], name: "index_transaction_details_on_transaction_file_id"
@@ -284,5 +299,6 @@ ActiveRecord::Schema.define(version: 20180712104413) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "suggested_categories", "transaction_details", column: "matched_transaction_id"
   add_foreign_key "transaction_files", "users"
 end
