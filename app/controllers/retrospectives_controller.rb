@@ -9,29 +9,15 @@ class RetrospectivesController < ApplicationController
   # GET /regimes/:regime_id/history
   # GET /regimes/:regime_id/history.json
   def index
-    # regions = PreSrocRegionsQuery.call(regime: @regime)
-    # regions = transaction_store.retrospective_regions
     @region = params.fetch(:region, cookies.fetch(:region, ''))
-    # @region = regions.first unless regions.include? @region
-    # q = params.fetch(:search, "")
-    # sort_col = params.fetch(:sort, :customer_reference)
-    # sort_dir = params.fetch(:sort_direction, 'asc')
     pg = params.fetch(:page, 1)
     per_pg = params.fetch(:per_page, 10)
 
-    @financial_years = PreSrocFinancialYearsQuery.call(regime: @regime)
+    @financial_years = Query::FinancialYears.call(regime: @regime)
     @financial_year = params.fetch(:fy, cookies.fetch(:fy, ''))
     @financial_year = '' unless @financial_years.include? @financial_year
 
-    @transactions = PreSrocTransactionsQuery.call(query_params)
-    # @transactions = transaction_store.retrospective_transactions(
-    #   q,
-    #   pg,
-    #   per_pg,
-    #   @region,
-    #   sort_col,
-    #   sort_dir
-    # )
+    @transactions = Query::PreSrocTransactions.call(query_params)
 
     summary = nil
 
@@ -45,12 +31,6 @@ class RetrospectivesController < ApplicationController
         end
       end
       format.csv do
-        # @transactions = transaction_store.transactions_to_be_billed_for_export(
-        #   q,
-        #   @region,
-        #   sort_col,
-        #   sort_dir
-        # ).unexcluded.limit(15000)
         send_data csv.export(presenter.wrap(@transactions.limit(15000))), csv_opts
       end
       format.json do
@@ -100,7 +80,7 @@ class RetrospectivesController < ApplicationController
       fys
     end
 
-    def transaction_store
-      @transaction_store ||= TransactionStorageService.new(@regime, current_user)
-    end
+    # def transaction_store
+    #   @transaction_store ||= TransactionStorageService.new(@regime, current_user)
+    # end
 end

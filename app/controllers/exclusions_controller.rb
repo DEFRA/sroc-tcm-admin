@@ -20,21 +20,11 @@ class ExclusionsController < ApplicationController
     pg = params.fetch(:page, cookies.fetch(:page, 1))
     per_pg = params.fetch(:per_page, cookies.fetch(:per_page, 10))
 
-    @financial_years = ExcludedFinancialYearsQuery.call(regime: @regime)
+    @financial_years = Query::FinancialYears.call(regime: @regime)
     @financial_year = params.fetch(:fy, cookies.fetch(:fy, ''))
     @financial_year = '' unless @financial_years.include? @financial_year
 
-    # @transactions = transaction_store.excluded_transactions(
-    #   q,
-    #   fy,
-    #   pg,
-    #   per_pg,
-    #   @region,
-    #   sort_col,
-    #   sort_dir
-    # )
-    #
-    @transactions = ExcludedTransactionsQuery.call(query_params)
+    @transactions = Query::ExcludedTransactions.call(query_params)
 
     respond_to do |format|
       format.html do
@@ -47,19 +37,9 @@ class ExclusionsController < ApplicationController
         end
       end
       format.csv do
-        # transactions = ExcludedTransactionsQuery.call(
-        # # @transactions = transaction_store.transactions_to_be_billed_for_export(
-        #   regime: @regime,
-        #   search: q,
-        #   region: @region,
-        #   sort_column: sort_col,
-        #   sort_direction: sort_dir
-        # ).limit(15000)
         send_data csv.export(presenter.wrap(@transactions.limit(15000))), csv_opts
       end
       format.json do
-        # @transactions = present_transactions_for_json(@transactions.page(pg).per(per_pg))
-        # @transactions = present_transactions_for_json(@transactions, region, regions, financial_years)
         render json: present_transactions_for_json(@transactions.page(pg).per(per_pg))
       end
     end
@@ -79,7 +59,7 @@ class ExclusionsController < ApplicationController
     end
 
     def present_transactions_for_json(transactions)
-      regions = ExcludedRegionsQuery.call(regime: @regime)
+      regions = Query::Regions.call(regime: @regime)
       selected_region = params.fetch(:region, regions.first)
       arr = present_transactions(transactions)
 
@@ -106,7 +86,7 @@ class ExclusionsController < ApplicationController
     end
 
     def financial_years
-      ExcludedFinancialYearsQuery.call(regime: @regime)
+      Query::FinancialYears.call(regime: @regime)
     end
 
     def financial_year_options(fy_list)
