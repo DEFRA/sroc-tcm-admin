@@ -66,6 +66,8 @@ gem 'devise_invitable'
 
 gem 'secure_headers'
 
+gem 'oauth2'
+
 group :production do
   gem 'airbrake', "~> 5.0"
 end
@@ -101,6 +103,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem 'minitest-reporters'
+  gem 'webmock'
   gem 'mocha'
 end
 
