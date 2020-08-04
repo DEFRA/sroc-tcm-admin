@@ -7,7 +7,7 @@ module APIConnector
     end
 
     def call
-      post_request(@endpoint, { region: @region })
+      post(@endpoint, region: @region)
     end
   end
 end

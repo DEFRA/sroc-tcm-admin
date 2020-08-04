@@ -17,42 +17,42 @@ class APIConnectorServiceTest < ActiveSupport::TestCase
     WebMock.allow_net_connect!
   end
 
-  def test_can_get_request
-    stub_request(:get, @api_url).to_return(:body => test_ok)
+  def test_can_get
+    stub_request(:get, @api_url).to_return(body: test_ok)
     api_object = APIConnector::APIObject.new
 
-    response = api_object.get_request("test")
+    response = api_object.get('test')
 
     assert(response[:success])
     assert_equal(response[:body], test_ok_symbolized)
   end
 
-  def test_can_post_request
-    stub_request(:post, @api_url).to_return(:body => test_ok)
+  def test_can_post
+    stub_request(:post, @api_url).to_return(body: test_ok)
     api_object = APIConnector::APIObject.new
 
-    response = api_object.post_request("test", {test: "test"})
-    
+    response = api_object.post('test', test: 'test')
+
     assert(response[:success])
     assert_equal(response[:body], test_ok_symbolized)
   end
 
-  def test_api_server_error
-    stub_request(:get, @api_url).to_return(:status => 500)
+  def test_api_server_500_error
+    stub_request(:get, @api_url).to_return(status: 500)
     api_object = APIConnector::APIObject.new
 
     TcmLogger.expects(:error).once
-    response = api_object.get_request("test")
+    response = api_object.get('test')
 
     assert_equal(response[:success], false)
   end
 
-  def test_api_server_error
-    stub_request(:get, @api_url).to_return(:status => 400)
+  def test_api_server_400_error
+    stub_request(:get, @api_url).to_return(status: 400)
     api_object = APIConnector::APIObject.new
 
     TcmLogger.expects(:notify).once
-    response = api_object.get_request("test")
+    response = api_object.get('test')
 
     assert_equal(response[:success], false)
   end
@@ -62,31 +62,29 @@ class APIConnectorServiceTest < ActiveSupport::TestCase
     api_object = APIConnector::APIObject.new
 
     TcmLogger.expects(:notify).once
-    response = api_object.get_request("test")
+    response = api_object.get('test')
 
     assert_equal(response[:success], false)
   end
-
 
   def test_ok
     '{"test": "ok"}'
   end
 
   def test_ok_symbolized
-    JSON.parse(test_ok, {:symbolize_names => true})
+    JSON.parse(test_ok, symbolize_names: true)
   end
 
   def valid_auth_response
     {
-      :headers => {"Content-Type" => "application/json"},
-      :status => 200,
-      :body => 
-        %Q({
+      headers: { 'Content-Type' => 'application/json' },
+      status: 200,
+      body:
+        %({
           "access_token": "dummy_auth_token",
           "expires_in": 3600,
           "token_type": "Bearer"
         })
     }
   end
-
 end

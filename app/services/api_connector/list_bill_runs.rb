@@ -6,7 +6,7 @@ module APIConnector
     end
 
     def call
-      get_request(@endpoint)
+      get(@endpoint)
     end
   end
 end
