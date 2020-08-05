@@ -1,8 +1,9 @@
 require 'net/http'
-require 'Base64'
 
 module APIConnector
   class APIObject < ServiceObject
+    attr_reader :body
+
     def get(endpoint, payload = '')
       api_request(endpoint, payload, Net::HTTP::Get)
     end
@@ -24,24 +25,41 @@ module APIConnector
     def api_request(endpoint, payload, http)
       request = build_http_request(endpoint, payload, http)
       response = http_connection.request(request)
+      handle_response(endpoint, http, response)
+      self
+    rescue StandardError => e
+      tcm_api_other_error(e)
+      self
+    end
 
+    def handle_response(endpoint, http, response)
       case response
       when Net::HTTPSuccess
-        return { success: true, body: JSON.parse(response.body, symbolize_names: true )}
+        build_success_response(response)
       when Net::HTTPInternalServerError
-        # Charging module API server error
-        TcmLogger.error("Bill run service problem: #{http} #{endpoint} #{response.body}")
-        build_error_response('Unable to retrieve data due to an unexpected error in the Charging Module API.'\
-          '\nPlease try again later')
+        tcm_api_error(endpoint, http, response)
       else
-        # something unexpected happened
-        TcmLogger.notify(Exceptions::APIConnectorError.new("#{http} #{endpoint} #{response.body}"))
-        build_error_response('Unable to retrieve data due to an unexpected error.'\
-          '\nPlease try again later')
+        api_connector_error(endpoint, http, response)
       end
-    rescue => e
+    end
+
+    def tcm_api_error(endpoint, http, response)
+      # Charging module API server error
+      TcmLogger.error("Bill run service problem: #{http} #{endpoint} #{response.body}")
+      build_error_response('Unable to retrieve data due to an unexpected error in the Charging Module API.'\
+        '\nPlease try again later')
+    end
+
+    def api_connector_error(endpoint, http, response)
+      # something unexpected happened
+      TcmLogger.notify(Exceptions::APIConnectorError.new("#{http} #{endpoint} #{response.body}"))
+      build_error_response('Unable to retrieve data due to an unexpected error.'\
+        '\nPlease try again later')
+    end
+
+    def tcm_api_other_error(error)
       # something REALLY unexpected happened ...
-      TcmLogger.notify(e)
+      TcmLogger.notify(error)
       build_error_response('Unable to retrieve data from the Charging Module API. '\
         'Please log a call with the service desk.')
     end
@@ -56,8 +74,14 @@ module APIConnector
       request
     end
 
+    def build_success_response(response)
+      @result = true
+      @body = JSON.parse(response.body, symbolize_names: true)
+    end
+
     def build_error_response(text)
-      { success: false, body: text }
+      @result = false
+      @body = text
     end
 
     def api_url
@@ -71,21 +95,7 @@ module APIConnector
     end
 
     def auth_token
-      @auth_token ||= make_token_request.token
-    end
-
-    def make_token_request
-      client  = OAuth2::Client.new(
-        ENV['COGNITO_USERNAME'], ENV['COGNITO_PASSWORD'],
-        site: ENV['COGNITO_HOST'], token_url: '/oauth2/token'
-      )
-      begin
-        token = client.client_credentials.get_token
-      rescue => e
-        raise Exceptions::APIConnectorError.new("Error retrieving Congito token: #{e}")
-      else
-        token
-      end
+      @auth_token ||= APIConnector::AuthorisationObject.call.token
     end
   end
 end

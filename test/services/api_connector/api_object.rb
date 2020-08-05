@@ -23,8 +23,8 @@ class APIConnectorServiceTest < ActiveSupport::TestCase
 
     response = api_object.get('test')
 
-    assert(response[:success])
-    assert_equal(response[:body], test_ok_symbolized)
+    assert(response.success?)
+    assert_equal(response.body, test_ok_symbolized)
   end
 
   def test_can_post
@@ -33,8 +33,8 @@ class APIConnectorServiceTest < ActiveSupport::TestCase
 
     response = api_object.post('test', test: 'test')
 
-    assert(response[:success])
-    assert_equal(response[:body], test_ok_symbolized)
+    assert(response.success?)
+    assert_equal(response.body, test_ok_symbolized)
   end
 
   def test_api_server_500_error
@@ -44,7 +44,7 @@ class APIConnectorServiceTest < ActiveSupport::TestCase
     TcmLogger.expects(:error).once
     response = api_object.get('test')
 
-    assert_equal(response[:success], false)
+    assert_equal(response.success?, false)
   end
 
   def test_api_server_400_error
@@ -54,7 +54,7 @@ class APIConnectorServiceTest < ActiveSupport::TestCase
     TcmLogger.expects(:notify).once
     response = api_object.get('test')
 
-    assert_equal(response[:success], false)
+    assert_equal(response.success?, false)
   end
 
   def test_api_unexpected_error
@@ -64,7 +64,7 @@ class APIConnectorServiceTest < ActiveSupport::TestCase
     TcmLogger.expects(:notify).once
     response = api_object.get('test')
 
-    assert_equal(response[:success], false)
+    assert_equal(response.success?, false)
   end
 
   def test_ok
