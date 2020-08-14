@@ -153,7 +153,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2018.0812)
     mini_mime (1.0.1)
-    mini_portile2 (2.3.0)
+    mini_portile2 (2.4.0)
     minitest (5.10.2)
     minitest-reporters (1.1.19)
       ansi
@@ -166,8 +166,8 @@ GEM
     multi_json (1.12.1)
     mustermann (1.0.0)
     nio4r (2.1.0)
-    nokogiri (1.8.5)
-      mini_portile2 (~> 2.3.0)
+    nokogiri (1.10.10)
+      mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
     passenger (5.1.11)
       rack
