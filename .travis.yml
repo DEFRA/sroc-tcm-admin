@@ -64,5 +64,4 @@ before_script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
 
 script:
-  - xvfb-run make test
-  - bundle exec rails test
+  - xvfb-run --server-args="-screen 0 1024x768x24" bundle exec rails test
