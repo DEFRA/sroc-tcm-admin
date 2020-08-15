@@ -13,6 +13,8 @@ env:
 
 services:
   - redis
+  # We need xvfb to support running chrome and chromedriver for our selenium
+  # based integration tests
   - xvfb
 
 language: ruby
@@ -41,16 +43,9 @@ before_script:
   # Thanks to https://travis-ci.community/u/sheean for his response which solved
   # this problem for us
   # https://travis-ci.community/t/how-to-setup-chromedriver-74-with-chrome-74-for-travis/2678/10
-  - echo 'HERE BE STUFF'
-  - echo $PWD
-  - echo $PATH
-  - ls -la /home/travis
   - CHROME_INSTALLED_VERSION=`google-chrome-stable --version | sed -E 's/(^Google Chrome |\.[0-9]+ )//g'`
   - CHROMEDRIVER_VERSION=`curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_INSTALLED_VERSION"`
-  - echo $CHROME_INSTALLED_VERSION
-  - echo $CHROMEDRIVER_VERSION
   - curl "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -O
-  - ls -la
   - unzip chromedriver_linux64.zip -d /home/travis
   - sudo mv -f /home/travis/chromedriver /usr/local/bin/chromedriver
   - sudo chown root:root /usr/local/bin/chromedriver
