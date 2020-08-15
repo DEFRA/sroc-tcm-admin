@@ -29,13 +29,6 @@ before_install:
   - gem install -v 1.17.3 bundler --no-document
 
 before_script:
-  # Replace database.yml with database.travis.yml (but leave filename as
-  # database.yml). database.travis.yml is the config needed for Travis, and it
-  # needs to be in place before we run the migrations.
-  - cp config/database.travis.yml config/database.yml
-  - RAILS_ENV=test bundle exec rake db:create --trace
-  - RAILS_ENV=test bundle exec rake db:migrate --trace
-  #
   # To support running selenium on Travis we have told Travis to install Chrome
   # (see addons). You also need the chromedriver which Travis doesn't install.
   # To make this 'future-proof' we use a couple of scripts to determine the
@@ -46,14 +39,26 @@ before_script:
   # Thanks to https://travis-ci.community/u/sheean for his response which solved
   # this problem for us
   # https://travis-ci.community/t/how-to-setup-chromedriver-74-with-chrome-74-for-travis/2678/10
-  - CHROME_INSTALLED_VERSION=`google-chrome-stable --version | sed -E 's/(^Google Chrome |\.[0-9]+ )//g'`
-  - CHROMEDRIVER_VERSION=`curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_INSTALLED_VERSION"`
   - echo 'HERE BE STUFF'
   - echo $PWD
   - echo $PATH
   - echo $CHROME_INSTALLED_VERSION
   - echo $CHROMEDRIVER_VERSION
   - ls -la /home/travis
+  - CHROME_INSTALLED_VERSION=`google-chrome-stable --version | sed -E 's/(^Google Chrome |\.[0-9]+ )//g'`
+  - CHROMEDRIVER_VERSION=`curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_INSTALLED_VERSION"`
+  - curl "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -O
+  - unzip chromedriver_linux64.zip -d /home/travis
+  - sudo mv -f /home/travis/chromedriver /usr/local/bin/chromedriver
+  - sudo chown root:root /usr/local/bin/chromedriver
+  - sudo chmod 0755 /usr/local/bin/chromedriver
+  #
+  # Replace database.yml with database.travis.yml (but leave filename as
+  # database.yml). database.travis.yml is the config needed for Travis, and it
+  # needs to be in place before we run the migrations.
+  - cp config/database.travis.yml config/database.yml
+  - RAILS_ENV=test bundle exec rake db:create --trace
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
 
 script:
   - bundle exec rails test
