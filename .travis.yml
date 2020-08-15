@@ -6,6 +6,10 @@ addons:
   sonarcloud:
     organization: "defra"
 
+env:
+  global:
+    - DEVISE_MAILER_SENDER=no-reply@example.com
+
 language: ruby
 rvm: 2.4.1
 cache: bundler
