@@ -15,6 +15,7 @@ services:
   - redis
 
 language: ruby
+os: linux
 rvm: 2.4.1
 cache: bundler
 
