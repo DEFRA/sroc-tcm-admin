@@ -43,12 +43,13 @@ before_script:
   - echo 'HERE BE STUFF'
   - echo $PWD
   - echo $PATH
-  - echo $CHROME_INSTALLED_VERSION
-  - echo $CHROMEDRIVER_VERSION
   - ls -la /home/travis
   - CHROME_INSTALLED_VERSION=`google-chrome-stable --version | sed -E 's/(^Google Chrome |\.[0-9]+ )//g'`
   - CHROMEDRIVER_VERSION=`curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_INSTALLED_VERSION"`
+  - echo $CHROME_INSTALLED_VERSION
+  - echo $CHROMEDRIVER_VERSION
   - curl "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -O
+  - ls -la
   - unzip chromedriver_linux64.zip -d /home/travis
   - sudo mv -f /home/travis/chromedriver /usr/local/bin/chromedriver
   - sudo chown root:root /usr/local/bin/chromedriver
