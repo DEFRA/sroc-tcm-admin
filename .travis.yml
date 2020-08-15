@@ -10,6 +10,7 @@ env:
   global:
     - DEVISE_MAILER_SENDER=no-reply@example.com
     - REDIS_URL="redis://localhost:6379"
+    - DISPLAY=:99.0
 
 services:
   - redis
@@ -64,4 +65,4 @@ before_script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
 
 script:
-  - xvfb-run --server-args="-screen 0 1024x768x24" bundle exec rails test
+  - xvfb-run bundle exec rails test
