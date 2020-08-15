@@ -10,7 +10,6 @@ env:
   global:
     - DEVISE_MAILER_SENDER=no-reply@example.com
     - REDIS_URL="redis://localhost:6379"
-    # - DISPLAY=:99.0
 
 services:
   - redis
@@ -66,3 +65,4 @@ before_script:
 
 script:
   - bundle exec rails test
+  - sonar-scanner
