@@ -30,4 +30,4 @@ end
 
 # Use test suite name to help simplecov merge minitest and rspec results
 # https://github.com/simplecov-ruby/simplecov#test-suite-names
-SimpleCov.command_name "test:unit:rspec"
+SimpleCov.command_name "test:unit:mini"
