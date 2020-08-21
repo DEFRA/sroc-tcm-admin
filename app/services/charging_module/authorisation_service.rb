@@ -2,6 +2,7 @@
 
 module ChargingModule
   class AuthorisationService < ServiceObject
+
     attr_reader :token
 
     # The current design of the base service object requires us to provide an
