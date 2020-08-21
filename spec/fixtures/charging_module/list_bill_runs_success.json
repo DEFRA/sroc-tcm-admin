@@ -1,0 +1,18 @@
+{
+  "bills": [
+    {
+      "_id": "5f3e4d45c4d01f0199d28ab0",
+      "index": 0,
+      "status": "calculating",
+      "balance": "1,691.34",
+      "created": "2014-01-26T06:03:26 -00:00"
+    },
+    {
+      "_id": "5f3e4d453b41a262a1023df8",
+      "index": 1,
+      "status": "calculating",
+      "balance": "1,173.92",
+      "created": "2014-05-07T12:52:37 -01:00"
+    }
+  ]
+}
