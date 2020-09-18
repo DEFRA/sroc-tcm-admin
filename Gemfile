@@ -32,7 +32,7 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 
 # bootstrap 4
-gem 'bootstrap', '~> 4.0.0.beta'
+gem 'bootstrap', '~> 4.3.1'
 # gem 'bootstrap', '~> 4.1.3'
 # jquery needed by bootstrap for rails 5.1+
 gem 'jquery-rails'
@@ -66,6 +66,10 @@ gem 'devise_invitable'
 
 gem 'secure_headers'
 
+# Wrapper for the OAuth 2.0 specification (https://oauth.net/2/). Needed to
+# authenticate with the Charging Module API
+gem 'oauth2'
+
 group :production do
   gem 'airbrake', "~> 5.0"
 end
@@ -74,9 +78,13 @@ end
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  gem 'dotenv-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Shim to load environment variables from a .env file into ENV in development
+  # and test
+  gem 'dotenv-rails'
+  # Project uses RSpec as its test framework
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -86,7 +94,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'letter_opener'
 end
 
 group :test do
@@ -103,6 +110,8 @@ group :test do
   gem 'minitest-reporters'
   gem 'webmock'
   gem 'mocha'
+  # Stubbing HTTP requests
+  gem 'webmock'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

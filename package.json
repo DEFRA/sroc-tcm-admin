@@ -3,13 +3,13 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "^3.0.2",
-    "axios": "^0.17.0",
+    "axios": "^0.18.1",
     "babel-polyfill": "6.26.0",
     "babel-preset-react": "^6.24.1",
     "coffeescript": "1.12.7",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react-dom": "^16.0.1",
     "react-select": "^1.0.0-rc.10",
     "react-simple-popover": "0.2.4"
   },
@@ -24,7 +24,7 @@
     "jest": "21.2.1",
     "react-test-renderer": "16.1.1",
     "standard": "^10.0.3",
-    "webpack-dev-server": "^2.9.2"
+    "webpack-dev-server": "^3.1.11"
   },
   "scripts": {
     "test": "standard app/assets/javascripts/*.js && jest"
