@@ -3,21 +3,21 @@
 require_relative "concerns/can_connect_to_api"
 
 module ChargingModule
-  class ListBillRunsService < ServiceObject
+  class CreateBillRunService < ServiceObject
     include ChargingModule::CanConnectToApi
 
     attr_reader :response
 
-    def initialize(params = {})
-      regime = params.fetch(:regime)
+    def initialize(payload = {})
+      regime = payload.fetch(:regime)
       @endpoint = "#{regime}/billruns"
-      @params = params.except(:regime)
+      @payload = payload.except(:regime)
     end
 
     def call
-      @response = make_get_request(@endpoint, @params)
+      @response = make_post_request(@endpoint, @payload)
       @result = true
-
+      puts @result
       self
     rescue StandardError => e
       @result = false
