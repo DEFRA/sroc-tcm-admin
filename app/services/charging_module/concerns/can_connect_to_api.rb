@@ -21,13 +21,12 @@ module ChargingModule
     end
 
     def build_http_request(endpoint, payload, params, http)
-      auth_token = '11111111'
       request = http.new(
         build_uri(endpoint, params),
         'Content-Type': 'application/json',
         'Authorization': auth_token
       )
-      request.body = payload.to_json if payload.present?
+      request.body = payload.to_json
 
       request
     end

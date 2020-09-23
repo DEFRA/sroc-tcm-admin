@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "concerns/can_connect_to_api"
+require_relative 'concerns/can_connect_to_api'
 
 module ChargingModule
   class CreateBillRunService < ServiceObject
@@ -17,7 +17,7 @@ module ChargingModule
     def call
       @response = make_post_request(@endpoint, @payload)
       @result = true
-      puts @result
+
       self
     rescue StandardError => e
       @result = false
