@@ -108,7 +108,6 @@ group :test do
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem 'minitest-reporters'
-  gem 'webmock'
   gem 'mocha'
   # Stubbing HTTP requests
   gem 'webmock'
