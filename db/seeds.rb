@@ -7,7 +7,7 @@ def create_user(details)
     password: ENV['DEFAULT_PASSWORD']
   )
 
-  add_regimes_to_user(user, details['regimes']) if user.regime_users.empty?
+  add_regimes_to_user(user, details['regimes'])
 
   user.save!
 end
