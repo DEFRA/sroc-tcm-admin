@@ -7,8 +7,7 @@ class DataExportController < ApplicationController
   before_action :set_regime, only: %i[index download generate]
 
   # GET /regimes/:regime_id/data_export
-  def index
-  end
+  def index; end
 
   def download
     result = FetchDataExportFile.call(regime: @regime)

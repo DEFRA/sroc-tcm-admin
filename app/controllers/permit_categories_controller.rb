@@ -61,8 +61,7 @@ class PermitCategoriesController < AdminController
     end
   end
 
-  def show
-  end
+  def show; end
 
   def new
     set_financial_year

@@ -34,8 +34,7 @@ class ExclusionsController < ApplicationController
 
   # GET /regimes/:regime_id/exclusions/1
   # GET /regimes/:regime_id/exclusions/1.json
-  def show
-  end
+  def show; end
 
   private
 

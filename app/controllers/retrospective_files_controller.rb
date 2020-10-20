@@ -30,12 +30,10 @@ class RetrospectiveFilesController < ApplicationController
   end
 
   # GET /regimes/:regimes_id/transaction_files/1/edit
-  def edit
-  end
+  def edit; end
 
   # PATCH/PUT /regimes/:regimes_id/transaction_files/1
-  def update
-  end
+  def update; end
 
   private
 

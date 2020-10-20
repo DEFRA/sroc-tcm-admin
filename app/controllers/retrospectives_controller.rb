@@ -35,8 +35,7 @@ class RetrospectivesController < ApplicationController
 
   # GET /regimes/:regime_id/history/1
   # GET /regimes/:regime_id/history/1.json
-  def show
-  end
+  def show; end
 
   private
 

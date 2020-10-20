@@ -51,8 +51,7 @@ class TransactionsController < ApplicationController
   end
 
   # GET /regimes/:regimes_id/transactions/1/edit
-  def edit
-  end
+  def edit; end
 
   # PATCH/PUT /regimes/:regimes_id/transactions/1
   # PATCH/PUT /regimes/:regimes_id/transactions/1.json

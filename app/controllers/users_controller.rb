@@ -15,8 +15,7 @@ class UsersController < AdminController
     end
   end
 
-  def show
-  end
+  def show; end
 
   def new
     # default to role with lowest rights

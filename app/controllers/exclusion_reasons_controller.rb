@@ -12,8 +12,7 @@ class ExclusionReasonsController < AdminController
     @reasons = @regime.exclusion_reasons.order(:reason)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @reason = @regime.exclusion_reasons.build
@@ -30,8 +29,7 @@ class ExclusionReasonsController < AdminController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @reason.update(reason_params)

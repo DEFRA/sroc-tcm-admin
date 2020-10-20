@@ -199,8 +199,7 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
       pluck(:tcm_transaction_reference).count
   end
 
-  def test_pas_assigns_transaction_references_correctly
-  end
+  def test_pas_assigns_transaction_references_correctly; end
 
   def test_pas_splits_transaction_references_by_financial_year
     @exporter.export
