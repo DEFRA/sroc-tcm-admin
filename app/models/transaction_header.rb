@@ -24,6 +24,7 @@ class TransactionHeader < ApplicationRecord
   private
 
   def generate_file_reference
-    self.file_reference = "#{feeder_source_code}#{region}#{file_type_flag}#{"%05d" % file_sequence_number}"
+    sequence_number = sprintf("%<sequence>05d", sequence: file_sequence_number)
+    self.file_reference = "#{feeder_source_code}#{region}#{file_type_flag}#{sequence_number}"
   end
 end
