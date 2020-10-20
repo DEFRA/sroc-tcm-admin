@@ -113,7 +113,7 @@ class TransactionFileImporterTest < ActiveSupport::TestCase
      ["22-MAR-2000", "9900"],
      ["1-APR-2001", "0102"]].each do |y|
        d = Date.parse(y[0])
-      assert_equal y[1], @importer.determine_financial_year(d)
+       assert_equal y[1], @importer.determine_financial_year(d)
      end
   end
 
@@ -123,7 +123,7 @@ class TransactionFileImporterTest < ActiveSupport::TestCase
      ["22-MAR-1998", "9798"],
      ["1-APR-1999", "9900"]].each do |y|
        d = Date.parse(y[0])
-      assert_equal y[1], @importer.determine_financial_year(d)
+       assert_equal y[1], @importer.determine_financial_year(d)
      end
   end
 end
