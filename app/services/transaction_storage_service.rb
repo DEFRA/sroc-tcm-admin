@@ -88,7 +88,7 @@ class TransactionStorageService
           where(reference_1: transaction.reference_1)
     end
     q.order(:reference_1)
-    end
+  end
 
   def unbilled_financial_years
     financial_years_for("unbilled")
