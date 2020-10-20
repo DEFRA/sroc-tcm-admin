@@ -51,7 +51,7 @@ class AnnualBillingDataFileService
   end
 
   def valid_file?(file)
-    #check file looks reasonable
+    # check file looks reasonable
     begin
       csv = CSV.new(file,
                     headers: true,

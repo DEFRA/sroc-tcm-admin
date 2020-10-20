@@ -18,9 +18,9 @@ class PutDataExportFileTest < ActiveSupport::TestCase
     edf = @regime.export_data_file
     filename = edf.exported_filename
     path = File.join(@tmp_path, "csv", File.basename(filename))
-    File.delete(path) #if File.exists?(path)
+    File.delete(path) # if File.exists?(path)
     path = File.join(@cache_path, File.basename(filename))
-    File.delete(path) #if File.exists?(filename)
+    File.delete(path) # if File.exists?(filename)
   end
 
   def test_it_copies_local_file_to_csv_export_store
