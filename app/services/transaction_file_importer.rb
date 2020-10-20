@@ -91,19 +91,19 @@ class TransactionFileImporter
     regime = header.regime
     if regime.installations?
       data.merge!({
-        filename: row[Detail::Filename],
+                    filename: row[Detail::Filename],
         reference_1: row[Detail::PermitReference],
         reference_2: row[Detail::OriginalPermitReference],
         reference_3: row[Detail::AbsOriginalPermitReference],
         customer_name: row[Detail::PasCustomerName]
-      })
+                  })
     elsif regime.water_quality?
       consent_parts = extract_consent_fields(row[Detail::LineDescription])
       data.merge!(consent_parts) unless consent_parts.empty?
       data.merge!({
-        variation: extract_variation(row),
+                    variation: extract_variation(row),
         customer_name: row[Detail::CfdCustomerName]
-      })
+                  })
     elsif regime.waste?
       line = row[Detail::LineDescription]
       ref = if row[Detail::TransactionType] == "C"

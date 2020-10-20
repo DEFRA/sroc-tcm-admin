@@ -142,7 +142,7 @@ class CfdTransactionDetailPresenterTest < ActiveSupport::TestCase
 
   def test_it_transforms_into_json
     assert_equal({
-      id: @transaction.id,
+                   id: @transaction.id,
       customer_reference: @presenter.customer_reference,
       tcm_transaction_reference: @presenter.tcm_transaction_reference,
       generated_filename: @presenter.generated_filename,
@@ -167,7 +167,7 @@ class CfdTransactionDetailPresenterTest < ActiveSupport::TestCase
       excluded: @presenter.excluded,
       excluded_reason: @presenter.excluded_reason,
       error_message: @presenter.error_message
-    }, @presenter.as_json)
+                 }, @presenter.as_json)
   end
 
   def clean_variation

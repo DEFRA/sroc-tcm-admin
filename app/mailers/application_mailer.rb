@@ -6,20 +6,20 @@ class ApplicationMailer < ActionMailer::Base
 
   def prevent_tracking
     headers({
-      "X-SMTPAPI" => {
-        "filters" => {
-          "bypass_list_management" => {
-            "settings" => {
-              "enable" => 1
-            }
-          },
-          "clicktrack" => {
-            "settings" => {
-              "enable" => 0
-            }
-          }
-        }
-      }.to_json
-    })
+              "X-SMTPAPI" => {
+                "filters" => {
+                  "bypass_list_management" => {
+                    "settings" => {
+                      "enable" => 1
+                    }
+                  },
+                  "clicktrack" => {
+                    "settings" => {
+                      "enable" => 0
+                    }
+                  }
+                }
+              }.to_json
+            })
   end
 end
