@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NextPasReference < ServiceObject
   attr_accessor :reference
 
@@ -14,4 +16,3 @@ class NextPasReference < ServiceObject
     self
   end
 end
-

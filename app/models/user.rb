@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   enum role: [:billing, :admin, :read_only, :read_only_export]
   enum active_regime: [:cfd, :pas, :wml]

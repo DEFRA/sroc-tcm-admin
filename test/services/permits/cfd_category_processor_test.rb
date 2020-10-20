@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper.rb'
 
 class CfdCategoryProcessorTest < ActiveSupport::TestCase
@@ -11,8 +13,6 @@ class CfdCategoryProcessorTest < ActiveSupport::TestCase
 
     @processor = Permits::CfdCategoryProcessor.new(@header)
     build_mock_calculator
-    # @calculator = build_mock_calculator
-    # @processor.stubs(:calculator).returns(@calculator)
   end
 
   def test_fetch_unique_consents_returns_list_of_consent_references

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ViewModels
   class AnnualBillingData
     attr_reader :regime, :upload, :user

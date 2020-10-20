@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper.rb'
 
 class WmlCategoryProcessorTest < ActiveSupport::TestCase
@@ -12,8 +14,6 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
 
     @processor = Permits::WmlCategoryProcessor.new(@header)
     build_mock_calculator
-    # @calculator = build_mock_calculator
-    # @processor.stubs(:calculator).returns(@calculator)
     @header.regime.permit_categories.create!(code: '2.15.3',
                                              description: 'test',
                                              status: 'active')

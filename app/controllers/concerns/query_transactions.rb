@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module QueryTransactions
   extend ActiveSupport::Concern
 

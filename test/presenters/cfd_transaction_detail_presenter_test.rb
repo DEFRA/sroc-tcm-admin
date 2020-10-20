@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper.rb'
 
 class CfdTransactionDetailPresenterTest < ActiveSupport::TestCase
@@ -74,7 +76,7 @@ class CfdTransactionDetailPresenterTest < ActiveSupport::TestCase
 
   def test_variation_percentage_file_returns_blank_when_100
     @presenter.variation = "100%"
-    assert_equal("", @presenter.variation_percentage_file) 
+    assert_equal("", @presenter.variation_percentage_file)
   end
 
   def test_it_returns_consent_reference

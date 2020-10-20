@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # :nocov:
 unless ENV.fetch("HEROKU", false)
   Resque.redis = ENV.fetch("REDIS_URL")

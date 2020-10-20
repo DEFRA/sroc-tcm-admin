@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "resque/tasks"
 
 namespace :resque do
@@ -89,7 +91,7 @@ namespace :resque do
   # seems to hang capistrano/jenkins
   def run_worker_fork(queue, count = 1, ops = {})
     puts "Starting #{count} worker(s) with QUEUE: #{queue}"
-    
+
     queues = queue.split(',')
 
     # get the git commit hash for later
@@ -97,7 +99,7 @@ namespace :resque do
 
     pids = []
     child = false
-    
+
     # Clear current db connection, ready to fork
     ::ActiveRecord::Base.clear_all_connections!
     count.times do

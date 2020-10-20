@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApproveMatchingTransactions < ServiceObject
   attr_reader :transaction, :count
 

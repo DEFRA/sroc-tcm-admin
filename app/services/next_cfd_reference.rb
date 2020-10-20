@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NextCfdReference < ServiceObject
   attr_accessor :reference
 

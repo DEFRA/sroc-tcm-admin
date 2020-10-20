@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ViewModels
   class AuditDetail
     attr_accessor :action, :attribute, :old_value, :new_value, :when, :who

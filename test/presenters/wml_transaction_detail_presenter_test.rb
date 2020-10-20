@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper.rb'
 
 class WmlTransactionDetailPresenterTest < ActiveSupport::TestCase
@@ -7,20 +9,6 @@ class WmlTransactionDetailPresenterTest < ActiveSupport::TestCase
     @presenter = WmlTransactionDetailPresenter.new(@transaction)
   end
 
-  # def test_it_returns_charge_params
-  #   assert_equal(@presenter.charge_params, {
-  #     permitCategoryRef: @transaction.category,
-  #     percentageAdjustment: clean_variation,
-  #     temporaryCessation: false,
-  #     compliancePerformanceBand: 'B',
-  #     billableDays: billable_days,
-  #     financialDays: financial_year_days,
-  #     chargePeriod: charge_period,
-  #     preConstruction: false,
-  #     environmentFlag: 'TEST'
-  #   })
-  # end
-  #
   def test_it_returns_compliance_band
     band = @transaction.line_attr_6
     band = band.present? ? band.first : ""

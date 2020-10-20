@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper.rb'
 
 module Query
@@ -29,4 +31,3 @@ module Query
     end
   end
 end
-

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Query
   class TransactionFiles < QueryObject
     def initialize(opts = {})

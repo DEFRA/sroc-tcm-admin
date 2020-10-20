@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class HistoryExportTest < ActionDispatch::IntegrationTest
@@ -21,5 +23,3 @@ class HistoryExportTest < ActionDispatch::IntegrationTest
     end
   end
 end
-
-

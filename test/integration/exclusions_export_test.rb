@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class ExclusionsExportTest < ActionDispatch::IntegrationTest
@@ -21,6 +23,3 @@ class ExclusionsExportTest < ActionDispatch::IntegrationTest
     end
   end
 end
-
-
-

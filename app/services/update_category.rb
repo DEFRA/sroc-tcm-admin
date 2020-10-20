@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateCategory < ServiceObject
   attr_reader :transaction
 

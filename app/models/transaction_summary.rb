@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TransactionSummary
   include ActiveModel::AttributeAssignment, ActionView::Helpers::NumberHelper
 

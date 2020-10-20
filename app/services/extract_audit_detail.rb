@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ExtractAuditDetail < ServiceObject
   attr_reader :transaction, :audit_details
 

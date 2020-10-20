@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ViewModels
   class ImportedTransactionFiles
     include RegimeScope, ActionView::Helpers::FormOptionsHelper

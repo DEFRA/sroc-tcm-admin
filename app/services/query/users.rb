@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Query
   class Users < QueryObject
     def initialize(opts = {})

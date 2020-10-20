@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class TransactionsExportTest < ActionDispatch::IntegrationTest
@@ -21,4 +23,3 @@ class TransactionsExportTest < ActionDispatch::IntegrationTest
     end
   end
 end
-

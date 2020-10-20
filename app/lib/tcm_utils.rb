@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TcmUtils
   def self.strip_bom(str)
     str.force_encoding('utf-8').gsub("\xEF\xBB\xBF".force_encoding('utf-8'), '')

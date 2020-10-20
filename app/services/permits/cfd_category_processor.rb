@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Permits
   class CfdCategoryProcessor < CategoryProcessorBase
     def suggest_categories

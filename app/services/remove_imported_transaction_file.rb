@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveImportedTransactionFile < ServiceObject
   attr_reader :transaction_header
 

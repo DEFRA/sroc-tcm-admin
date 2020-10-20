@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # run with: bundle exec rails runner benchmark/transactions_to_be_billed.rb
 #
 require 'benchmark/ips'

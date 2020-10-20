@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Query
   class RelatedBilledTransactions < QueryObject
     def initialize(opts = {})

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper.rb'
 
 class ApproveMatchingTransactionsTest < ActiveSupport::TestCase
@@ -33,4 +35,3 @@ class ApproveMatchingTransactionsTest < ActiveSupport::TestCase
     assert tt.reload.approved_for_billing?, "Unapproved but should be"
   end
 end
-

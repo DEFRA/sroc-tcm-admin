@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class ExcludedTransactionsTest < ActionDispatch::IntegrationTest
@@ -25,7 +27,7 @@ class ExcludedTransactionsTest < ActionDispatch::IntegrationTest
       assert row.has_style?('color' => 'rgba(170, 170, 170, 1)',
         'text-decoration' => /line-through/)
     end
-    
+
     page.select 'Excluded Transactions', from: 'mode'
     page.fill_in 'search', with: "wibble"
     page.click_button "Search"

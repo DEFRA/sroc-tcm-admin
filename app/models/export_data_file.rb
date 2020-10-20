@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ExportDataFile < ApplicationRecord
   belongs_to :regime, inverse_of: :export_data_file
 

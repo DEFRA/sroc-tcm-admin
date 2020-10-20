@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Regime < ApplicationRecord
   has_many :sequence_counters, inverse_of: :regime, dependent: :destroy
   has_many :transaction_headers, inverse_of: :regime, dependent: :destroy

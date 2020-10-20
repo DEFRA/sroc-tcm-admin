@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApproveTransaction < ServiceObject
   attr_reader :transaction
 

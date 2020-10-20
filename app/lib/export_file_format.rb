@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExportFileFormat
   ExportColumns = [
     { heading: 'Customer Reference', accessor: :customer_reference },

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PermitCategoryPresenter < SimpleDelegator
   def self.wrap(collection)
     collection.map { |o| new o }

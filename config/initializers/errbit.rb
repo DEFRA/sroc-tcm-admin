@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 if defined?(Airbrake)
   Airbrake.configure do |config|
     config.host = ENV.fetch("AIRBRAKE_HOST")

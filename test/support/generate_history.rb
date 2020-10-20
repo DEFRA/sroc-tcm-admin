@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module GenerateHistory
   def generate_historic_cfd
     f = transaction_files(:cfd_sroc_file)
@@ -5,7 +7,7 @@ module GenerateHistory
     history = []
     t2 = t.dup
     t2.reference_1 = 'AAAA/1/1'
-    t2.reference_2 = '1' 
+    t2.reference_2 = '1'
     t2.reference_3 = '1'
     t2.customer_reference = 'A1234'
     t2.status = 'billed'
@@ -84,7 +86,7 @@ module GenerateHistory
     history = []
     t2 = t.dup
     t2.reference_1 = '0123456'
-    t2.reference_2 = 'AAA/A0011' 
+    t2.reference_2 = 'AAA/A0011'
     t2.reference_3 = '1'
     t2.transaction_reference = 'E12344'
     t2.customer_reference = 'A1234'
@@ -116,7 +118,7 @@ module GenerateHistory
     history = []
     t2 = t.dup
     t2.reference_1 = '0123456'
-    t2.reference_2 = 'AAA/A0011' 
+    t2.reference_2 = 'AAA/A0011'
     t2.reference_3 = 'AAAA0001'
     t2.transaction_reference = 'E12344'
     t2.customer_reference = 'A1234'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FormErrorHelper
   def error_header(resource, opts = {})
     if resource.errors.any?

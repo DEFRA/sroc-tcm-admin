@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < AdminController
   include ViewModelBuilder
   before_action :set_user, only: [:show, :edit, :update, :reinvite]

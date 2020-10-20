@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WmlTransactionFilePresenter < TransactionFilePresenter
   def detail_row(td, idx)
     if td.credit?

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
@@ -23,7 +25,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create user" do
     assert_difference('User.count') do
-      post users_url, params: new_user_params 
+      post users_url, params: new_user_params
     end
     assert_redirected_to users_path
     assert_equal 'User account created', flash[:notice]

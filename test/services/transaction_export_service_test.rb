@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper.rb'
 
 class TransactionExportServiceTest < ActiveSupport::TestCase
@@ -182,4 +184,3 @@ class TransactionExportServiceTest < ActiveSupport::TestCase
     assert_equal expected, @exporter.regime_history_columns
   end
 end
-

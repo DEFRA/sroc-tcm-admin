@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # run with: bundle exec rails runner benchmark/pre_sroc_summary.rb
 #
 require 'benchmark/ips'

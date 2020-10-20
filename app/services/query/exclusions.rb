@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Query
   class Exclusions < QueryObject
     def initialize(opts = {})
@@ -10,4 +12,3 @@ module Query
     end
   end
 end
-

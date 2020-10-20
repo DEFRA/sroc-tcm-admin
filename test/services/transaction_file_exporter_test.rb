@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper.rb'
 
 class TransactionFileExporterTest < ActiveSupport::TestCase
@@ -122,7 +124,7 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
     @exporter.export
     file = TransactionFile.last
     assert_equal 3, file.transaction_details.count
-    
+
     file.transaction_details.update_all(customer_reference: 'ABCD1234',
                                         reference_1: 'ZZZZ9999')
     @transaction_2.update_attributes(tcm_charge: @transaction_1.tcm_charge,
@@ -139,7 +141,7 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
     @exporter.export
     file = TransactionFile.last
     assert_equal 3, file.transaction_details.count
-    
+
     file.transaction_details.update_all(customer_reference: 'ABCD1234',
                                         reference_1: 'ZZZZ9999',
                                         line_context_code: 'E')
@@ -169,7 +171,7 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
     @exporter.export
     file = TransactionFile.last
     assert_equal 3, file.transaction_details.count
-    
+
     file.transaction_details.update_all(customer_reference: 'ABCD1234',
                                         reference_1: 'ZZZZ9999')
     @transaction_2.update_attributes(tcm_charge: @transaction_1.tcm_charge,
@@ -186,7 +188,7 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
     @exporter.export
     file = TransactionFile.last
     assert_equal 3, file.transaction_details.count
-    
+
     file.transaction_details.update_all(customer_reference: 'ABCD1234',
                                         reference_1: 'ZZZZ9999')
     # 1,2 and 3 same permit reference
@@ -216,7 +218,7 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
     @exporter.export
     file = TransactionFile.last
     assert_equal 3, file.transaction_details.count
-    
+
     file.transaction_details.update_all(customer_reference: 'ABCD1234',
                                         reference_1: 'ZZZZ9999')
     @transaction_2.update_attributes(tcm_charge: @transaction_1.tcm_charge,
@@ -233,7 +235,7 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
     @exporter.export
     file = TransactionFile.last
     assert_equal 3, file.transaction_details.count
-    
+
     file.transaction_details.update_all(customer_reference: 'ABCD1234',
                                         reference_1: 'ZZZZ9999')
     # 1,2 and 3 same permit reference

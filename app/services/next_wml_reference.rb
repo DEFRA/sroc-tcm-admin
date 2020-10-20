@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NextWmlReference < ServiceObject
   attr_accessor :reference
 

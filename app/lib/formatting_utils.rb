@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FormattingUtils
   def yn_flag(bool)
     bool ? 'Y' : 'N'

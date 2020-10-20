@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PermitCategoriesController < AdminController
   include RegimeScope, FinancialYear
   before_action :set_regime, only: [:index, :new, :create]

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AuditService
   attr_reader :user
 

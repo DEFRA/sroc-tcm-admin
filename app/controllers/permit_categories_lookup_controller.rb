@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PermitCategoriesLookupController < ApplicationController
   include RegimeScope
   before_action :set_regime, only: [:index]
@@ -18,7 +20,7 @@ class PermitCategoriesLookupController < ApplicationController
     end
   end
 
-  private 
+  private
     def present(categories)
       categories.map { |c| { code: c.code, description: c.description } }
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SystemConfig < ApplicationRecord
   def self.config
     first_or_create

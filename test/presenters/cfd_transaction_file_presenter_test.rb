@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper.rb'
 
 class CfdTransactionFilePresenterTest < ActiveSupport::TestCase
@@ -99,7 +101,7 @@ class CfdTransactionFilePresenterTest < ActiveSupport::TestCase
   end
 
   def test_detail_record_consent_number_not_prefixed
-    # consent no. shouldn't be prefixed with 'Consent No - ' or 
+    # consent no. shouldn't be prefixed with 'Consent No - ' or
     # 'Authorization No ' as per the incoming file value
     @presenter.transaction_details.each_with_index do |td, i|
       expected_value = td.reference_1

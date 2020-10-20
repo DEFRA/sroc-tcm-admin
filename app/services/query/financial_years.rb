@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Query
   class FinancialYears < QueryObject
     def initialize(opts = {})

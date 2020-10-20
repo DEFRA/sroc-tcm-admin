@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WmlTransactionDetailPresenter < TransactionDetailPresenter
   def charge_params
     {

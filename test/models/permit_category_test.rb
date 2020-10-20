@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class PermitCategoryTest < ActiveSupport::TestCase
@@ -87,7 +89,7 @@ class PermitCategoryTest < ActiveSupport::TestCase
       @permit_category.valid_from = invalid_val
       assert @permit_category.invalid?
       assert_not_nil @permit_category.errors[:valid_from]
-    end 
+    end
 
     @permit_category.valid_from = "2122"
     assert @permit_category.valid?
@@ -98,7 +100,7 @@ class PermitCategoryTest < ActiveSupport::TestCase
       @permit_category.valid_to = invalid_val
       assert @permit_category.invalid?
       assert_not_nil @permit_category.errors[:valid_to]
-    end 
+    end
 
     @permit_category.valid_to = "2425"
     assert @permit_category.valid?

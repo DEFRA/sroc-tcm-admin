@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SuggestedCategory < ApplicationRecord
   enum confidence_level: [ :green, :amber, :red ]
 

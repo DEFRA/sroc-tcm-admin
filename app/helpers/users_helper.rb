@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UsersHelper
   def user_submit_button(form)
     title = form.object.new_record? ? 'Add and Invite User' : 'Update User'

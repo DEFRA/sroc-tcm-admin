@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Query
   class SortTransactions < QueryObject
     def initialize(opts = {})

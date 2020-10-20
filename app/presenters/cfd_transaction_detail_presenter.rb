@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CfdTransactionDetailPresenter < TransactionDetailPresenter
   def charge_params
     {

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper.rb'
 
 class TransactionControllerTest < ActionDispatch::IntegrationTest
@@ -17,7 +19,7 @@ class TransactionControllerTest < ActionDispatch::IntegrationTest
     get regime_transactions_url(@regime)
     assert_response :success
   end
-  
+
   def test_it_should_get_index_for_csv
     setup_cfd
     get regime_transactions_path(@regime, format: :csv)

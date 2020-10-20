@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TransactionGroupFilters
   def regime_specific_detail_presenter_class
     name = "#{regime.slug}_transaction_detail_presenter".camelize

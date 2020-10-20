@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ViewModels
   class Exclusions < Transactions
     def initialize(params = {})

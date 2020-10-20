@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def create_user(details)
   user = User.new(
     first_name: details['firstname'],

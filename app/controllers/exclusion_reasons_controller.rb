@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ExclusionReasonsController < AdminController
   include RegimeScope
   # allow billing admins access to the index (frontend JSON requests)

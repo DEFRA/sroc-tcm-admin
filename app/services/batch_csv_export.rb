@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'csv'
 
 class BatchCsvExport < ServiceObject
@@ -19,7 +21,7 @@ class BatchCsvExport < ServiceObject
 
       batch_query do |t|
         y << csv_row(t)
-      end 
+      end
     end
 
     @result = true

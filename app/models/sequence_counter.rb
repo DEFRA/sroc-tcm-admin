@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SequenceCounter < ApplicationRecord
   belongs_to :regime, inverse_of: :sequence_counters
 

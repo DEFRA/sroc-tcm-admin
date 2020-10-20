@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TransactionsHelper
   def present_transaction(transaction)
     name = "#{transaction.regime.slug}_transaction_detail_presenter".camelize

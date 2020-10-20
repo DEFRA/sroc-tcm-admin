@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module RegimePresenter
   def presenter
     name = "#{@regime.slug}_transaction_detail_presenter".camelize

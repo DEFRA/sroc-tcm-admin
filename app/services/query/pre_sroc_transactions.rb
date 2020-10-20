@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Query
   class PreSrocTransactions < QueryObject
     def initialize(opts = {})

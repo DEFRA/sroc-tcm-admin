@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Query
   class PermitCategoryLastChanged < QueryObject
     def initialize(opts = {})
