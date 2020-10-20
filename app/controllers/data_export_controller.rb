@@ -2,7 +2,7 @@
 
 class DataExportController < ApplicationController
   include RegimeScope, FinancialYear, CsvExporter
-  before_action :set_regime, only: [:index, :download, :generate]
+  before_action :set_regime, only: %i[index download generate]
 
   # GET /regimes/:regime_id/data_export
   def index

@@ -2,7 +2,7 @@
 
 class RetrospectiveFilesController < ApplicationController
   include RegimeScope
-  before_action :set_regime, only: [:index, :create]
+  before_action :set_regime, only: %i[index create]
 
   # GET /regimes/:regime_id/transaction_files
   # GET /regimes/:regime_id/transaction_files.json

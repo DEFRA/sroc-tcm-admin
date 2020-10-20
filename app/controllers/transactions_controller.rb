@@ -2,9 +2,9 @@
 
 class TransactionsController < ApplicationController
   include RegimeScope, FinancialYear, CsvExporter, ViewModelBuilder
-  before_action :set_regime, only: [:index, :approve]
-  before_action :set_transaction, only: [:show, :edit, :update, :audit]
-  before_action :read_only_user_check!, only: [:update, :approve, :audit]
+  before_action :set_regime, only: %i[index approve]
+  before_action :set_transaction, only: %i[show edit update audit]
+  before_action :read_only_user_check!, only: %i[update approve audit]
 
   # GET /regimes/:regime_id/transactions
   # GET /regimes/:regime_id/transactions.json

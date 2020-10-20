@@ -2,7 +2,7 @@
 
 class UsersController < AdminController
   include ViewModelBuilder
-  before_action :set_user, only: [:show, :edit, :update, :reinvite]
+  before_action :set_user, only: %i[show edit update reinvite]
 
   def index
     @view_model = build_users_view_model
@@ -62,7 +62,7 @@ class UsersController < AdminController
   def user_params
     params.require(:user).permit(:email, :first_name, :last_name, :password,
                                  :enabled, :role,
-                                 regime_users_attributes: [:id, :regime_id, :enabled])
+                                 regime_users_attributes: %i[id regime_id enabled])
   end
 
   def build_regimes

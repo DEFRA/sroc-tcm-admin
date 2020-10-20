@@ -15,16 +15,16 @@ Rails.application.routes.draw do
   resources :regimes, only: [] do
     resources :permit_categories  # , only: [:index]
     resources :permit_categories_lookup, only: [:index]
-    resources :transactions, only: [:index, :show, :edit, :update] do
+    resources :transactions, only: %i[index show edit update] do
       put "approve", on: :collection
       get "audit", on: :member
     end
-    resources :history, only: [:index, :show]
-    resources :retrospectives, only: [:index, :show]
+    resources :history, only: %i[index show]
+    resources :retrospectives, only: %i[index show]
     resources :exclusions, only: [:index]
-    resources :transaction_files, only: [:index, :create]
-    resources :imported_transaction_files, only: [:index, :show, :edit, :update]
-    resources :transaction_summary, only: [:index, :show]
+    resources :transaction_files, only: %i[index create]
+    resources :imported_transaction_files, only: %i[index show edit update]
+    resources :transaction_summary, only: %i[index show]
     resources :retrospective_files, only: [:create]
     resources :retrospective_summary, only: [:index]
     resources :annual_billing_data_files, except: [:destroy]

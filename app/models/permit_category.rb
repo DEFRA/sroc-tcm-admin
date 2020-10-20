@@ -3,12 +3,12 @@
 class PermitCategory < ApplicationRecord
   include Auditable
 
-  audit_events [:create, :update]
-  audit_attributes [:code,
-                    :description,
-                    :valid_from,
-                    :valid_to,
-                    :status]
+  audit_events %i[create update]
+  audit_attributes %i[code
+                    description
+                    valid_from
+                    valid_to
+                    status]
   belongs_to :regime
 
   validate :valid_from_is_financial_year
@@ -19,7 +19,7 @@ class PermitCategory < ApplicationRecord
     message: "Code must be in dotted numeric format, with 1 to 3 segments between"\
       " 1 and 4 digits long. e.g. 6, 1.2, 9.34.1, 27.111.1234"
   }
-  validates :code, presence: true, uniqueness: { scope: [:regime_id, :valid_from] }
+  validates :code, presence: true, uniqueness: { scope: %i[regime_id valid_from] }
   validates :description, presence: true, unless: :excluded?
   validates :description, length: { maximum: 150 }
   validate :description_has_no_invalid_characters

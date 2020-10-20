@@ -2,8 +2,8 @@
 
 class PermitCategoriesController < AdminController
   include RegimeScope, FinancialYear
-  before_action :set_regime, only: [:index, :new, :create]
-  before_action :set_permit_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_regime, only: %i[index new create]
+  before_action :set_permit_category, only: %i[show edit update destroy]
 
   # GET /regime/cfd/permit_categories
   # GET /regime/cfd/permit_categories.json

@@ -6,7 +6,7 @@ class ExclusionReasonsController < AdminController
   skip_before_action :admin_only_check!, only: :index
 
   before_action :set_regime
-  before_action :set_reason, only: [:edit, :update, :destroy]
+  before_action :set_reason, only: %i[edit update destroy]
 
   def index
     @reasons = @regime.exclusion_reasons.order(:reason)

@@ -3,8 +3,8 @@
 class ImportedTransactionFilesController < ApplicationController
   include RegimeScope, ViewModelBuilder
 
-  before_action :set_regime, only: [:index, :update]
-  before_action :set_transaction_header, only: [:show, :edit]
+  before_action :set_regime, only: %i[index update]
+  before_action :set_transaction_header, only: %i[show edit]
   before_action :read_only_user_check!
 
   def index

@@ -3,8 +3,8 @@
 class AnnualBillingDataFilesController < ApplicationController
   include RegimeScope, ViewModelBuilder
 
-  before_action :set_regime, only: [:index, :new, :create]
-  before_action :set_upload, only: [:show, :edit, :update]
+  before_action :set_regime, only: %i[index new create]
+  before_action :set_upload, only: %i[show edit update]
 
   # GET /regimes/:regime_id/transactions
   # GET /regimes/:regime_id/transactions.json

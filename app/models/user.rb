@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  enum role: [:billing, :admin, :read_only, :read_only_export]
-  enum active_regime: [:cfd, :pas, :wml]
+  enum role: %i[billing admin read_only read_only_export]
+  enum active_regime: %i[cfd pas wml]
 
   has_many :regime_users, inverse_of: :user, dependent: :destroy
   has_many :regimes, -> { merge(RegimeUser.enabled) }, through: :regime_users
@@ -35,7 +35,7 @@ class User < ApplicationRecord
   end
 
   def self.ordered_roles
-    [:read_only, :read_only_export, :billing, :admin]
+    %i[read_only read_only_export billing admin]
   end
 
   def self.search(str)
