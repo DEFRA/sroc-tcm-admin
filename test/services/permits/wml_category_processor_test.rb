@@ -143,7 +143,7 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
     generate_historic_wml
 
     t = @transactions.second_to_last.dup
-    t.line_amount = 123000
+    t.line_amount = 123_000
     t.save!
 
     @processor.suggest_categories
@@ -321,7 +321,7 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
     generate_historic_wml
 
     t = @transactions.last.dup
-    t.line_amount = -123000
+    t.line_amount = -123_000
     t.save!
 
     @processor.suggest_categories
@@ -351,14 +351,14 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
     results = []
     t = transaction_details(:wml_annual)
     [
-      ["0123456", "E1234", "1", 12345, "A1234"],
-      ["0123457", "E1235", "1", 67890, "A3453"],
-      ["0123458", "E1236", "1", 12233, "A9483"],
-      ["0123459", "E1237", "1", 22991, "A33133"],
-      ["0123450", "E1238", "1", 435564, "A938392"],
-      ["0123450", "E1238", "2", 23665, "A938392"],
-      ["0123451", "E1239", "1", 124322, "A993022"],
-      ["0123451", "E1239", "2", -123991, "A993022"]
+      ["0123456", "E1234", "1", 12_345, "A1234"],
+      ["0123457", "E1235", "1", 67_890, "A3453"],
+      ["0123458", "E1236", "1", 12_233, "A9483"],
+      ["0123459", "E1237", "1", 22_991, "A33133"],
+      ["0123450", "E1238", "1", 435_564, "A938392"],
+      ["0123450", "E1238", "2", 23_665, "A938392"],
+      ["0123451", "E1239", "1", 124_322, "A993022"],
+      ["0123451", "E1239", "2", -123_991, "A993022"]
     ].each_with_index do |ref, i|
       tt = t.dup
       tt.sequence_number = 2 + i

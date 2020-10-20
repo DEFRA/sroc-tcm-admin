@@ -162,7 +162,7 @@ class CfdCategoryProcessorTest < ActiveSupport::TestCase
     history = generate_historic_with_supplemental_cfd
     history.last.update_attributes(category: "2.3.5")
     t = history.last.dup
-    t.line_amount = 567123
+    t.line_amount = 567_123
     t.reference_1 = "AAAA/2/2"
     t.reference_3 = "2"
     t.category = "2.3.6"
@@ -188,7 +188,7 @@ class CfdCategoryProcessorTest < ActiveSupport::TestCase
     t2.reference_2 = "1"
     t2.reference_3 = "1"
     t2.status = "billed"
-    t2.line_amount = 18724
+    t2.line_amount = 18_724
     t2.category = "2.3.5"
     t2.tcm_financial_year = "2021"
     t2.period_start = "1-APR-2020"
@@ -322,18 +322,18 @@ class CfdCategoryProcessorTest < ActiveSupport::TestCase
   def fixup_annual(header)
     t = transaction_details(:cfd_annual)
     [
-      ["AAAA", "1", "1", 12345, "A1234"],
-      ["AAAA", "1", "2", 546789, "A1234"],
-      ["AAAA", "2", "1", 334455, "A1234"],
-      ["AAAA", "2", "2", 21311, "A1234"],
-      ["AAAB", "1", "1", 67890, "A3453"],
-      ["AAAC", "1", "1", 12233, "A9483"],
-      ["AAAD", "1", "1", 22991, "A33133"],
-      ["AAAE", "1", "1", 435564, "A938392"],
-      ["AAAE", "1", "2", 23665, "A938392"],
-      ["AAAF", "2", "3", 124322, "A993022"],
-      ["AAAF", "2", "3", -123991, "A993022"],
-      ["AAAG", "2", "1", 45678, "BB11"],
+      ["AAAA", "1", "1", 12_345, "A1234"],
+      ["AAAA", "1", "2", 546_789, "A1234"],
+      ["AAAA", "2", "1", 334_455, "A1234"],
+      ["AAAA", "2", "2", 21_311, "A1234"],
+      ["AAAB", "1", "1", 67_890, "A3453"],
+      ["AAAC", "1", "1", 12_233, "A9483"],
+      ["AAAD", "1", "1", 22_991, "A33133"],
+      ["AAAE", "1", "1", 435_564, "A938392"],
+      ["AAAE", "1", "2", 23_665, "A938392"],
+      ["AAAF", "2", "3", 124_322, "A993022"],
+      ["AAAF", "2", "3", -123_991, "A993022"],
+      ["AAAG", "2", "1", 45_678, "BB11"],
       ["AAAG", "2", "2", 3456, "BB11"]
     ].each_with_index do |ref, i|
       tt = t.dup
@@ -354,16 +354,16 @@ class CfdCategoryProcessorTest < ActiveSupport::TestCase
   def fixup_supplemental(header)
     t = transaction_details(:cfd_annual)
     [
-      ["AAAA", "1", "1", -12345, "A1234", "1-APR-2018", "31-MAR-2019"],
+      ["AAAA", "1", "1", -12_345, "A1234", "1-APR-2018", "31-MAR-2019"],
       ["AAAA", "1", "1", 6789, "A1234", "1-APR-2018", "30-JUN-2018"],
-      ["AAAA", "2", "1", 334455, "A1234", "1-JUL-2018", "31-MAR-2019"],
-      ["AAAB", "1", "1", -34560, "B1234", "1-APR-2018", "31-MAR-2019"],
-      ["AAAB", "1", "1", 14153, "B1234", "1-APR-2018", "30-JUN-2018"],
-      ["AAAB", "2", "1", 20407, "B1234", "1-JUL-2018", "31-MAR-2019"],
-      ["AAAB", "2", "2", 33992, "B1234", "1-JUL-2018", "31-MAR-2019"],
-      ["AAAC", "1", "1", -34560, "C1234", "1-APR-2018", "31-MAR-2019"],
-      ["AAAC", "1", "1", 14153, "C1234", "1-APR-2018", "30-JUN-2018"],
-      ["AAAC", "1", "1", 20407, "C9876", "1-JUL-2018", "31-MAR-2019"]
+      ["AAAA", "2", "1", 334_455, "A1234", "1-JUL-2018", "31-MAR-2019"],
+      ["AAAB", "1", "1", -34_560, "B1234", "1-APR-2018", "31-MAR-2019"],
+      ["AAAB", "1", "1", 14_153, "B1234", "1-APR-2018", "30-JUN-2018"],
+      ["AAAB", "2", "1", 20_407, "B1234", "1-JUL-2018", "31-MAR-2019"],
+      ["AAAB", "2", "2", 33_992, "B1234", "1-JUL-2018", "31-MAR-2019"],
+      ["AAAC", "1", "1", -34_560, "C1234", "1-APR-2018", "31-MAR-2019"],
+      ["AAAC", "1", "1", 14_153, "C1234", "1-APR-2018", "30-JUN-2018"],
+      ["AAAC", "1", "1", 20_407, "C9876", "1-JUL-2018", "31-MAR-2019"]
     ].each_with_index do |ref, i|
       tt = t.dup
       tt.sequence_number = 2 + i
@@ -384,7 +384,7 @@ class CfdCategoryProcessorTest < ActiveSupport::TestCase
     history = generate_historic_cfd
     t2 = history.second.dup
     t2.status = "unbilled"
-    t2.line_amount = 18724
+    t2.line_amount = 18_724
     t2.category = nil
     t2.transaction_header_id = header.id
     t2.tcm_financial_year = "1920"
@@ -394,7 +394,7 @@ class CfdCategoryProcessorTest < ActiveSupport::TestCase
     t2.save!
     t3 = t2.dup
     t3.status = "unbilled"
-    t3.line_amount = 58117
+    t3.line_amount = 58_117
     t3.category = nil
     t3.transaction_header_id = header.id
     t3.tcm_financial_year = "1920"
@@ -404,7 +404,7 @@ class CfdCategoryProcessorTest < ActiveSupport::TestCase
     t3.save!
     t4 = t2.dup
     t4.status = "unbilled"
-    t4.line_amount = -76841
+    t4.line_amount = -76_841
     t4.category = nil
     t4.transaction_header_id = header.id
     t4.tcm_financial_year = "1920"

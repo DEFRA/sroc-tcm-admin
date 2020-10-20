@@ -38,7 +38,7 @@ class TransactionDetailTest < ActiveSupport::TestCase
   def test_indicates__when_charge_calculation_present
     @transaction.charge_calculation = nil
     assert_not @transaction.charge_calculated?, "charge_calculated? != false"
-    @transaction.charge_calculation = { some_value: 123456 }
+    @transaction.charge_calculation = { some_value: 123_456 }
     assert @transaction.charge_calculated?, "charge_calculated? == false"
   end
 

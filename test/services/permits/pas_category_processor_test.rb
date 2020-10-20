@@ -1601,7 +1601,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       t2.transaction_reference = "E12344"
       t2.customer_reference = "A"
       t2.status = "billed"
-      t2.line_amount = 12567
+      t2.line_amount = 12_567
       t2.category = "2.4.5"
       t2.period_start = "1-APR-2018"
       t2.period_end = "31-MAR-2019"

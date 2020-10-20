@@ -95,7 +95,7 @@ module ViewModels
     end
 
     # override me for different views
-    def csv_transactions(limit = 15000)
+    def csv_transactions(limit = 15_000)
       @csv ||= presenter.wrap(transactions.unexcluded.limit(limit), user)
     end
 

@@ -10,7 +10,7 @@ class BatchCsvExport < ServiceObject
   def initialize(params = {})
     @regime = params.fetch(:regime)
     @query = params.fetch(:query)
-    @max_limit = params.fetch(:max_limit, 15000)
+    @max_limit = params.fetch(:max_limit, 15_000)
     @batch_size = params.fetch(:batch_size, 1000)
     @csv_stream = nil
   end

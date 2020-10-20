@@ -20,7 +20,7 @@ module ViewModels
       all_region_options
     end
 
-    def csv_transactions(limit = 15000)
+    def csv_transactions(limit = 15_000)
       @csv ||= presenter.wrap(transactions.limit(limit), user)
     end
   end

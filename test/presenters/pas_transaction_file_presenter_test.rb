@@ -167,7 +167,7 @@ class PasTransactionFilePresenterTest < ActiveSupport::TestCase
         "chargeAmount" => transaction.tcm_charge.abs,
         "compliancePerformanceBand" => band,
         "decisionPoints" => {
-          "baselineCharge" => 196803,
+          "baselineCharge" => 196_803,
           "percentageAdjustment" => 0
         }
       },
