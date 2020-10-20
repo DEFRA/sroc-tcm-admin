@@ -117,7 +117,7 @@ class PermitCategoriesController < AdminController
       if can_remove_permit_category?(cat.code, @financial_year)
         @permit_category = permit_store.
                            update_or_create_new_version(
-            cat.code, permit_category_params[:description],
+                             cat.code, permit_category_params[:description],
             @financial_year, "excluded"
           )
       else
@@ -132,7 +132,7 @@ class PermitCategoriesController < AdminController
     else
       @permit_category = permit_store.
                          update_or_create_new_version(
-          cat.code, permit_category_params[:description],
+                           cat.code, permit_category_params[:description],
           @financial_year, cat.status
         )
     end
