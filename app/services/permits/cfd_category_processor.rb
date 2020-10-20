@@ -120,6 +120,7 @@ module Permits
       m = /\A(.*)\/(\d+)\/(\d+)\z/.match(consent_reference)
       # make 'like' string from permit and discharge parts of consent reference
       raise "Badly formatted consent reference: '#{consent_reference}'" if m.nil?
+
       "#{m[1]}/%/#{m[3]}"
     end
   end

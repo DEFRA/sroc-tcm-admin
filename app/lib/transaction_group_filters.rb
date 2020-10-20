@@ -49,6 +49,7 @@ module TransactionGroupFilters
   def cfd_group_filter(base_query)
     incomplete_records = base_query.unapproved.distinct.pluck(:reference_1)
     return base_query.approved if incomplete_records.empty?
+
     base_query.approved.where.not(reference_1: incomplete_records)
   end
 
@@ -80,6 +81,7 @@ module TransactionGroupFilters
   def wml_group_filter(base_query)
     incomplete_records = base_query.unapproved.distinct.pluck(:reference_1)
     return base_query.approved if incomplete_records.empty?
+
     base_query.approved.where.not(reference_1: incomplete_records)
   end
 

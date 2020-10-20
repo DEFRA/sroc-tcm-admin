@@ -21,6 +21,7 @@ class CfdTransactionDetailPresenter < TransactionDetailPresenter
 
   def clean_variation_percentage
     return 100 if variation_percentage.blank?
+
     variation_percentage.gsub(/%/,"")
   end
 
@@ -31,6 +32,7 @@ class CfdTransactionDetailPresenter < TransactionDetailPresenter
   def variation_percentage_file
     val = variation_percentage
     return "" if val == "100%"
+
     val
   end
 

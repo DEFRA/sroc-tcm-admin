@@ -70,11 +70,13 @@ class TransactionDetailPresenter < SimpleDelegator
 
   def currency_baseline_charge
     return "" if baseline_charge.nil?
+
     pence_to_currency(baseline_charge)
   end
 
   def currency_tcm_charge
     return "" if transaction_detail.tcm_charge.nil?
+
     pence_to_currency(transaction_detail.tcm_charge)
   end
 

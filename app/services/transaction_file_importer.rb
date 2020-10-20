@@ -43,12 +43,15 @@ class TransactionFileImporter
         elsif record_type == "D"
           # detail record
           raise Exceptions::TransactionFileError, "Detail record but no header record" if header.nil?
+
           detail = extract_detail(header, row, process_retrospectives)
           raise Exceptions::TransactionFileError, "Detail record has no reference_1" if detail[:reference_1].nil?
+
           header.transaction_details.create(detail)
         elsif record_type == "T"
           # trailer record
           raise Exceptions::TransactionFileError, "Trailer record but no header record" if header.nil?
+
           # pull totals from trailer record
           header.transaction_count = row[Trailer::RecordCount].to_i
           header.invoice_total = row[Trailer::DebitTotal].to_i

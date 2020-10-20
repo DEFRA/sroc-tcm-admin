@@ -45,6 +45,7 @@ class FileStorageService
 
   def zone_path(z, path = "")
     raise ArgumentError.new("Unknown zone: #{z}") unless STORAGE_ZONES.include?(z)
+
     File.join(STORAGE_ZONES[z], path)
   end
 

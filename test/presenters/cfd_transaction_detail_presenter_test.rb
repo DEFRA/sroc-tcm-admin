@@ -173,6 +173,7 @@ class CfdTransactionDetailPresenterTest < ActiveSupport::TestCase
   def clean_variation
     v = @transaction.variation
     return 100 if v.blank?
+
     v.gsub(/%/, "")
   end
 
