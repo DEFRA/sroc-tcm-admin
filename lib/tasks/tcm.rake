@@ -40,8 +40,8 @@ namespace :tcm do
   desc "Generate suggested categories"
   task :dev_populate_categories => :environment do
     levels = [:green, :amber, :red]
-    stages = %w[ stage1 stage2 stage3 stage4 ]
-    logics = %w[ logic1 logic2 logic3 logic4 ]
+    stages = %w[stage1 stage2 stage3 stage4]
+    logics = %w[logic1 logic2 logic3 logic4]
     # for audit
     Thread.current[:current_user] = User.system_account
 

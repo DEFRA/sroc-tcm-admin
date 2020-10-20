@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module AnnualBillingDataFileFormat
-  FileTypes = %w[ .csv ].freeze
+  FileTypes = %w[.csv].freeze
 
   Descriptions = {
     consent_reference: "Unique consent reference including discharge and version",
@@ -86,7 +86,7 @@ module AnnualBillingDataFileFormat
     sym.to_s.humanize.capitalize
   end
 
-  %w[ CFD PAS WML ].each do |regime|
+  %w[CFD PAS WML].each do |regime|
     prefix = regime.downcase
 
     define_method "#{prefix}_columns" do

@@ -19,10 +19,10 @@ class TcmUtils
   end
 
   def self.generate_site_name
-    a = %w[ High Low Narrow Broad East West North South White Brown Green Red ]
-    b = %w[ St. Rd. Chigley Trumpton Camberwick Tottenham Bristol Cliff Sea Beach Windmill ]
-    c = %w[ Waste Water Smelting Pig Sewerage Hill Wigwam Chipmonk Haystack ]
-    d = %w[ Disposal Facility Farm Unit Incinerator Plant Wharf Tank ]
+    a = %w[High Low Narrow Broad East West North South White Brown Green Red]
+    b = %w[St. Rd. Chigley Trumpton Camberwick Tottenham Bristol Cliff Sea Beach Windmill]
+    c = %w[Waste Water Smelting Pig Sewerage Hill Wigwam Chipmonk Haystack]
+    d = %w[Disposal Facility Farm Unit Incinerator Plant Wharf Tank]
     "#{a.sample} #{b.sample} #{c.sample} #{d.sample}"
   end
 

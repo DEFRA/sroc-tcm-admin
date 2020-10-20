@@ -30,7 +30,7 @@ class TransactionHeaderTest < ActiveSupport::TestCase
   end
 
   def test_valid_when_a_valid_feeder_source_code_selected
-    %w[ PAS CFD WML ].each do |fsc|
+    %w[PAS CFD WML].each do |fsc|
       @header.feeder_source_code = fsc
       assert @header.valid?, "Header invalid with feeder_source_code #{fsc}!"
     end
@@ -55,7 +55,7 @@ class TransactionHeaderTest < ActiveSupport::TestCase
   end
 
   def test_valid_when_a_valid_file_type_flag_selected
-    %w[ C I ].each do |ftf|
+    %w[C I].each do |ftf|
       @header.file_type_flag = ftf
       assert @header.valid?, "Header invalid with file_type_flag #{ftf}!"
     end

@@ -4,9 +4,9 @@ class TransactionHeader < ApplicationRecord
   belongs_to :regime, inverse_of: :transaction_headers
   has_many :transaction_details, inverse_of: :transaction_header, dependent: :destroy
   belongs_to :removed_by, class_name: "User", inverse_of: :removed_transaction_files, required: false
-  validates :feeder_source_code, inclusion: { in: %w[ PAS CFD WML ] }
+  validates :feeder_source_code, inclusion: { in: %w[PAS CFD WML] }
   validates :region, presence: true
-  validates :file_type_flag, inclusion: { in: %w[ C I ] }
+  validates :file_type_flag, inclusion: { in: %w[C I] }
   validates :file_sequence_number, presence: true
   validates :generated_at, presence: true
 

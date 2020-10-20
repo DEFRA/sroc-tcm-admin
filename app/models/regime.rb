@@ -45,11 +45,11 @@ class Regime < ApplicationRecord
 
   def regions
     if water_quality?
-      %w[ A B E N S T Y]
+      %w[A B E N S T Y]
     elsif installations?
-      %w[ A B E N S Y]
+      %w[A B E N S Y]
     elsif waste?
-      %w[ A B E N S T U Y]
+      %w[A B E N S T U Y]
     else
       raise "Unknown regime #{slug}"
     end

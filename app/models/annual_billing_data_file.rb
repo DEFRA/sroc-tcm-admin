@@ -6,7 +6,7 @@ class AnnualBillingDataFile < ApplicationRecord
 
   validates :filename, presence: true
   validates :number_of_records, numericality: { only_integer: true }
-  validates :status, inclusion: { in: %w[ new uploaded processing completed failed ] }
+  validates :status, inclusion: { in: %w[new uploaded processing completed failed] }
 
   def file_types
     AnnualBillingDataFileFormat::FileTypes
