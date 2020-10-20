@@ -140,7 +140,12 @@ class PermitCategoriesController < AdminController
 
     respond_to do |format|
       if result
-        format.html { redirect_to regime_permit_categories_path(@regime, fy: @financial_year), notice: "Permit category was successfully updated." }
+        format.html do
+          redirect_to(
+            regime_permit_categories_path(@regime, fy: @financial_year),
+            notice: "Permit category was successfully updated."
+          )
+        end
         format.json { render :show, status: :ok, location: regime_permit_category_path(@regime, @permit_category) }
       else
         @timeline = permit_store.permit_category_versions(@permit_category.code)
@@ -154,7 +159,9 @@ class PermitCategoriesController < AdminController
     # update record status or create new 'excluded' record
     @permit_category.destroy
     respond_to do |format|
-      format.html { redirect_to regime_permit_categories_url(@regime), notice: "Permit category was successfully destroyed." }
+      format.html do
+        redirect_to regime_permit_categories_url(@regime), notice: "Permit category was successfully destroyed."
+      end
       format.json { head :no_content }
     end
   end

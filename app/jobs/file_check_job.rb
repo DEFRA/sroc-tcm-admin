@@ -61,7 +61,9 @@ class FileCheckJob < ApplicationJob
           end
         end
 
-        Rails.logger.info("Successfully copied #{success} files, failed to copy #{failed}, quarantined #{quarantined} files")
+        Rails.logger.info(
+          "Successfully copied #{success} files, failed to copy #{failed}, quarantined #{quarantined} files"
+        )
       ensure
         SystemConfig.config.stop_import
       end

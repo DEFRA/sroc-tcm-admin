@@ -205,7 +205,13 @@ class AnnualBillingDataFileService
       # to cater for the possiblity...
       regions = regions_for_transactions(transactions)
 
-      upload.log_error(line_no, "Multiple transactions found for #{present_column(key_column)}: '#{ref_value}' in #{'region'.pluralize(regions.count)} #{regions.join(', ')}")
+      column_name = present_column(key_column)
+      region_count = "region".pluralize(regions.count)
+
+      upload.log_error(
+        line_no,
+        "Multiple transactions found for #{column_name}: '#{ref_value}' in #{region_count} #{regions.join(', ')}"
+      )
       nil
     else
       # if multiple matches, it apparently doesn't matter which one we select,

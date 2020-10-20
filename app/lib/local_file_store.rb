@@ -12,7 +12,8 @@ class LocalFileStore
 
   def list(path = "")
     file_root = Pathname.new(file_path(""))
-    Dir.glob(File.join(file_path(path), "**", "*")).select { |f| File.file?(f) }.map { |f| Pathname.new(f).relative_path_from(file_root).to_s }
+    files = Dir.glob(File.join(file_path(path), "**", "*"))
+    files.select { |f| File.file?(f) }.map { |f| Pathname.new(f).relative_path_from(file_root).to_s }
   end
 
   # to_path can be file path or io object

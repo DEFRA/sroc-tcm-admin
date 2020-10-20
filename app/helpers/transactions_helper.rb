@@ -120,11 +120,15 @@ module TransactionsHelper
   end
 
   def columns_for_regime(regime)
-    regime_columns(regime).map { |c| { name: c, label: t(c, scope: "table.heading"), sortable: sortable?(c), selectable: selectable?(c) } }.to_json
+    regime_columns(regime).map do |c|
+      { name: c, label: t(c, scope: "table.heading"), sortable: sortable?(c), selectable: selectable?(c) }
+    end.to_json
   end
 
   def history_columns_for_regime(regime)
-    regime_columns(regime).map { |c| { name: c, label: t(c, scope: "table.heading"), sortable: sortable?(c), selectable: false }}.to_json
+    regime_columns(regime).map do |c|
+      { name: c, label: t(c, scope: "table.heading"), sortable: sortable?(c), selectable: false }
+    end.to_json
   end
 
   def sortable?(col)
