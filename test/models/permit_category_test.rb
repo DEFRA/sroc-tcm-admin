@@ -75,7 +75,7 @@ class PermitCategoryTest < ActiveSupport::TestCase
     assert p2.valid?
 
     p2.valid_from = @permit_category.valid_from
-    p2.code = p2.code + "1"
+    p2.code = "#{p2.code}1"
     assert p2.valid?
 
     p2.code = @permit_category.code

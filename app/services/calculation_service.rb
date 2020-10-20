@@ -28,7 +28,7 @@ class CalculationService
     puts "Successfully generated charge"
     result
   rescue StandardError => e
-    msg = "Check connectivity error: " + e.message
+    msg = "Check connectivity error: #{e.message}"
     TcmLogger.error(msg)
     puts msg
   end

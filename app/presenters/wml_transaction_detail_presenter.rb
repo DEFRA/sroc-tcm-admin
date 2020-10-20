@@ -38,13 +38,13 @@ class WmlTransactionDetailPresenter < TransactionDetailPresenter
     else
       pos = txt.index /\sat\s/
       if pos
-        prefix + ". At " + txt[(pos + 4)..-1]
+        "#{prefix}. At #{txt[(pos + 4)..-1]}"
       else
         m = /\AIn cancellation of invoice no. [A-Z0-9]+:\s*(.*)\z/.match(txt)
         if m
-          prefix + ". " + m[1]
+          "#{prefix}. #{m[1]}"
         else
-          prefix + ". " + txt
+          "#{prefix}. #{txt}"
         end
       end
     end
@@ -57,7 +57,7 @@ class WmlTransactionDetailPresenter < TransactionDetailPresenter
     # remove leading text either "Compliance Adjustment at " or "Charge code n at "
     pos = txt.index /\sat\s/
     if pos
-      "Site: " + txt[(pos + 4)..-1]
+      "Site: #{txt[(pos + 4)..-1]}"
     else
       txt
     end

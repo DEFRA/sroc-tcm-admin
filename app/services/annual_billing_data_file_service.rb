@@ -167,8 +167,7 @@ class AnnualBillingDataFileService
             if transaction.charge_calculation_error?
               # what should we do here? revoke the changes and mark as an error?
               upload.log_error(counter,
-                               "Calculation error: " +
-                               TransactionCharge.extract_calculation_error(transaction))
+                               "Calculation error: #{TransactionCharge.extract_calculation_error(transaction)}")
               failed = true
             else
               transaction.tcm_charge = TransactionCharge.extract_correct_charge(transaction)

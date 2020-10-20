@@ -29,7 +29,7 @@ class AnnualBillingDataImportJob < ApplicationJob
         # update upload record status
         upload.state.complete!
       rescue StandardError => e
-        Rails.logger.error("AnnualBillingDataImportJob: Unhandled error: " + e.message)
+        Rails.logger.error("AnnualBillingDataImportJob: Unhandled error: #{e.message}")
         # update upload record status
         upload.state.error!
       ensure
@@ -38,7 +38,7 @@ class AnnualBillingDataImportJob < ApplicationJob
       end
     end
   rescue StandardError => e
-    Rails.logger.error("AnnualBillingDataImportJob: Failure: " + e.message)
+    Rails.logger.error("AnnualBillingDataImportJob: Failure: #{e.message}")
     throw e
   end
 end

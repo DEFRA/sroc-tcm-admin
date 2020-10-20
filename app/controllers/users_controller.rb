@@ -25,7 +25,7 @@ class UsersController < AdminController
   end
 
   def create
-    p = user_params.merge(password: Devise.friendly_token.first(8) + "Az9")
+    p = user_params.merge(password: "#{Devise.friendly_token.first(8)}Az9")
     @user = User.create(p)
 
     if @user.valid?

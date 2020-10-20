@@ -30,7 +30,7 @@ module FormattingUtils
   end
 
   def format_date(date, fmt, include_time)
-    fmt = fmt + " %H:%M:%S" if include_time
+    fmt = "#{fmt} %H:%M:%S" if include_time
     date.strftime(fmt)
   end
 

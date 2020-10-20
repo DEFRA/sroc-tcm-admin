@@ -12,6 +12,6 @@ class FileExportJob < ApplicationJob
       exporter.generate_output_file(transaction_file)
     end
   rescue StandardError => e
-    Rails.logger.error("FileExportJob: Failure: " + e.message)
+    Rails.logger.error("FileExportJob: Failure: #{e.message}")
   end
 end
