@@ -75,7 +75,7 @@ class ExclusionsController < ApplicationController
 
   def region_options(regions)
     opts = regions.map { |r| { label: r, value: r } }
-    opts = [{label: "All", value: ""}] + opts if opts.count > 1
+    opts = [{ label: "All", value: "" }] + opts if opts.count > 1
     opts
   end
 
@@ -85,7 +85,7 @@ class ExclusionsController < ApplicationController
 
   def financial_year_options(fy_list)
     fys = fy_list.map { |fy| { label: fy[0..1] + "/" + fy[2..3], value: fy } }
-    fys = [{label: "All", value: ""}] + fys if fys.count > 1
+    fys = [{ label: "All", value: "" }] + fys if fys.count > 1
     fys
   end
 

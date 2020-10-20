@@ -32,7 +32,7 @@ class TransactionControllerTest < ActionDispatch::IntegrationTest
     @transaction = transaction_details(:cfd)
     refute @transaction.approved_for_billing
     put regime_transaction_url(@regime, @transaction),
-        params: { transaction_detail: { category: "2.3.5" }}
+        params: { transaction_detail: { category: "2.3.5" } }
     assert_redirected_to regime_transaction_path(@regime, @transaction)
     assert_equal "2.3.5", @transaction.reload.category
     assert_not_nil @transaction.charge_calculation
@@ -44,7 +44,7 @@ class TransactionControllerTest < ActionDispatch::IntegrationTest
     stub_calculator
     @transaction = transaction_details(:cfd)
     put regime_transaction_url(@regime, @transaction),
-        params: { transaction_detail: { temporary_cessation: "true" }}
+        params: { transaction_detail: { temporary_cessation: "true" } }
     assert_redirected_to regime_transaction_path(@regime, @transaction)
     assert_equal true, @transaction.reload.temporary_cessation
   end
@@ -59,7 +59,7 @@ class TransactionControllerTest < ActionDispatch::IntegrationTest
     @transaction.save!
 
     put regime_transaction_url(@regime, @transaction),
-        params: { transaction_detail: { approved_for_billing: true }}
+        params: { transaction_detail: { approved_for_billing: true } }
     assert_redirected_to regime_transaction_path(@regime, @transaction)
     assert @transaction.reload.approved_for_billing, "Not approved"
   end
@@ -68,7 +68,7 @@ class TransactionControllerTest < ActionDispatch::IntegrationTest
     setup_cfd
     @transaction = transaction_details(:cfd)
     put regime_transaction_url(@regime, @transaction),
-        params: { transaction_detail: { excluded: "true", excluded_reason: "Computer says no" }}
+        params: { transaction_detail: { excluded: "true", excluded_reason: "Computer says no" } }
     assert_redirected_to regime_transaction_path(@regime, @transaction)
     assert @transaction.reload.excluded
   end
@@ -77,7 +77,7 @@ class TransactionControllerTest < ActionDispatch::IntegrationTest
     setup_cfd
     @transaction = transaction_details(:cfd)
     put regime_transaction_url(@regime, @transaction),
-        params: { transaction_detail: { excluded: "false" }}
+        params: { transaction_detail: { excluded: "false" } }
     assert_redirected_to regime_transaction_path(@regime, @transaction)
     refute @transaction.reload.excluded
   end
@@ -87,7 +87,7 @@ class TransactionControllerTest < ActionDispatch::IntegrationTest
     stub_calculator_error
     @transaction = transaction_details(:cfd)
     put regime_transaction_url(@regime, @transaction),
-        params: { transaction_detail: { category: "Windy" }}
+        params: { transaction_detail: { category: "Windy" } }
     assert_redirected_to regime_transaction_path(@regime, @transaction)
     assert_nil @transaction.reload.category
     assert_not_nil @transaction.charge_calculation["calculation"]["messages"]
@@ -115,7 +115,7 @@ class TransactionControllerTest < ActionDispatch::IntegrationTest
     assert_not_equal "2.3.5", category, "Category already set"
     refute @transaction.approved_for_billing
     put regime_transaction_url(@regime, @transaction),
-        params: { transaction_detail: { category: "2.3.5" }}
+        params: { transaction_detail: { category: "2.3.5" } }
     assert_redirected_to root_path
     assert_not_equal "2.3.5", @transaction.reload.category
     assert_nil @transaction.charge_calculation
@@ -127,7 +127,7 @@ class TransactionControllerTest < ActionDispatch::IntegrationTest
     stub_calculator
     @transaction = transaction_details(:cfd)
     put regime_transaction_url(@regime, @transaction),
-        params: { transaction_detail: { temporary_cessation: "true" }}
+        params: { transaction_detail: { temporary_cessation: "true" } }
     assert_redirected_to root_path
     assert_equal false, @transaction.reload.temporary_cessation
   end
@@ -144,7 +144,7 @@ class TransactionControllerTest < ActionDispatch::IntegrationTest
     Thread.current[:current_user] = @user
 
     put regime_transaction_url(@regime, @transaction),
-        params: { transaction_detail: { approved_for_billing: true }}
+        params: { transaction_detail: { approved_for_billing: true } }
     assert_redirected_to root_path
     refute @transaction.reload.approved_for_billing, "Been approved"
   end
@@ -153,7 +153,7 @@ class TransactionControllerTest < ActionDispatch::IntegrationTest
     setup_cfd_read_only
     @transaction = transaction_details(:cfd)
     put regime_transaction_url(@regime, @transaction),
-        params: { transaction_detail: { excluded: "true", excluded_reason: "Computer says no" }}
+        params: { transaction_detail: { excluded: "true", excluded_reason: "Computer says no" } }
     assert_redirected_to root_path
     refute @transaction.reload.excluded
   end
@@ -165,7 +165,7 @@ class TransactionControllerTest < ActionDispatch::IntegrationTest
     @transaction.update_attributes(status: "unbilled")
     assert @transaction.excluded
     put regime_transaction_url(@regime, @transaction),
-        params: { transaction_detail: { excluded: "false" }}
+        params: { transaction_detail: { excluded: "false" } }
     assert_redirected_to root_path
     assert @transaction.reload.excluded
   end

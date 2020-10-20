@@ -88,7 +88,7 @@ private
   end
 
   def build_error_response(text)
-    { "calculation": { "messages": text }}
+    { "calculation": { "messages": text } }
   end
 
   def charge_service_url

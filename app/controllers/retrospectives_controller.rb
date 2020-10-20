@@ -70,7 +70,7 @@ class RetrospectivesController < ApplicationController
 
   def financial_year_options(fy_list)
     fys = fy_list.map { |fy| { label: fy[0..1] + "/" + fy[2..3], value: fy } }
-    fys = [{label: "All", value: ""}] + fys if fys.count > 1
+    fys = [{ label: "All", value: "" }] + fys if fys.count > 1
     fys
   end
 end
