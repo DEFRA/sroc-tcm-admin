@@ -2,7 +2,10 @@
 
 class TcmUtils
   def self.strip_bom(str)
-    str.force_encoding("utf-8").gsub("\xEF\xBB\xBF".force_encoding("utf-8"), "")
+    # The *.dup.* calls ensures we are mutating a duplicate of the string. This
+    # resolves the issue of trying to modify the frozen string "\xEF\xBB\xBF"
+    # whilst `frozen_string_literal: true` is enabled
+    str.force_encoding("utf-8").gsub("\xEF\xBB\xBF".dup.force_encoding("utf-8"), "")
   end
 
   def self.obsfucate_sites
