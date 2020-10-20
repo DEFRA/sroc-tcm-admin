@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "test_helper.rb"
+require 'test_helper'
 
 module Query
   class PermitCategoryLookupTest < ActiveSupport::TestCase
