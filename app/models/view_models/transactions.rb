@@ -124,7 +124,8 @@ module ViewModels
 
     def permit_category_timestamp
       @permit_category_timestamp ||= Query::PermitCategoryLastChanged.call(
-        regime: regime)
+        regime: regime
+)
     end
 
     private

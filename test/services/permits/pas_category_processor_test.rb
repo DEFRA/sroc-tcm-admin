@@ -115,7 +115,8 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       destroy_all
 
     assert @processor.find_historic_transactions(
-      reference_3: "AAAA0001", customer_reference: "A").empty?
+      reference_3: "AAAA0001", customer_reference: "A"
+).empty?
   end
 
   def test_find_historic_transactions_returns_most_recent_transactions_if_possible
@@ -135,7 +136,8 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     transactions = set_historic_content(historic_data)
 
     matches = @processor.find_historic_transactions(
-      reference_3: "AAAA0001", customer_reference: "A")
+      reference_3: "AAAA0001", customer_reference: "A"
+)
     assert_equal 1, matches.count
     assert_equal transactions.second, matches.first
   end
@@ -157,7 +159,8 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     transactions = set_historic_content(historic_data)
 
     matches = @processor.find_historic_transactions(
-      reference_3: "AAAA0001", customer_reference: "A")
+      reference_3: "AAAA0001", customer_reference: "A"
+)
     assert_equal 2, matches.count
     assert_equal transactions.first, matches.first
     assert_equal transactions.second, matches.second

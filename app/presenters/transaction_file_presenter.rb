@@ -19,7 +19,8 @@ class TransactionFilePresenter < SimpleDelegator
   def details
     records = []
     transactions = regime_specific_detail_presenter_class.wrap(
-      regime_specific_sorter(transaction_details))
+      regime_specific_sorter(transaction_details)
+)
 
     transactions.each.with_index(1) do |td, idx|
       row = detail_row(td, idx)

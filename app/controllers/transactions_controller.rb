@@ -33,9 +33,11 @@ class TransactionsController < ApplicationController
   # GET /regimes/:regime_id/transactions/1.json
   def show
     @related_unbilled_transactions = Query::RelatedUnbilledTransactions.call(
-      transaction: @transaction)
+      transaction: @transaction
+)
     @related_billed_transactions = Query::RelatedBilledTransactions.call(
-      transaction: @transaction)
+      transaction: @transaction
+)
 
     @exclusion_reasons = Query::Exclusions.call(regime: @regime)
   end

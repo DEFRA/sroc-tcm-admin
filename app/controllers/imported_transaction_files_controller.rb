@@ -35,7 +35,8 @@ class ImportedTransactionFilesController < ApplicationController
       transaction_header: @file,
       remover: current_user,
       removal_reference: parms[:removal_reference],
-      removal_reason: parms[:removal_reason])
+      removal_reason: parms[:removal_reason]
+)
 
     if result.success?
       redirect_to regime_imported_transaction_file_path(@regime, @file),
