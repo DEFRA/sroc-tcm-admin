@@ -95,8 +95,8 @@ class PermitCategoriesController < AdminController
       if result.success?
         format.html do
           redirect_to regime_permit_categories_path(@regime,
-                                                   fy: @financial_year),
-                                                   notice: "Permit category was successfully created."
+                                                    fy: @financial_year),
+                      notice: "Permit category was successfully created."
         end
         format.json { render :show, status: :created, location: regime_permit_category_path(@regime, @permit_category) }
       else
@@ -171,7 +171,7 @@ class PermitCategoriesController < AdminController
 
   def permit_category_params
     params.require(:permit_category).permit(:code, :description, :status,
-                                           :valid_from, :valid_to)
+                                            :valid_from, :valid_to)
   end
 
   def can_remove_permit_category?(code, financial_year)

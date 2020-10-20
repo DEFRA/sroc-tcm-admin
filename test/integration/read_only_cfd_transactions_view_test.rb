@@ -39,7 +39,7 @@ class ReadOnlyCfdTransactionsViewTest < ActionDispatch::IntegrationTest
     t = page.find("div.tcm-table table tbody")
     assert t.has_selector?("tr.active", minimum: 1), "No rows to test"
     assert t.has_no_selector?("select.temporary-cessation-select"),
-      "Temporary Cessation selector found"
+           "Temporary Cessation selector found"
   end
 
   def test_approval_flag_is_read_only
@@ -65,6 +65,6 @@ class ReadOnlyCfdTransactionsViewTest < ActionDispatch::IntegrationTest
   def test_no_csv_export_button
     visit regime_transactions_path(@regime)
     assert page.has_no_selector?("button.table-export-btn"),
-      "CSV export button found"
+           "CSV export button found"
   end
 end

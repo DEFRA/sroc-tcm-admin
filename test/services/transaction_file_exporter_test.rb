@@ -115,9 +115,9 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
     assert_not_nil @transaction_3.reload.tcm_transaction_reference
 
     assert_equal @transaction_1.tcm_transaction_reference,
-      @transaction_2.tcm_transaction_reference
+                 @transaction_2.tcm_transaction_reference
     assert_not_equal @transaction_1.tcm_transaction_reference,
-      @transaction_3.tcm_transaction_reference
+                     @transaction_3.tcm_transaction_reference
   end
 
   def test_cfd_splits_transaction_references_by_customer_reference

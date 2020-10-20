@@ -301,7 +301,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     assert(sc.green?, "Not GREEN")
     assert_equal("Assigned matching category", sc.logic, "Wrong outcome")
     assert_equal("Annual billing (single) - Stage 1", sc.suggestion_stage,
-                "Wrong stage")
+                 "Wrong stage")
   end
 
 #     Multiple matches (red)
@@ -336,7 +336,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     assert(sc.red?, "Not RED")
     assert_equal("Multiple historic matches found", sc.logic, "Wrong outcome")
     assert_equal("Annual billing (single) - Stage 1", sc.suggestion_stage,
-                "Wrong stage")
+                 "Wrong stage")
   end
 
   #     No matches (red) - will never happen in Stage 1 as this will try
@@ -376,7 +376,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     assert(sc.green?, "Not GREEN")
     assert_equal("Assigned matching category", sc.logic, "Wrong outcome")
     assert_equal("Annual billing (single) - Stage 2", sc.suggestion_stage,
-                "Wrong stage")
+                 "Wrong stage")
   end
 
 #     Multiple matches (red)
@@ -411,7 +411,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     assert(sc.red?, "Not RED")
     assert_equal("Multiple historic matches found", sc.logic, "Wrong outcome")
     assert_equal("Annual billing (single) - Stage 2", sc.suggestion_stage,
-                "Wrong stage")
+                 "Wrong stage")
   end
 
 #     No matches (red)
@@ -435,7 +435,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     assert(sc.red?, "Not RED")
     assert_equal("No previous bill found", sc.logic, "Wrong outcome")
     assert_equal("Annual billing (single) - Stage 2", sc.suggestion_stage,
-                "Wrong stage")
+                 "Wrong stage")
   end
 
 #   Mutliple permits - Stage 1 ---------------------------------------
@@ -477,7 +477,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       assert(sc.amber?, "Not AMBER")
       assert_equal("Assigned matching category", sc.logic, "Wrong outcome")
       assert_equal("Annual billing (multiple) - Stage 1", sc.suggestion_stage,
-                "Wrong stage")
+                   "Wrong stage")
     end
     assert_equal(expected, assigned.sort, "Categories not assigned correctly")
   end
@@ -516,7 +516,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       assert(sc.red?, "Not RED")
       assert_equal("Number of matching transactions differs from number in file", sc.logic, "Wrong outcome")
       assert_equal("Annual billing (multiple) - Stage 1", sc.suggestion_stage,
-                "Wrong stage")
+                   "Wrong stage")
     end
   end
 
@@ -566,7 +566,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       assert(sc.amber?, "Not AMBER")
       assert_equal("Assigned matching category", sc.logic, "Wrong outcome")
       assert_equal("Annual billing (multiple) - Stage 2", sc.suggestion_stage,
-                "Wrong stage")
+                   "Wrong stage")
     end
     assert_equal(expected, assigned.sort, "Categories not assigned correctly")
   end
@@ -605,7 +605,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       assert(sc.red?, "Not RED")
       assert_equal("Number of matching transactions differs from number in file", sc.logic, "Wrong outcome")
       assert_equal("Annual billing (multiple) - Stage 2", sc.suggestion_stage,
-                "Wrong stage")
+                   "Wrong stage")
     end
   end
 
@@ -643,7 +643,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       assert(sc.red?, "Not RED")
       assert_equal("No previous bill found", sc.logic, "Wrong outcome")
       assert_equal("Annual billing (multiple) - Stage 2", sc.suggestion_stage,
-                "Wrong stage")
+                   "Wrong stage")
     end
   end
 

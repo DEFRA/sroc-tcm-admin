@@ -33,7 +33,7 @@ class RegionSelectorTest < ActionDispatch::IntegrationTest
       page.find(".tcm-table") do |t|
         # does region select have correct region selected?
         assert t.has_select?("region", selected: r),
-          "'#{r}' option not selected"
+               "'#{r}' option not selected"
         t.find("table>tbody") do |body|
           body.assert_selector("tr", count: row_count)
         end
@@ -47,7 +47,7 @@ class RegionSelectorTest < ActionDispatch::IntegrationTest
     page.find(".tcm-table") do |t|
       # does region select have 'All' selected?
       assert t.has_select?("region", selected: "All"),
-        "All option not selected"
+             "All option not selected"
 
       t.find("table>tbody") do |body|
         body.assert_selector("tr", count: row_count)
@@ -71,7 +71,7 @@ class RegionSelectorTest < ActionDispatch::IntegrationTest
       page.find(".tcm-table") do |t|
         # does region select have correct region selected?
         assert t.has_select?("region", selected: r),
-          "'#{r}' option not selected"
+               "'#{r}' option not selected"
         t.find("table>tbody") do |body|
           body.assert_selector("tr", count: row_count)
         end
@@ -85,7 +85,7 @@ class RegionSelectorTest < ActionDispatch::IntegrationTest
     page.find(".tcm-table") do |t|
       # does region select have 'All' selected?
       assert t.has_select?("region", selected: "All"),
-        "All option not selected"
+             "All option not selected"
 
       t.find("table>tbody") do |body|
         body.assert_selector("tr", count: row_count)
@@ -109,7 +109,7 @@ class RegionSelectorTest < ActionDispatch::IntegrationTest
       page.find(".tcm-table") do |t|
         # does region select have correct region selected?
         assert t.has_select?("region", selected: r),
-          "'#{r}' option not selected"
+               "'#{r}' option not selected"
         t.find("table>tbody") do |body|
           body.assert_selector("tr", count: row_count)
         end
@@ -123,7 +123,7 @@ class RegionSelectorTest < ActionDispatch::IntegrationTest
     page.find(".tcm-table") do |t|
       # does region select have 'All' selected?
       assert t.has_select?("region", selected: "All"),
-        "All option not selected"
+             "All option not selected"
 
       t.find("table>tbody") do |body|
         body.assert_selector("tr", count: row_count)

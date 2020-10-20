@@ -41,6 +41,6 @@ class PutDataExportFileTest < ActiveSupport::TestCase
     # when Rails.env.development? or Rails.env.test? the file
     # should be stored locally rather than S3
     assert File.exist?(File.join(@tmp_path, "csv", File.basename(filename))),
-      "Didn't find stored file"
+           "Didn't find stored file"
   end
 end

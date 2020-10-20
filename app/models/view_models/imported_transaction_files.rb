@@ -6,7 +6,7 @@ module ViewModels
 
     attr_reader :regime, :user, :permit_all_regions
     attr_accessor :region, :status, :search, :sort, :sort_direction,
-      :page, :per_page
+                  :page, :per_page
 
     def initialize(params = {})
       @regime = params.fetch(:regime)

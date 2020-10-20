@@ -14,7 +14,7 @@ class DataExportController < ApplicationController
       send_file result.filename
     else
       redirect_to regime_data_export_index_path(@regime),
-        alert: "Unable to retrieve data file! Please try again later or contact the support desk."
+                  alert: "Unable to retrieve data file! Please try again later or contact the support desk."
     end
   end
 
@@ -22,6 +22,6 @@ class DataExportController < ApplicationController
     raise ActionController::RoutingError.new("Not Found") unless SystemConfig.config.can_generate_export?    
     RegimeTransactionExportJob.perform_later(@regime.id)
     redirect_to regime_data_export_index_path(@regime),
-      notice: "Your request has been queued. Check back in a few minutes."
+                notice: "Your request has been queued. Check back in a few minutes."
   end
 end

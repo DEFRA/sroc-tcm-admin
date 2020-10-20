@@ -25,17 +25,17 @@ module ViewModels
 
           if old_err && new_err
             I18n.t("error_html",
-                 scope: audit_scope,
-                 message: new_attr_value)
+                   scope: audit_scope,
+                   message: new_attr_value)
           elsif old_err
             I18n.t("error_old_html",
-                 scope: audit_scope,
-                 value: new_attr_value)
+                   scope: audit_scope,
+                   value: new_attr_value)
           elsif new_err
             I18n.t("error_new_html",
-                 scope: audit_scope,
-                 old_value: old_attr_value,
-                 message: new_attr_value)
+                   scope: audit_scope,
+                   old_value: old_attr_value,
+                   message: new_attr_value)
           else
             I18n.t("changed_html",
                    scope: audit_scope,

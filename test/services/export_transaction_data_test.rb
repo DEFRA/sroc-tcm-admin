@@ -23,7 +23,7 @@ class ExportTransactionDataTest < ActiveSupport::TestCase
 
     assert File.exists?(result.filename), "File not found #{result.filename}"
     assert_equal @regime.export_data_file.reload.exported_filename,
-      File.basename(result.filename), "Filenames do not match"
+                 File.basename(result.filename), "Filenames do not match"
   end
 
   def test_it_exports_csv_data
@@ -47,7 +47,7 @@ class ExportTransactionDataTest < ActiveSupport::TestCase
         val = "" if val.nil?
 
         assert_equal t.send(c[:accessor]).to_s, val,
-          "CSV column error in '#{c[:accessor]}' [#{idx}]"
+                     "CSV column error in '#{c[:accessor]}' [#{idx}]"
       end
       idx += 1
     end
@@ -134,7 +134,7 @@ class ExportTransactionDataTest < ActiveSupport::TestCase
     ]
 
     assert_equal expected,
-      ExportFileFormat::ExportColumns.map { |c| c[:heading] },
-      "Column mismatch"
+                 ExportFileFormat::ExportColumns.map { |c| c[:heading] },
+                 "Column mismatch"
   end
 end

@@ -40,7 +40,7 @@ class FileCheckJob < ApplicationJob
               end
             else
               raise Exceptions::TransactionFileError,
-                "File generated invalid transaction record [#{f}]"
+                    "File generated invalid transaction record [#{f}]"
             end
           rescue Exceptions::TransactionFileError, ArgumentError => e
             # invalid transaction file or some other file handling issue

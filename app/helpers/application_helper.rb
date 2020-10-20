@@ -8,8 +8,8 @@ module ApplicationHelper
 
     content_tag(:div,
                 form_with(*(args << options.merge(builder: TcmFormBuilder)),
-                         &block),
-                         class: "tcm_form")
+                          &block),
+                class: "tcm_form")
   end
 
   def make_page_title(title)

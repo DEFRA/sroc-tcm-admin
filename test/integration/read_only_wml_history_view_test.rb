@@ -15,6 +15,6 @@ class ReadOnlyWmlHistoryViewTest < ActionDispatch::IntegrationTest
     visit regime_history_index_path(@regime)
     assert page.has_selector?("div.tcm-table table tbody tr", minimum: 1)
     assert page.has_no_selector?("button.table-export-btn"),
-      "CSV export button found"
+           "CSV export button found"
   end
 end

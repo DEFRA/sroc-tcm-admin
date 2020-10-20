@@ -20,21 +20,21 @@ class TransactionModeSelectionTest < ActionDispatch::IntegrationTest
     setup_wml
     visit regime_transactions_path(@regime)
     assert page.has_no_selector? "nav.main-menu a.dropdown-item",
-      text: @retro_text
+                                 text: @retro_text
   end
 
   def test_transaction_main_menu_has_retrospective_option_for_installations
     setup_pas
     visit regime_transactions_path(@regime)
     assert page.has_selector? "nav.main-menu a.dropdown-item",
-      text: @retro_text
+                              text: @retro_text
   end
 
   def test_transaction_main_menu_has_retrospective_option_for_water_quality
     setup_cfd
     visit regime_transactions_path(@regime)
     assert page.has_selector? "nav.main-menu a.dropdown-item",
-      text: @retro_text
+                              text: @retro_text
   end
 
   def test_view_selector_has_no_retrospective_option_for_waste

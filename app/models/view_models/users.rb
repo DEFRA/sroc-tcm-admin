@@ -5,7 +5,7 @@ module ViewModels
     include RegimeScope, ActionView::Helpers::FormOptionsHelper
 
     attr_accessor :regime, :role, :search, :sort,
-      :sort_direction, :page, :per_page
+                  :sort_direction, :page, :per_page
 
     def initialize(params = {})
       @regime = params.fetch(:regime, "")
