@@ -14,7 +14,7 @@ module Query
       assert @regime.transaction_details.historic_excluded.count.positive?
 
       transactions = ExcludedTransactions.call(regime: @regime)
-      q =  @regime.transaction_details.historic_excluded
+      q = @regime.transaction_details.historic_excluded
       assert_equal q.count, transactions.count
 
       transactions.each do |t|

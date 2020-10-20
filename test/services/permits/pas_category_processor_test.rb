@@ -950,7 +950,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     file = set_file_content(file_data)
 
     @processor.suggest_categories
-    expected =  ["2.4.5", "2.4.6"]
+    expected = ["2.4.5", "2.4.6"]
     assigned = []
 
     file[0..1].each do |t|
@@ -997,7 +997,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     file = set_file_content(file_data)
 
     @processor.suggest_categories
-    expected =  ["2.4.5", "2.4.6"]
+    expected = ["2.4.5", "2.4.6"]
     assigned = []
 
     file[0..1].each do |t|
@@ -1085,7 +1085,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     file = set_file_content(file_data)
 
     @processor.suggest_categories
-    expected =  ["2.4.5", "2.4.6"]
+    expected = ["2.4.5", "2.4.6"]
     assigned = []
 
     file[0..1].each do |t|
@@ -1173,7 +1173,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     file = set_file_content(file_data)
 
     @processor.suggest_categories
-    expected =  ["2.4.5", "2.4.6"]
+    expected = ["2.4.5", "2.4.6"]
     assigned = []
 
     file[0..1].each do |t|
@@ -1419,7 +1419,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     file = set_file_content(file_data)
 
     @processor.suggest_categories
-    expected =  ["2.4.5", "2.4.6"]
+    expected = ["2.4.5", "2.4.6"]
     assigned = []
 
     file[0..1].each do |t|
@@ -1509,7 +1509,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     file = set_file_content(file_data)
 
     @processor.suggest_categories
-    expected =  ["2.4.5", "2.4.6"]
+    expected = ["2.4.5", "2.4.6"]
     assigned = []
 
     file[0..1].each do |t|

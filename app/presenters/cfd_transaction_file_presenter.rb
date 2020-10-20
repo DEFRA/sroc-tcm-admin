@@ -22,7 +22,7 @@ class CfdTransactionFilePresenter < TransactionFilePresenter
       "",                     # header_attr_8
       "",                     # header_attr_9
       "",                     # header_attr_10
-      padded_number(td.tcm_charge, 3),  # line_amount
+      padded_number(td.tcm_charge, 3), # line_amount
       "",                     # line VAT code always blank
       td.line_area_code,
       td.discharge_location,  # line_description
@@ -33,8 +33,8 @@ class CfdTransactionFilePresenter < TransactionFilePresenter
       td.category,            # line_attr_3
       td.pro_rata_days,       # line_attr_4
       td.category_description, # was line_attr_5
-      td.baseline_charge,     # line_attr_6
-      td.variation_percentage_file,     # line_attr_7 (compliance band)
+      td.baseline_charge, # line_attr_6
+      td.variation_percentage_file, # line_attr_7 (compliance band)
       td.temporary_cessation_file, # temporary cessation
       "",                     # line_attr_9   future - compliance band
       "",                     # line_attr_10  future - compliance adjustment

@@ -22,7 +22,7 @@ class PasTransactionFilePresenter < TransactionFilePresenter
       "",                     # header_attr_8
       "",                     # header_attr_9
       "",                     # header_attr_10
-      padded_number(td.tcm_charge, 3),  # line_amount
+      padded_number(td.tcm_charge, 3), # line_amount
       "",                     # line VAT code always blank
       td.line_area_code,
       td.site_address,        # line_description
@@ -39,7 +39,7 @@ class PasTransactionFilePresenter < TransactionFilePresenter
       "",                     # line_attr_9   future - performance band
       "",                     # line_attr_10  future - performance adjustment
       "",                     # line_attr_11  future - pre-construction flag
-      td.temporary_cessation_file,  # line_attr_12
+      td.temporary_cessation_file, # line_attr_12
       "",                     # line_attr_13
       "",                     # line_attr_14
       "",                     # line_attr_15
