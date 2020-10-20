@@ -112,7 +112,7 @@ module Permits
         else
           stage = if with_customer_reference
                     "Supplementary invoice (single) - Stage 2"
-          else
+                  else
             "Supplementary invoice (single) - Stage 4"
           end
 
