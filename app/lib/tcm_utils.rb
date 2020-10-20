@@ -29,7 +29,7 @@ class TcmUtils
   def self.set_period_dates()
     Regime.all.each do |r|
       r.transaction_details.each do |t|
-        dates = self.extract_transaction_period_dates(t, r)
+        dates = extract_transaction_period_dates(t, r)
         t.update_attributes(period_start: dates[0], period_end: dates[1]) if dates.present?
       end
     end
@@ -38,16 +38,16 @@ class TcmUtils
   def self.extract_transaction_period_dates(transaction, regime = nil)
     regime = transaction.regime if regime.nil?
     info = TcmConstants::PeriodDates[regime.slug.to_sym]
-    self.extract_period_dates(transaction.send(info[:attr_name]), info[:format])
+    extract_period_dates(transaction.send(info[:attr_name]), info[:format])
   end
 
   def self.extract_csv_period_dates(regime, row)
     info = TcmConstants::PeriodDates[regime.slug.to_sym]
     period_index = "TransactionFileFormat::Detail::#{info[:attr_name].to_s.classify}".constantize
     if regime.waste?
-      self.extract_waste_period_dates(row[period_index], info[:format])
+      extract_waste_period_dates(row[period_index], info[:format])
     else
-      self.extract_period_dates(row[period_index], info[:format])
+      extract_period_dates(row[period_index], info[:format])
     end
   end
 
@@ -66,7 +66,7 @@ class TcmUtils
       dates[1] = Date.new(end_year, 3, 31)
       dates
     else
-      self.extract_period_dates(period, date_format)
+      extract_period_dates(period, date_format)
     end
   end
 

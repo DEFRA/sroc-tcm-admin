@@ -38,6 +38,6 @@ module SrocTcmAdmin
     config.generators.system_tests = nil
 
     # exception handling
-    config.exceptions_app = self.routes
+    config.exceptions_app = routes
   end
 end
