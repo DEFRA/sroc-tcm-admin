@@ -5,13 +5,13 @@ class TransactionDetail < ApplicationRecord
 
   audit_events :update
   audit_attributes [:category,
-                     :temporary_cessation,
-                     :charge_calculation,
-                     :tcm_charge,
-                     :variation,
-                     :excluded,
-                     :excluded_reason,
-                     :approved_for_billing]
+                    :temporary_cessation,
+                    :charge_calculation,
+                    :tcm_charge,
+                    :variation,
+                    :excluded,
+                    :excluded_reason,
+                    :approved_for_billing]
 
   belongs_to :transaction_header, inverse_of: :transaction_details
   has_one :regime, through: :transaction_header

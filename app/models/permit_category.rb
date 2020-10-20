@@ -5,10 +5,10 @@ class PermitCategory < ApplicationRecord
 
   audit_events [:create, :update]
   audit_attributes [:code,
-                     :description,
-                     :valid_from,
-                     :valid_to,
-                     :status]
+                    :description,
+                    :valid_from,
+                    :valid_to,
+                    :status]
   belongs_to :regime
 
   validate :valid_from_is_financial_year
