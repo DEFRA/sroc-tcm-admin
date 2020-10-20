@@ -19,7 +19,7 @@ class PermitCategoryPresenter < SimpleDelegator
     }
   end
 
-protected
+  protected
   def permit_category
     __getobj__
   end

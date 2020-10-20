@@ -79,7 +79,7 @@ class TransactionCsvPresenter < SimpleDelegator
     ]
   end
 
-private
+  private
   def transaction_header
     __getobj__
   end

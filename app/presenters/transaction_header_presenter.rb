@@ -51,7 +51,7 @@ class TransactionHeaderPresenter < SimpleDelegator
     pence_to_currency(transaction_detail.line_amount)
   end
 
-protected
+  protected
   def transaction_header
     __getobj__
   end

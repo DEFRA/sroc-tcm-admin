@@ -288,7 +288,7 @@ class TransactionDetailPresenter < SimpleDelegator
     end
   end
 
-protected
+  protected
   def transaction_detail
     __getobj__
   end

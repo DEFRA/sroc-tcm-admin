@@ -60,7 +60,7 @@ module ViewModels
       who.full_name
     end
 
-  private
+    private
     def old_attr_value
       describe_value(old_value)
     end

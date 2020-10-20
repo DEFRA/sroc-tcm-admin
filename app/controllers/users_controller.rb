@@ -53,7 +53,7 @@ class UsersController < AdminController
     redirect_to edit_user_path(@user), notice: "User reinvited"
   end
 
-private
+  private
   def set_user
     @user = User.find(params[:id])
   end

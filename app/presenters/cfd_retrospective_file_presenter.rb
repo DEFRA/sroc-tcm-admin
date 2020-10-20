@@ -48,7 +48,7 @@ class CfdRetrospectiveFilePresenter < CfdTransactionFilePresenter
       td.padded_number(td.line_amount, 3)
     ]
   end
-protected
+  protected
   def trailer_invoice_total
     transaction_details.where(tcm_transaction_type: "I").sum(:line_amount).to_i
   end

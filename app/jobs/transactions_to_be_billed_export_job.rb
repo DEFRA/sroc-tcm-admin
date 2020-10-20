@@ -21,7 +21,7 @@ class TransactionsToBeBilledExportJob < ApplicationJob
     TcmLogger.notify(e)
   end
 
-private
+  private
   def storage
     @storage ||= FileStorageService.new
   end

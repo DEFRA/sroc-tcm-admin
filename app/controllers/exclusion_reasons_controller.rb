@@ -46,7 +46,7 @@ class ExclusionReasonsController < AdminController
     redirect_to regime_exclusion_reasons_path(@regime), notice: "Exclusion reason deleted"
   end
 
-private
+  private
   def set_reason
     @reason = @regime.exclusion_reasons.find(params[:id])
   end

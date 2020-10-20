@@ -57,7 +57,7 @@ class AwsFileStore
     raise Exceptions::PermissionError.new("Unable to copy file: #{from_path} to #{to_path}")
   end
 
-private
+  private
   def s3
     @s3 ||= Aws::S3::Client.new(region: aws_region, credentials: credentials)
   end

@@ -71,7 +71,7 @@ class CalculationService
                          "service desk.")
   end
 
-private
+  private
   def make_payload(regime, financial_year, charge_params)
     {
       regime: regime.slug,

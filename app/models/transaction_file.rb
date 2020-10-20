@@ -44,7 +44,7 @@ class TransactionFile < ApplicationRecord
     user.full_name unless user.nil?
   end
 
-private
+  private
   def set_file_id
     self.file_id = generate_file_id
     self.file_reference = base_filename

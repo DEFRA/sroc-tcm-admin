@@ -27,7 +27,7 @@ module Query
       end
       q.order(:reference_1)
     end
-  private
+    private
     def consent_reference
       m = /\A(.*)\/(?:\d+)\/(?:\d+)\z/.match(@transaction.reference_1)
       if m.nil?

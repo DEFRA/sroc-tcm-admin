@@ -37,7 +37,7 @@ class FileStorageService
     storage.delete_file(zone_path(zone, file_path))
   end
 
-private
+  private
   def storage
     @storage ||= determine_storage_handler
   end
