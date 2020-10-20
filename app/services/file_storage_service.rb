@@ -2,6 +2,7 @@
 
 class FileStorageService
   attr_reader :user
+
   # STORAGE_ZONES = [:import, :export, :archive, :quarantine].freeze
   STORAGE_ZONES = {
     import: "import",
