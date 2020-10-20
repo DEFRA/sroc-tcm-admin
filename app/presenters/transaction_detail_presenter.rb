@@ -173,7 +173,7 @@ class TransactionDetailPresenter < SimpleDelegator
   end
 
   def credit_debit_indicator
-    line_amount < 0 ? "C" : "D"
+    line_amount.negative? ? "C" : "D"
   end
 
   def date_received

@@ -18,7 +18,7 @@ class ExportTransactionDataTest < ActiveSupport::TestCase
 
   def test_it_generates_a_file
     transactions = @regime.transaction_details
-    assert transactions.count > 0, "No transaction data"
+    assert transactions.count.positive?, "No transaction data"
     result = ExportTransactionData.call(regime: @regime)
     assert result.success?, "Result unsuccessful"
 
@@ -34,7 +34,7 @@ class ExportTransactionDataTest < ActiveSupport::TestCase
                :transaction_file).
                    order(:region, :transaction_date, :id)
 
-    assert transactions.count > 0, "No transaction data"
+    assert transactions.count.positive?, "No transaction data"
     result = ExportTransactionData.call(regime: @regime)
     assert result.success?, "Result unsuccessful"
 

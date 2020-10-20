@@ -14,7 +14,7 @@ class TransactionExportServiceTest < ActiveSupport::TestCase
 
   def test_export_generates_csv_data
     transactions = @regime.transaction_details.unbilled
-    assert transactions.count > 0, "No TTBB data"
+    assert transactions.count.positive?, "No TTBB data"
     data = @exporter.export(presenter.wrap(transactions))
     idx = 0
     CSV.parse(data, headers: true) do |row|
@@ -28,7 +28,7 @@ class TransactionExportServiceTest < ActiveSupport::TestCase
     transactions = @regime.transaction_details.unbilled
     code = permit_categories(:cfd_a).code
 
-    assert transactions.count > 0, "No TTBB data"
+    assert transactions.count.positive?, "No TTBB data"
     transactions.update_all(category: code, category_description: nil)
 
     data = @exporter.export(presenter.wrap(transactions))
@@ -49,7 +49,7 @@ class TransactionExportServiceTest < ActiveSupport::TestCase
   def test_export_history_generates_csv_data
     generate_historic_cfd
     transactions = @regime.transaction_details.historic
-    assert transactions.count > 0, "No historic test data"
+    assert transactions.count.positive?, "No historic test data"
     data = @exporter.export_history(presenter.wrap(transactions))
     idx = 0
     CSV.parse(data, headers: true) do |row|

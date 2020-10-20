@@ -63,7 +63,7 @@ class TransactionFileExporter
       credit_count = credits.count
       debit_count = invoices.count
 
-      if credit_count > 0 || debit_count > 0
+      if credit_count.positive? || debit_count.positive?
         file = regime.transaction_files.create!(region: region,
                                                 user: user,
                                                 retrospective: true,

@@ -42,7 +42,7 @@ class ReadOnlyWmlTransactionsViewTest < ActionDispatch::IntegrationTest
     admin_user = users(:wml_billing_admin)
     Thread.current[:current_user] = admin_user
     transactions = Query::TransactionsToBeBilled.call(regime: @regime)
-    assert transactions.count > 0, "No transactions"
+    assert transactions.count.positive?, "No transactions"
     transactions.each do |transaction|
       assert UpdateCategory.call(transaction: transaction,
                                  category: "2.15.2",
