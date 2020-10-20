@@ -145,13 +145,13 @@ module TransactionsHelper
   end
 
   def confidence_dot(level)
-    if level
-      msg = "Category confidence is #{confidence(level)}"
+    return unless level
 
-      "<span class='sr-only'>#{msg}</span>" \
-        "<span aria-hidden='true' class='#{level}-dot' title='#{msg}'></span>".
-        html_safe
-    end
+    msg = "Category confidence is #{confidence(level)}"
+
+    "<span class='sr-only'>#{msg}</span>" \
+      "<span aria-hidden='true' class='#{level}-dot' title='#{msg}'></span>".
+      html_safe
   end
 
   def lookup_category_description(regime, category, financial_year)

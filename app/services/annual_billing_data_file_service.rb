@@ -135,11 +135,9 @@ class AnnualBillingDataFileService
                 # will always be an integer as they round down any fractional values
                 begin
                   i = Integer(val.to_s, 10)
-                  if i < 0 || i > 100
-                    raise ArgumentError
-                  else
-                    val += "%" unless val.include?("%")
-                  end
+                  raise ArgumentError if i < 0 || i > 100
+
+                  val += "%" unless val.include?("%")
                 rescue ArgumentError => e
                   failed = true
                 end

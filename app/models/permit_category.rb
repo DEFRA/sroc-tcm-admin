@@ -72,19 +72,18 @@ class PermitCategory < ApplicationRecord
   def valid_from_and_valid_to_is_valid_range
     return if valid_to.nil?
 
-    if valid_from >= valid_to
-      errors.add(:valid_from, "Valid from must be earlier than valid to")
-    end
+    return unless valid_from >= valid_to
+
+    errors.add(:valid_from, "Valid from must be earlier than valid to")
   end
 
   def description_has_no_invalid_characters
-    if description.present?
-      if description =~ /[\?\^£\u2014\u2264\u2265]/
-        errors.add(
-          :description,
-          "^Description contains characters that are not permitted. Please modify your description to remove them."
-        )
-      end
-    end
+    return unless description.present?
+    return unless description =~ /[\?\^£\u2014\u2264\u2265]/
+
+    errors.add(
+      :description,
+      "^Description contains characters that are not permitted. Please modify your description to remove them."
+    )
   end
 end

@@ -14,32 +14,28 @@ class TransactionFileImporter
         record_type = row[Common::RecordType]
 
         if record_type == "H"
-          if header.nil?
-            file_type = row[Header::FileType]
-            if file_type == "I"
-              source = row[Header::FileSource]
-              region = row[Header::Region]
-              file_type_flag = row[Header::FileType]
-              file_seq_no = row[Header::FileSequenceNumber]
-              bill_run_id = row[Header::BillRunId]
-              generated_at = sanitize_date(row[Header::FileDate])
+          raise Exceptions::TransactionFileError, "Header record already exists?!" unless header.nil?
 
-              header = TransactionHeader.create!(
-                regime: Regime.find_by(name: source),
-                feeder_source_code: source,
-                region: region,
-                file_type_flag: file_type_flag,
-                file_sequence_number: file_seq_no,
-                bill_run_id: bill_run_id,
-                generated_at: generated_at,
-                filename: original_filename
-              )
-            else
-              raise Exceptions::TransactionFileError, "Not a transaction file!"
-            end
-          else
-            raise Exceptions::TransactionFileError, "Header record already exists?!"
-          end
+          file_type = row[Header::FileType]
+          raise Exceptions::TransactionFileError, "Not a transaction file!" unless file_type == "I"
+
+          source = row[Header::FileSource]
+          region = row[Header::Region]
+          file_type_flag = row[Header::FileType]
+          file_seq_no = row[Header::FileSequenceNumber]
+          bill_run_id = row[Header::BillRunId]
+          generated_at = sanitize_date(row[Header::FileDate])
+
+          header = TransactionHeader.create!(
+            regime: Regime.find_by(name: source),
+            feeder_source_code: source,
+            region: region,
+            file_type_flag: file_type_flag,
+            file_sequence_number: file_seq_no,
+            bill_run_id: bill_run_id,
+            generated_at: generated_at,
+            filename: original_filename
+          )
         elsif record_type == "D"
           # detail record
           raise Exceptions::TransactionFileError, "Detail record but no header record" if header.nil?

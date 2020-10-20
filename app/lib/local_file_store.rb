@@ -19,11 +19,9 @@ class LocalFileStore
   # to_path can be file path or io object
   def fetch_file(from_path, to_path)
     src = file_path(from_path)
-    if File.exists?(src)
-      FileUtils.cp(src, to_path)
-    else
-      raise Exceptions::FileNotFoundError.new("Local file storage file not found: #{from_path}")
-    end
+    raise Exceptions::FileNotFoundError.new("Local file storage file not found: #{from_path}") unless File.exists?(src)
+
+    FileUtils.cp(src, to_path)
   end
 
   # stream file from disk
@@ -37,11 +35,9 @@ class LocalFileStore
 
   def delete_file(path)
     dst = file_path(path)
-    if File.exists?(dst)
-      FileUtils.rm(dst)
-    else
-      raise Exceptions::FileNotFoundError.new("Local file storage file not found: #{path}")
-    end
+    raise Exceptions::FileNotFoundError.new("Local file storage file not found: #{path}") unless File.exists?(dst)
+
+    FileUtils.rm(dst)
   end
 
   private

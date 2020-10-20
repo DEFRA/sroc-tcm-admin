@@ -15,15 +15,15 @@ class ApplicationController < ActionController::Base
   private
 
   def read_only_user_check!
-    if user_signed_in? && current_user.can_read_only?
-      redirect_to root_path, notice: "You are not permitted to access this area or make changes to data."
-    end
+    return unless user_signed_in? && current_user.can_read_only?
+
+    redirect_to root_path, notice: "You are not permitted to access this area or make changes to data."
   end
 
   def export_data_user_check!
-    if user_signed_in? && !current_user.can_export_data?
-      redirect_to root_path, notice: "You are not permitted to export data from the system."
-    end
+    return unless user_signed_in? && !current_user.can_export_data?
+
+    redirect_to root_path, notice: "You are not permitted to export data from the system."
   end
 
   def set_thread_current_user

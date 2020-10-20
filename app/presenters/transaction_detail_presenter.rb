@@ -114,9 +114,9 @@ class TransactionDetailPresenter < SimpleDelegator
   end
 
   def baseline_charge
-    if charge_calculated? && !charge_calculation_error?
-      (charge_calculation["calculation"]["decisionPoints"]["baselineCharge"] * 100).round
-    end
+    return unless charge_calculated? && !charge_calculation_error?
+
+    (charge_calculation["calculation"]["decisionPoints"]["baselineCharge"] * 100).round
   end
 
   def transaction_date

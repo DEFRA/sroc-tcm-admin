@@ -2,14 +2,14 @@
 
 module FormErrorHelper
   def error_header(resource, opts = {})
-    if resource.errors.any?
-      default_opts = {
-        resource: resource,
-        title: "Check your details",
-        description: "The following #{"error".pluralize(resource.errors.count)} prevented the form from being saved:"
-      }
-      render partial: "shared/error_header", locals: opts.reverse_merge(default_opts)
-    end
+    return unless resource.errors.any?
+
+    default_opts = {
+      resource: resource,
+      title: "Check your details",
+      description: "The following #{"error".pluralize(resource.errors.count)} prevented the form from being saved:"
+    }
+    render partial: "shared/error_header", locals: opts.reverse_merge(default_opts)
   end
 
   def error_list(resource)
@@ -50,9 +50,9 @@ module FormErrorHelper
   end
 
   def error_class(resource, id)
-    if resource.errors.any? && resource.errors.include?(id.to_sym)
-      "form-error error-#{id}"
-    end
+    return unless resource.errors.any? && resource.errors.include?(id.to_sym)
+
+    "form-error error-#{id}"
   end
 
   # This enables us to have custom messages without the attribute name

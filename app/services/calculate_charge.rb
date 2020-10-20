@@ -39,11 +39,11 @@ class CalculateCharge < ServiceObject
   private
 
   def extract_charge_amount
-    if success?
-      amt = (charge_calculation["calculation"]["chargeValue"] * 100).round
-      amt = -amt if @transaction.credit?
-      amt
-    end
+    return unless success?
+
+    amt = (charge_calculation["calculation"]["chargeValue"] * 100).round
+    amt = -amt if @transaction.credit?
+    amt
   end
 
   def calculate_charge

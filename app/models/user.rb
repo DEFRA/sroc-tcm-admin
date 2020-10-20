@@ -100,10 +100,9 @@ class User < ApplicationRecord
   end
 
   def password_complexity
-    if password.present?
-      if !password.match /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/
-        errors.add :password, "does not meet complexity requirements"
-      end
-    end
+    return unless password.present?
+    return if password.match /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/
+
+    errors.add :password, "does not meet complexity requirements"
   end
 end

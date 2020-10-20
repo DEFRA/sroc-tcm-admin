@@ -28,38 +28,38 @@ class WmlTransactionDetailPresenter < TransactionDetailPresenter
   end
 
   def credit_line_description
-    if transaction_detail.line_description.present?
-      txt = transaction_detail.line_description.gsub(/Permit Ref:/, "EPR Ref:")
-      prefix = "Credit of subsistence charge for permit category #{category}"
-      pos = txt.index /\sdue\s/
+    return unless transaction_detail.line_description.present?
+
+    txt = transaction_detail.line_description.gsub(/Permit Ref:/, "EPR Ref:")
+    prefix = "Credit of subsistence charge for permit category #{category}"
+    pos = txt.index /\sdue\s/
+    if pos
+      prefix + txt[pos..-1]
+    else
+      pos = txt.index /\sat\s/
       if pos
-        prefix + txt[pos..-1]
+        prefix + ". At " + txt[(pos + 4)..-1]
       else
-        pos = txt.index /\sat\s/
-        if pos
-          prefix + ". At " + txt[(pos + 4)..-1]
+        m = /\AIn cancellation of invoice no. [A-Z0-9]+:\s*(.*)\z/.match(txt)
+        if m
+          prefix + ". " + m[1]
         else
-          m = /\AIn cancellation of invoice no. [A-Z0-9]+:\s*(.*)\z/.match(txt)
-          if m
-            prefix + ". " + m[1]
-          else
-            prefix + ". " + txt
-          end
+          prefix + ". " + txt
         end
       end
     end
   end
 
   def invoice_line_description
-    if transaction_detail.line_description.present?
-      txt = transaction_detail.line_description.gsub(/Permit Ref:/, "EPR Ref:")
-      # remove leading text either "Compliance Adjustment at " or "Charge code n at "
-      pos = txt.index /\sat\s/
-      if pos
-        "Site: " + txt[(pos + 4)..-1]
-      else
-        txt
-      end
+    return unless transaction_detail.line_description.present?
+
+    txt = transaction_detail.line_description.gsub(/Permit Ref:/, "EPR Ref:")
+    # remove leading text either "Compliance Adjustment at " or "Charge code n at "
+    pos = txt.index /\sat\s/
+    if pos
+      "Site: " + txt[(pos + 4)..-1]
+    else
+      txt
     end
   end
 
