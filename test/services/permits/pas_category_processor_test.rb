@@ -269,7 +269,6 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     assert sc.red?, "Confidence not RED"
   end
 
-
   # Annual Billing:
   #   Single permit - Stage 1 ---------------------------------------
   #     Match 1 (green)
@@ -529,7 +528,6 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
 
   #     No matches (red)
 
-
   #   Multiple permits - Stage 2 (ignores customer_reference)
   #     Match same number (amber)
   def test_annual_multiple_stage_2_all_match_is_amber
@@ -649,7 +647,6 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
                    "Wrong stage")
     end
   end
-
 
   # Supplementary Billing:
   #   Debits:
@@ -1387,7 +1384,6 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
                  sc.suggestion_stage, "Wrong stage")
   end
 
-
   #     Multiple credits - Stage 1 ---------------------------------------
   #       Match all (amber)
   def test_supplemental_credit_multiple_stage_1_all_match_is_amber
@@ -1567,7 +1563,6 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
                    sc.suggestion_stage, "Wrong stage")
     end
   end
-
 
   def set_file_content(content)
     results = []

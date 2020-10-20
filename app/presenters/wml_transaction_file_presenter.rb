@@ -105,7 +105,6 @@ class WmlTransactionFilePresenter < TransactionFilePresenter
     ]
   end
 
-
   protected
 
   def record_count
