@@ -115,7 +115,8 @@ class TransactionExportServiceTest < ActiveSupport::TestCase
       "Original File Date",
       "Pro Rata Days",
       "Currency Baseline Charge",
-      "Currency Tcm Charge"]
+      "Currency Tcm Charge"
+]
     assert_equal expected, @exporter.regime_columns
   end
 
@@ -180,7 +181,8 @@ class TransactionExportServiceTest < ActiveSupport::TestCase
       "Generated Filename",
       "Tcm File Date",
       "Tcm Transaction Type",
-      "Tcm Transaction Reference"]
+      "Tcm Transaction Reference"
+]
     assert_equal expected, @exporter.regime_history_columns
   end
 end
