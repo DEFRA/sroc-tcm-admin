@@ -57,7 +57,8 @@ class AnnualBillingDataFileService
                     headers: true,
                     return_headers: true,
                     header_converters: ->(h) { TcmUtils.strip_bom(h).
-                                               parameterize.underscore.to_sym },
+                                               parameterize.underscore.to_sym
+}                                       ,
                     field_size_limit: 32)
       row = csv.shift
       headers = csv.headers
@@ -96,7 +97,8 @@ class AnnualBillingDataFileService
     counter = 1
     CSV.foreach(path, headers: true,
                       header_converters: ->(h) { TcmUtils.strip_bom(h).
-                                               parameterize.underscore.to_sym },
+                                               parameterize.underscore.to_sym
+}                                         ,
                       field_size_limit: 32) do |row|
       counter += 1
       failed = false
