@@ -22,7 +22,7 @@ module Devise
           self.valid?
           self.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
           false
-        end
+                 end
 
         clean_up_passwords
         result

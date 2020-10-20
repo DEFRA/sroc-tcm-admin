@@ -114,7 +114,7 @@ module Permits
                     "Supplementary invoice (single) - Stage 2"
                   else
             "Supplementary invoice (single) - Stage 4"
-          end
+                  end
 
           if invoices.first.period_start != invoices.second.period_start
             set_category(transaction, invoices.first, :amber, stage)
