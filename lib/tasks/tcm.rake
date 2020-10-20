@@ -2,12 +2,12 @@
 
 namespace :tcm do
   desc "Delete all transaction records from the database"
-  task :cleardown => :environment do
+  task cleardown: :environment do
     TransactionHeader.destroy_all
   end
 
   desc "Check process running"
-  task :check_rails_running => :environment do
+  task check_rails_running: :environment do
     path = Rails.root.join("tmp", "pids", "server.pid")
     rails_running = true
     if File.exists? path
@@ -30,7 +30,7 @@ namespace :tcm do
   end
 
   desc "Check charging service accessible"
-  task :check_charge_service => :environment do
+  task check_charge_service: :environment do
     result = CalculationService.new.check_connectivity
     abort("Cannot generate charge") unless result &&
                                            result["calculation"] &&
@@ -38,7 +38,7 @@ namespace :tcm do
   end
 
   desc "Generate suggested categories"
-  task :dev_populate_categories => :environment do
+  task dev_populate_categories: :environment do
     levels = %i[green amber red]
     stages = %w[stage1 stage2 stage3 stage4]
     logics = %w[logic1 logic2 logic3 logic4]

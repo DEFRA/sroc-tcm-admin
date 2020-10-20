@@ -3,7 +3,7 @@
 require "resque/tasks"
 
 namespace :resque do
-  task :setup => :environment do
+  task setup: :environment do
     Resque.before_fork = Proc.new do |job|
       ActiveRecord::Base.connection.disconnect!
     end
@@ -14,18 +14,18 @@ namespace :resque do
 
   # From https://gist.github.com/1870642
   desc "Restart running workers"
-  task :restart_workers => :environment do
+  task restart_workers: :environment do
     Rake::Task["resque:stop_workers"].invoke
     Rake::Task["resque:start_workers"].invoke
   end
 
   desc "Quit running workers"
-  task :stop_workers => :environment do
+  task stop_workers: :environment do
     stop_workers
   end
 
   desc "Start workers"
-  task :start_workers => :environment do
+  task start_workers: :environment do
     run_worker("*", 1)
   end
 
@@ -70,9 +70,9 @@ namespace :resque do
     puts "Starting #{count} worker(s) with QUEUE: #{queue}"
 
     ## make sure log/resque_err, log/resque_stdout are writable
-    ops = { :pgroup => true,
-            :err => [Rails.root.join("log", "resque_err").to_s, "a"],
-            :out => [Rails.root.join("log", "resque_out").to_s, "a"] }
+    ops = { pgroup: true,
+            err: [Rails.root.join("log", "resque_err").to_s, "a"],
+            out: [Rails.root.join("log", "resque_out").to_s, "a"] }
     env_vars = { "QUEUE" => queue.to_s, "RAILS_ENV" => Rails.env.to_s }
 
     pids = []

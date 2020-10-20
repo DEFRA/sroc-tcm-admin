@@ -19,10 +19,10 @@ class AnnualBillingDataFile < ApplicationRecord
   def state
     machine = Bstard.define do |fsm|
       fsm.initial status
-      fsm.event :upload, :new => :uploaded
-      fsm.event :process, :uploaded => :processing
-      fsm.event :complete, :processing => :completed
-      fsm.event :error, :processing => :failed, :new => :failed
+      fsm.event :upload, new: :uploaded
+      fsm.event :process, uploaded: :processing
+      fsm.event :complete, processing: :completed
+      fsm.event :error, processing: :failed, new: :failed
       fsm.when :any do |_event, _prev_state, new_state|
         update_attribute(:status, new_state)
       end
