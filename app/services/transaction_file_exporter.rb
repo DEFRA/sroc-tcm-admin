@@ -119,7 +119,6 @@ class TransactionFileExporter
     end
     tf.transaction_details.update_all(attrs)
     tf.update_attributes(state: "exported")
-
   ensure
     out_file.close
   end
