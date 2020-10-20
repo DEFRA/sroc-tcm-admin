@@ -15,7 +15,7 @@ class ExclusionsController < ApplicationController
     respond_to do |format|
       format.html do
         if request.xhr?
-          render partial: 'table', locals: { view_model: @view_model }
+          render partial: "table", locals: { view_model: @view_model }
         end
       end
       format.csv do
@@ -41,7 +41,7 @@ class ExclusionsController < ApplicationController
 
       headers["Content-Type"] = "text/csv"
       headers["Content-disposition"] = "attachment; filename=\"#{filename}\""
-      headers['X-Accel-Buffering'] = 'no'
+      headers["X-Accel-Buffering"] = "no"
       headers.delete("Content-Length")
     end
 
@@ -75,7 +75,7 @@ class ExclusionsController < ApplicationController
 
     def region_options(regions)
       opts = regions.map { |r| { label: r, value: r } }
-      opts = [{label: 'All', value: ''}] + opts if opts.count > 1
+      opts = [{label: "All", value: ""}] + opts if opts.count > 1
       opts
     end
 
@@ -84,8 +84,8 @@ class ExclusionsController < ApplicationController
     end
 
     def financial_year_options(fy_list)
-      fys = fy_list.map { |fy| { label: fy[0..1] + '/' + fy[2..3], value: fy } }
-      fys = [{label: 'All', value: ''}] + fys if fys.count > 1
+      fys = fy_list.map { |fy| { label: fy[0..1] + "/" + fy[2..3], value: fy } }
+      fys = [{label: "All", value: ""}] + fys if fys.count > 1
       fys
     end
 

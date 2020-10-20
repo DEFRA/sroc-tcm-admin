@@ -18,6 +18,6 @@ class PutQuarantineFile < ServiceObject
   private
 
   def quarantine_path
-    File.join('quarantine', File.basename(@remote_path))
+    File.join("quarantine", File.basename(@remote_path))
   end
 end

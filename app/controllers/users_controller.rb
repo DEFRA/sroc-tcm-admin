@@ -20,17 +20,17 @@ class UsersController < AdminController
 
   def new
     # default to role with lowest rights
-    @user = User.new(role: 'read_only')
+    @user = User.new(role: "read_only")
     build_regimes
   end
 
   def create
-    p = user_params.merge(password: Devise.friendly_token.first(8) + 'Az9')
+    p = user_params.merge(password: Devise.friendly_token.first(8) + "Az9")
     @user = User.create(p)
 
     if @user.valid?
       invite_user(@user)
-      redirect_to users_path, notice: 'User account created'
+      redirect_to users_path, notice: "User account created"
     else
       render :new
     end
@@ -42,7 +42,7 @@ class UsersController < AdminController
 
   def update
     if @user.update(user_params.except(:email))
-      redirect_to users_path, notice: 'User account updated'
+      redirect_to users_path, notice: "User account updated"
     else
       render :edit
     end
@@ -50,7 +50,7 @@ class UsersController < AdminController
 
   def reinvite
     invite_user(@user)
-    redirect_to edit_user_path(@user), notice: 'User reinvited'
+    redirect_to edit_user_path(@user), notice: "User reinvited"
   end
 
 private

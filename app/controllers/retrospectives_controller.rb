@@ -15,7 +15,7 @@ class RetrospectivesController < ApplicationController
     respond_to do |format|
       format.html do
         if request.xhr?
-          render partial: 'table', locals: { view_model: @view_model }
+          render partial: "table", locals: { view_model: @view_model }
         end
       end
       format.csv do
@@ -69,8 +69,8 @@ class RetrospectivesController < ApplicationController
     end
 
     def financial_year_options(fy_list)
-      fys = fy_list.map { |fy| { label: fy[0..1] + '/' + fy[2..3], value: fy } }
-      fys = [{label: 'All', value: ''}] + fys if fys.count > 1
+      fys = fy_list.map { |fy| { label: fy[0..1] + "/" + fy[2..3], value: fy } }
+      fys = [{label: "All", value: ""}] + fys if fys.count > 1
       fys
     end
 end

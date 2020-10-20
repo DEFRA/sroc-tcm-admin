@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper.rb'
+require "test_helper.rb"
 
 class ExclusionReasonsControllerTest < ActionDispatch::IntegrationTest
   def setup
@@ -23,7 +23,7 @@ class ExclusionReasonsControllerTest < ActionDispatch::IntegrationTest
 
   def test_it_should_create_reason_for_system_admin
     params = { exclusion_reason: { reason: "Trod on false teeth" }}
-    assert_difference 'ExclusionReason.count' do
+    assert_difference "ExclusionReason.count" do
       post regime_exclusion_reasons_path(@regime), params: params
     end
     assert_redirected_to regime_exclusion_reasons_path(@regime)
@@ -43,7 +43,7 @@ class ExclusionReasonsControllerTest < ActionDispatch::IntegrationTest
   end
 
   def test_it_should_delete_reason_for_system_admin
-    assert_difference 'ExclusionReason.count', -1 do
+    assert_difference "ExclusionReason.count", -1 do
       delete regime_exclusion_reason_path(@regime, @reasons.first)
     end
     assert_redirected_to regime_exclusion_reasons_path(@regime)
@@ -71,7 +71,7 @@ class ExclusionReasonsControllerTest < ActionDispatch::IntegrationTest
   def test_it_should_not_create_for_billing_admin
     sign_in users(:billing_admin)
     params = { exclusion_reason: { reason: "Trod on false teeth" }}
-    assert_no_difference 'ExclusionReason.count' do
+    assert_no_difference "ExclusionReason.count" do
       post regime_exclusion_reasons_path(@regime), params: params
     end
     assert_redirected_to root_path
@@ -80,7 +80,7 @@ class ExclusionReasonsControllerTest < ActionDispatch::IntegrationTest
   def test_it_should_not_create_for_read_only
     sign_in users(:cfd_read_only)
     params = { exclusion_reason: { reason: "Trod on false teeth" }}
-    assert_no_difference 'ExclusionReason.count' do
+    assert_no_difference "ExclusionReason.count" do
       post regime_exclusion_reasons_path(@regime), params: params
     end
     assert_redirected_to root_path
@@ -116,7 +116,7 @@ class ExclusionReasonsControllerTest < ActionDispatch::IntegrationTest
 
   def test_it_should_not_delete_reason_for_billing_admin
     sign_in users(:billing_admin)
-    assert_no_difference 'ExclusionReason.count' do
+    assert_no_difference "ExclusionReason.count" do
       delete regime_exclusion_reason_path(@regime, @reasons.first)
     end
     assert_redirected_to root_path
@@ -124,7 +124,7 @@ class ExclusionReasonsControllerTest < ActionDispatch::IntegrationTest
 
   def test_it_should_not_delete_reason_for_read_only
     sign_in users(:cfd_read_only)
-    assert_no_difference 'ExclusionReason.count' do
+    assert_no_difference "ExclusionReason.count" do
       delete regime_exclusion_reason_path(@regime, @reasons.first)
     end
     assert_redirected_to root_path

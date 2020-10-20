@@ -24,7 +24,7 @@ class PermitCategory < ApplicationRecord
   validates :status, inclusion: { in: %w[active excluded],
     message: "%{value} is not a valid state" }
 
-  scope :active, -> { where(status: 'active') }
+  scope :active, -> { where(status: "active") }
 
   def self.by_financial_year(fy)
     t = arel_table
@@ -38,11 +38,11 @@ class PermitCategory < ApplicationRecord
   end
 
   def active?
-    status == 'active'
+    status == "active"
   end
 
   def excluded?
-    status == 'excluded'
+    status == "excluded"
   end
 
   private

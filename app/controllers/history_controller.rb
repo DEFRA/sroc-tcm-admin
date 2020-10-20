@@ -14,7 +14,7 @@ class HistoryController < ApplicationController
     respond_to do |format|
       format.html do
         if request.xhr?
-          render partial: 'table', locals: { view_model: @view_model }
+          render partial: "table", locals: { view_model: @view_model }
         end
       end
       format.csv do

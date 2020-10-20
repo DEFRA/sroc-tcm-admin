@@ -4,24 +4,24 @@
 # This is as per its docs https://github.com/colszowka/simplecov#getting-started
 require "./test/support/simplecov"
 
-require File.expand_path('../../config/environment', __FILE__)
-require 'rails/test_help'
+require File.expand_path("../../config/environment", __FILE__)
+require "rails/test_help"
 
-require 'capybara/rails'
-require 'capybara/minitest'
-require 'capybara/minitest/spec'
+require "capybara/rails"
+require "capybara/minitest"
+require "capybara/minitest/spec"
 
-require 'minitest/reporters'
+require "minitest/reporters"
 Minitest::Reporters.use!
 
-require 'selenium/webdriver'
+require "selenium/webdriver"
 
-require 'mocha/mini_test'
+require "mocha/mini_test"
 
 Dir[Rails.root.join("test/support/**/*.rb")].each { |f| require f }
 
 # remove http auth which is only for heroku deployment
-ENV['HEROKU'] = nil
+ENV["HEROKU"] = nil
 
 Capybara.register_driver :chrome do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome)
@@ -31,7 +31,7 @@ Capybara.register_driver :headless_chrome do |app|
   capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
     chromeOptions: { args: %w[ headless disable-gpu no-sandbox disable-dev-shm-usage window-size=1600,1000 ] }
   )
-  driver_options = { verbose: true, log_path: 'tmp/chromedriver.log' }
+  driver_options = { verbose: true, log_path: "tmp/chromedriver.log" }
   Capybara::Selenium::Driver.new(app,
                                  browser: :chrome,
                                  desired_capabilities: capabilities,
@@ -39,7 +39,7 @@ Capybara.register_driver :headless_chrome do |app|
 end
 
 # Capybara.javascript_driver = :chrome
-driver = ENV.fetch('TEST_DRIVER', :headless_chrome)
+driver = ENV.fetch("TEST_DRIVER", :headless_chrome)
 Capybara.javascript_driver = driver.to_sym
 
 class ActiveSupport::TestCase
@@ -58,7 +58,7 @@ class ActionDispatch::IntegrationTest
 
   def wait_for_ajax
     Timeout.timeout(Capybara.default_max_wait_time) do
-      loop until page.evaluate_script('jQuery.active').zero?
+      loop until page.evaluate_script("jQuery.active").zero?
     end
   end
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper.rb'
+require "test_helper.rb"
 
 module Query
   class TransctionFileYearsTest < ActiveSupport::TestCase
@@ -8,7 +8,7 @@ module Query
     def setup
       @regime = regimes(:cfd)
       @file = transaction_files(:cfd_sroc_file)
-      @regime.transaction_details.update_all(status: 'billed',
+      @regime.transaction_details.update_all(status: "billed",
                                              transaction_file_id: @file.id)
     end
 

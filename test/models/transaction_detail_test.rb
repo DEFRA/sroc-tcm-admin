@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 class TransactionDetailTest < ActiveSupport::TestCase
   def setup
@@ -52,12 +52,12 @@ class TransactionDetailTest < ActiveSupport::TestCase
   end
 
   def test_unbilled_scope_returns_unbilled_transactions
-    transactions = TransactionDetail.where(status: 'unbilled')
+    transactions = TransactionDetail.where(status: "unbilled")
     assert_equal transactions, TransactionDetail.unbilled
   end
 
   def test_historic_scope_returns_historic_transactions
-    transactions = TransactionDetail.where(status: 'billed')
+    transactions = TransactionDetail.where(status: "billed")
     assert_equal transactions, TransactionDetail.historic
   end
 

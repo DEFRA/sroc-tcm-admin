@@ -2,7 +2,7 @@
 
 # run with: bundle exec rails runner benchmark/permit_category_lookup.rb
 #
-require 'benchmark/ips'
+require "benchmark/ips"
 
 Benchmark.ips do |x|
   regime = Regime.first
@@ -14,13 +14,13 @@ Benchmark.ips do |x|
 
   x.report("base query") do |times|
     Query::PermitCategoryLookup.call(regime: regime,
-                                     financial_year: '1819').count
+                                     financial_year: "1819").count
   end
 
   x.report("with search") do |times|
     Query::PermitCategoryLookup.call(regime: regime,
-                                     financial_year: '1819',
-                                     query: '1.2').count
+                                     financial_year: "1819",
+                                     query: "1.2").count
   end
 
   x.compare!

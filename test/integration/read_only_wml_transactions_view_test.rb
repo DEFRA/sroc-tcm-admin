@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 class ReadOnlyWmlTransactionsViewTest < ActionDispatch::IntegrationTest
   include RegimeSetup, ChargeCalculation
@@ -44,7 +44,7 @@ class ReadOnlyWmlTransactionsViewTest < ActionDispatch::IntegrationTest
     assert transactions.count > 0, "No transactions"
     transactions.each do |transaction|
       assert UpdateCategory.call(transaction: transaction,
-                                 category: '2.15.2',
+                                 category: "2.15.2",
                                  user: admin_user).success?
     end
     Thread.current[:current_user] = @user

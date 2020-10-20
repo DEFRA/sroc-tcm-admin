@@ -32,6 +32,6 @@ class PutDataExportFile < ServiceObject
   private
 
   def csv_path
-    File.join('csv', File.basename(filename))
+    File.join("csv", File.basename(filename))
   end
 end

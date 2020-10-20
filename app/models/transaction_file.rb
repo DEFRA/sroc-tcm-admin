@@ -30,7 +30,7 @@ class TransactionFile < ApplicationRecord
     unless @filename
       base = base_filename
       base.downcase! if regime.water_quality?
-      ext = regime.waste? ? '.DAT' : '.dat'
+      ext = regime.waste? ? ".DAT" : ".dat"
       @filename = "#{base}#{ext}"
     end
     @filename
@@ -53,7 +53,7 @@ private
 
   def generate_file_id
     fid = "#{SequenceCounter.next_file_number(regime, region).to_s.rjust(5, "0")}"
-    fid += 'T' unless retrospective?
+    fid += "T" unless retrospective?
     fid
   end
 end

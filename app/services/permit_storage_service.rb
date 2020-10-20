@@ -54,24 +54,24 @@ class PermitStorageService
   end
 
   def build_permit_category(code, description, valid_from,
-                            status = 'active')
+                            status = "active")
     regime.permit_categories.build(code: code,
                                   description: description,
                                   valid_from: valid_from,
                                   status: status)
   end
 
-  def new_permit_category(code, description, valid_from, status = 'active')
+  def new_permit_category(code, description, valid_from, status = "active")
     pc = build_permit_category(code, description, valid_from, status)
 
     if code_exists?(code)
       pc.errors.add(:code, "^Code '#{code}' is already in use.")
-    elsif pc.save && valid_from != '1819'
+    elsif pc.save && valid_from != "1819"
       create_permit_category(code: code,
                              description: description,
-                             valid_from: '1819',
+                             valid_from: "1819",
                              valid_to: valid_from,
-                             status: 'excluded')
+                             status: "excluded")
     end
     pc
   end
@@ -80,7 +80,7 @@ class PermitStorageService
     regime.permit_categories.find_by(code: code, valid_from: fy)
   end
 
-  def update_or_create_new_version(code, description, fy, status = 'active')
+  def update_or_create_new_version(code, description, fy, status = "active")
     pc = regime.permit_categories.find_by(code: code, valid_from: fy)
     if pc.nil?
       # no version to update so create a new one
@@ -93,7 +93,7 @@ class PermitStorageService
     pc
   end
 
-  def add_permit_category_version(code, description, valid_from, status = 'active')
+  def add_permit_category_version(code, description, valid_from, status = "active")
     pc = build_permit_category(code, description, valid_from, status)
 
     return pc unless pc.valid?
@@ -128,7 +128,7 @@ class PermitStorageService
   end
 
   def order_query(q, col, dir)
-    dir = dir == 'desc' ? :desc : :asc
+    dir = dir == "desc" ? :desc : :asc
 
     if col.to_sym == :description
       q.order(description: dir)

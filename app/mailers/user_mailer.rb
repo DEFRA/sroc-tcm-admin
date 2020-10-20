@@ -5,6 +5,6 @@ class UserMailer < ApplicationMailer
     @name = name
     @invitation_link = invitation_link
     prevent_tracking
-    mail(to: email, subject: 'Account created - SRoC Tactical Charging Module')
+    mail(to: email, subject: "Account created - SRoC Tactical Charging Module")
   end
 end

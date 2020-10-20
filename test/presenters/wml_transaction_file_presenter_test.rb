@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper.rb'
+require "test_helper.rb"
 
 class WmlTransactionFilePresenterTest < ActiveSupport::TestCase
   include TransactionFileFormat
@@ -12,20 +12,20 @@ class WmlTransactionFilePresenterTest < ActiveSupport::TestCase
     @transaction_1 = transaction_details(:wml)
     @transaction_2 = @transaction_1.dup
 
-    @transaction_2.customer_reference ='A223344123P'
-    @transaction_2.transaction_reference ='E00555123'
-    @transaction_2.transaction_type = 'C'
-    @transaction_2.line_attr_2 = '012345'
-    @transaction_2.reference_1 = '012345'
-    @transaction_2.reference_2 = 'XZ3333PG/A001'
+    @transaction_2.customer_reference ="A223344123P"
+    @transaction_2.transaction_reference ="E00555123"
+    @transaction_2.transaction_type = "C"
+    @transaction_2.line_attr_2 = "012345"
+    @transaction_2.reference_1 = "012345"
+    @transaction_2.reference_2 = "XZ3333PG/A001"
     @transaction_2.line_amount = -1234
     @transaction_2.unit_of_measure_price = -1234
 
     @transaction_3 = transaction_details(:wml_invoice)
 
     [@transaction_1, @transaction_2, @transaction_3].each_with_index do |t, i|
-      t.category = '2.4.4'
-      t.status = 'billed'
+      t.category = "2.4.4"
+      t.status = "billed"
       t.tcm_charge = t.line_amount
       t.tcm_transaction_type = t.transaction_type
       t.tcm_transaction_reference = generate_reference(t, 100 - i)
@@ -79,7 +79,7 @@ class WmlTransactionFilePresenterTest < ActiveSupport::TestCase
   end
 
   def test_detail_record_has_correct_category_description
-    expected_value = 'Wigwam'
+    expected_value = "Wigwam"
     tested = false
     @presenter.transaction_details.each_with_index do |td, i|
       if td.invoice?
@@ -99,10 +99,10 @@ class WmlTransactionFilePresenterTest < ActiveSupport::TestCase
     assert_equal(
       [
         "T",
-        (count + 1).to_s.rjust(7, '0'),
-        (count + 2).to_s.rjust(7, '0'),
-        @presenter.transaction_details.where(tcm_transaction_type: 'I').sum(:tcm_charge).to_i,
-        @presenter.transaction_details.where(tcm_transaction_type: 'C').sum(:tcm_charge).to_i
+        (count + 1).to_s.rjust(7, "0"),
+        (count + 2).to_s.rjust(7, "0"),
+        @presenter.transaction_details.where(tcm_transaction_type: "I").sum(:tcm_charge).to_i,
+        @presenter.transaction_details.where(tcm_transaction_type: "C").sum(:tcm_charge).to_i
       ],
       @presenter.trailer
     )
@@ -110,15 +110,15 @@ class WmlTransactionFilePresenterTest < ActiveSupport::TestCase
 
   def set_charge_calculation(transaction, band)
     transaction.charge_calculation = {
-      'calculation' => {
-        'chargeAmount' => transaction.tcm_charge.abs,
-        'compliancePerformanceBand' => band,
-        'decisionPoints' => {
-          'baselineCharge' => 196803,
-          'percentageAdjustment' => 0
+      "calculation" => {
+        "chargeAmount" => transaction.tcm_charge.abs,
+        "compliancePerformanceBand" => band,
+        "decisionPoints" => {
+          "baselineCharge" => 196803,
+          "percentageAdjustment" => 0
         }
       },
-      'generatedAt' => '10-AUG-2017'
+      "generatedAt" => "10-AUG-2017"
     }
     transaction.save!
   end

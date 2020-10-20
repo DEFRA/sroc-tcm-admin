@@ -10,7 +10,7 @@ class ListEtlImportFiles < ServiceObject
   end
 
   def call
-    @files = etl_file_store.list('import').reject do |f|
+    @files = etl_file_store.list("import").reject do |f|
       # reject any "directories"
       f.end_with?(File::Separator)
     end

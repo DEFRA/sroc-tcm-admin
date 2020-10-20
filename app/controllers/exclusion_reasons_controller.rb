@@ -24,7 +24,7 @@ class ExclusionReasonsController < AdminController
 
     if @reason.valid?
       @reason.save!
-      redirect_to regime_exclusion_reasons_path(@regime), notice: 'Exclusion reason created'
+      redirect_to regime_exclusion_reasons_path(@regime), notice: "Exclusion reason created"
     else
       render :new
     end
@@ -35,7 +35,7 @@ class ExclusionReasonsController < AdminController
 
   def update
     if @reason.update(reason_params)
-      redirect_to regime_exclusion_reasons_path(@regime), notice: 'Exclusion reason updated'
+      redirect_to regime_exclusion_reasons_path(@regime), notice: "Exclusion reason updated"
     else
       render :edit
     end
@@ -43,7 +43,7 @@ class ExclusionReasonsController < AdminController
 
   def destroy
     @reason.destroy
-    redirect_to regime_exclusion_reasons_path(@regime), notice: 'Exclusion reason deleted'
+    redirect_to regime_exclusion_reasons_path(@regime), notice: "Exclusion reason deleted"
   end
 
 private

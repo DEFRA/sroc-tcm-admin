@@ -10,7 +10,7 @@ class PasTransactionDetailPresenter < TransactionDetailPresenter
       financialDays: financial_year_days,
       chargePeriod: charge_period,
       preConstruction: false,
-      environmentFlag: 'TEST'
+      environmentFlag: "TEST"
     }
   end
 
@@ -54,9 +54,9 @@ class PasTransactionDetailPresenter < TransactionDetailPresenter
 
     parts = cols.map { |c| value_or_space(c) }
     first = parts.shift
-    first += ':' unless first.ends_with?(':')
-    addr = first + ' ' + parts.shift + ','
-    addr += parts.join(',')
+    first += ":" unless first.ends_with?(":")
+    addr = first + " " + parts.shift + ","
+    addr += parts.join(",")
     addr
   end
 

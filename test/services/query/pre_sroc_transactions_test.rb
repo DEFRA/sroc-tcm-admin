@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'test_helper.rb'
+require "test_helper.rb"
 
 module Query
   class PreSrocTransactionsTest < ActiveSupport::TestCase
     def setup
       @regime = regimes(:cfd)
-      @regime.transaction_details.update_all(status: 'retrospective')
+      @regime.transaction_details.update_all(status: "retrospective")
     end
 
     def test_returns_pre_sroc_transactions

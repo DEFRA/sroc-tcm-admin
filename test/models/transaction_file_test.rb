@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 class TransactionFileTest < ActiveSupport::TestCase
   def setup
@@ -9,10 +9,10 @@ class TransactionFileTest < ActiveSupport::TestCase
 
     @regime = regimes(:cfd)
     @sroc_file = @regime.transaction_files.create!(user: @user,
-                                                   region: 'A',
+                                                   region: "A",
                                                    retrospective: false)
     @retro_file = @regime.transaction_files.create!(user: @user,
-                                                    region: 'B',
+                                                    region: "B",
                                                     retrospective: true)
   end
 
@@ -43,11 +43,11 @@ class TransactionFileTest < ActiveSupport::TestCase
   def test_filename_is_uppercase_for_Installations
     @regime = regimes(:pas)
     @sroc_file = @regime.transaction_files.create(user: @user,
-                                                   region: 'A',
+                                                   region: "A",
                                                    retrospective: false)
 
     @retro_file = @regime.transaction_files.create(user: @user,
-                                                   region: 'B',
+                                                   region: "B",
                                                    retrospective: true)
     [@sroc_file, @retro_file].each do |f|
       fn = f.filename
@@ -60,11 +60,11 @@ class TransactionFileTest < ActiveSupport::TestCase
   def test_filename_is_all_uppercase_for_Waste
     @regime = regimes(:wml)
     @sroc_file = @regime.transaction_files.create(user: @user,
-                                                   region: 'A',
+                                                   region: "A",
                                                    retrospective: false)
 
     @retro_file = @regime.transaction_files.create(user: @user,
-                                                   region: 'B',
+                                                   region: "B",
                                                    retrospective: true)
     [@sroc_file, @retro_file].each do |f|
       assert_equal f.filename.upcase, f.filename

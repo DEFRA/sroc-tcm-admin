@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 class PermitCategoryTest < ActiveSupport::TestCase
   def setup
@@ -33,14 +33,14 @@ class PermitCategoryTest < ActiveSupport::TestCase
   end
 
   def test_invalid_without_description_when_active
-    @permit_category.status = 'active'
+    @permit_category.status = "active"
     @permit_category.description = nil
     assert @permit_category.invalid?
     assert_not_nil @permit_category.errors[:description]
   end
 
   def test_valid_without_description_when_excluded
-    @permit_category.status = 'excluded'
+    @permit_category.status = "excluded"
     @permit_category.description = nil
     assert @permit_category.valid?
   end
@@ -56,7 +56,7 @@ class PermitCategoryTest < ActiveSupport::TestCase
     assert @permit_category.invalid?
     assert_not_nil @permit_category.errors[:status]
 
-    @permit_category.status = 'bananas'
+    @permit_category.status = "bananas"
     assert @permit_category.invalid?
     assert_not_nil @permit_category.errors[:status]
 

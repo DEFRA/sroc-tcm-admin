@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'test_helper.rb'
-require 'fileutils'
+require "test_helper.rb"
+require "fileutils"
 
 class PutDataExportFileTest < ActiveSupport::TestCase
   include RegimePresenter, GenerateHistory, FileStorage
@@ -11,7 +11,7 @@ class PutDataExportFileTest < ActiveSupport::TestCase
     @store = archive_file_store
     @tmp_path = @store.base_path
     FileUtils.mkdir_p @tmp_path
-    @cache_path = Rails.root.join('tmp', 'cache', 'export_data')
+    @cache_path = Rails.root.join("tmp", "cache", "export_data")
   end
 
   def teardown

@@ -2,7 +2,7 @@
 
 # run with: bundle exec rails runner benchmark/pre_sroc_summary.rb
 #
-require 'benchmark/ips'
+require "benchmark/ips"
 
 Benchmark.ips do |x|
   regime = Regime.first
@@ -15,12 +15,12 @@ Benchmark.ips do |x|
 
   x.report("summary A") do |times|
     Query::PreSrocSummary.call(regime: regime,
-                               region: 'A')
+                               region: "A")
   end
 
   x.report("summary B") do |times|
     Query::PreSrocSummary.call(regime: regime,
-                               region: 'B')
+                               region: "B")
   end
 
   x.compare!

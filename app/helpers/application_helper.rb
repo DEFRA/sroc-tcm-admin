@@ -25,7 +25,7 @@ module ApplicationHelper
   end
 
   def menu_path(regime, ctrl_name)
-    url_for controller: ctrl_name, action: 'index', regime_id: regime.slug
+    url_for controller: ctrl_name, action: "index", regime_id: regime.slug
   end
 
   def flash_class(level)
@@ -41,15 +41,15 @@ module ApplicationHelper
     sort_col = view_model.sort.to_sym
     sort_dir = view_model.sort_direction
 
-    cls = 'sort-link'
+    cls = "sort-link"
     if name.to_sym == sort_col
       span = "<span class='oi oi-caret-#{top_or_bottom(sort_dir)}'></span>"
       cls = cls + " sorted sorted-#{sort_dir}"
     else
-      span = ''
+      span = ""
     end
 
-    link_to('#', class: cls, data: { column: name }) do
+    link_to("#", class: cls, data: { column: name }) do
       "#{th(name)} #{span}".html_safe
     end
   end
@@ -63,15 +63,15 @@ module ApplicationHelper
   end
 
   def switch_direction(dir)
-    if dir == 'desc'
-      'asc'
+    if dir == "desc"
+      "asc"
     else
-      'desc'
+      "desc"
     end
   end
 
   def top_or_bottom(dir)
-    dir == 'asc' ? 'top' : 'bottom'
+    dir == "asc" ? "top" : "bottom"
   end
 
   def param_or_cookie(key, default_value = nil)

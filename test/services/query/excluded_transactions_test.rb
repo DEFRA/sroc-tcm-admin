@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require 'test_helper.rb'
+require "test_helper.rb"
 
 module Query
   class ExcludedTransactionsTest < ActiveSupport::TestCase
     def setup
       @regime = regimes(:cfd)
       @user = users(:billing_admin)
-      @regime.transaction_details.update_all(status: 'excluded')
+      @regime.transaction_details.update_all(status: "excluded")
     end
 
     def test_returns_permanently_excluded_transactions

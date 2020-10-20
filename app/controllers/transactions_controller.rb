@@ -65,12 +65,12 @@ class TransactionsController < ApplicationController
               locals: { transaction: presenter.new(@transaction, current_user),
                         data_path: path }
           else
-            redirect_to path, notice: 'Transaction was successfully updated.'
+            redirect_to path, notice: "Transaction was successfully updated."
           end
         end
         format.json {
           render json: { transaction: presenter.new(@transaction, current_user),
-                         message: 'Transaction updated'
+                         message: "Transaction updated"
                         },
                         status: :ok,
                         location: path
@@ -82,7 +82,7 @@ class TransactionsController < ApplicationController
               locals: { transaction: presenter.new(@transaction, current_user),
                         data_path: path }
           else
-            redirect_to path, notice: 'Transaction was not updated.'
+            redirect_to path, notice: "Transaction was not updated."
           end
         end
         format.json { render json: @transaction, status: :unprocessable_entity }
@@ -98,7 +98,7 @@ class TransactionsController < ApplicationController
     fy = params.fetch(:fy, cookies[:fy])
 
     available_years = Query::FinancialYears.call(regime: @regime)
-    fy = '' unless available_years.include? fy
+    fy = "" unless available_years.include? fy
 
     msg = ""
 
@@ -113,7 +113,7 @@ class TransactionsController < ApplicationController
     count = 0
 
     if result
-      q = params.fetch(:search, '')
+      q = params.fetch(:search, "")
       approval = ApproveMatchingTransactions.call(regime: @regime,
                                                   region: @region,
                                                   financial_year: fy,

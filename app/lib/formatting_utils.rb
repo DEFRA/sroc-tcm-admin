@@ -2,7 +2,7 @@
 
 module FormattingUtils
   def yn_flag(bool)
-    bool ? 'Y' : 'N'
+    bool ? "Y" : "N"
   end
 
   def padded_number(val, length = 7)

@@ -2,7 +2,7 @@
 
 class TcmUtils
   def self.strip_bom(str)
-    str.force_encoding('utf-8').gsub("\xEF\xBB\xBF".force_encoding('utf-8'), '')
+    str.force_encoding("utf-8").gsub("\xEF\xBB\xBF".force_encoding("utf-8"), "")
   end
 
   def self.obsfucate_sites
@@ -56,8 +56,8 @@ class TcmUtils
     # e.g.
     # '23/06/2017 - 31/03/2017'
     # 'From 03/10/2017'
-    parts = period.split(' ')
-    if parts[0].downcase == 'from'
+    parts = period.split(" ")
+    if parts[0].downcase == "from"
       dates = []
       start_date = Date.strptime(parts[1], date_format)
       end_year = start_date.month > 3 ? start_date.year + 1 : start_date.year
@@ -75,7 +75,7 @@ class TcmUtils
     # e.g.
     # '10/06/17 - 22/12/17'
     # '23/06/2017 - 31/03/2017'
-    period.split(' ').select { |i| i != '-' }.each do |d|
+    period.split(" ").select { |i| i != "-" }.each do |d|
       dates << Date.strptime(d, date_format)
     end
     dates

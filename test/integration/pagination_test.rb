@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 class PaginationTest < ActionDispatch::IntegrationTest
   include RegimeSetup
@@ -11,9 +11,9 @@ class PaginationTest < ActionDispatch::IntegrationTest
 
   def test_can_navigate_to_last_page_on_ttbb
     setup_cfd
-    count = 27 - @regime.transaction_details.region('A').unbilled.count
+    count = 27 - @regime.transaction_details.region("A").unbilled.count
     bulk_up_transaction(:cfd_unbilled_invoice_2, count)
-    go_to_last_page(regime_transactions_path(@regime, region: 'A',
+    go_to_last_page(regime_transactions_path(@regime, region: "A",
                                              page: 1, per_page: 5))
   end
 
@@ -89,7 +89,7 @@ class PaginationTest < ActionDispatch::IntegrationTest
   def go_to_last_page(path)
     visit path
     el = page.find "a.page-link", text: "Last"
-    page_num = el['data-page']
+    page_num = el["data-page"]
     assert_not_nil page_num, "No last page number"
     assert page_num.to_i > 1
     el.click

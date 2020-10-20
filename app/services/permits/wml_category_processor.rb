@@ -22,10 +22,10 @@ module Permits
         historic_transaction = find_latest_historic_transaction(permit_args)
         if historic_transaction
           unbilled_transactions(permit_args) do |t|
-            set_category(t, historic_transaction, :green, 'Annual billing')
+            set_category(t, historic_transaction, :green, "Annual billing")
           end
         else
-          no_historic_transaction(permit_args, 'Annual billing')
+          no_historic_transaction(permit_args, "Annual billing")
         end
       end
     end

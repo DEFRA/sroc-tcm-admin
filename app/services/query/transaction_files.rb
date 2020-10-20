@@ -4,17 +4,17 @@ module Query
   class TransactionFiles < QueryObject
     def initialize(opts = {})
       @regime = opts.fetch(:regime)
-      @region = opts.fetch(:region, '')
-      @prepost = opts.fetch(:prepost, '')
+      @region = opts.fetch(:region, "")
+      @prepost = opts.fetch(:prepost, "")
       @sort_column = opts.fetch(:sort, :file_reference)
-      @sort_direction = opts.fetch(:sort_direction, 'asc')
-      @search = opts.fetch(:search, '')
+      @sort_direction = opts.fetch(:sort_direction, "asc")
+      @search = opts.fetch(:search, "")
     end
 
     def call
       q = @regime.transaction_files
-      q = pre_or_post_sroc(q) unless @prepost.blank? || @prepost == 'all'
-      q = q.where(region: @region) unless @region.blank? || @region == 'all'
+      q = pre_or_post_sroc(q) unless @prepost.blank? || @prepost == "all"
+      q = q.where(region: @region) unless @region.blank? || @region == "all"
       q = q.search(@search) unless @search.blank?
       sort_transactions_files(q)
     end
@@ -22,7 +22,7 @@ module Query
     private
 
     def pre_or_post_sroc(q)
-      if @prepost == 'pre'
+      if @prepost == "pre"
         q.pre_sroc
       else
         q.post_sroc

@@ -22,13 +22,13 @@ module Permits
     ### Annual Billing ===============================
     #
     def handle_single_annual_permit(permit_args)
-      stage = 'Annual billing (single) - Stage 1'
+      stage = "Annual billing (single) - Stage 1"
       transaction = header.transaction_details.find_by(permit_args)
       historic_transactions = find_historic_transactions(permit_args)
 
       if historic_transactions.count.zero?
         # try without customer ref
-        stage = 'Annual billing (single) - Stage 2'
+        stage = "Annual billing (single) - Stage 2"
         historic_transactions = find_historic_transactions(
           permit_args.except(:customer_reference))
       end
@@ -44,12 +44,12 @@ module Permits
     end
 
     def handle_multiple_annual_permits(permit_args, num_records)
-      stage = 'Annual billing (multiple) - Stage 1'
+      stage = "Annual billing (multiple) - Stage 1"
       historic_transactions = find_historic_transactions(permit_args)
 
       if historic_transactions.count.zero?
         # try without customer ref
-        stage = 'Annual billing (multiple) - Stage 2'
+        stage = "Annual billing (multiple) - Stage 2"
         historic_transactions = find_historic_transactions(
           permit_args.except(:customer_reference))
       end

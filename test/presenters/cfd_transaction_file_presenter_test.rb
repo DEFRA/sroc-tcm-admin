@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper.rb'
+require "test_helper.rb"
 
 class CfdTransactionFilePresenterTest < ActiveSupport::TestCase
   include TransactionFileFormat
@@ -12,16 +12,16 @@ class CfdTransactionFilePresenterTest < ActiveSupport::TestCase
     @transaction_1 = transaction_details(:cfd)
     @transaction_2 = @transaction_1.dup
 
-    @transaction_2.customer_reference ='A1234000A'
-    @transaction_2.transaction_type = 'C'
-    @transaction_2.line_description = 'Consent No - ABCD/9999/1/2'
-    @transaction_2.reference_1 = 'ABCD/9999/1/2'
+    @transaction_2.customer_reference ="A1234000A"
+    @transaction_2.transaction_type = "C"
+    @transaction_2.line_description = "Consent No - ABCD/9999/1/2"
+    @transaction_2.reference_1 = "ABCD/9999/1/2"
     @transaction_2.line_amount = -1234
     @transaction_2.unit_of_measure_price = -1234
 
     [@transaction_1, @transaction_2].each do |t|
-      t.category = '2.3.4'
-      t.status = 'billed'
+      t.category = "2.3.4"
+      t.status = "billed"
       t.tcm_charge = t.line_amount
       set_charge_calculation(t)
     end
@@ -68,7 +68,7 @@ class CfdTransactionFilePresenterTest < ActiveSupport::TestCase
   def test_detail_records_have_correct_temporary_cessation_value
     @presenter.transaction_details.each_with_index do |td, i|
       td.temporary_cessation = i.odd?
-      expected_value = i.odd? ? '50%' : ''
+      expected_value = i.odd? ? "50%" : ""
 
       p = CfdTransactionDetailPresenter.new(td)
       row = @presenter.detail_row(p, i)
@@ -90,10 +90,10 @@ class CfdTransactionFilePresenterTest < ActiveSupport::TestCase
     @presenter.transaction_details.each_with_index do |td, i|
       p = CfdTransactionDetailPresenter.new(td)
       if i.odd?
-        p.line_attr_9 = '100%'
+        p.line_attr_9 = "100%"
         p.variation = nil
       else
-        p.variation = '100%'
+        p.variation = "100%"
       end
       row = @presenter.detail_row(p, i)
       assert row[Detail::LineAttr7].blank?
@@ -112,7 +112,7 @@ class CfdTransactionFilePresenterTest < ActiveSupport::TestCase
   end
 
   def test_detail_record_has_correct_category_description
-    expected_value = 'Wigwam'
+    expected_value = "Wigwam"
     @presenter.transaction_details.each_with_index do |td, i|
       td.category_description = expected_value
 
@@ -127,10 +127,10 @@ class CfdTransactionFilePresenterTest < ActiveSupport::TestCase
     assert_equal(
       [
         "T",
-        (count + 1).to_s.rjust(7, '0'),
-        (count + 2).to_s.rjust(7, '0'),
-        @presenter.transaction_details.where(tcm_transaction_type: 'I').sum(:tcm_charge).to_i,
-        @presenter.transaction_details.where(tcm_transaction_type: 'C').sum(:tcm_charge).to_i
+        (count + 1).to_s.rjust(7, "0"),
+        (count + 2).to_s.rjust(7, "0"),
+        @presenter.transaction_details.where(tcm_transaction_type: "I").sum(:tcm_charge).to_i,
+        @presenter.transaction_details.where(tcm_transaction_type: "C").sum(:tcm_charge).to_i
       ],
       @presenter.trailer
     )
@@ -138,14 +138,14 @@ class CfdTransactionFilePresenterTest < ActiveSupport::TestCase
 
   def set_charge_calculation(transaction)
     transaction.charge_calculation = {
-      'calculation' => {
-        'chargeAmount' => transaction.tcm_charge.abs,
-        'decisionPoints' => {
-          'baselineCharge' => 196803,
-          'percentageAdjustment' => 0
+      "calculation" => {
+        "chargeAmount" => transaction.tcm_charge.abs,
+        "decisionPoints" => {
+          "baselineCharge" => 196803,
+          "percentageAdjustment" => 0
         }
       },
-      'generatedAt' => '10-AUG-2017'
+      "generatedAt" => "10-AUG-2017"
     }
     transaction.save
   end

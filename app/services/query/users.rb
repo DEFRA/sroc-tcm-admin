@@ -3,11 +3,11 @@
 module Query
   class Users < QueryObject
     def initialize(opts = {})
-      @regime = opts.fetch(:regime, '')
-      @role = opts.fetch(:role, '')
+      @regime = opts.fetch(:regime, "")
+      @role = opts.fetch(:role, "")
       @sort_column = opts.fetch(:sort, :last_name)
-      @sort_direction = opts.fetch(:sort_direction, 'asc')
-      @search = opts.fetch(:search, '')
+      @sort_direction = opts.fetch(:sort_direction, "asc")
+      @search = opts.fetch(:search, "")
     end
 
     def call

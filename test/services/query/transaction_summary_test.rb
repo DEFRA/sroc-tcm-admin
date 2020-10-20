@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper.rb'
+require "test_helper.rb"
 
 module Query
   class TransactionSummaryTest < ActiveSupport::TestCase
@@ -8,7 +8,7 @@ module Query
 
     def setup
       @regime = regimes(:cfd)
-      @region = 'A'
+      @region = "A"
       @user = users(:billing_admin)
       Thread.current[:current_user] = @user
       @regime.transaction_details.unbilled.region(@region).each do |transaction|

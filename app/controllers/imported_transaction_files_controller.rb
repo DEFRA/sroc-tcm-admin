@@ -23,7 +23,7 @@ class ImportedTransactionFilesController < ApplicationController
 
   def edit
     unless @file.can_be_removed?
-      flash[:error] = 'This file contains billed transactions and cannot be removed'
+      flash[:error] = "This file contains billed transactions and cannot be removed"
       redirect_to regime_imported_transaction_file_path(@regime, @file)
     end
   end
@@ -39,7 +39,7 @@ class ImportedTransactionFilesController < ApplicationController
 
     if result.success?
       redirect_to regime_imported_transaction_file_path(@regime, @file),
-        notice: 'Transaction file removed'
+        notice: "Transaction file removed"
     else
       @file = result.transaction_header
       render :edit

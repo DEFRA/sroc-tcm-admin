@@ -32,7 +32,7 @@ class TransactionFilesController < ApplicationController
     def set_region
       # TODO: this could be defaulted to a user's region if there are
       # restrictions around this
-      @region = params.fetch(:region, '')
+      @region = params.fetch(:region, "")
     end
     # :nocov:
 

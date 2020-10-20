@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require 'test_helper.rb'
+require "test_helper.rb"
 
 module Query
   class PermitCategoryLookupTest < ActiveSupport::TestCase
     def setup
       @regime = regimes(:cfd)
       @user = users(:billing_admin)
-      @regime.transaction_details.update_all(status: 'excluded')
+      @regime.transaction_details.update_all(status: "excluded")
     end
 
     def test_returns_permit_categories_active_for_financial_year
@@ -20,7 +20,7 @@ module Query
     end
 
     def test_returns_filtered_list_base_on_partial_code
-      financial_year = '1819'
+      financial_year = "1819"
       %w[ 2 2.3 2.3.4 6.7.8 ].each do |query|
         categories = PermitCategoryLookup.call(regime: @regime,
                                                financial_year: financial_year,

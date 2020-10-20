@@ -5,9 +5,9 @@ module Query
     def initialize(opts = {})
       @regime = opts.fetch(:regime)
       @financial_year = opts.fetch(:financial_year)
-      @search = opts.fetch(:search, '')
+      @search = opts.fetch(:search, "")
       @sort_column = opts.fetch(:sort, :code)
-      @sort_direction = opts.fetch(:sort_direction, 'asc')
+      @sort_direction = opts.fetch(:sort_direction, "asc")
     end
 
     def call

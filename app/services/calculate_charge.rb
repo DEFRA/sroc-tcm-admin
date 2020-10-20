@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'net/http'
+require "net/http"
 
 class CalculateCharge < ServiceObject
   include RegimeScope
@@ -89,7 +89,7 @@ class CalculateCharge < ServiceObject
 
   def build_post_request
     request = Net::HTTP::Post.new(charge_service_url.request_uri,
-                                  'Content-Type': 'application/json')
+                                  'Content-Type': "application/json")
     request.body = payload.to_json
     request
   end
@@ -99,12 +99,12 @@ class CalculateCharge < ServiceObject
   end
 
   def charge_service_url
-    @charge_service_url ||= URI.parse(ENV.fetch('CHARGE_SERVICE_URL'))
+    @charge_service_url ||= URI.parse(ENV.fetch("CHARGE_SERVICE_URL"))
   end
 
   def http_connection
     http = Net::HTTP.new(charge_service_url.host, charge_service_url.port)
-    http.use_ssl = charge_service_url.scheme.downcase == 'https'
+    http.use_ssl = charge_service_url.scheme.downcase == "https"
     http
   end
 end

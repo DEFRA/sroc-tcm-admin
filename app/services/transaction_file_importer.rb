@@ -103,7 +103,7 @@ class TransactionFileImporter
       })
     elsif regime.waste?
       line = row[Detail::LineDescription]
-      ref = if row[Detail::TransactionType] == 'C'
+      ref = if row[Detail::TransactionType] == "C"
               row[Detail::LineAttr2]
             else
               row[Detail::LineAttr3]
@@ -111,7 +111,7 @@ class TransactionFileImporter
 
       refs = {
         reference_1: ref,
-        reference_2: line.split(':').last.strip,
+        reference_2: line.split(":").last.strip,
         customer_name: row[Detail::WmlCustomerName]
       }
       cc = extract_charge_code(line)
@@ -137,7 +137,7 @@ class TransactionFileImporter
       data["tcm_financial_year"] = determine_financial_year(period[0])
 
       if process_retrospectives && regime.retrospective_date?(period[1])
-        data["status"] = 'retrospective'
+        data["status"] = "retrospective"
       end
     end
 
@@ -181,7 +181,7 @@ class TransactionFileImporter
     v = row[Detail::LineAttr9]
     if v.blank?
       "100%"
-    elsif v.ends_with?('%')
+    elsif v.ends_with?("%")
       v
     else
       "#{v}%"
@@ -195,7 +195,7 @@ class TransactionFileImporter
 
   def determine_financial_year(date)
     y = (date.month < 4 ? date.year - 1 : date.year) % 100
-    sprintf('%02d%02d', y, (y + 1) % 100)
+    sprintf("%02d%02d", y, (y + 1) % 100)
   end
 
   def sanitize_date(d)

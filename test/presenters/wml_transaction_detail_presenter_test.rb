@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper.rb'
+require "test_helper.rb"
 
 class WmlTransactionDetailPresenterTest < ActiveSupport::TestCase
   def setup
@@ -87,7 +87,7 @@ class WmlTransactionDetailPresenterTest < ActiveSupport::TestCase
 
     presenter = WmlTransactionDetailPresenter.new(transaction)
 
-    assert_equal(val.gsub(/Permit/, 'EPR'), presenter.invoice_line_description)
+    assert_equal(val.gsub(/Permit/, "EPR"), presenter.invoice_line_description)
   end
 
   def test_it_returns_permit_reference

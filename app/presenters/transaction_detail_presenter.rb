@@ -50,7 +50,7 @@ class TransactionDetailPresenter < SimpleDelegator
     fyd = financial_year_days
 
     if bd == fyd
-      ''
+      ""
     else
       "#{bd}/#{fyd}"
     end
@@ -113,14 +113,14 @@ class TransactionDetailPresenter < SimpleDelegator
 
   def baseline_charge
     if charge_calculated? && !charge_calculation_error?
-      (charge_calculation['calculation']['decisionPoints']['baselineCharge'] * 100).round
+      (charge_calculation["calculation"]["decisionPoints"]["baselineCharge"] * 100).round
     end
   end
 
   def transaction_date
     # called when exporting to file
-    if charge_calculation && charge_calculation['generatedAt']
-      charge_calculation['generatedAt'].to_date
+    if charge_calculation && charge_calculation["generatedAt"]
+      charge_calculation["generatedAt"].to_date
     else
       transaction_detail.transaction_date
     end
@@ -131,18 +131,18 @@ class TransactionDetailPresenter < SimpleDelegator
   end
 
   def pre_sroc_flag
-    (retrospective? || billed_retrospective?) ? 'Y' : 'N'
+    (retrospective? || billed_retrospective?) ? "Y" : "N"
   end
 
   def excluded_flag
-    (permanently_excluded? || excluded?) ? 'Y' : 'N'
+    (permanently_excluded? || excluded?) ? "Y" : "N"
   end
 
   def excluded_reason
     if permanently_excluded? || excluded?
       transaction_detail.excluded_reason
     else
-      ''
+      ""
     end
   end
 
@@ -171,7 +171,7 @@ class TransactionDetailPresenter < SimpleDelegator
   end
 
   def credit_debit_indicator
-    line_amount < 0 ? 'C' : 'D'
+    line_amount < 0 ? "C" : "D"
   end
 
   def date_received
@@ -179,15 +179,15 @@ class TransactionDetailPresenter < SimpleDelegator
   end
 
   def temporary_cessation_file
-    temporary_cessation? ? '50%' : ''
+    temporary_cessation? ? "50%" : ""
   end
 
   def temporary_cessation_flag
-    temporary_cessation? ? 'Y' : 'N'
+    temporary_cessation? ? "Y" : "N"
   end
 
   def temporary_cessation_yes_no
-    temporary_cessation ? 'Yes' : 'No'
+    temporary_cessation ? "Yes" : "No"
   end
 
   def period
@@ -201,7 +201,7 @@ class TransactionDetailPresenter < SimpleDelegator
         credit_debit
       else
         ActiveSupport::NumberHelper.number_to_currency(
-          sprintf('%.2f', value/100.0), unit: "")
+          sprintf("%.2f", value/100.0), unit: "")
       end
     else
       credit_debit
@@ -210,12 +210,12 @@ class TransactionDetailPresenter < SimpleDelegator
 
   def credit_debit
     txt = if line_amount.negative?
-            'Credit'
+            "Credit"
           else
-            'Debit'
+            "Debit"
           end
 
-    txt += ' (TBC)' unless status == 'excluded'
+    txt += " (TBC)" unless status == "excluded"
     txt
   end
 
@@ -245,11 +245,11 @@ class TransactionDetailPresenter < SimpleDelegator
   end
 
   def suggested_category_overridden_flag
-    suggested_category.overridden ? 'Y' : 'N' unless suggested_category.nil?
+    suggested_category.overridden ? "Y" : "N" unless suggested_category.nil?
   end
 
   def suggested_category_admin_lock_flag
-    suggested_category.admin_lock ? 'Y' : 'N' unless suggested_category.nil?
+    suggested_category.admin_lock ? "Y" : "N" unless suggested_category.nil?
   end
 
   def suggested_category_logic
@@ -261,7 +261,7 @@ class TransactionDetailPresenter < SimpleDelegator
   end
 
   def approved_flag
-    transaction_detail.approved_for_billing ? 'Y' : 'N'
+    transaction_detail.approved_for_billing ? "Y" : "N"
   end
 
   def approved_date
@@ -295,8 +295,8 @@ protected
 
   def extract_compliance_performance
     chg = transaction_detail.charge_calculation
-    chg['calculation']['compliancePerformanceBand'] unless chg.nil? ||
-      chg['calculation'].nil?
+    chg["calculation"]["compliancePerformanceBand"] unless chg.nil? ||
+      chg["calculation"].nil?
   end
 
   def permit_store

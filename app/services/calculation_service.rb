@@ -11,7 +11,7 @@ class CalculationService
 
   def check_connectivity
     # generate a charge to test connectivity
-    regime = Regime.find_by!(slug: 'cfd')
+    regime = Regime.find_by!(slug: "cfd")
     parms = {
       permitCategoryRef: regime.permit_categories.first.code,
       percentageAdjustment: "100",
@@ -25,7 +25,7 @@ class CalculationService
     }
 
     result = calculate_charge(regime, 2018, parms)
-    puts 'Successfully generated charge'
+    puts "Successfully generated charge"
     result
   rescue => e
     msg = "Check connectivity error: " + e.message
@@ -82,7 +82,7 @@ private
 
   def build_post_request(payload)
     request = Net::HTTP::Post.new(charge_service_url.request_uri,
-                                  'Content-Type': 'application/json')
+                                  'Content-Type': "application/json")
     request.body = payload.to_json
     request
   end
@@ -92,12 +92,12 @@ private
   end
 
   def charge_service_url
-    @charge_service_url ||= URI.parse(ENV.fetch('CHARGE_SERVICE_URL'))
+    @charge_service_url ||= URI.parse(ENV.fetch("CHARGE_SERVICE_URL"))
   end
 
   def http_connection
     http = Net::HTTP.new(charge_service_url.host, charge_service_url.port)
-    http.use_ssl = charge_service_url.scheme.downcase == 'https'
+    http.use_ssl = charge_service_url.scheme.downcase == "https"
     http
   end
 end

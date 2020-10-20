@@ -19,7 +19,7 @@ class DataExportController < ApplicationController
   end
 
   def generate
-    raise ActionController::RoutingError.new('Not Found') unless SystemConfig.config.can_generate_export?    
+    raise ActionController::RoutingError.new("Not Found") unless SystemConfig.config.can_generate_export?    
     RegimeTransactionExportJob.perform_later(@regime.id)
     redirect_to regime_data_export_index_path(@regime),
       notice: "Your request has been queued. Check back in a few minutes."

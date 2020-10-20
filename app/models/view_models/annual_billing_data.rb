@@ -9,8 +9,8 @@ module ViewModels
       @regime = params.fetch(:regime)
       @upload = params.fetch(:upload)
       @user = params.fetch(:user)
-      @sort = 'line_number'
-      @sort_direction = 'asc'
+      @sort = "line_number"
+      @sort_direction = "asc"
       @page = 1
       @per_page = 10
     end

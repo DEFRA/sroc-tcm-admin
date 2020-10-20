@@ -14,26 +14,26 @@ class TransactionStorageService
     regime.transaction_details.find(id)
   end
 
-  def transactions_to_be_billed(search = '', page = 1, per_page = 10,
-                                region = '', order = :customer_reference,
-                                direction = 'asc')
+  def transactions_to_be_billed(search = "", page = 1, per_page = 10,
+                                region = "", order = :customer_reference,
+                                direction = "asc")
     region = first_region if region.blank?
     q = regime.transaction_details.region(region).unbilled
     q = q.search(search) unless search.blank?
     order_query(q, order, direction).page(page).per(per_page)
   end
 
-  def transactions_to_be_billed_for_export(search = '', region = '',
+  def transactions_to_be_billed_for_export(search = "", region = "",
                                            order = :customer_reference,
-                                           direction = 'asc')
+                                           direction = "asc")
     region = first_region if region.blank?
     q = regime.transaction_details.region(region).unbilled
     q = q.search(search) unless search.blank?
     order_query(q, order, direction)
   end
 
-  def transaction_history(search = '', fy = '', page = 1, per_page = 10, region = '',
-                               order = :customer_reference, direction = 'asc')
+  def transaction_history(search = "", fy = "", page = 1, per_page = 10, region = "",
+                               order = :customer_reference, direction = "asc")
     q = regime.transaction_details.historic
     q = q.region(region) unless region.blank?
     q = q.history_search(search) unless search.blank?
@@ -41,8 +41,8 @@ class TransactionStorageService
     order_query(q, order, direction).page(page).per(per_page)
   end
 
-  def transaction_history_for_export(search = '', fy = '', region = '',
-                                     order = :customer_reference, direction = 'asc')
+  def transaction_history_for_export(search = "", fy = "", region = "",
+                                     order = :customer_reference, direction = "asc")
     q = regime.transaction_details.historic
     q = q.region(region) unless region.blank?
     q = q.history_search(search) unless search.blank?
@@ -50,18 +50,18 @@ class TransactionStorageService
     order_query(q, order, direction)
   end
 
-  def retrospective_transactions(search = '', page = 1, per_page = 10,
-                                 region = '', order = :customer_reference,
-                                 direction = 'asc')
+  def retrospective_transactions(search = "", page = 1, per_page = 10,
+                                 region = "", order = :customer_reference,
+                                 direction = "asc")
     region = first_retrospective_region if region.blank?
     q = regime.transaction_details.region(region).retrospective
     q = q.retrospective_search(search) unless search.blank?
     order_query(q, order, direction).page(page).per(per_page)
   end
 
-  def excluded_transactions(search = '', fy = '', page = 1, per_page = 10,
-                            region = '', order = :customer_reference,
-                            direction = 'asc')
+  def excluded_transactions(search = "", fy = "", page = 1, per_page = 10,
+                            region = "", order = :customer_reference,
+                            direction = "asc")
     q = regime.transaction_details.historic_excluded
     q = q.region(region) unless region.blank?
     q = q.exclusion_search(search) unless search.blank?
@@ -74,38 +74,38 @@ def transactions_related_to(transaction)
     q = regime.transaction_details.unbilled.where.not(id: transaction.id)
     if regime.installations?
       q = q.where.not(reference_3: nil).
-        where.not(reference_3: 'NA').
+        where.not(reference_3: "NA").
         where(reference_3: transaction.reference_3).
-        or(q.where.not(reference_1: 'NA').
+        or(q.where.not(reference_1: "NA").
            where.not(reference_1: nil).
            where(reference_1: transaction.reference_1)
         ).
-        or(q.where.not(reference_2: 'NA').
+        or(q.where.not(reference_2: "NA").
            where.not(reference_2: nil).
            where(reference_2: transaction.reference_2)
         )
     else
       q = q.where.not(reference_1: nil).
-        where.not(reference_1: 'NA').
+        where.not(reference_1: "NA").
         where(reference_1: transaction.reference_1)
     end
     q.order(:reference_1)
   end
 
   def unbilled_financial_years
-    financial_years_for('unbilled')
+    financial_years_for("unbilled")
   end
 
   def history_financial_years
-    financial_years_for('billed')
+    financial_years_for("billed")
   end
 
   def retrospective_financial_years
-    financial_years_for('retrospective')
+    financial_years_for("retrospective")
   end
 
   def exclusion_financial_years
-    financial_years_for('excluded')
+    financial_years_for("excluded")
   end
 
   def financial_years_for(status)
@@ -130,8 +130,8 @@ def transactions_related_to(transaction)
   end
 
   def order_query(q, col, dir)
-    dir = dir == 'desc' ? :desc : :asc
-    txt_dir = (dir == :asc) ? 'asc' : 'desc'
+    dir = dir == "desc" ? :desc : :asc
+    txt_dir = (dir == :asc) ? "asc" : "desc"
 
     # lookup col value
     case col.to_sym

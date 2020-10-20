@@ -12,7 +12,7 @@ class PermitCategoriesController < AdminController
     set_financial_year
     q = params.fetch(:search, "")
     sort_col = params.fetch(:sort, :code)
-    sort_dir = params.fetch(:sort_direction, 'asc')
+    sort_dir = params.fetch(:sort_direction, "asc")
     pg = params.fetch(:page, 1)
     per_pg = params.fetch(:per_page, 10)
     unpaged = !!params.fetch(:unpaged, false)
@@ -39,7 +39,7 @@ class PermitCategoriesController < AdminController
         )
 
         if request.xhr?
-          render partial: 'table', locals: { view_model: @view_model }
+          render partial: "table", locals: { view_model: @view_model }
         else
           render
         end
@@ -67,7 +67,7 @@ class PermitCategoriesController < AdminController
     set_financial_year
     @permit_category = @regime.permit_categories.
       build(valid_from: @financial_year,
-            status: 'active')
+            status: "active")
   end
 
   def edit
@@ -96,7 +96,7 @@ class PermitCategoriesController < AdminController
         format.html do
           redirect_to regime_permit_categories_path(@regime,
                                                    fy: @financial_year),
-                                                   notice: 'Permit category was successfully created.'
+                                                   notice: "Permit category was successfully created."
         end
         format.json { render :show, status: :created, location: regime_permit_category_path(@regime, @permit_category) }
       else
@@ -113,20 +113,20 @@ class PermitCategoriesController < AdminController
     cat = @permit_category
     status = cat.status
 
-    if params[:commit] == 'Remove Category'
+    if params[:commit] == "Remove Category"
       if can_remove_permit_category?(cat.code, @financial_year)
         @permit_category = permit_store.
           update_or_create_new_version(
             cat.code, permit_category_params[:description],
-            @financial_year, 'excluded')
+            @financial_year, "excluded")
       else
        @permit_category.errors.add(:base, "^This code is in use and cannot be removed")
       end
-    elsif params[:commit] == 'Reinstate Category'
+    elsif params[:commit] == "Reinstate Category"
       @permit_category = permit_store.update_or_create_new_version(
         cat.code, permit_category_params[:description],
         @financial_year,
-        'active')
+        "active")
     else
       @permit_category = permit_store.
         update_or_create_new_version(
@@ -137,7 +137,7 @@ class PermitCategoriesController < AdminController
 
     respond_to do |format|
       if result
-        format.html { redirect_to regime_permit_categories_path(@regime, fy: @financial_year), notice: 'Permit category was successfully updated.' }
+        format.html { redirect_to regime_permit_categories_path(@regime, fy: @financial_year), notice: "Permit category was successfully updated." }
         format.json { render :show, status: :ok, location: regime_permit_category_path(@regime, @permit_category) }
       else
         @timeline = permit_store.permit_category_versions(@permit_category.code)
@@ -151,7 +151,7 @@ class PermitCategoriesController < AdminController
     # update record status or create new 'excluded' record
     @permit_category.destroy
     respond_to do |format|
-      format.html { redirect_to regime_permit_categories_url(@regime), notice: 'Permit category was successfully destroyed.' }
+      format.html { redirect_to regime_permit_categories_url(@regime), notice: "Permit category was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -165,8 +165,8 @@ class PermitCategoriesController < AdminController
   end
 
   def set_financial_year
-    @financial_year = params.fetch(:fy, '1819')
-    @financial_year = '1819' unless valid_financial_year? @financial_year
+    @financial_year = params.fetch(:fy, "1819")
+    @financial_year = "1819" unless valid_financial_year? @financial_year
   end
 
   def permit_category_params

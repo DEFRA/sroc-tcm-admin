@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper.rb'
+require "test_helper.rb"
 
 class PasTransactionDetailPresenterTest < ActiveSupport::TestCase
   def setup
@@ -33,19 +33,19 @@ class PasTransactionDetailPresenterTest < ActiveSupport::TestCase
   end
 
   def test_it_builds_site_address
-    @transaction.header_attr_8 = 'AB12 1AB'
+    @transaction.header_attr_8 = "AB12 1AB"
     addr = "Site: Red St. Hill Farm, , , , ,AB12 1AB"
     assert_equal(addr, @presenter.site_address)
   end
 
   def test_pre_sroc_flag_returns_Y_for_retrospective_transactions
-    @transaction.status = 'retrospective'
-    assert_equal 'Y', @presenter.pre_sroc_flag, "Pre-SRoC flag incorrect"
+    @transaction.status = "retrospective"
+    assert_equal "Y", @presenter.pre_sroc_flag, "Pre-SRoC flag incorrect"
   end
 
   def test_pre_sroc_flag_returns_Y_for_retro_billed_transactions
-    @transaction.status = 'retro_billed'
-    assert_equal 'Y', @presenter.pre_sroc_flag, "Pre-SRoC flag incorrect"
+    @transaction.status = "retro_billed"
+    assert_equal "Y", @presenter.pre_sroc_flag, "Pre-SRoC flag incorrect"
   end
 
   def test_it_transforms_into_json

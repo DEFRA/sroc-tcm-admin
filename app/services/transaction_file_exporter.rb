@@ -40,10 +40,10 @@ class TransactionFileExporter
                                               credit_total)
 
       # link transactions and update status
-      q.update_all(transaction_file_id: file.id, status: 'exporting')
+      q.update_all(transaction_file_id: file.id, status: "exporting")
     end
     # 'remove' excluded transactions
-    excluded_transactions_by_region(region).update_all(status: 'excluded')
+    excluded_transactions_by_region(region).update_all(status: "excluded")
     # queue the background job to create the file
     FileExportJob.perform_later(file.id) unless file.nil?
     file
@@ -75,7 +75,7 @@ class TransactionFileExporter
                                                 credit_total)
 
         # link transactions and update status
-        q.update_all(transaction_file_id: file.id, status: 'retro_exporting')
+        q.update_all(transaction_file_id: file.id, status: "retro_exporting")
       end
     end
 
@@ -113,19 +113,19 @@ class TransactionFileExporter
     }
 
     if tf.retrospective?
-      attrs[:status] = 'retro_billed'
+      attrs[:status] = "retro_billed"
     else
-      attrs[:status] = 'billed'
+      attrs[:status] = "billed"
     end
     tf.transaction_details.update_all(attrs)
-    tf.update_attributes(state: 'exported')
+    tf.update_attributes(state: "exported")
 
   ensure
     out_file.close
   end
 
   def present(transaction_file)
-    file_type = transaction_file.retrospective? ? 'Retrospective' : 'Transaction'
+    file_type = transaction_file.retrospective? ? "Retrospective" : "Transaction"
     "#{regime.to_param.titlecase}#{file_type}FilePresenter".constantize.
       new(transaction_file)
   end
@@ -170,14 +170,14 @@ class TransactionFileExporter
         ref, cust = refs
         trans_ref = next_wml_transaction_reference
         q.where(reference_1: ref).where(customer_reference: cust).where(atab[:tcm_charge].gteq(0)).
-          update_all(tcm_transaction_type: 'I',
+          update_all(tcm_transaction_type: "I",
                      tcm_transaction_reference: trans_ref)
       end
       negatives.each do |refs|
         ref, cust = refs
         trans_ref = next_wml_transaction_reference
         q.where(reference_1: ref).where(customer_reference: cust).where(atab[:tcm_charge].lt(0)).
-          update_all(tcm_transaction_type: 'C',
+          update_all(tcm_transaction_type: "C",
                      tcm_transaction_reference: trans_ref)
       end
     end
@@ -188,7 +188,7 @@ class TransactionFileExporter
     if result.success?
       result.reference
     else
-      ''
+      ""
     end
   end
 
@@ -216,14 +216,14 @@ class TransactionFileExporter
         ref, cust = refs
         trans_ref = next_pas_transaction_reference(retro)
         q.where(reference_1: ref).where(customer_reference: cust).where(atab[charge_attr].gteq(0)).
-          update_all(tcm_transaction_type: 'I',
+          update_all(tcm_transaction_type: "I",
                      tcm_transaction_reference: trans_ref)
       end
       negatives.each do |refs|
         ref, cust = refs
         trans_ref = next_pas_transaction_reference(retro)
         q.where(reference_1: ref).where(customer_reference: cust).where(atab[charge_attr].lt(0)).
-          update_all(tcm_transaction_type: 'C',
+          update_all(tcm_transaction_type: "C",
                      tcm_transaction_reference: trans_ref)
       end
     end
@@ -239,7 +239,7 @@ class TransactionFileExporter
     if result.success?
       result.reference
     else
-      ''
+      ""
     end
   end
 
@@ -259,7 +259,7 @@ class TransactionFileExporter
                      end
 
       cust_charges.each do |k, v|
-        trans_type = v.negative? ? 'C' : 'I'
+        trans_type = v.negative? ? "C" : "I"
         trans_ref = next_cfd_transaction_reference(retro)
 
         q.where(customer_reference: k[0], line_context_code: k[1]).
@@ -279,7 +279,7 @@ class TransactionFileExporter
     if result.success?
       result.reference
     else
-      ''
+      ""
     end
   end
 

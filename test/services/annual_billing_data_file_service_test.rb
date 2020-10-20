@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper.rb'
+require "test_helper.rb"
 
 class AnnualBillingDataFileServiceTest < ActiveSupport::TestCase
   include ChargeCalculation
@@ -36,19 +36,19 @@ class AnnualBillingDataFileServiceTest < ActiveSupport::TestCase
   end
 
   def test_valid_file_returns_true_when_valid
-    File.open(file_fixture('cfd_abd.csv'), "r") do |f|
+    File.open(file_fixture("cfd_abd.csv"), "r") do |f|
       assert @service.valid_file?(f)
     end
   end
 
   def test_valid_file_returns_false_when_invalid
-    File.open(file_fixture('invalid.csv'), "r") do |f|
+    File.open(file_fixture("invalid.csv"), "r") do |f|
       refute @service.valid_file?(f)
     end
   end
 
   def test_import_updates_matching_transactions_in_regime
-    file = file_fixture('cfd_abd.csv')
+    file = file_fixture("cfd_abd.csv")
     transaction = sroc_transaction
     assert_nil transaction.category
     refute transaction.temporary_cessation
@@ -62,7 +62,7 @@ class AnnualBillingDataFileServiceTest < ActiveSupport::TestCase
   end
 
   def test_import_calculates_charge_for_updated_transactions
-    file = file_fixture('cfd_abd.csv')
+    file = file_fixture("cfd_abd.csv")
     transaction = sroc_transaction
     assert_nil transaction.charge_calculation
 
@@ -74,7 +74,7 @@ class AnnualBillingDataFileServiceTest < ActiveSupport::TestCase
   end
 
   def test_import_extracts_and_converts_calculated_charge_amount
-    file = file_fixture('cfd_abd.csv')
+    file = file_fixture("cfd_abd.csv")
     transaction = sroc_transaction
     assert_nil transaction.charge_calculation
 
@@ -82,13 +82,13 @@ class AnnualBillingDataFileServiceTest < ActiveSupport::TestCase
     @service.import(upload, file)
 
     transaction.reload
-    amt = (transaction.charge_calculation['calculation']['chargeValue'] * 100).round
+    amt = (transaction.charge_calculation["calculation"]["chargeValue"] * 100).round
     amt = -amt if transaction.line_amount.negative?
     assert_equal amt, transaction.tcm_charge
   end
 
   def test_import_does_not_update_transactions_outside_regime
-    file = file_fixture('cfd_abd.csv')
+    file = file_fixture("cfd_abd.csv")
 
     transaction = transaction_details(:pas)
     assert_nil transaction.category
@@ -103,7 +103,7 @@ class AnnualBillingDataFileServiceTest < ActiveSupport::TestCase
   end
 
   def test_import_correctly_set_temporary_cessation
-    file = file_fixture('cfd_abd.csv')
+    file = file_fixture("cfd_abd.csv")
     upload = prepare_upload(file)
 
     transaction = sroc_transaction
@@ -117,7 +117,7 @@ class AnnualBillingDataFileServiceTest < ActiveSupport::TestCase
   end
 
   def test_import_handles_zero_variation
-    file = file_fixture('cfd_abd_zero_variation.csv')
+    file = file_fixture("cfd_abd_zero_variation.csv")
     upload = prepare_upload(file)
 
     transaction = sroc_transaction
@@ -135,7 +135,7 @@ class AnnualBillingDataFileServiceTest < ActiveSupport::TestCase
   end
 
   def test_import_stores_variation_with_an_percent_suffix
-    file = file_fixture('cfd_abd.csv')
+    file = file_fixture("cfd_abd.csv")
     upload = prepare_upload(file)
 
     transaction = sroc_transaction
@@ -144,12 +144,12 @@ class AnnualBillingDataFileServiceTest < ActiveSupport::TestCase
     transaction_2.save
 
     @service.import(upload, file)
-    assert transaction.reload.variation.end_with?('%')
-    assert transaction_2.reload.variation.end_with?('%')
+    assert transaction.reload.variation.end_with?("%")
+    assert transaction_2.reload.variation.end_with?("%")
   end
 
   def test_import_records_total_and_errors
-    file = file_fixture('cfd_abd.csv')
+    file = file_fixture("cfd_abd.csv")
     upload = prepare_upload(file)
     transaction = sroc_transaction
     transaction_2 = transaction.dup
@@ -163,21 +163,21 @@ class AnnualBillingDataFileServiceTest < ActiveSupport::TestCase
   end
 
   def test_import_creates_audit_records
-    file = file_fixture('cfd_abd.csv')
+    file = file_fixture("cfd_abd.csv")
     upload = prepare_upload(file)
     transaction = sroc_transaction
     transaction_2 = transaction.dup
     transaction_2.reference_1 = "ANNF/1754/1/1"
     transaction_2.save!
 
-    assert_difference('AuditLog.count', 2) do
+    assert_difference("AuditLog.count", 2) do
       @service.import(upload, file)
     end
     assert_equal(@user, AuditLog.last.user)
   end
 
   def test_import_creates_audit_log_of_changes
-    file = file_fixture('cfd_abd.csv')
+    file = file_fixture("cfd_abd.csv")
     upload = prepare_upload(file)
 
     transaction = sroc_transaction
@@ -185,13 +185,13 @@ class AnnualBillingDataFileServiceTest < ActiveSupport::TestCase
     @service.import(upload, file)
 
     log = transaction.reload.audit_logs.last
-    changes = log.payload['modifications']
+    changes = log.payload["modifications"]
 
-    assert_equal([nil, '2.3.4'], changes['category'])
-    assert_equal([false, true], changes['temporary_cessation'])
-    assert_equal([nil, '88%'], changes['variation'])
-    assert_not_nil(changes['charge_calculation'])
-    assert_not_nil(changes['tcm_charge'])
+    assert_equal([nil, "2.3.4"], changes["category"])
+    assert_equal([false, true], changes["temporary_cessation"])
+    assert_equal([nil, "88%"], changes["variation"])
+    assert_not_nil(changes["charge_calculation"])
+    assert_not_nil(changes["tcm_charge"])
   end
 
   def prepare_upload(file)
@@ -202,9 +202,9 @@ class AnnualBillingDataFileServiceTest < ActiveSupport::TestCase
 
   def sroc_transaction
     transaction = transaction_details(:cfd)
-    transaction.tcm_financial_year = '1819'
-    transaction.period_start = '1-APR-2018'
-    transaction.period_end = '31-MAR-2019'
+    transaction.tcm_financial_year = "1819"
+    transaction.period_start = "1-APR-2018"
+    transaction.period_end = "31-MAR-2019"
     transaction.save!
     transaction
   end

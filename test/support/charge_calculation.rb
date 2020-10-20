@@ -33,7 +33,7 @@ module ChargeCalculation
   def error_charge
     {
       "calculation" => {
-        "messages" => 'Error message'
+        "messages" => "Error message"
       }
     }
   end

@@ -8,7 +8,7 @@ module FormErrorHelper
         title: "Check your details",
         description: "The following #{"error".pluralize(resource.errors.count)} prevented the form from being saved:"
       }
-      render partial: 'shared/error_header', locals: opts.reverse_merge(default_opts)
+      render partial: "shared/error_header", locals: opts.reverse_merge(default_opts)
     end
   end
 
@@ -29,7 +29,7 @@ module FormErrorHelper
 
     if resource.errors.include?(attr.to_sym)
       # there are errors for this attribute
-      html_class = html_opts.fetch(:class, '')
+      html_class = html_opts.fetch(:class, "")
       html_class += " #{error_class(resource, attr)}"
       html_opts.merge!(class: html_class)
       el = []

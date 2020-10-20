@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'csv'
+require "csv"
 
 class PermitCategoryImporter
   def self.import(regime, filename)

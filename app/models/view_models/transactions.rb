@@ -13,16 +13,16 @@ module ViewModels
       @user = params.fetch(:user)
       @page = 1
       @per_page = 10
-      @sort = 'customer_reference'
-      @sort_direction = 'asc'
+      @sort = "customer_reference"
+      @sort_direction = "asc"
       @permit_all_regions = false
       @unapproved = false
     end
 
     def region=(val)
-      if val.blank? || val == 'all'
+      if val.blank? || val == "all"
         if permit_all_regions
-          @region = 'all'
+          @region = "all"
         else
           @region = available_regions.first
         end
@@ -37,7 +37,7 @@ module ViewModels
     end
 
     def region
-      if permit_all_regions && @region == 'all'
+      if permit_all_regions && @region == "all"
         @region
       else
         if available_regions.include?(@region)
@@ -52,7 +52,7 @@ module ViewModels
       if available_years.include? @financial_year
         @financial_year
       else
-        ''
+        ""
       end
     end
 
@@ -109,12 +109,12 @@ module ViewModels
     end
 
     def all_region_options
-      opts = available_regions.length == 1 ? [] : [['All', 'all']]
+      opts = available_regions.length == 1 ? [] : [["All", "all"]]
       options_for_select(opts + available_regions.map { |r| [r, r] }, region)
     end
 
     def financial_year_options
-      opts = available_years.length == 1 ? [] : [['All', 'all']]
+      opts = available_years.length == 1 ? [] : [["All", "all"]]
       options_for_select(opts + pretty_years_list, financial_year)
     end
 

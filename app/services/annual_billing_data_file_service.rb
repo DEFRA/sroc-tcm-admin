@@ -22,7 +22,7 @@ class AnnualBillingDataFileService
 
   def upload(params = {})
     record = regime.annual_billing_data_files.build(number_of_records: 0,
-                                                    status: 'new')
+                                                    status: "new")
     data_file = params.fetch(:data_file, nil)
     if data_file
       if valid_file? data_file.tempfile
@@ -133,7 +133,7 @@ class AnnualBillingDataFileService
                   if i < 0 || i > 100
                     raise ArgumentError
                   else
-                    val += '%' unless val.include?('%')
+                    val += "%" unless val.include?("%")
                   end
                 rescue ArgumentError => e
                   failed = true
@@ -141,10 +141,10 @@ class AnnualBillingDataFileService
               elsif col[:header] == :temporary_cessation
                 # check for Y or N
                 v = val.downcase
-                if v != 'y' && v != 'n'
+                if v != "y" && v != "n"
                   failed = true
                 else
-                  val = (v == 'y')
+                  val = (v == "y")
                 end
               end
 
@@ -172,7 +172,7 @@ class AnnualBillingDataFileService
               if transaction.save
                 upload.success_count += 1
               else
-                upload.log_error(counter, upload.errors.full_messages.join(', '))
+                upload.log_error(counter, upload.errors.full_messages.join(", "))
                 failed = true
               end
             end

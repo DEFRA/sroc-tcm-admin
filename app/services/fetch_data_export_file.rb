@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'digest'
-require 'fileutils'
+require "digest"
+require "fileutils"
 
 class FetchDataExportFile < ServiceObject
 
@@ -54,7 +54,7 @@ class FetchDataExportFile < ServiceObject
   end
 
   def cache_path
-    path = Rails.root.join('tmp', 'cache', 'export_data')
+    path = Rails.root.join("tmp", "cache", "export_data")
     FileUtils.mkdir_p path unless Dir.exist? path
     path
   end

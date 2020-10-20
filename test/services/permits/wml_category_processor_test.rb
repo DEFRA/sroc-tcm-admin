@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper.rb'
+require "test_helper.rb"
 
 class WmlCategoryProcessorTest < ActiveSupport::TestCase
   include ChargeCalculation, GenerateHistory
@@ -14,9 +14,9 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
 
     @processor = Permits::WmlCategoryProcessor.new(@header)
     build_mock_calculator
-    @header.regime.permit_categories.create!(code: '2.15.3',
-                                             description: 'test',
-                                             status: 'active')
+    @header.regime.permit_categories.create!(code: "2.15.3",
+                                             description: "test",
+                                             status: "active")
   end
 
   def test_fetch_unique_consents_returns_list_of_consent_references
@@ -25,41 +25,41 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
   end
 
   def test_only_invoices_in_file_returns_true_when_only_invoices_in_file_for_permit
-    assert @processor.only_invoices_in_file?(reference_1: '0123456')
+    assert @processor.only_invoices_in_file?(reference_1: "0123456")
   end
 
   def test_only_invoices_in_file_returns_false_when_credits_in_file_for_permit
-   refute @processor.only_invoices_in_file?(reference_1: '0123451')
+   refute @processor.only_invoices_in_file?(reference_1: "0123451")
   end
 
   def test_find_latest_historic_transaction_returns_nil_when_no_matches_found
     assert_nil @processor.find_latest_historic_transaction(
-      reference_1: '0123456', reference_3: '1')
+      reference_1: "0123456", reference_3: "1")
   end
 
   def test_find_historic_transaction_returns_newest_matching_transaction
     # newest == newest period_end date
     historic = generate_historic_wml
     assert_equal historic[1], @processor.find_latest_historic_transaction(
-      reference_1: '0123456', reference_3: '1')
+      reference_1: "0123456", reference_3: "1")
   end
 
   def test_set_category_sets_category
     history = generate_historic_wml
     matched = history.last
-    transaction = @header.transaction_details.find_by(reference_1: '0123456')
-    @processor.set_category(transaction, matched, :green, 'Level')
+    transaction = @header.transaction_details.find_by(reference_1: "0123456")
+    @processor.set_category(transaction, matched, :green, "Level")
     assert_equal matched.category, transaction.reload.category
     sg = transaction.suggested_category
-    assert_equal 'Assigned matching category', sg.logic
+    assert_equal "Assigned matching category", sg.logic
     assert sg.green?
   end
 
   def test_set_category_sets_charge_info
     history = generate_historic_wml
     matched = history.last
-    transaction = @header.transaction_details.find_by(reference_1: '0123456')
-    @processor.set_category(transaction, matched, :amber, 'Level')
+    transaction = @header.transaction_details.find_by(reference_1: "0123456")
+    @processor.set_category(transaction, matched, :amber, "Level")
     assert_not_nil transaction.charge_calculation
     assert_not_nil transaction.tcm_charge
   end
@@ -67,12 +67,12 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
   def test_set_category_does_not_set_category_when_category_removed
     history = generate_historic_wml
     matched = history.last
-    matched.category = '2.3.9'
-    transaction = @header.transaction_details.find_by(reference_1: '0123456')
-    @processor.set_category(transaction, matched, :green, 'Level')
+    matched.category = "2.3.9"
+    transaction = @header.transaction_details.find_by(reference_1: "0123456")
+    @processor.set_category(transaction, matched, :green, "Level")
     assert_nil transaction.reload.category
     sg = transaction.suggested_category
-    assert_equal 'Category not valid for financial year', sg.logic
+    assert_equal "Category not valid for financial year", sg.logic
     refute sg.admin_lock?, "It is admin locked"
     assert sg.red?
   end
@@ -84,11 +84,11 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
     # @calculator = build_mock_calculator_with_error
     # @processor.stubs(:calculator).returns(@calculator)
 
-    transaction = @header.transaction_details.find_by(reference_1: '0123456')
-    @processor.set_category(transaction, matched, :green, 'Level')
+    transaction = @header.transaction_details.find_by(reference_1: "0123456")
+    @processor.set_category(transaction, matched, :green, "Level")
     assert_nil transaction.reload.category
     sg = transaction.suggested_category
-    assert_equal 'Error assigning charge', sg.logic
+    assert_equal "Error assigning charge", sg.logic
     refute sg.admin_lock?, "It is admin locked"
     assert sg.red?
   end
@@ -98,14 +98,14 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
     @processor.suggest_categories
 
     [
-      [ '0123456', '1', '2.15.3', 'Assigned matching category' ],
-      [ '0123457', '1', nil, 'No previous bill found' ],
-      [ '0123458', '1', nil, 'No previous bill found' ],
-      [ '0123459', '1', nil, 'No previous bill found' ],
-      [ '0123450', '1', nil, 'No previous bill found' ],
-      [ '0123450', '2', nil, 'No previous bill found' ],
-      [ '0123451', '1', nil, 'No previous bill found' ],
-      [ '0123451', '2', nil, 'No previous bill found' ]
+      [ "0123456", "1", "2.15.3", "Assigned matching category" ],
+      [ "0123457", "1", nil, "No previous bill found" ],
+      [ "0123458", "1", nil, "No previous bill found" ],
+      [ "0123459", "1", nil, "No previous bill found" ],
+      [ "0123450", "1", nil, "No previous bill found" ],
+      [ "0123450", "2", nil, "No previous bill found" ],
+      [ "0123451", "1", nil, "No previous bill found" ],
+      [ "0123451", "2", nil, "No previous bill found" ]
     ].each do |td|
       t = @header.transaction_details.find_by(reference_1: td[0],
                                               reference_3: td[1])
@@ -124,10 +124,10 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
     historic = generate_historic_wml
     historic.last.update_attributes(line_amount: -1234)
     @processor.suggest_categories
-    t = @header.transaction_details.find_by(reference_1: '0123456', reference_3: '1')
-    assert_equal('2.15.2', t.category)
+    t = @header.transaction_details.find_by(reference_1: "0123456", reference_3: "1")
+    assert_equal("2.15.2", t.category)
     sg = t.suggested_category
-    assert_equal('Assigned matching category', sg.logic)
+    assert_equal("Assigned matching category", sg.logic)
   end
 
   def test_suggest_categories_generates_audit_records
@@ -150,8 +150,8 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
 
     assert_nil t.reload.category, "Category set!"
     sg = t.suggested_category
-    assert_equal('Multiple activities for permit', sg.logic)
-    assert_equal('Supplementary invoice stage 1', sg.suggestion_stage)
+    assert_equal("Multiple activities for permit", sg.logic)
+    assert_equal("Supplementary invoice stage 1", sg.suggestion_stage)
     refute sg.admin_lock?, "It is admin locked"
     assert sg.red?
   end
@@ -163,8 +163,8 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
 
     assert_nil t.category, "Category set!"
     sg = t.suggested_category
-    assert_equal('No previous bill found', sg.logic)
-    assert_equal('Supplementary invoice stage 1', sg.suggestion_stage)
+    assert_equal("No previous bill found", sg.logic)
+    assert_equal("Supplementary invoice stage 1", sg.suggestion_stage)
     refute sg.admin_lock?, "It is admin locked"
     assert sg.red?
   end
@@ -185,8 +185,8 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
 
     assert_equal ht.category, t.category, "Category not equal"
     sg = t.suggested_category
-    assert_equal('Assigned matching category', sg.logic)
-    assert_equal('Supplementary invoice stage 1', sg.suggestion_stage)
+    assert_equal("Assigned matching category", sg.logic)
+    assert_equal("Supplementary invoice stage 1", sg.suggestion_stage)
     refute sg.admin_lock?, "It is admin locked"
     assert sg.amber?
   end
@@ -212,8 +212,8 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
     assert_equal ht.category, t.category, "Category not equal"
     assert ht2.category != t.category, "Second category is equal"
     sg = t.suggested_category
-    assert_equal('Assigned matching category', sg.logic)
-    assert_equal('Supplementary invoice stage 2', sg.suggestion_stage)
+    assert_equal("Assigned matching category", sg.logic)
+    assert_equal("Supplementary invoice stage 2", sg.suggestion_stage)
     refute sg.admin_lock?, "It is admin locked"
     assert sg.amber?
   end
@@ -237,8 +237,8 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
 
     assert_nil t.category, "Category set!"
     sg = t.suggested_category
-    assert_equal('Multiple historic matches found', sg.logic)
-    assert_equal('Supplementary invoice stage 2', sg.suggestion_stage)
+    assert_equal("Multiple historic matches found", sg.logic)
+    assert_equal("Supplementary invoice stage 2", sg.suggestion_stage)
     refute sg.admin_lock?, "It is admin locked"
     assert sg.red?
   end
@@ -259,8 +259,8 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
 
     assert_equal ht.category, t.category, "Category not equal"
     sg = t.suggested_category
-    assert_equal('Assigned matching category', sg.logic)
-    assert_equal('Supplementary credit stage 1', sg.suggestion_stage)
+    assert_equal("Assigned matching category", sg.logic)
+    assert_equal("Supplementary credit stage 1", sg.suggestion_stage)
     assert sg.admin_lock?, "Not admin locked"
     assert sg.green?
   end
@@ -286,8 +286,8 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
     assert_equal ht.category, t.category, "Category not equal"
     assert ht2.category != t.category, "Second category is equal"
     sg = t.suggested_category
-    assert_equal('Assigned matching category', sg.logic)
-    assert_equal('Supplementary credit stage 2', sg.suggestion_stage)
+    assert_equal("Assigned matching category", sg.logic)
+    assert_equal("Supplementary credit stage 2", sg.suggestion_stage)
     assert sg.admin_lock?, "Not admin locked"
     assert sg.green?
   end
@@ -311,8 +311,8 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
 
     assert_nil t.category, "Category set!"
     sg = t.suggested_category
-    assert_equal('Multiple historic matches found', sg.logic)
-    assert_equal('Supplementary credit stage 2', sg.suggestion_stage)
+    assert_equal("Multiple historic matches found", sg.logic)
+    assert_equal("Supplementary credit stage 2", sg.suggestion_stage)
     refute sg.admin_lock?, "It is admin locked"
     assert sg.red?
   end
@@ -328,8 +328,8 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
 
     assert_nil t.reload.category, "Category set!"
     sg = t.suggested_category
-    assert_equal('Multiple activities for permit', sg.logic)
-    assert_equal('Supplementary credit stage 1', sg.suggestion_stage)
+    assert_equal("Multiple activities for permit", sg.logic)
+    assert_equal("Supplementary credit stage 1", sg.suggestion_stage)
     refute sg.admin_lock?, "It is admin locked"
     assert sg.red?
   end
@@ -341,8 +341,8 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
 
     assert_nil t.category, "Category set!"
     sg = t.suggested_category
-    assert_equal('No previous bill found', sg.logic)
-    assert_equal('Supplementary credit stage 1', sg.suggestion_stage)
+    assert_equal("No previous bill found", sg.logic)
+    assert_equal("Supplementary credit stage 1", sg.suggestion_stage)
     refute sg.admin_lock?, "It is admin locked"
     assert sg.red?
   end
@@ -368,9 +368,9 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
       tt.line_amount = ref[3]
       tt.customer_reference = ref[4]
       tt.transaction_header_id = header.id
-      tt.period_start = '1-APR-2020'
-      tt.period_end = '31-MAR-2021'
-      tt.tcm_financial_year = '2021'
+      tt.period_start = "1-APR-2020"
+      tt.period_end = "31-MAR-2021"
+      tt.tcm_financial_year = "2021"
       tt.save!
       results << tt
     end

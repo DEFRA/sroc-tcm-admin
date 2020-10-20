@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 class ReadOnlyCfdTransactionsViewTest < ActionDispatch::IntegrationTest
   include RegimeSetup, ChargeCalculation
@@ -22,9 +22,9 @@ class ReadOnlyCfdTransactionsViewTest < ActionDispatch::IntegrationTest
 
   def test_exclusions_not_in_view_selection
     visit regime_transactions_path(@regime)
-    assert page.has_select?("mode", options: [ 'Transactions to be billed',
-                                               'Transaction History',
-                                               'Pre-April 2018 Transactions to be billed' ]), "Invalid view mode options"
+    assert page.has_select?("mode", options: [ "Transactions to be billed",
+                                               "Transaction History",
+                                               "Pre-April 2018 Transactions to be billed" ]), "Invalid view mode options"
   end
 
   def test_category_is_read_only
@@ -51,7 +51,7 @@ class ReadOnlyCfdTransactionsViewTest < ActionDispatch::IntegrationTest
     assert transactions.count > 0, "No transactions"
     transactions.each do |transaction|
       assert UpdateCategory.call(transaction: transaction,
-                                 category: '2.3.4',
+                                 category: "2.3.4",
                                  user: admin_user).success?
     end
     Thread.current[:current_user] = @user

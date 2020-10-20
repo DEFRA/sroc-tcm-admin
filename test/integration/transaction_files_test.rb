@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 class TransactionFilesTest < ActionDispatch::IntegrationTest
   include RegimeSetup
@@ -13,7 +13,7 @@ class TransactionFilesTest < ActionDispatch::IntegrationTest
     setup_cfd
     visit regime_transaction_files_path(@regime)
 
-    regions = ['All'] + @regime.transaction_headers.distinct.pluck(:region).sort
+    regions = ["All"] + @regime.transaction_headers.distinct.pluck(:region).sort
 
     assert page.has_select? "region", options: regions
   end
@@ -21,13 +21,13 @@ class TransactionFilesTest < ActionDispatch::IntegrationTest
   def test_should_have_pre_post_select_filter_for_cfd
     setup_cfd
     visit regime_transaction_files_path(@regime)
-    assert page.has_select? "prepost", options: [ 'All', 'Post', 'Pre' ]
+    assert page.has_select? "prepost", options: [ "All", "Post", "Pre" ]
   end
 
   def test_should_have_pre_post_select_filter_for_pas
     setup_pas
     visit regime_transaction_files_path(@regime)
-    assert page.has_select? "prepost", options: [ 'All', 'Post', 'Pre' ]
+    assert page.has_select? "prepost", options: [ "All", "Post", "Pre" ]
   end
 
   def test_should_not_have_pre_post_select_filter_for_waste

@@ -18,7 +18,7 @@ class ExtractAuditDetail < ServiceObject
     def build_audit_detail
       Enumerator.new do |y|
         d = ViewModels::AuditDetail.new
-        d.action = 'create'
+        d.action = "create"
         d.when = @transaction.created_at
         d.who = User.system_account
         d.new_value = @transaction.original_filename
@@ -26,14 +26,14 @@ class ExtractAuditDetail < ServiceObject
 
         @transaction.audit_logs.order(:created_at, :id).each do |l|
           case l.action
-          when 'modify'
+          when "modify"
             mods = l.payload.fetch("modifications", {})
 
             mods.each do |k, v|
               d = ViewModels::AuditDetail.new
 
-              if k == 'category' && l.user == User.system_account
-                d.action = 'suggestion'
+              if k == "category" && l.user == User.system_account
+                d.action = "suggestion"
               else
                 d.action = l.action
               end
@@ -47,7 +47,7 @@ class ExtractAuditDetail < ServiceObject
 
               y << d
             end
-          when 'create'
+          when "create"
             d = ViewModels::AuditDetail.new
             d.action = l.action
             d.when = l.created_at
@@ -59,7 +59,7 @@ class ExtractAuditDetail < ServiceObject
         file = @transaction.transaction_file
         if file
           d = ViewModels::AuditDetail.new
-          d.action = 'export'
+          d.action = "export"
           d.when = file.generated_at
           d.who = file.user
           d.new_value = @transaction.generated_filename

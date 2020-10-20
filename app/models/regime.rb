@@ -28,15 +28,15 @@ class Regime < ApplicationRecord
   end
 
   def waste?
-    slug == 'wml'
+    slug == "wml"
   end
 
   def installations?
-    slug == 'pas'
+    slug == "pas"
   end
 
   def water_quality?
-    slug == 'cfd'
+    slug == "cfd"
   end
 
   def retrospective_date?(end_date)

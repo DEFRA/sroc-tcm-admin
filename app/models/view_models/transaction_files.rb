@@ -11,18 +11,18 @@ module ViewModels
     def initialize(params = {})
       @regime = params.fetch(:regime)
       @user = params.fetch(:user)
-      @prepost = params.fetch(:prepost, '')
+      @prepost = params.fetch(:prepost, "")
       @page = 1
       @per_page = 10
-      @sort = 'file_reference'
-      @sort_direction = 'asc'
+      @sort = "file_reference"
+      @sort_direction = "asc"
       @permit_all_regions = true
     end
 
     def region=(val)
-      if val.blank? || val == 'all'
+      if val.blank? || val == "all"
         if permit_all_regions
-          @region = ''
+          @region = ""
         else
           @region = available_regions.first
         end
@@ -90,13 +90,13 @@ module ViewModels
     end
 
     def all_region_options
-      opts = available_regions.length == 1 ? [] : [['All', '']]
+      opts = available_regions.length == 1 ? [] : [["All", ""]]
       options_for_select(opts + available_regions.map { |r| [r, r] }, region)
     end
 
     def prepost_options
       options_for_select([
-        [ 'All', ''], ['Post', 'post'], ['Pre', 'pre']
+        [ "All", ""], ["Post", "post"], ["Pre", "pre"]
       ], prepost)
     end
 

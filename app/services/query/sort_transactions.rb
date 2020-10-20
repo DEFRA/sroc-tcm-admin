@@ -6,11 +6,11 @@ module Query
       @regime = opts.fetch(:regime)
       @query = opts.fetch(:query)
       @sort_column = opts.fetch(:sort, :customer_name)
-      @sort_direction = opts.fetch(:sort_direction, 'asc')
+      @sort_direction = opts.fetch(:sort_direction, "asc")
     end
 
     def call
-      dir = @sort_direction == 'desc' ? :desc : :asc
+      dir = @sort_direction == "desc" ? :desc : :asc
       q = @query
 
       # lookup col value

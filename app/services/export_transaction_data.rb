@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'csv'
-require 'digest'
-require 'fileutils'
+require "csv"
+require "digest"
+require "fileutils"
 
 class ExportTransactionData < ServiceObject
   include RegimePresenter
@@ -77,7 +77,7 @@ class ExportTransactionData < ServiceObject
   end
 
   def regime_file(&block)
-    CSV.open(regime_filename, 'w', write_headers: true, headers: regime_headers) do |csv|
+    CSV.open(regime_filename, "w", write_headers: true, headers: regime_headers) do |csv|
       yield csv
     end
   end
@@ -125,7 +125,7 @@ class ExportTransactionData < ServiceObject
   end
 
   def cache_path
-    path = Rails.root.join('tmp', 'cache', 'export_data')
+    path = Rails.root.join("tmp", "cache", "export_data")
     FileUtils.mkdir_p path unless Dir.exist? path
     path
   end

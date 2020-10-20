@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -9,24 +9,24 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.1'
+gem "rails", "~> 5.1.1"
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.18'
+gem "pg", "~> 0.18"
 
 group :benchmark do
-  gem 'rack-mini-profiler'
-  gem 'flamegraph'
-  gem 'stackprof'
-  gem 'memory_profiler'
-  gem 'benchmark-ips'
+  gem "rack-mini-profiler"
+  gem "flamegraph"
+  gem "stackprof"
+  gem "memory_profiler"
+  gem "benchmark-ips"
 end
 
 # Use Puma as the app server
-gem 'puma', '~> 3.7'
+gem "puma", "~> 3.7"
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem "sass-rails", "~> 5.0"
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem "uglifier", ">= 1.3.0"
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 # gem 'webpacker'
 
@@ -34,20 +34,20 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 
 # bootstrap 4
-gem 'bootstrap', '~> 4.3.1'
+gem "bootstrap", "~> 4.3.1"
 # gem 'bootstrap', '~> 4.1.3'
 # jquery needed by bootstrap for rails 5.1+
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
+gem "jquery-rails"
+gem "jquery-ui-rails"
 
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
+gem "coffee-rails", "~> 4.2"
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+gem "turbolinks", "~> 5"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
+gem "jbuilder", "~> 2.5"
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 3.2'
+gem "redis", "~> 3.2"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -57,23 +57,23 @@ gem "whenever", require: false
 gem "resque"  #, require: "resque/server"
 gem "aws-sdk", "~> 2"
 
-gem 'rails-i18n'
+gem "rails-i18n"
 
-gem 'kaminari'
+gem "kaminari"
 
-gem 'bstard'
+gem "bstard"
 
-gem 'devise'
-gem 'devise_invitable'
+gem "devise"
+gem "devise_invitable"
 
-gem 'secure_headers'
+gem "secure_headers"
 
 # Wrapper for the OAuth 2.0 specification (https://oauth.net/2/). Needed to
 # authenticate with the Charging Module API
-gem 'oauth2'
+gem "oauth2"
 
 group :production do
-  gem 'airbrake', "~> 5.0"
+  gem "airbrake", "~> 5.0"
 end
 
 # Use Capistrano for deployment
@@ -81,43 +81,43 @@ end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   # Shim to load environment variables from a .env file into ENV in development
   # and test
-  gem 'dotenv-rails'
+  gem "dotenv-rails"
   # Project uses RSpec as its test framework
-  gem 'rspec-rails'
+  gem "rspec-rails"
 end
 
 group :development do
   # Manages our rubocop style rules for all defra ruby projects
-  gem 'defra_ruby_style'
+  gem "defra_ruby_style"
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem "web-console", ">= 3.3.0"
+  gem "listen", ">= 3.0.5", "< 3.2"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem "spring"
+  gem "spring-watcher-listen", "~> 2.0.0"
 end
 
 group :test do
-  gem 'rails-controller-testing'
+  gem "rails-controller-testing"
   # gem 'rspec-rails'
   # gem 'cucumber-rails', require: false
   # gem 'database_cleaner'
-  gem 'factory_bot_rails', '~> 4.0'
+  gem "factory_bot_rails", "~> 4.0"
   # gem 'shoulda-matchers'
-  gem 'capybara'
-  gem 'capybara-selenium'
-  gem 'selenium-webdriver'
-  gem 'simplecov', require: false
-  gem 'minitest-reporters'
-  gem 'mocha'
+  gem "capybara"
+  gem "capybara-selenium"
+  gem "selenium-webdriver"
+  gem "simplecov", require: false
+  gem "minitest-reporters"
+  gem "mocha"
   # Stubbing HTTP requests
-  gem 'webmock'
+  gem "webmock"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 ruby "2.4.1"

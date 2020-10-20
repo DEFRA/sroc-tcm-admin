@@ -24,14 +24,14 @@ module Permits
     end
 
     def handle_annual_billing(consent_args)
-      stage = 'Annual billing - stage 1'
+      stage = "Annual billing - stage 1"
       last_invoice = find_latest_historic_invoice(consent_args)
       if last_invoice
         header.transaction_details.unbilled.where(consent_args).each do |t|
           set_category(t, last_invoice, :green, stage)
         end
       else
-        stage = 'Annual billing - stage 2'
+        stage = "Annual billing - stage 2"
         header.transaction_details.unbilled.where(consent_args).each do |t|
           # debugger
           last_invoice = find_latest_historic_invoice_version_for_annual(t)
@@ -58,16 +58,16 @@ module Permits
       history_args = consent_args.merge(period_start: transaction.period_start)
       last_invoice = find_latest_historic_invoice(history_args)
       if last_invoice
-        set_category(transaction, last_invoice, :green, 'Supplementary invoice stage 1')
+        set_category(transaction, last_invoice, :green, "Supplementary invoice stage 1")
       else
         invoice = find_latest_historic_invoice_version(transaction)
 
         if invoice
-          set_category(transaction, invoice, :amber, 'Supplementary invoice stage 2')
+          set_category(transaction, invoice, :amber, "Supplementary invoice stage 2")
         else
           # possibly multiple transactions we're working through for this
           # consent so identify transaction explicitly
-          no_historic_transaction({ id: transaction.id }, 'Supplementary invoice')
+          no_historic_transaction({ id: transaction.id }, "Supplementary invoice")
         end
       end
     end
@@ -80,9 +80,9 @@ module Permits
         order(tcm_transaction_reference: :desc).first
 
       if invoice
-        set_category(transaction, invoice, :green, 'Supplementary credit', true)
+        set_category(transaction, invoice, :green, "Supplementary credit", true)
       else
-        no_historic_transaction({ id: transaction.id }, 'Supplementary credit')
+        no_historic_transaction({ id: transaction.id }, "Supplementary credit")
       end
     end
 

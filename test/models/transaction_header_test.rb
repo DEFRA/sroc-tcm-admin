@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 class TransactionHeaderTest < ActiveSupport::TestCase
   def setup
     @regime = regimes(:cfd)
     @header = TransactionHeader.new(regime_id: @regime.id,
-                                    feeder_source_code: 'CFD',
-                                    region: 'A',
-                                    file_type_flag: 'I',
+                                    feeder_source_code: "CFD",
+                                    region: "A",
+                                    file_type_flag: "I",
                                     file_sequence_number: 1,
                                     generated_at: Time.zone.now)
   end
@@ -24,7 +24,7 @@ class TransactionHeaderTest < ActiveSupport::TestCase
   end
 
   def test_invalid_with_invalid_feeder_source_code
-    @header.feeder_source_code = 'bananas'
+    @header.feeder_source_code = "bananas"
     assert @header.invalid?
     assert_not_nil @header.errors[:feeder_source_code]
   end
@@ -49,7 +49,7 @@ class TransactionHeaderTest < ActiveSupport::TestCase
   end
 
   def test_invalid_with_invalid_file_type_flag
-    @header.file_type_flag = 'X'
+    @header.file_type_flag = "X"
     assert @header.invalid?
     assert_not_nil @header.errors[:file_type_flag]
   end

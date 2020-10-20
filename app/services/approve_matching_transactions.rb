@@ -6,7 +6,7 @@ class ApproveMatchingTransactions < ServiceObject
   def initialize(params = {})
     @regime = params.fetch(:regime)
     @region = params.fetch(:region)
-    @financial_year = params.fetch(:financial_year, '')
+    @financial_year = params.fetch(:financial_year, "")
     @search = params.fetch(:search)
     @user = params.fetch(:user)
     @count = 0

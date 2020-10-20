@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper.rb'
+require "test_helper.rb"
 
 class CfdTransactionDetailPresenterTest < ActiveSupport::TestCase
   def setup
@@ -14,12 +14,12 @@ class CfdTransactionDetailPresenterTest < ActiveSupport::TestCase
         permitCategoryRef: @transaction.category,
         percentageAdjustment: clean_variation,
         temporaryCessation: @presenter.temporary_cessation,
-        compliancePerformanceBand: 'B',
+        compliancePerformanceBand: "B",
         billableDays: billable_days,
         financialDays: financial_year_days,
         chargePeriod: charge_period,
         preConstruction: false,
-        environmentFlag: 'TEST'
+        environmentFlag: "TEST"
       },
       @presenter.charge_params
     )
@@ -34,13 +34,13 @@ class CfdTransactionDetailPresenterTest < ActiveSupport::TestCase
   end
 
   def test_pro_rata_days_is_correctly_formatted
-    days = @presenter.line_attr_4.split('/')
+    days = @presenter.line_attr_4.split("/")
     assert_equal("#{days[1]}/#{days[0]}", @presenter.pro_rata_days)
   end
 
   def test_pro_rata_days_returns_empty_when_full_year
-    @transaction.period_start = Time.zone.parse('1-APR-2018 00:00:00')
-    @transaction.period_end = Time.zone.parse('31-MAR-2019 23:59:59')
+    @transaction.period_start = Time.zone.parse("1-APR-2018 00:00:00")
+    @transaction.period_end = Time.zone.parse("31-MAR-2019 23:59:59")
     assert_empty(@presenter.pro_rata_days)
   end
 
@@ -49,7 +49,7 @@ class CfdTransactionDetailPresenterTest < ActiveSupport::TestCase
   end
 
   def test_billable_days_match_line_attr_4_part
-    days = @presenter.line_attr_4.split('/')
+    days = @presenter.line_attr_4.split("/")
     assert_equal(days[1].to_i, @presenter.billable_days)
   end
 
@@ -58,7 +58,7 @@ class CfdTransactionDetailPresenterTest < ActiveSupport::TestCase
   end
 
   def test_financial_year_days_match_line_attr_4_part
-    days = @presenter.line_attr_4.split('/')
+    days = @presenter.line_attr_4.split("/")
     assert_equal(days[0].to_i, @presenter.financial_year_days)
   end
 
@@ -97,19 +97,19 @@ class CfdTransactionDetailPresenterTest < ActiveSupport::TestCase
 
   def test_temporary_cessation_flag_returns_Y_when_true
     @presenter.temporary_cessation = true
-    assert_equal('Y', @presenter.temporary_cessation_flag)
+    assert_equal("Y", @presenter.temporary_cessation_flag)
   end
 
   def test_temporary_cessation_flag_returns_N_when_false
     @presenter.temporary_cessation = false
-    assert_equal('N', @presenter.temporary_cessation_flag)
+    assert_equal("N", @presenter.temporary_cessation_flag)
   end
 
   def test_temporary_cessation_file_returns_50_percent_or_blank
     @presenter.temporary_cessation = true
-    assert_equal('50%', @presenter.temporary_cessation_file)
+    assert_equal("50%", @presenter.temporary_cessation_file)
     @presenter.temporary_cessation = false
-    assert_equal('', @presenter.temporary_cessation_file)
+    assert_equal("", @presenter.temporary_cessation_file)
   end
 
   def test_discharge_location_has_correct_prefix
@@ -123,17 +123,17 @@ class CfdTransactionDetailPresenterTest < ActiveSupport::TestCase
   end
 
   def test_pre_sroc_flag_returns_Y_for_retrospective_transactions
-    @transaction.status = 'retrospective'
-    assert_equal 'Y', @presenter.pre_sroc_flag, "Pre-SRoC flag incorrect"
+    @transaction.status = "retrospective"
+    assert_equal "Y", @presenter.pre_sroc_flag, "Pre-SRoC flag incorrect"
   end
 
   def test_pre_sroc_flag_returns_Y_for_retro_billed_transactions
-    @transaction.status = 'retro_billed'
-    assert_equal 'Y', @presenter.pre_sroc_flag, "Pre-SRoC flag incorrect"
+    @transaction.status = "retro_billed"
+    assert_equal "Y", @presenter.pre_sroc_flag, "Pre-SRoC flag incorrect"
   end
 
   def test_tcm_compliance_percentage_is_always_blank
-    [ 'A(100%)', 'B (87%)', '()' ].each do |cp|
+    [ "A(100%)", "B (87%)", "()" ].each do |cp|
       @transaction.charge_calculation = build_compliance(cp)
       v = @presenter.tcm_compliance_percentage
       assert v.blank?, "Compliance percentage not blank: '#{v}'"
@@ -173,7 +173,7 @@ class CfdTransactionDetailPresenterTest < ActiveSupport::TestCase
   def clean_variation
     v = @transaction.variation
     return 100 if v.blank?
-    v.gsub(/%/, '')
+    v.gsub(/%/, "")
   end
 
   def financial_year_days
@@ -197,8 +197,8 @@ class CfdTransactionDetailPresenterTest < ActiveSupport::TestCase
 
   def build_compliance(val)
     {
-      'calculation' => {
-        'compliancePerformanceBand' => val
+      "calculation" => {
+        "compliancePerformanceBand" => val
       }
     }
   end

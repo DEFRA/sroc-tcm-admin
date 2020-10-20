@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'concerns/can_connect_to_api'
+require_relative "concerns/can_connect_to_api"
 
 module ChargingModule
   class CreateBillRunService < ServiceObject

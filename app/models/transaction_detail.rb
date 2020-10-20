@@ -17,23 +17,23 @@ class TransactionDetail < ApplicationRecord
   has_one :regime, through: :transaction_header
   belongs_to :transaction_file, inverse_of: :transaction_details, required: false
   has_one :suggested_category, inverse_of: :transaction_detail, dependent: :destroy
-  has_many :matched_transactions, class_name: 'SuggestedCategory', foreign_key: :matched_transaction_id, dependent: :nullify
-  belongs_to :approver, class_name: 'User', inverse_of: :approved_transactions, required: false
+  has_many :matched_transactions, class_name: "SuggestedCategory", foreign_key: :matched_transaction_id, dependent: :nullify
+  belongs_to :approver, class_name: "User", inverse_of: :approved_transactions, required: false
 
   validates :sequence_number, presence: true
   validates :customer_reference, presence: true
   validates :line_amount, presence: true
   validates :unit_of_measure_price, presence: true
 
-  scope :unbilled, -> { where(status: 'unbilled') }
-  scope :retrospective, -> { where(status: 'retrospective') }
-  scope :historic, -> { where(status: 'billed') }
+  scope :unbilled, -> { where(status: "unbilled") }
+  scope :retrospective, -> { where(status: "retrospective") }
+  scope :historic, -> { where(status: "billed") }
 
   scope :excluded, -> { where(excluded: true) }
   scope :unexcluded, -> { where(excluded: false) }
-  scope :historic_excluded, -> { where(status: 'excluded') }
+  scope :historic_excluded, -> { where(status: "excluded") }
 
-  scope :unbilled_exclusions, -> { where(status: 'unbilled', excluded: true) }
+  scope :unbilled_exclusions, -> { where(status: "unbilled", excluded: true) }
 
   scope :with_charge_errors, -> {
     where("(charge_calculation -> 'calculation' ->> 'messages') is not null")
@@ -104,19 +104,19 @@ class TransactionDetail < ApplicationRecord
   end
 
   def unbilled?
-    status == 'unbilled'
+    status == "unbilled"
   end
 
   def retrospective?
-    status == 'retrospective'
+    status == "retrospective"
   end
 
   def billed_retrospective?
-    status == 'retro_billed'
+    status == "retro_billed"
   end
 
   def permanently_excluded?
-    status == 'excluded'
+    status == "excluded"
   end
 
   def charge_calculated?

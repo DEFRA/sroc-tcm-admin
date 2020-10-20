@@ -53,11 +53,11 @@ protected
   end
 
   def trailer_invoice_total
-    transaction_details.where(tcm_transaction_type: 'I').sum(:tcm_charge).to_i
+    transaction_details.where(tcm_transaction_type: "I").sum(:tcm_charge).to_i
   end
 
   def trailer_credit_total
-    transaction_details.where(tcm_transaction_type: 'C').sum(:tcm_charge).to_i
+    transaction_details.where(tcm_transaction_type: "C").sum(:tcm_charge).to_i
   end
 
   def file_generated_at

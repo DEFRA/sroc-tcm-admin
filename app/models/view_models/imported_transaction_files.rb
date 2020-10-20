@@ -11,18 +11,18 @@ module ViewModels
     def initialize(params = {})
       @regime = params.fetch(:regime)
       @user = params.fetch(:user)
-      @status = params.fetch(:status, '')
+      @status = params.fetch(:status, "")
       @page = 1
       @per_page = 10
-      @sort = 'created_at'
-      @sort_direction = 'desc'
+      @sort = "created_at"
+      @sort_direction = "desc"
       @permit_all_regions = true
     end
 
     def region=(val)
-      if val.blank? || val == 'all'
+      if val.blank? || val == "all"
         if permit_all_regions
-          @region = ''
+          @region = ""
         else
           @region = available_regions.first
         end
@@ -90,13 +90,13 @@ module ViewModels
     end
 
     def all_region_options
-      opts = available_regions.length == 1 ? [] : [['All', '']]
+      opts = available_regions.length == 1 ? [] : [["All", ""]]
       options_for_select(opts + available_regions.map { |r| [r, r] }, region)
     end
 
     def status_options
       options_for_select([
-        [ 'All', ''], ['Active', 'included'], ['Removed', 'removed']
+        [ "All", ""], ["Active", "included"], ["Removed", "removed"]
       ], status)
     end
 

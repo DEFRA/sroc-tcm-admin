@@ -10,7 +10,7 @@ class WmlTransactionDetailPresenter < TransactionDetailPresenter
       financialDays: financial_year_days,
       chargePeriod: charge_period,
       preConstruction: false,
-      environmentFlag: 'TEST'
+      environmentFlag: "TEST"
     }
   end
 
@@ -29,7 +29,7 @@ class WmlTransactionDetailPresenter < TransactionDetailPresenter
 
   def credit_line_description
     if transaction_detail.line_description.present?
-      txt = transaction_detail.line_description.gsub(/Permit Ref:/, 'EPR Ref:')
+      txt = transaction_detail.line_description.gsub(/Permit Ref:/, "EPR Ref:")
       prefix = "Credit of subsistence charge for permit category #{category}"
       pos = txt.index /\sdue\s/
       if pos
@@ -37,13 +37,13 @@ class WmlTransactionDetailPresenter < TransactionDetailPresenter
       else
         pos = txt.index /\sat\s/
         if pos
-          prefix + '. At ' + txt[(pos + 4)..-1]
+          prefix + ". At " + txt[(pos + 4)..-1]
         else
           m = /\AIn cancellation of invoice no. [A-Z0-9]+:\s*(.*)\z/.match(txt)
           if m
-            prefix + '. ' + m[1]
+            prefix + ". " + m[1]
           else
-            prefix + '. ' + txt
+            prefix + ". " + txt
           end
         end
       end
@@ -52,7 +52,7 @@ class WmlTransactionDetailPresenter < TransactionDetailPresenter
 
   def invoice_line_description
     if transaction_detail.line_description.present?
-      txt = transaction_detail.line_description.gsub(/Permit Ref:/, 'EPR Ref:')
+      txt = transaction_detail.line_description.gsub(/Permit Ref:/, "EPR Ref:")
       # remove leading text either "Compliance Adjustment at " or "Charge code n at "
       pos = txt.index /\sat\s/
       if pos
@@ -66,8 +66,8 @@ class WmlTransactionDetailPresenter < TransactionDetailPresenter
   def compliance_band_with_percent
     val = ""
     chg = transaction_detail.charge_calculation
-    if !chg.nil? && !chg['calculation'].nil?
-      band = chg['calculation']['compliancePerformanceBand']
+    if !chg.nil? && !chg["calculation"].nil?
+      band = chg["calculation"]["compliancePerformanceBand"]
       unless band.nil?
         d = band.match /\A(.*)(\(\d+%\))\z/
         val = "#{d[1]} #{d[2]}" if d.size == 3 && d[1].strip.present?

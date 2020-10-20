@@ -5,6 +5,6 @@ class AdminController < ApplicationController
 
   private
   def admin_only_check!
-    redirect_to root_path, notice: 'Only system administrators can access the requested area.' unless current_user && current_user.admin?
+    redirect_to root_path, notice: "Only system administrators can access the requested area." unless current_user && current_user.admin?
   end
 end
