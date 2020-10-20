@@ -63,7 +63,7 @@ module FormErrorHelper
   # pipe it through here to trim off everything upto and including the '^'
   # or just return the original message if no '^' is present
   def error_trim(message)
-    message.split("^").last if message
+    message&.split("^")&.last
   end
 
   def error_item(attr, message)

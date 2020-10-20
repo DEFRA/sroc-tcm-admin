@@ -157,7 +157,7 @@ module TransactionsHelper
   def lookup_category_description(regime, category, financial_year)
     c = PermitStorageService.new(regime).
         code_for_financial_year(category, financial_year)
-    c.description unless c.nil?
+    c&.description
   end
 
   def approval_check(approved)

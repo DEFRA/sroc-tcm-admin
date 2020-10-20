@@ -40,7 +40,7 @@ class TransactionHeaderPresenter < SimpleDelegator
   end
 
   def removed_by
-    transaction_header.removed_by.full_name unless transaction_header.removed_by.nil?
+    transaction_header.removed_by&.full_name
   end
 
   def removed_at

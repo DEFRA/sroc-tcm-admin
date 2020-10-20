@@ -105,7 +105,7 @@ class TransactionDetail < ApplicationRecord
   end
 
   def category_overridden?
-    suggested_category && suggested_category.overridden?
+    suggested_category&.overridden?
   end
 
   def unbilled?

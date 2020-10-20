@@ -25,7 +25,7 @@ class FileCheckJob < ApplicationJob
           in_file.rewind
 
           transaction_file = importer.import(in_file.path, File.basename(f))
-          if transaction_file && transaction_file.valid?
+          if transaction_file&.valid?
             in_file.rewind
             PutArchiveImportFile.call(local_path: in_file.path,
                                       remote_path: f)
@@ -35,7 +35,7 @@ class FileCheckJob < ApplicationJob
 
             begin
               processor = category_processor(transaction_file, user)
-              processor.suggest_categories unless processor.nil?
+              processor&.suggest_categories
             rescue StandardError => e
               Rails.logger.warn("Failed suggesting category: #{e.message}")
             end

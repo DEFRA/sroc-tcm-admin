@@ -42,7 +42,7 @@ class TransactionDetailPresenter < SimpleDelegator
   end
 
   def generated_file_date
-    generated_file_at.strftime("%d/%m/%y") unless generated_file_at.nil?
+    generated_file_at&.strftime("%d/%m/%y")
   end
 
   def pro_rata_days
@@ -101,13 +101,13 @@ class TransactionDetailPresenter < SimpleDelegator
   end
 
   def category_locked
-    transaction_detail.suggested_category && transaction_detail.suggested_category.admin_lock?
+    transaction_detail.suggested_category&.admin_lock?
   end
 
   def can_update_category?
     if category_locked
       # if the current_user is an admin we can allow editing
-      @user && @user.admin?
+      @user&.admin?
     else
       true
     end
@@ -240,27 +240,27 @@ class TransactionDetailPresenter < SimpleDelegator
   end
 
   def suggested_category_code
-    suggested_category.category unless suggested_category.nil?
+    suggested_category&.category
   end
 
   def suggested_category_confidence_level
-    suggested_category.confidence_level.titlecase unless suggested_category.nil?
+    suggested_category&.confidence_level&.titlecase
   end
 
   def suggested_category_overridden_flag
-    suggested_category.overridden ? "Y" : "N" unless suggested_category.nil?
+    suggested_category&.overridden ? "Y" : "N"
   end
 
   def suggested_category_admin_lock_flag
-    suggested_category.admin_lock ? "Y" : "N" unless suggested_category.nil?
+    suggested_category&.admin_lock ? "Y" : "N"
   end
 
   def suggested_category_logic
-    suggested_category.logic unless suggested_category.nil?
+    suggested_category&.logic
   end
 
   def suggested_category_stage
-    suggested_category.suggestion_stage unless suggested_category.nil?
+    suggested_category&.suggestion_stage
   end
 
   def approved_flag
@@ -280,7 +280,7 @@ class TransactionDetailPresenter < SimpleDelegator
   end
 
   def confidence_level
-    transaction_detail.suggested_category.confidence_level unless transaction_detail.suggested_category.nil?
+    transaction_detail.suggested_category&.confidence_level
   end
 
   def customer_name

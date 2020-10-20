@@ -41,7 +41,7 @@ class TransactionFile < ApplicationRecord
   end
 
   def generated_by
-    user.full_name unless user.nil?
+    user&.full_name
   end
 
   private
