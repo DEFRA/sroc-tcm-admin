@@ -8,7 +8,7 @@ class ErrorPopupTest < ActionDispatch::IntegrationTest
     @regime = regimes(:cfd)
     @user = users(:billing_admin)
     @regions_only = @regime.transaction_headers.distinct.pluck(:region).sort
-    @regions_with_all = [ "All" ] + @regions_only
+    @regions_with_all = ["All"] + @regions_only
     @error_transaction = transaction_details(:cfd_unbilled_error_invoice)
     sign_in @user
   end

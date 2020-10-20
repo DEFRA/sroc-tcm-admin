@@ -44,13 +44,13 @@ class PasTransactionDetailPresenter < TransactionDetailPresenter
   end
 
   def make_site_address
-    cols = [ :header_attr_2,
+    cols = [:header_attr_2,
              :header_attr_3,
              :header_attr_4,
              :header_attr_5,
              :header_attr_6,
              :header_attr_7,
-             :header_attr_8 ]
+             :header_attr_8]
 
     parts = cols.map { |c| value_or_space(c) }
     first = parts.shift

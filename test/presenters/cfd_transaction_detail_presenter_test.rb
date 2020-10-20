@@ -133,7 +133,7 @@ class CfdTransactionDetailPresenterTest < ActiveSupport::TestCase
   end
 
   def test_tcm_compliance_percentage_is_always_blank
-    [ "A(100%)", "B (87%)", "()" ].each do |cp|
+    ["A(100%)", "B (87%)", "()"].each do |cp|
       @transaction.charge_calculation = build_compliance(cp)
       v = @presenter.tcm_compliance_percentage
       assert v.blank?, "Compliance percentage not blank: '#{v}'"

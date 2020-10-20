@@ -32,7 +32,7 @@ class BatchCsvExport < ServiceObject
 
   def batch_query(&block)
     count = query.count
-    count = [ count, max_limit ].min unless max_limit.zero?
+    count = [count, max_limit].min unless max_limit.zero?
 
     offset = 0
     while offset < count do

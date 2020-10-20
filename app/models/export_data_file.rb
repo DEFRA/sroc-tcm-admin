@@ -6,7 +6,7 @@ class ExportDataFile < ApplicationRecord
   before_validation :generate_filename, on: :create
 
   validates :filename, presence: true
-  enum status: [ :pending, :generating, :success, :failed ]
+  enum status: [:pending, :generating, :success, :failed]
 
   private
 

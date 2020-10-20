@@ -22,9 +22,9 @@ class ReadOnlyCfdTransactionsViewTest < ActionDispatch::IntegrationTest
 
   def test_exclusions_not_in_view_selection
     visit regime_transactions_path(@regime)
-    assert page.has_select?("mode", options: [ "Transactions to be billed",
+    assert page.has_select?("mode", options: ["Transactions to be billed",
                                                "Transaction History",
-                                               "Pre-April 2018 Transactions to be billed" ]), "Invalid view mode options"
+                                               "Pre-April 2018 Transactions to be billed"]), "Invalid view mode options"
   end
 
   def test_category_is_read_only

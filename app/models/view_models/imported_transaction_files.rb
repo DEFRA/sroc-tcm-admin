@@ -96,7 +96,7 @@ module ViewModels
 
     def status_options
       options_for_select([
-        [ "All", ""], ["Active", "included"], ["Removed", "removed"]
+        ["All", ""], ["Active", "included"], ["Removed", "removed"]
       ], status)
     end
 

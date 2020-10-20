@@ -91,14 +91,14 @@ module TransactionsHelper
 
   def regime_columns(regime)
     if regime.installations?
-      [ :customer_reference,
+      [:customer_reference,
         :permit_reference,
         :sroc_category,
         :compliance_band,
         :period,
-        :amount ]
+        :amount]
     elsif regime.water_quality?
-      [ :customer_reference,
+      [:customer_reference,
         :consent_reference,
         :version,
         :discharge,
@@ -106,14 +106,14 @@ module TransactionsHelper
         :variation,
         :temporary_cessation,
         :period,
-        :amount ]
+        :amount]
     elsif regime.waste?
-      [ :customer_reference,
+      [:customer_reference,
         :permit_reference,
         :sroc_category,
         :compliance_band,
         :period,
-        :amount ]
+        :amount]
     else
       raise "Unknown regime #{p regime}"
     end

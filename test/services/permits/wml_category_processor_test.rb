@@ -98,14 +98,14 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
     @processor.suggest_categories
 
     [
-      [ "0123456", "1", "2.15.3", "Assigned matching category" ],
-      [ "0123457", "1", nil, "No previous bill found" ],
-      [ "0123458", "1", nil, "No previous bill found" ],
-      [ "0123459", "1", nil, "No previous bill found" ],
-      [ "0123450", "1", nil, "No previous bill found" ],
-      [ "0123450", "2", nil, "No previous bill found" ],
-      [ "0123451", "1", nil, "No previous bill found" ],
-      [ "0123451", "2", nil, "No previous bill found" ]
+      ["0123456", "1", "2.15.3", "Assigned matching category"],
+      ["0123457", "1", nil, "No previous bill found"],
+      ["0123458", "1", nil, "No previous bill found"],
+      ["0123459", "1", nil, "No previous bill found"],
+      ["0123450", "1", nil, "No previous bill found"],
+      ["0123450", "2", nil, "No previous bill found"],
+      ["0123451", "1", nil, "No previous bill found"],
+      ["0123451", "2", nil, "No previous bill found"]
     ].each do |td|
       t = @header.transaction_details.find_by(reference_1: td[0],
                                               reference_3: td[1])
