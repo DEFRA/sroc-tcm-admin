@@ -31,7 +31,7 @@ module Permits
         stage = "Annual billing (single) - Stage 2"
         historic_transactions = find_historic_transactions(
           permit_args.except(:customer_reference)
-)
+        )
       end
 
       if historic_transactions.count == 1
@@ -53,7 +53,7 @@ module Permits
         stage = "Annual billing (multiple) - Stage 2"
         historic_transactions = find_historic_transactions(
           permit_args.except(:customer_reference)
-)
+        )
       end
 
       if historic_transactions.count == num_records
@@ -100,7 +100,7 @@ module Permits
         if invoices.count.zero?
           invoices = find_historic_debits(
             query_args.except(:customer_reference)
-)
+          )
           stage = "Supplementary invoice (single) - Stage 3"
           with_customer_reference = false
         end
@@ -134,7 +134,7 @@ module Permits
       if invoices.count.zero?
         invoices = find_historic_debits(
           query_args.except(:customer_reference)
-)
+        )
         stage = "Supplementary invoice (multiple) - Stage 3"
         with_customer_reference = false
       end
@@ -160,7 +160,7 @@ module Permits
 
         invoices = find_historic_debits(
           q.merge({ period_start: invoices.first.period_start })
-)
+        )
 
         if invoices.count == count
           cnt = 0
@@ -222,7 +222,7 @@ module Permits
         stage = "Supplementary credit (multiple) - Stage 2"
         invoices = find_historic_debits(
           query_args.merge({ period_start: invoices.first.period_start })
-)
+        )
 
         if invoices.count == count
           cnt = 0

@@ -19,7 +19,7 @@ class RemoveImportedTransactionFile < ServiceObject
           removed_at: Time.zone.now,
           removal_reference: @removal_reference,
           removal_reason: @removal_reason
-)
+        )
         @transaction_header.transaction_details.destroy_all
         @result = true
       end

@@ -34,10 +34,10 @@ class TransactionsController < ApplicationController
   def show
     @related_unbilled_transactions = Query::RelatedUnbilledTransactions.call(
       transaction: @transaction
-)
+    )
     @related_billed_transactions = Query::RelatedBilledTransactions.call(
       transaction: @transaction
-)
+    )
 
     @exclusion_reasons = Query::Exclusions.call(regime: @regime)
   end

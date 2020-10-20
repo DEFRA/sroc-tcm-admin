@@ -35,7 +35,7 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
   def test_find_latest_historic_transaction_returns_nil_when_no_matches_found
     assert_nil @processor.find_latest_historic_transaction(
       reference_1: "0123456", reference_3: "1"
-)
+    )
   end
 
   def test_find_historic_transaction_returns_newest_matching_transaction
@@ -43,7 +43,7 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
     historic = generate_historic_wml
     assert_equal historic[1], @processor.find_latest_historic_transaction(
       reference_1: "0123456", reference_3: "1"
-)
+    )
   end
 
   def test_set_category_sets_category

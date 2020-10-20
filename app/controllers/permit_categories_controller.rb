@@ -119,7 +119,7 @@ class PermitCategoriesController < AdminController
                            update_or_create_new_version(
             cat.code, permit_category_params[:description],
             @financial_year, "excluded"
-)
+          )
       else
         @permit_category.errors.add(:base, "^This code is in use and cannot be removed")
       end
@@ -128,13 +128,13 @@ class PermitCategoriesController < AdminController
         cat.code, permit_category_params[:description],
         @financial_year,
         "active"
-)
+      )
     else
       @permit_category = permit_store.
                          update_or_create_new_version(
           cat.code, permit_category_params[:description],
           @financial_year, cat.status
-)
+        )
     end
     result = @permit_category.errors.empty?
 
