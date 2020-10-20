@@ -180,7 +180,7 @@ class CfdTransactionDetailPresenterTest < ActiveSupport::TestCase
   def financial_year_days
     year = financial_year
     start_date = Date.new(year, 4, 1) # 1st April
-    end_date = Date.new(year + 1, 3 , 31) # 31st March
+    end_date = Date.new(year + 1, 3, 31) # 31st March
     (end_date - start_date).to_i + 1
   end
 
