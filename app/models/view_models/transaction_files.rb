@@ -96,8 +96,8 @@ module ViewModels
 
     def prepost_options
       options_for_select([
-        ["All", ""], ["Post", "post"], ["Pre", "pre"]
-      ], prepost)
+                           ["All", ""], ["Post", "post"], ["Pre", "pre"]
+                         ], prepost)
     end
 
     private

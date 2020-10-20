@@ -53,8 +53,8 @@ module TransactionsHelper
   def per_page_options(selected = nil)
     selected = param_or_cookie(:per_page, 10) if selected.nil?
     options_for_select([
-      ["5", 5], ["10", 10], ["15", 15], ["20", 20], ["50", 50], ["100", 100]
-    ], selected)
+                         ["5", 5], ["10", 10], ["15", 15], ["20", 20], ["50", 50], ["100", 100]
+                       ], selected)
   end
 
   def available_regions(regime)
