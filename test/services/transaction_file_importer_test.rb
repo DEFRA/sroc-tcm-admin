@@ -67,11 +67,11 @@ class TransactionFileImporterTest < ActiveSupport::TestCase
       line.chomp!
       fields = @importer.extract_consent_fields(line)
       str = ""
-      if line.start_with? "Consent"
-        str = "Consent No - #{fields[:reference_1]}"
+      str = if line.start_with? "Consent"
+        "Consent No - #{fields[:reference_1]}"
       else
-        str = "Authorisation No - #{fields[:reference_1]}"
-      end
+        "Authorisation No - #{fields[:reference_1]}"
+            end
       assert_equal(line, str, "Fail: #{idx}: #{line}")
 
       arr = line.split("/")

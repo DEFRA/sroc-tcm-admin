@@ -9,13 +9,13 @@ class ApproveTransaction < ServiceObject
   end
 
   def call
-    if @transaction.ready_for_approval?
-      @result = @transaction.update_attributes(approved_for_billing: true,
+    @result = if @transaction.ready_for_approval?
+      @transaction.update_attributes(approved_for_billing: true,
                                                approver: @approver,
                                                approved_for_billing_at: Time.zone.now)
     else
-      @result = false
-    end
+      false
+              end
     self
   end
 end

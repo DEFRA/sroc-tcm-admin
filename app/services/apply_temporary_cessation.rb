@@ -35,11 +35,11 @@ class ApplyTemporaryCessation < ServiceObject
   def generate_charge
     charge = CalculateCharge.call(transaction: @transaction)
     @transaction.charge_calculation = charge.charge_calculation
-    if charge.success?
-      @transaction.tcm_charge = charge.amount
+    @transaction.tcm_charge = if charge.success?
+      charge.amount
     else
-      @transaction.tcm_charge = nil
-    end
+      nil
+                              end
     charge
   end
 end
