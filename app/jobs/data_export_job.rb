@@ -10,7 +10,7 @@ class DataExportJob < ApplicationJob
         RegimeTransactionExportJob.perform_later(regime.id)
       end
     end
-  rescue => e
+  rescue StandardError => e
     TcmLogger.notify(e)
   end
 end

@@ -27,7 +27,7 @@ class CalculationService
     result = calculate_charge(regime, 2018, parms)
     puts "Successfully generated charge"
     result
-  rescue => e
+  rescue StandardError => e
     msg = "Check connectivity error: " + e.message
     TcmLogger.error(msg)
     puts msg
@@ -63,7 +63,7 @@ class CalculationService
       build_error_response("Unable to calculate charge due to an unexpected error."\
                            "\nPlease try again later")
     end
-  rescue => e
+  rescue StandardError => e
     # something REALLY unexpected happened ...
     TcmLogger.notify(e)
     build_error_response("Unable to calculate charge due to the rules service "\

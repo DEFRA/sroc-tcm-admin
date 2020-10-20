@@ -38,7 +38,7 @@ class ExportTransactionData < ServiceObject
                              exported_filename_hash: sha1)
       edf.success!
       @result = true
-    rescue => e
+    rescue StandardError => e
       TcmLogger.notify(e)
       edf.failed!
       @result = false
@@ -92,7 +92,7 @@ class ExportTransactionData < ServiceObject
     end
     @filename = zip_file
     File.delete(orig_file) if File.exist?(orig_file)
-  rescue => e
+  rescue StandardError => e
     TcmLogger.notify(e)
     @filename = orig_file
   end
@@ -103,7 +103,7 @@ class ExportTransactionData < ServiceObject
     zip_file = "#{orig_file}.gz"
     r = `gzip -fq #{orig_file}`
     @filename = zip_file
-  rescue => e
+  rescue StandardError => e
     TcmLogger.notify(e)
     @filename = orig_file
   end

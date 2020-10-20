@@ -70,7 +70,7 @@ class CalculateCharge < ServiceObject
                                    "unexpected error.\nPlease try again later")
       false
     end
-  rescue => e
+  rescue StandardError => e
     # something REALLY unexpected happened ...
     TcmLogger.notify(e)
     @body = build_error_response("Unable to calculate charge due to the rules " \

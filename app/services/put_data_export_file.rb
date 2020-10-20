@@ -18,7 +18,7 @@ class PutDataExportFile < ServiceObject
         archive_file_store.store_file(filename, csv_path)
 
         @result = true
-      rescue => e
+      rescue StandardError => e
         @result = false
         TcmLogger.notify(e)
       end

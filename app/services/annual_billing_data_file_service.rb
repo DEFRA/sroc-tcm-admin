@@ -36,7 +36,7 @@ class AnnualBillingDataFileService
 
           record.filename = dest_file
           record.state.upload!
-        rescue => e
+        rescue StandardError => e
           record.errors.add(:base, e.message)
         end
       else
@@ -70,7 +70,7 @@ class AnnualBillingDataFileService
     rescue CSV::MalformedCSVError => e
       Rails.logger.warn(e.message)
       return false
-    rescue => e
+    rescue StandardError => e
       Rails.logger.error(e.message)
       return false
     end

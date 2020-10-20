@@ -36,7 +36,7 @@ class FileCheckJob < ApplicationJob
             begin
               processor = category_processor(transaction_file, user)
               processor.suggest_categories unless processor.nil?
-            rescue => e
+            rescue StandardError => e
               Rails.logger.warn("Failed suggesting category: #{e.message}")
             end
           else
@@ -51,7 +51,7 @@ class FileCheckJob < ApplicationJob
                                   remote_path: f)
           DeleteEtlImportFile.call(remote_path: f)
           quarantined += 1
-        rescue => e
+        rescue StandardError => e
           Rails.logger.warn("Failed to import file: #{e}")
           failed += 1
         ensure

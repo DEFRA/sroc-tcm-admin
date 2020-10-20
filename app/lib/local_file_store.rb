@@ -29,7 +29,7 @@ class LocalFileStore
     dst = file_path(to_path)
     x = FileUtils.mkdir_p(File.dirname(dst))
     FileUtils.cp(from_path, dst)
-  rescue => e
+  rescue StandardError => e
     raise Exceptions::FileNotFoundError.new("Local file storage file not found: #{from_path}")
   end
 

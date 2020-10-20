@@ -86,7 +86,7 @@ module ApplicationHelper
     elsif File.exist? Rails.root.join("REVISION")
       File.read(Rails.root.join("REVISION")).chomp
     end
-  rescue => e
+  rescue StandardError => e
     TcmLogger.notify(e)
   end
 end
