@@ -72,8 +72,7 @@ class TransactionsController < ApplicationController
         end
         format.json {
           render json: { transaction: presenter.new(@transaction, current_user),
-                         message: "Transaction updated"
-                        },
+                         message: "Transaction updated"},
                  status: :ok,
                  location: path
         }
