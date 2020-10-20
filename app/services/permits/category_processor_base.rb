@@ -20,7 +20,7 @@ module Permits
 
     def set_category(transaction, matched_transaction, confidence_level,
                      stage, admin_lock = false)
-      
+
       fy = transaction.tcm_financial_year
       # need to ensure the found category is still valid
       category = matched_transaction.category
@@ -57,9 +57,6 @@ module Permits
 
     def calc_charge(transaction)
       CalculateCharge.call(transaction: transaction).charge_calculation
-
-      # TransactionCharge.invoke_charge_calculation(calculator,
-      #                                             presenter.new(transaction))
     end
 
     def not_annual_bill(where_args, stage)

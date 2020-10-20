@@ -28,7 +28,7 @@ class ExportTransactionData < ServiceObject
         end
       end
       ext_compress_file if edf.compress?
-      
+
       sha1 = generate_file_hash(filename)
 
       edf.update_attributes!(last_exported_at: Time.zone.now,

@@ -1,6 +1,4 @@
 class TcmUtils
-  # RetrospectiveCutoffDate = Time.zone.parse("31-MAR-2018 23:59:59")
-
   def self.strip_bom(str)
     str.force_encoding('utf-8').gsub("\xEF\xBB\xBF".force_encoding('utf-8'), '')
   end
@@ -42,7 +40,7 @@ class TcmUtils
 
   def self.extract_csv_period_dates(regime, row)
     info = TcmConstants::PeriodDates[regime.slug.to_sym]
-    period_index = "TransactionFileFormat::Detail::#{info[:attr_name].to_s.classify}".constantize 
+    period_index = "TransactionFileFormat::Detail::#{info[:attr_name].to_s.classify}".constantize
     if regime.waste?
       self.extract_waste_period_dates(row[period_index], info[:format])
     else
@@ -73,7 +71,7 @@ class TcmUtils
     dates = []
     # expecting a string with 2 dates matching the date_format
     # e.g.
-    # '10/06/17 - 22/12/17' 
+    # '10/06/17 - 22/12/17'
     # '23/06/2017 - 31/03/2017'
     period.split(' ').select { |i| i != '-' }.each do |d|
       dates << Date.strptime(d, date_format)

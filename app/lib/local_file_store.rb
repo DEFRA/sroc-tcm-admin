@@ -44,6 +44,5 @@ class LocalFileStore
 private
   def file_path(path)
     File.join(@base_path, path)
-    # Rails.root.join("tmp", "files", path)
   end
 end

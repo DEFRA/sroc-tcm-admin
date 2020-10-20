@@ -20,11 +20,6 @@ module AnnualBillingDataFileFormat
         unique_reference: true,
         mandatory: true
       },
-      # {
-      #   header: :region,
-      #   column: :region,
-      #   mandatory: true
-      # },
       {
         header: :permit_category,
         column: :category,
@@ -40,16 +35,6 @@ module AnnualBillingDataFileFormat
         column: :temporary_cessation,
         mandatory: false
       },
-      # {
-      #   header: :temporary_cessation_start,
-      #   column: :temporary_cessation_start,
-      #   mandatory: false
-      # },
-      # {
-      #   header: :temporary_cessation_end,
-      #   column: :temporary_cessation_end,
-      #   mandatory: false
-      # }
     ].freeze
   end
 
@@ -61,11 +46,6 @@ module AnnualBillingDataFileFormat
         unique_reference: true,
         mandatory: true
       },
-      # {
-      #   header: :region,
-      #   column: :region,
-      #   mandatory: true
-      # },
       {
         header: :permit_category,
         column: :category,
@@ -75,17 +55,7 @@ module AnnualBillingDataFileFormat
         header: :temporary_cessation,
         column: :temporary_cessation,
         mandatory: false
-      },
-      # {
-      #   header: :temporary_cessation_start,
-      #   column: :temporary_cessation_start,
-      #   mandatory: false
-      # },
-      # {
-      #   header: :temporary_cessation_end,
-      #   column: :temporary_cessation_end,
-      #   mandatory: false
-      # }
+      }
     ].freeze
   end
 
@@ -97,11 +67,6 @@ module AnnualBillingDataFileFormat
         unique_reference: true,
         mandatory: true
       },
-      # {
-      #   header: :region,
-      #   column: :region,
-      #   mandatory: true
-      # },
       {
         header: :permit_category,
         column: :category,
@@ -111,17 +76,7 @@ module AnnualBillingDataFileFormat
         header: :temporary_cessation,
         column: :temporary_cessation,
         mandatory: false
-      },
-      # {
-      #   header: :temporary_cessation_start,
-      #   column: :temporary_cessation_start,
-      #   mandatory: false
-      # },
-      # {
-      #   header: :temporary_cessation_end,
-      #   column: :temporary_cessation_end,
-      #   mandatory: false
-      # }
+      }
     ].freeze
   end
 

@@ -91,7 +91,7 @@ module ViewModels
                                          financial_year: financial_year,
                                          search: search)
     end
-    
+
     # override me for different views
     def csv_transactions(limit = 15000)
       @csv ||= presenter.wrap(transactions.unexcluded.limit(limit), user)
@@ -119,7 +119,7 @@ module ViewModels
     def table_partial_name
       "#{regime.slug}_table"
     end
-    
+
     def permit_category_timestamp
       @permit_category_timestamp ||= Query::PermitCategoryLastChanged.call(
         regime: regime)

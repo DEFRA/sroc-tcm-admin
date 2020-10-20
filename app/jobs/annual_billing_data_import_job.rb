@@ -7,7 +7,6 @@ class AnnualBillingDataImportJob < ApplicationJob
       user = User.find(user_id)
 
       regime = upload.regime
-      # storage = FileStorageService.new
       data_service = AnnualBillingDataFileService.new(regime, user)
 
       # fetch stored file
@@ -16,7 +15,6 @@ class AnnualBillingDataImportJob < ApplicationJob
       GetAnnualBillingDataFile.call(remote_path: upload.filename,
                                     local_path: file.path)
 
-      # storage.fetch_file_from(:annual_billing_data, upload.filename, file.path)
       file.rewind
 
       # process stored file

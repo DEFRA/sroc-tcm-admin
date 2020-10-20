@@ -13,7 +13,7 @@ module ViewModels
                                        financial_year: financial_year,
                                        search: search)
     end
-    
+
     def region_options
       all_region_options
     end

@@ -18,10 +18,10 @@ module Query
             merge(RegimeUser.where(regime_id: r.id))
         end
       end
-      
+
       q = q.where(role: @role) unless @role.blank?
       q = q.search(@search) unless @search.blank?
-      
+
       sort_users(q)
     end
 

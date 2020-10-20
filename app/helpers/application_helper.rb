@@ -1,10 +1,6 @@
 module ApplicationHelper
   include FormattingUtils
 
-  # def yn_flag(bool)
-  #   bool ? 'Y' : 'N'
-  # end
-
   def tcm_form_with(*args, &block)
     options = args.extract_options!
 
@@ -27,7 +23,6 @@ module ApplicationHelper
   end
 
   def menu_path(regime, ctrl_name)
-    # ctrl_name = 'transactions' if ctrl_name == 'transaction_audits'
     url_for controller: ctrl_name, action: 'index', regime_id: regime.slug
   end
 
@@ -40,24 +35,6 @@ module ApplicationHelper
     end
   end
 
-  # def formatted_pence(value)
-  #   number_to_currency(value / 100.0)
-  # end
-  #
-  # def formatted_pence_without_symbol(value)
-  #   number_to_currency(value / 100.0, format: "%n") unless value.blank?
-  # end
-  #
-  # def slash_formatted_date(date)
-  #   date.strftime("%d/%m/%y")
-  # end
-  #
-  # def formatted_date(date, include_time = false)
-  #   fmt = "%d-%b-%Y"
-  #   fmt = fmt + " %H:%M:%S" if include_time
-  #   date.strftime(fmt)
-  # end
-  #
   def sortable(name, view_model)
     sort_col = view_model.sort.to_sym
     sort_dir = view_model.sort_direction
@@ -75,40 +52,12 @@ module ApplicationHelper
     end
   end
 
-  # def sortable(name, default_col = 'customer_reference')
-  #   sorted = params.fetch(:sort, default_col) == name.to_s
-  #   sort_dir = sorted ? params.fetch(:sort_direction, 'asc') : 'desc'
-  #   # options = {
-  #   #   controller: controller_name,
-  #   #   action: 'index',
-  #   #   regime_id: @regime.slug,
-  #   #   sort: name,
-  #   #   sort_direction: switch_direction(sort_dir),
-  #   #   page: 1,
-  #   #   per_page: params[:per_page],
-  #   #   search: params[:search]
-  #   # }
-  #   cls = "sort-link"
-  #   if sorted
-  #     span = "<span class='oi oi-caret-#{top_or_bottom(sort_dir)}'></span>"
-  #     cls = cls + " sorted sorted-#{sort_dir}"
-  #   else
-  #     span = ''
-  #   end
-  #
-  #   # link_to(url_for(options)) do
-  #   link_to('#', class: cls, data: { column: name }) do
-  #     "#{th(name)} #{span}".html_safe
-  #   end
-  # end
-
   def view_scope
     "table.heading.#{controller_name}"
   end
 
   def th(name)
     t(name, scope: view_scope)
-    # t(name, scope: 'table.heading')
   end
 
   def switch_direction(dir)

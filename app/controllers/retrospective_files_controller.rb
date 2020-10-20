@@ -16,13 +16,6 @@ class RetrospectiveFilesController < ApplicationController
     # TODO: this could be detail of one file
   end
 
-  # GET /regimes/:regime_id/transaction_files/new
-  # def new
-  #   # This can be invoked from generate transaction file on TTBB
-  #   set_region
-  #   @summary = collate_summary
-  # end
-
   # POST /regimes/:regime_id/transaction_files
   def create
     set_region

@@ -63,35 +63,6 @@ module TransactionsHelper
       sort.map { |r| { label: r, value: r, selected: selected == r } }
   end
 
-  # def region_options(regime, include_all = true)
-  #   regions = Query::Regions.call(regime: regime) 
-  #   if include_all
-  #     arr = [['All', 'all']]
-  #     default_region = 'all'
-  #   else
-  #     arr = []
-  #     default_region = regions.first
-  #   end
-  #   options_for_select(arr + regions.map { |r| [r, r] },
-  #                      param_or_cookie(:region, default_region))
-  # end
-  #
-  # def region_options_historic(regime)
-  #   options_for_select([['All', 'all']] +
-  #                      regime.transaction_headers.pluck(:region).uniq.
-  #                      sort.map { |r| [r, r] },
-  #                      params.fetch(:region, 'all'))
-  # end
-
-  # def financial_year_options(years_list)
-  #   years_list = [] if years_list.nil?
-  #   opts = []
-  #
-  #   # show all when nothing available or when more than one item in the list
-  #   opts = [['All', 'all']] if years_list.length != 1
-  #   options_for_select(opts + pretty_years_list(years_list), @financial_year)
-  # end
-
   def permit_financial_year_options(years_list, selected)
     options_for_select(pretty_years_list(years_list), selected)
   end
@@ -101,10 +72,6 @@ module TransactionsHelper
     list.sort.map { |y| ["#{y[0..1]}/#{y[2..3]}", y] }
   end
 
-  # def category_options(regime, selected)
-  #   options_for_select([['Category 1',1],['Category 2',2]], selected)
-  # end
-  #
   def temporary_cessation_options(selected)
     options_for_select([['Y', true], ['N', false]], selected)
   end
@@ -114,9 +81,6 @@ module TransactionsHelper
       pluck(:code).map do |c|
         { value: c, label: c }
       end
-    # regime.permit_categories.order(:code).pluck(:code).map do |c|
-    #   { value: c, label: c }
-    # end
   end
 
   def reason_options(reasons, selected = nil)

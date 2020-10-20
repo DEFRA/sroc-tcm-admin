@@ -51,7 +51,7 @@ module ViewModels
                         sort_direction: sort_direction,
                         search: search)
     end
-    
+
     def regime_options
       options_for_select([['All', '']] +
                          available_regimes.map { |r| [r.title, r.slug] },

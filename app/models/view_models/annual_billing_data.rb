@@ -16,7 +16,7 @@ module ViewModels
     def errors
       @errors ||= sorted_paged_errors
     end
-    
+
     private
 
     def sorted_paged_errors

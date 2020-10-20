@@ -25,10 +25,6 @@ class HistoryController < ApplicationController
           set_streaming_headers
           self.response_body = result.csv_stream
         end
-        # set_streaming_headers
-        # self.response_body = stream_csv_data(@view_model.fetch_transactions)
-
-        # send_data csv.full_export(@view_model.csv_transactions), csv_opts
       end
     end
   end

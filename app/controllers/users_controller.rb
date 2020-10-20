@@ -11,7 +11,6 @@ class UsersController < AdminController
         end
       end
     end
-    # @users = User.order(:last_name)
   end
 
   def show

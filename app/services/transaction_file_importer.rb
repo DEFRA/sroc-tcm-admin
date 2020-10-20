@@ -126,7 +126,7 @@ class TransactionFileImporter
     (1..15).each do |n|
       data["line_attr_#{n}".to_sym] = row[24 + n]
     end
-    
+
     # period dates
     period = TcmUtils.extract_csv_period_dates(regime, row)
     if period.present?
@@ -199,7 +199,7 @@ class TransactionFileImporter
   def sanitize_date(d)
     Date.parse(d)
   rescue ArguementError => e
-    Rails.logger.warn("Invalid date in transaction file: #{d}") 
+    Rails.logger.warn("Invalid date in transaction file: #{d}")
     nil
   end
 end

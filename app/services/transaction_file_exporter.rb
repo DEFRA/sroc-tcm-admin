@@ -27,13 +27,6 @@ class TransactionFileExporter
       credit_total = credits.sum
       invoice_total = invoices.sum
 
-      # can't do a distinct query once locked for update, so have to do it locally
-      # q.order(:tcm_financial_year).distinct.pluck(:tcm_financial_year).each do |fy|
-      # q.pluck(:tcm_financial_year).uniq.sort.each do |fy|
-      # fy_q = q.financial_year(fy)
-      # credit_total = fy_q.credits.pluck(:tcm_charge).sum
-      # invoice_total = fy_q.invoices.pluck(:tcm_charge).sum
-
       file = regime.transaction_files.create!(region: region,
                                               user: user,
                                               generated_at: Time.zone.now,
@@ -48,7 +41,7 @@ class TransactionFileExporter
       q.update_all(transaction_file_id: file.id, status: 'exporting')
     end
     # 'remove' excluded transactions
-    excluded_transactions_by_region(region).update_all(status: 'excluded') 
+    excluded_transactions_by_region(region).update_all(status: 'excluded')
     # queue the background job to create the file
     FileExportJob.perform_later(file.id) unless file.nil?
     file
@@ -111,8 +104,6 @@ class TransactionFileExporter
                        remote_path: tf.path)
     PutArchiveExportFile.call(local_path: out_file.path,
                               remote_path: tf.path)
-    # storage.store_file_in(:export, out_file.path, tf.path)
-    # storage.store_file_in(:export_archive, out_file.path, tf.path)
 
     attrs = {
       generated_filename: tf.base_filename,
@@ -210,7 +201,7 @@ class TransactionFileExporter
     # - ‘T’ is a fixed digit
     # E.g. the first invoice number for region A would be PAS00000001AT, and so on.
     # The ‘T’ suffix should ensure that there will never be any duplication with
-    # invoice numbers previously generated in PAS  
+    # invoice numbers previously generated in PAS
     retro = transaction_file.retrospective?
     charge_attr = retro ? :line_amount : :tcm_charge
     atab = TransactionDetail.arel_table
@@ -289,10 +280,6 @@ class TransactionFileExporter
       ''
     end
   end
-
-  # def storage
-  #   @storage ||= FileStorageService.new
-  # end
 
   def permit_store
     @permit_store ||= PermitStorageService.new(regime)

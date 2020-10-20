@@ -26,8 +26,6 @@ class RetrospectivesController < ApplicationController
           set_streaming_headers
           self.response_body = result.csv_stream
         end
-        # self.response_body = stream_csv_data(@view_model.fetch_transactions)
-        # send_data csv.full_export(@view_model.csv_transactions), csv_opts
       end
     end
   end
@@ -75,8 +73,4 @@ class RetrospectivesController < ApplicationController
       fys = [{label: 'All', value: ''}] + fys if fys.count > 1
       fys
     end
-
-    # def transaction_store
-    #   @transaction_store ||= TransactionStorageService.new(@regime, current_user)
-    # end
 end

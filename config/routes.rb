@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :users do
-    get 'reinvite', on: :member 
+    get 'reinvite', on: :member
   end
 
   resources :regimes, only: [] do

@@ -81,11 +81,10 @@ module ViewModels
                                    sort_direction: sort_direction,
                                    search: search)
     end
-    
+
     # override me if 'all' regions is permitted in the view
     def region_options
       all_region_options
-      # options_for_select(available_regions.map { |r| [r, r] }, region)
     end
 
     def all_region_options
@@ -102,7 +101,6 @@ module ViewModels
     private
 
     def available_regions
-      # @available_regions ||= Query::Regions.call(regime: regime)
       @available_regions ||= Query::TransactionFileRegions.call(regime: regime)
     end
   end

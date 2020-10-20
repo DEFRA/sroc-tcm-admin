@@ -67,9 +67,6 @@ class CalculationService
     build_error_response("Unable to calculate charge due to the rules service "\
                          "being unavailable. Please log a call with the "\
                          "service desk.")
-  # rescue Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError,
-  #   Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError => e
-  #   raise Exceptions::CalculationServiceError.new e
   end
 
 private

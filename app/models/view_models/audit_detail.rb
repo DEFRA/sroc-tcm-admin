@@ -98,8 +98,6 @@ module ViewModels
       if calc
         if calc['chargeValue']
           calc['chargeValue']
-          # ActiveSupport::NumberHelper.number_to_currency(
-          #             sprintf("%.2f", v), unit: "")
         elsif calc['messages']
           calc['messages']
         else

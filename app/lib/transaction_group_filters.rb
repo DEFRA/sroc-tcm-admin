@@ -45,7 +45,6 @@ module TransactionGroupFilters
   end
 
   def cfd_group_filter(base_query)
-    # incomplete_records = base_query.without_charge.distinct.pluck(:reference_1)
     incomplete_records = base_query.unapproved.distinct.pluck(:reference_1)
     return base_query.approved if incomplete_records.empty?
     base_query.approved.where.not(reference_1: incomplete_records)
@@ -58,7 +57,6 @@ module TransactionGroupFilters
   end
 
   def pas_group_filter(base_query)
-    # incomplete_records = base_query.without_charge.distinct.
     incomplete_records = base_query.unapproved.distinct.
       pluck(:reference_1, :reference_2, :reference_3).transpose
 
@@ -78,7 +76,6 @@ module TransactionGroupFilters
   end
 
   def wml_group_filter(base_query)
-    # incomplete_records = base_query.without_charge.distinct.pluck(:reference_1)
     incomplete_records = base_query.unapproved.distinct.pluck(:reference_1)
     return base_query.approved if incomplete_records.empty?
     base_query.approved.where.not(reference_1: incomplete_records)

@@ -70,12 +70,6 @@ class TransactionStorageService
   end
 
 def transactions_related_to(transaction)
-    # col = regime.waste_or_installations? ? :reference_3 : :reference_1
-    # val = transaction.send(col)
-    # regime.transaction_details.unbilled.where(col => val).
-    #   where.not(col => nil).
-    #   where.not(col => 'NA').
-    #   order(:reference_1)
     at = TransactionDetail.arel_table
     q = regime.transaction_details.unbilled.where.not(id: transaction.id)
     if regime.installations?
@@ -97,29 +91,6 @@ def transactions_related_to(transaction)
     end
     q.order(:reference_1)
   end
-
-  # def unbilled_regions
-  #   regions_for('unbilled')
-  # end
-  #
-  # def history_regions
-  #   regions_for('billed')
-  # end
-  #
-  # def retrospective_regions
-  #   regions_for('retrospective')
-  # end
-  #
-  # def exclusion_regions
-  #   regions_for('excluded')
-  # end
-  #
-  # def regions_for(status)
-  #   regime.transaction_details.where(status: status).distinct.pluck(:region).sort
-  #   # regime.transaction_headers.joins(:transaction_details).
-  #   #   merge(TransactionDetail.where(status: status)).
-  #   #   distinct.order(:region).pluck(:region).reject { |r| r.blank? }
-  # end
 
   def unbilled_financial_years
     financial_years_for('unbilled')
@@ -188,8 +159,6 @@ def transactions_related_to(transaction)
       else
         q.order(line_attr_6: dir, reference_1: dir)
       end
-    # when :variation
-    #   q.order(line_attr_9: dir, id: dir)
     when :variation
       q.order("to_number(variation, '999%') #{txt_dir}")
     when :period

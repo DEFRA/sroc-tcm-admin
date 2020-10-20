@@ -13,7 +13,6 @@ module Query
       SortPermitCategories.call(query: q,
                                 sort: 'code',
                                 sort_direction: 'asc')
-      # q.order("string_to_array(code, '.')::int[]")
     end
   end
 end

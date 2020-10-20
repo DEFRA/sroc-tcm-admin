@@ -16,7 +16,6 @@ class PermitCategoriesController < AdminController
     unpaged = !!params.fetch(:unpaged, false)
     @financial_years = Query::PermitCategoryYears.call
 
-    # fy = params.fetch(:fy, '1819')
     @categories = Query::PermitCategories.call(regime: @regime,
                                                financial_year: @financial_year,
                                                search: q,
@@ -37,8 +36,6 @@ class PermitCategoriesController < AdminController
           financial_years: @financial_years
         )
 
-        # @categories = @categories.page(pg).per(per_pg)
-
         if request.xhr?
           render partial: 'table', locals: { view_model: @view_model }
         else
@@ -46,8 +43,6 @@ class PermitCategoriesController < AdminController
         end
       end
       format.json do
-        # cats = permit_store.all_for_financial_year(fy).
-        #   order("string_to_array(code, '.')::int[]").
         cats = permit_store.search_all(@financial_year, q,
                                        sort_col, sort_dir)
         cats = cats.page(pg).per(per_pg) unless unpaged
@@ -91,14 +86,10 @@ class PermitCategoriesController < AdminController
                                        user: current_user,
                                        code: p[:code],
                                        description: p[:description])
-    # @permit_category = permit_store.new_permit_category(p[:code],
-    #                                                     p[:description],
-    #                                                     @financial_year)
 
     @permit_category = result.permit_category
 
     respond_to do |format|
-      # if @permit_category.errors.empty?
       if result.success?
         format.html do
           redirect_to regime_permit_categories_path(@regime,
@@ -141,22 +132,6 @@ class PermitCategoriesController < AdminController
           @financial_year, cat.status)
     end
     result = @permit_category.errors.empty?
-    # result = false
-    # create = false
-    # if @permit_category.valid_from != @financial_year
-    #   # we need to create a new permit_category to represent the change
-    #   create = true
-    #   parms = permit_category_params
-    #
-    #   @permit_category = permit_store.build_permit_category(
-    #     parms[:code],
-    #     parms[:description],
-    #     @financial_year,
-    #     'active')
-    #   result = @permit_category.save
-    # else
-    #   result = @permit_category.update(permit_category_params)
-    # end
 
     respond_to do |format|
       if result
@@ -185,20 +160,6 @@ class PermitCategoriesController < AdminController
     set_regime
     set_financial_year
     @permit_category = @regime.permit_categories.find(params[:id])
-    # cat = @regime.permit_categories.find(params[:id])
-    # @permit_category = if cat.valid_from == @financial_year
-    #                      # editing the actual one we want
-    #                      cat
-    #                    else
-    #                      # want to edit category for a financial year
-    #                      # that is not the valid_from so effectively we
-    #                      # need to introduce a new permit_category record
-    #                      # for the requested financial year
-    #                      @regime.permit_categories.build(code: cat.code,
-    #                                                      description: cat.description,
-    #                                                      status: cat.status,
-    #                                                      valid_from: @financial_year)
-    #                    end
   end
 
   def set_financial_year

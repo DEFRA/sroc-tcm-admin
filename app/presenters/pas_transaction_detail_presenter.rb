@@ -17,31 +17,9 @@ class PasTransactionDetailPresenter < TransactionDetailPresenter
     band || ""
   end
 
-  # def percentage_adjustment
-  #   # FIXME: this is wrong - this is not a percentage value
-  #   # charge calculation adjustment as a percentage - ie. 95%
-  #   val = charge_calculation['calculation']['decisionPoints']['percentageAdjustment']
-  #   "#{val}%"
-  # end
-
   def compliance_band_adjustment
     tcm_compliance_percentage
-    # band = extract_compliance_performance
-    # return "" if band.nil?
-    # d = band.match /\A.*\((\d+%)\)\z/
-    # if d.size == 2
-    #   d[1]
-    # else
-    #   ""
-    # end
   end
-
-  # Moved to base class
-  # def extract_compliance_performance
-  #   chg = transaction_detail.charge_calculation
-  #   chg['calculation']['compliancePerformanceBand'] unless chg.nil? ||
-  #     chg['calculation'].nil?
-  # end
 
   def permit_reference
     reference_1

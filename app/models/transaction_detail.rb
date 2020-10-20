@@ -47,7 +47,7 @@ class TransactionDetail < ApplicationRecord
 
   def self.search(q)
     m = "%#{sanitize_sql_like(q)}%"
-    # m = "%#{q}%"
+
     where(arel_table[:customer_reference].matches(m).
           or(arel_table[:reference_1].matches(m)).
           or(arel_table[:transaction_reference].matches(m)))
@@ -55,7 +55,7 @@ class TransactionDetail < ApplicationRecord
 
   def self.history_search(q)
     m = "%#{sanitize_sql_like(q)}%"
-    # m = "%#{q}%"
+
     where(arel_table[:customer_reference].matches(m).
           or(arel_table[:reference_1].matches(m)).
           or(arel_table[:reference_2].matches(m)).
@@ -68,7 +68,7 @@ class TransactionDetail < ApplicationRecord
 
   def self.retrospective_search(q)
     m = "%#{sanitize_sql_like(q)}%"
-    # m = "%#{q}%"
+
     where(arel_table[:customer_reference].matches(m).
           or(arel_table[:reference_1].matches(m)).
           or(arel_table[:transaction_reference].matches(m)))
@@ -76,7 +76,7 @@ class TransactionDetail < ApplicationRecord
 
   def self.exclusion_search(q)
     m = "%#{sanitize_sql_like(q)}%"
-    # m = "%#{q}%"
+
     where(arel_table[:customer_reference].matches(m).
           or(arel_table[:reference_1].matches(m)).
           or(arel_table[:reference_2].matches(m)).

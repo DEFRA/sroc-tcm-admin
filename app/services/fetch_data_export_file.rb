@@ -13,7 +13,7 @@ class FetchDataExportFile < ServiceObject
 
   def call
     # retrieve file from cache or S3
-    @filename = cache_or_retrieve @edf.exported_filename      
+    @filename = cache_or_retrieve @edf.exported_filename
     @result = filename.present?
     self
   end
@@ -28,7 +28,6 @@ class FetchDataExportFile < ServiceObject
     # pull file from S3
     GetDataExportFile.call(remote_path: file,
                            local_path: cached_filename)
-    # storage.fetch_file_from(:csv_export, file, cached_filename)
 
     # verify checksum
     raise RuntimeError.new("Checksum does not match stored file") unless check_file_hash(cached_filename)
@@ -57,8 +56,4 @@ class FetchDataExportFile < ServiceObject
     FileUtils.mkdir_p path unless Dir.exist? path
     path
   end
-
-  # def storage
-  #   @storage ||= FileStorageService.new
-  # end
 end

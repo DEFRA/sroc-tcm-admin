@@ -41,7 +41,6 @@ class TransactionDetailPresenter < SimpleDelegator
 
   def generated_file_date
     generated_file_at.strftime("%d/%m/%y") unless generated_file_at.nil?
-    # transaction_file.created_at.strftime("%d/%m/%y") if transaction_file
   end
 
   def pro_rata_days
@@ -57,9 +56,6 @@ class TransactionDetailPresenter < SimpleDelegator
 
   def calculated_amount
     tcm_charge
-    # charge = (charge_calculation['calculation']['chargeValue'] * 100).round
-    # charge = -charge if line_amount.negative?
-    # charge
   end
 
   def currency_line_amount
@@ -91,7 +87,7 @@ class TransactionDetailPresenter < SimpleDelegator
     # category description is not present until the user generates
     # a transaction file. However, is should probably be included
     # in a TTBB export if a category has been set even at the risk
-    # of the category description changing between assignment and 
+    # of the category description changing between assignment and
     # file generation
     if transaction_detail.unbilled? && category.present?
       pc = permit_store.code_for_financial_year(category, tcm_financial_year)
@@ -118,19 +114,6 @@ class TransactionDetailPresenter < SimpleDelegator
       (charge_calculation['calculation']['decisionPoints']['baselineCharge'] * 100).round
     end
   end
-
-  # region added to TransactionDetail now so no longer needed
-  # def region_from_ref
-  #   if tcm_transaction_reference.present?
-  #     tcm_transaction_reference[-2]
-  #   else
-  #     transaction_header.region
-  #   end
-  # end
-  #
-  # def region
-  #   transaction_header.region
-  # end
 
   def transaction_date
     # called when exporting to file
@@ -174,8 +157,6 @@ class TransactionDetailPresenter < SimpleDelegator
   end
 
   def charge_period
-    # year = financial_year - 2000
-    #sik76mzz iFY#{year}#{year + 1}"
     "FY#{tcm_financial_year}"
   end
 
@@ -242,15 +223,6 @@ class TransactionDetailPresenter < SimpleDelegator
 
   def charge_amount
     tcm_charge
-    # charge = transaction_detail.charge_calculation
-    # if charge && charge["calculation"] && charge["calculation"]["messages"].nil?
-    #   amt = charge["calculation"]["chargeValue"]
-    #   # FIXME: is this the /best/ way to determine a credt?
-    #   amt *= -1 if !amt.nil? && line_amount.negative?
-    #   amt
-    # else
-    #   nil
-    # end
   end
 
   def generated_at

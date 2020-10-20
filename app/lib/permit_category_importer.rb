@@ -12,14 +12,11 @@ class PermitCategoryImporter
       order = n
       if destroy_BOM
         code = TcmUtils.strip_bom(code)
-        # code = code.force_encoding('utf-8')
-        # code.gsub!("\xEF\xBB\xBF".force_encoding('utf-8'), '')
         destroy_BOM = false
       end
       n += 1
       regime.permit_categories.find_or_create_by!(code: code) do |cat|
         cat.description = desc
-        # cat.display_order = order
         cat.status = "active"
       end
     end

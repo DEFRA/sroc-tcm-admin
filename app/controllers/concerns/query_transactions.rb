@@ -34,8 +34,6 @@ module QueryTransactions
   end
 
   def query_params
-    # region = params.fetch(:region, cookies.fetch(:region, ''))
-    # region = '' if region == 'all'
     {
       regime: @regime,
       region: @region,

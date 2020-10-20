@@ -34,7 +34,6 @@ class CfdTransactionDetailPresenter < TransactionDetailPresenter
 
   def consent_reference
     reference_1
-    # "#{permit_reference}/#{version}/#{discharge_reference}"
   end
 
   def permit_reference
@@ -64,10 +63,6 @@ class CfdTransactionDetailPresenter < TransactionDetailPresenter
   def tcm_compliance_percentage
     ""
   end
-
-  # def period
-  #   line_attr_3
-  # end
 
   def as_json(options = {})
     {

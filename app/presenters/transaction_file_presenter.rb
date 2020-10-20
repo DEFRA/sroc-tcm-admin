@@ -57,7 +57,7 @@ protected
   def trailer_credit_total
     transaction_details.where(tcm_transaction_type: 'C').sum(:tcm_charge).to_i
   end
-  
+
   def file_generated_at
     generated_at.strftime("%d-%^b-%Y")
   end

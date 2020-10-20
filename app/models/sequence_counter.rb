@@ -10,7 +10,7 @@ class SequenceCounter < ApplicationRecord
     SequenceCounter.transaction do
       sequencer = SequenceCounter.lock.find_or_create_by(regime_id: regime.id,
                                                          region: region.upcase)
-      # sequencer.lock!
+
       val = sequencer.file_number
       sequencer.file_number += 1
       sequencer.save!
@@ -23,7 +23,7 @@ class SequenceCounter < ApplicationRecord
     SequenceCounter.transaction do
       sequencer = SequenceCounter.lock.find_or_create_by(regime_id: regime.id,
                                                          region: region.upcase)
-      # sequencer.lock!
+
       val = sequencer.invoice_number
       sequencer.invoice_number += 1
       sequencer.save!

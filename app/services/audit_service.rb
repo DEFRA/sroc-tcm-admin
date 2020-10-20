@@ -26,11 +26,6 @@ class AuditService
   def extract_changes(entity)
     mods = {}
     entity.audit_attributes.each do |attr|
-    # [ :category,
-    #   :temporary_cessation,
-    #   :charge_calculation,
-    #   :tcm_charge,
-    #   :variation ].each do |attr|
       if entity.send("saved_change_to_#{attr}?")
         mods[attr] = [entity.send("#{attr}_before_last_save"),
                       entity.send(attr)]

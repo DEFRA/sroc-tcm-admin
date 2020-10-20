@@ -5,7 +5,6 @@ class TransactionsController < ApplicationController
   before_action :set_regime, only: [:index, :approve]
   before_action :set_transaction, only: [:show, :edit, :update, :audit]
   before_action :read_only_user_check!, only: [:update, :approve, :audit]
-  # before_action :set_current_user, only: [:update, :approve]
 
   # GET /regimes/:regime_id/transactions
   # GET /regimes/:regime_id/transactions.json
@@ -26,9 +25,6 @@ class TransactionsController < ApplicationController
           set_streaming_headers
           self.response_body = result.csv_stream
         end
-        # set_streaming_headers
-        # self.response_body = stream_csv_data(@view_model.fetch_transactions)
-        # send_data csv.full_export(@view_model.csv_transactions), csv_opts
       end
     end
   end
@@ -51,7 +47,6 @@ class TransactionsController < ApplicationController
 
   # GET /regimes/:regimes_id/transactions/1/edit
   def edit
-    # @related_transactions = transaction_store.transactions_related_to(@transaction)
   end
 
   # PATCH/PUT /regimes/:regimes_id/transactions/1
@@ -101,12 +96,12 @@ class TransactionsController < ApplicationController
     # regions = transaction_store.unbilled_regions
     @region = params.fetch(:region, cookies[:region])
     fy = params.fetch(:fy, cookies[:fy])
-    
+
     available_years = Query::FinancialYears.call(regime: @regime)
     fy = '' unless available_years.include? fy
 
     msg = ""
-    
+
     result = if regions.include? @region
                true
              else

@@ -13,7 +13,7 @@ module ViewModels
                                      financial_year: financial_year,
                                      search: search)
     end
-    
+
     def csv_transactions(limit = 15000)
       @csv ||= presenter.wrap(transactions.limit(limit), user)
     end

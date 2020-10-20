@@ -75,9 +75,6 @@ class CalculateCharge < ServiceObject
                                  "service being unavailable. Please log a call " \
                                  "with the service desk.")
     false
-  # rescue Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError,
-  #   Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError => e
-  #   raise Exceptions::CalculationServiceError.new e
   end
 
   def payload

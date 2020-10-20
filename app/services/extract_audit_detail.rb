@@ -44,7 +44,7 @@ class ExtractAuditDetail < ServiceObject
               d.new_value = v[1]
 
               y << d
-            end 
+            end
           when 'create'
             d = ViewModels::AuditDetail.new
             d.action = l.action

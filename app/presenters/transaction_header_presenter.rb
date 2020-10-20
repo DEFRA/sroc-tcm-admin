@@ -36,7 +36,7 @@ class TransactionHeaderPresenter < SimpleDelegator
   def created_at
     slash_formatted_date transaction_header.created_at
   end
-  
+
   def removed_by
     transaction_header.removed_by.full_name unless transaction_header.removed_by.nil?
   end

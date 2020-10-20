@@ -30,7 +30,7 @@ class AnnualBillingDataFileService
           dest_file = File.join(storage_path, filename)
           PutAnnualBillingDataFile.call(local_path: data_file.tempfile.path,
                                         remote_path: dest_file)
-          # storage.store_file_in(:annual_billing_data, data_file.tempfile.path, dest_file)
+
           record.filename = dest_file
           record.state.upload!
         rescue => e
@@ -78,10 +78,6 @@ class AnnualBillingDataFileService
   def regime_headers
     send("#{regime.to_param}_columns")
   end
-
-  # def storage
-  #   @storage ||= FileStorageService.new
-  # end
 
   def storage_path
     File.join(regime.to_param, Time.zone.now.strftime("%Y%m%d%H%M%S"))
@@ -162,7 +158,6 @@ class AnnualBillingDataFileService
         if !failed
           if transaction.changed?
             # (re)calculate the charge if the transaction has changed
-            # transaction.charge_calculation = TransactionCharge.invoke_charge_calculation(calculator, presenter.new(transaction))
             transaction.charge_calculation = CalculateCharge.call(transaction: transaction).charge_calculation
             if transaction.charge_calculation_error?
               # what should we do here? revoke the changes and mark as an error?
@@ -223,8 +218,4 @@ class AnnualBillingDataFileService
     # so we can pick up the user for auditing changes
     Thread.current[:current_user] = user
   end
-
-  # def calculator
-  #   @calculator ||= CalculationService.new
-  # end
 end

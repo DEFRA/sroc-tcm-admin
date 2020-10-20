@@ -2,7 +2,6 @@ class WmlTransactionDetailPresenter < TransactionDetailPresenter
   def charge_params
     {
       permitCategoryRef: category,
-      # percentageAdjustment: clean_variation_percentage,
       temporaryCessation: temporary_cessation,
       compliancePerformanceBand: compliance_band,
       billableDays: billable_days,

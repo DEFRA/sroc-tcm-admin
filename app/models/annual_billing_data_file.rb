@@ -26,7 +26,7 @@ class AnnualBillingDataFile < ApplicationRecord
       end
     end
   end
-  
+
   def finished_processing?
     s = state
     s.completed? || s.failed?

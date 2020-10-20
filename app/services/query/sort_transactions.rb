@@ -32,15 +32,12 @@ module Query
         q.order(reference_1: dir, reference_2: dir, reference_3: dir, id: dir)
       when :sroc_category
         q.order("string_to_array(category, '.')::int[] #{dir}, id #{dir}")
-        # q.order(category: dir, id: dir)
       when :compliance_band
         if @regime.installations?
           q.order(line_attr_11: dir, id: dir)
         else
           q.order(line_attr_6: dir, reference_1: dir)
         end
-        # when :variation
-        #   q.order(line_attr_9: dir, id: dir)
       when :variation
         q.order("to_number(variation, '999%') #{dir}, id #{dir}")
       when :period
