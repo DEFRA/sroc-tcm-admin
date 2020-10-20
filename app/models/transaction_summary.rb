@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class TransactionSummary
-  include ActiveModel::AttributeAssignment, ActionView::Helpers::NumberHelper
+  include ActionView::Helpers::NumberHelper
+  include ActiveModel::AttributeAssignment
 
   attr_accessor(
     :title,

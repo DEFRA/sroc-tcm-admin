@@ -3,7 +3,8 @@
 require "csv"
 
 class TransactionFileExporter
-  include TransactionFileFormat, TransactionGroupFilters
+  include TransactionGroupFilters
+  include TransactionFileFormat
 
   attr_reader :regime, :region, :user
 

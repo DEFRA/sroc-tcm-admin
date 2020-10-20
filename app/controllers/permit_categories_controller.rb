@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class PermitCategoriesController < AdminController
-  include RegimeScope, FinancialYear
+  include FinancialYear
+  include RegimeScope
   before_action :set_regime, only: %i[index new create]
   before_action :set_permit_category, only: %i[show edit update destroy]
 

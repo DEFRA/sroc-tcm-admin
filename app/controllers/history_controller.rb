@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 class HistoryController < ApplicationController
-  include RegimeScope, CsvExporter, QueryTransactions, ViewModelBuilder
+  include ViewModelBuilder
+  include QueryTransactions
+  include CsvExporter
+  include RegimeScope
 
   before_action :set_regime, only: [:index]
   before_action :set_transaction, only: [:show]

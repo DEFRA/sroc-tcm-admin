@@ -2,7 +2,8 @@
 
 module ViewModels
   class Users
-    include RegimeScope, ActionView::Helpers::FormOptionsHelper
+    include ActionView::Helpers::FormOptionsHelper
+    include RegimeScope
 
     attr_accessor :regime, :role, :search, :sort,
                   :sort_direction, :page, :per_page

@@ -3,7 +3,8 @@
 require 'test_helper'
 
 class WmlCategoryProcessorTest < ActiveSupport::TestCase
-  include ChargeCalculation, GenerateHistory
+  include GenerateHistory
+  include ChargeCalculation
 
   def setup
     @header = transaction_headers(:wml_annual)

@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 class ExclusionsController < ApplicationController
-  include RegimeScope, CsvExporter, QueryTransactions, ViewModelBuilder
+  include ViewModelBuilder
+  include QueryTransactions
+  include CsvExporter
+  include RegimeScope
 
   before_action :read_only_user_check!
   before_action :set_regime, only: [:index]

@@ -3,7 +3,8 @@
 require 'test_helper'
 
 class TransactionControllerTest < ActionDispatch::IntegrationTest
-  include RegimeSetup, ChargeCalculation
+  include ChargeCalculation
+  include RegimeSetup
 
   def setup
     # @regime = FactoryBot.create(:cfd)

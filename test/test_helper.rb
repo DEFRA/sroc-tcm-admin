@@ -53,8 +53,10 @@ class ActiveSupport::TestCase
 end
 
 class ActionDispatch::IntegrationTest
-  include Devise::Test::IntegrationHelpers, ActiveJob::TestHelper
-  include Capybara::DSL, Capybara::Minitest::Assertions
+  include ActiveJob::TestHelper
+  include Devise::Test::IntegrationHelpers
+  include Capybara::Minitest::Assertions
+  include Capybara::DSL
 
   def wait_for_ajax
     Timeout.timeout(Capybara.default_max_wait_time) do

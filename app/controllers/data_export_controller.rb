@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class DataExportController < ApplicationController
-  include RegimeScope, FinancialYear, CsvExporter
+  include CsvExporter
+  include FinancialYear
+  include RegimeScope
   before_action :set_regime, only: %i[index download generate]
 
   # GET /regimes/:regime_id/data_export

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class TransactionFilesController < ApplicationController
-  include RegimeScope, ViewModelBuilder
+  include ViewModelBuilder
+  include RegimeScope
 
   before_action :set_regime
   before_action :read_only_user_check!, only: [:create]

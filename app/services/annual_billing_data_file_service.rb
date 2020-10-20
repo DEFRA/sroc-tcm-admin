@@ -3,7 +3,8 @@
 require "csv"
 
 class AnnualBillingDataFileService
-  include AnnualBillingDataFileFormat, RegimeScope
+  include RegimeScope
+  include AnnualBillingDataFileFormat
 
   attr_reader :regime, :user
 

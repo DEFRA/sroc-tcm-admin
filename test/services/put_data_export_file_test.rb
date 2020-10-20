@@ -4,7 +4,9 @@ require 'test_helper'
 require "fileutils"
 
 class PutDataExportFileTest < ActiveSupport::TestCase
-  include RegimePresenter, GenerateHistory, FileStorage
+  include FileStorage
+  include GenerateHistory
+  include RegimePresenter
 
   def setup
     @regime = regimes(:cfd)

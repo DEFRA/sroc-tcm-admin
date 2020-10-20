@@ -2,7 +2,8 @@
 
 module ViewModels
   class Transactions
-    include RegimeScope, ActionView::Helpers::FormOptionsHelper
+    include ActionView::Helpers::FormOptionsHelper
+    include RegimeScope
 
     attr_reader :regime, :user, :permit_all_regions
     attr_accessor :region, :financial_year, :search, :sort, :sort_direction,

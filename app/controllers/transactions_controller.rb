@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 class TransactionsController < ApplicationController
-  include RegimeScope, FinancialYear, CsvExporter, ViewModelBuilder
+  include ViewModelBuilder
+  include CsvExporter
+  include FinancialYear
+  include RegimeScope
   before_action :set_regime, only: %i[index approve]
   before_action :set_transaction, only: %i[show edit update audit]
   before_action :read_only_user_check!, only: %i[update approve audit]

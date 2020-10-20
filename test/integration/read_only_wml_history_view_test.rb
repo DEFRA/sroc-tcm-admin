@@ -3,7 +3,8 @@
 require "test_helper"
 
 class ReadOnlyWmlHistoryViewTest < ActionDispatch::IntegrationTest
-  include RegimeSetup, GenerateHistory
+  include GenerateHistory
+  include RegimeSetup
 
   def setup
     Capybara.current_driver = Capybara.javascript_driver

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class TransactionFilePresenter < SimpleDelegator
-  include FormattingUtils, TransactionGroupFilters
+  include TransactionGroupFilters
+  include FormattingUtils
 
   def header
     [

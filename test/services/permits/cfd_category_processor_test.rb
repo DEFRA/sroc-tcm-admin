@@ -3,7 +3,8 @@
 require 'test_helper'
 
 class CfdCategoryProcessorTest < ActiveSupport::TestCase
-  include ChargeCalculation, GenerateHistory
+  include GenerateHistory
+  include ChargeCalculation
   def setup
     @regime = Regime.find_by(slug: "cfd")
     @header = transaction_headers(:cfd_annual)

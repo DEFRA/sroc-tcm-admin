@@ -3,7 +3,8 @@
 require 'test_helper'
 
 class ExportTransactionDataTest < ActiveSupport::TestCase
-  include RegimePresenter, GenerateHistory
+  include GenerateHistory
+  include RegimePresenter
 
   def setup
     @regime = regimes(:cfd)

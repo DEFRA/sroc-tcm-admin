@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class AnnualBillingDataFilesController < ApplicationController
-  include RegimeScope, ViewModelBuilder
+  include ViewModelBuilder
+  include RegimeScope
 
   before_action :set_regime, only: %i[index new create]
   before_action :set_upload, only: %i[show edit update]

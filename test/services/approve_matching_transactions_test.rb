@@ -3,7 +3,9 @@
 require 'test_helper'
 
 class ApproveMatchingTransactionsTest < ActiveSupport::TestCase
-  include RegimePresenter, ChargeCalculation, GenerateHistory
+  include GenerateHistory
+  include ChargeCalculation
+  include RegimePresenter
 
   def setup
     @regime = regimes(:cfd)

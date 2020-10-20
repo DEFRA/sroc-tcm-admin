@@ -3,7 +3,8 @@
 require "test_helper"
 
 class ReadOnlyWmlTransactionsViewTest < ActionDispatch::IntegrationTest
-  include RegimeSetup, ChargeCalculation
+  include ChargeCalculation
+  include RegimeSetup
 
   def setup
     Capybara.current_driver = Capybara.javascript_driver

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class ImportedTransactionFilesController < ApplicationController
-  include RegimeScope, ViewModelBuilder
+  include ViewModelBuilder
+  include RegimeScope
 
   before_action :set_regime, only: %i[index update]
   before_action :set_transaction_header, only: %i[show edit]

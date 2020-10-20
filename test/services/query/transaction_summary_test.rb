@@ -4,7 +4,8 @@ require 'test_helper'
 
 module Query
   class TransactionSummaryTest < ActiveSupport::TestCase
-    include ActionView::Helpers::NumberHelper, ChargeCalculation
+    include ChargeCalculation
+    include ActionView::Helpers::NumberHelper
 
     def setup
       @regime = regimes(:cfd)

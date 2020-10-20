@@ -56,7 +56,8 @@ require 'test_helper'
 # valid category fixtures for 2.4.4, 2.4.5 and 2.4.6
 #
 class PasCategoryProcessorTest < ActiveSupport::TestCase
-  include ChargeCalculation, GenerateHistory
+  include GenerateHistory
+  include ChargeCalculation
 
   def setup
     @regime = regimes(:pas)
