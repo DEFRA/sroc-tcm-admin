@@ -35,61 +35,61 @@ class ExclusionsController < ApplicationController
   end
 
   private
-    def set_streaming_headers
-      ts = Time.zone.now.strftime("%Y%m%d%H%M%S")
-      filename = "exclusions_#{ts}.csv"
+  def set_streaming_headers
+    ts = Time.zone.now.strftime("%Y%m%d%H%M%S")
+    filename = "exclusions_#{ts}.csv"
 
-      headers["Content-Type"] = "text/csv"
-      headers["Content-disposition"] = "attachment; filename=\"#{filename}\""
-      headers["X-Accel-Buffering"] = "no"
-      headers.delete("Content-Length")
-    end
+    headers["Content-Type"] = "text/csv"
+    headers["Content-disposition"] = "attachment; filename=\"#{filename}\""
+    headers["X-Accel-Buffering"] = "no"
+    headers.delete("Content-Length")
+  end
 
-    def present_transactions(transactions)
-      Kaminari.paginate_array(presenter.wrap(transactions),
-                              total_count: transactions.total_count,
-                              limit: transactions.limit_value,
-                              offset: transactions.offset_value)
-    end
+  def present_transactions(transactions)
+    Kaminari.paginate_array(presenter.wrap(transactions),
+                            total_count: transactions.total_count,
+                            limit: transactions.limit_value,
+                            offset: transactions.offset_value)
+  end
 
-    def present_transactions_for_json(transactions)
-      regions = Query::Regions.call(regime: @regime)
-      selected_region = params.fetch(:region, regions.first)
-      arr = present_transactions(transactions)
+  def present_transactions_for_json(transactions)
+    regions = Query::Regions.call(regime: @regime)
+    selected_region = params.fetch(:region, regions.first)
+    arr = present_transactions(transactions)
 
-      {
-        pagination: {
-          current_page: arr.current_page,
-          prev_page: arr.prev_page,
-          next_page: arr.next_page,
-          per_page: arr.limit_value,
-          total_pages: arr.total_pages,
-          total_count: arr.total_count
-        },
-        transactions: arr,
-        selected_region: selected_region,
-        regions: region_options(regions),
-        financial_years: financial_year_options(financial_years)
-      }
-    end
+    {
+      pagination: {
+        current_page: arr.current_page,
+        prev_page: arr.prev_page,
+        next_page: arr.next_page,
+        per_page: arr.limit_value,
+        total_pages: arr.total_pages,
+        total_count: arr.total_count
+      },
+      transactions: arr,
+      selected_region: selected_region,
+      regions: region_options(regions),
+      financial_years: financial_year_options(financial_years)
+    }
+  end
 
-    def region_options(regions)
-      opts = regions.map { |r| { label: r, value: r } }
-      opts = [{label: "All", value: ""}] + opts if opts.count > 1
-      opts
-    end
+  def region_options(regions)
+    opts = regions.map { |r| { label: r, value: r } }
+    opts = [{label: "All", value: ""}] + opts if opts.count > 1
+    opts
+  end
 
-    def financial_years
-      Query::FinancialYears.call(regime: @regime)
-    end
+  def financial_years
+    Query::FinancialYears.call(regime: @regime)
+  end
 
-    def financial_year_options(fy_list)
-      fys = fy_list.map { |fy| { label: fy[0..1] + "/" + fy[2..3], value: fy } }
-      fys = [{label: "All", value: ""}] + fys if fys.count > 1
-      fys
-    end
+  def financial_year_options(fy_list)
+    fys = fy_list.map { |fy| { label: fy[0..1] + "/" + fy[2..3], value: fy } }
+    fys = [{label: "All", value: ""}] + fys if fys.count > 1
+    fys
+  end
 
-    def transaction_store
-      @transaction_store ||= TransactionStorageService.new(@regime)
-    end
+  def transaction_store
+    @transaction_store ||= TransactionStorageService.new(@regime)
+  end
 end

@@ -21,7 +21,7 @@ class PermitCategoriesLookupController < ApplicationController
   end
 
   private
-    def present(categories)
-      categories.map { |c| { code: c.code, description: c.description } }
-    end
+  def present(categories)
+    categories.map { |c| { code: c.code, description: c.description } }
+  end
 end

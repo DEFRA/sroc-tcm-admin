@@ -29,7 +29,7 @@ class WmlCategoryProcessorTest < ActiveSupport::TestCase
   end
 
   def test_only_invoices_in_file_returns_false_when_credits_in_file_for_permit
-   refute @processor.only_invoices_in_file?(reference_1: "0123451")
+    refute @processor.only_invoices_in_file?(reference_1: "0123451")
   end
 
   def test_find_latest_historic_transaction_returns_nil_when_no_matches_found

@@ -134,22 +134,22 @@ class TransactionsController < ApplicationController
   end
 
   private
-    def present_transactions(transactions)
-      Kaminari.paginate_array(presenter.wrap(transactions, current_user),
-                              total_count: transactions.total_count,
-                              limit: transactions.limit_value,
-                              offset: transactions.offset_value)
-    end
+  def present_transactions(transactions)
+    Kaminari.paginate_array(presenter.wrap(transactions, current_user),
+                            total_count: transactions.total_count,
+                            limit: transactions.limit_value,
+                            offset: transactions.offset_value)
+  end
 
-    def set_transaction
-      set_regime
-      @transaction = Query::FindTransaction.call(regime: @regime,
-                                                 transaction_id: params[:id])
-    end
+  def set_transaction
+    set_regime
+    @transaction = Query::FindTransaction.call(regime: @regime,
+                                               transaction_id: params[:id])
+  end
 
-    def transaction_params
-      params.require(:transaction_detail).permit(:category, :temporary_cessation,
-                                                 :excluded, :excluded_reason,
-                                                 :approved_for_billing)
-    end
+  def transaction_params
+    params.require(:transaction_detail).permit(:category, :temporary_cessation,
+                                               :excluded, :excluded_reason,
+                                               :approved_for_billing)
+  end
 end

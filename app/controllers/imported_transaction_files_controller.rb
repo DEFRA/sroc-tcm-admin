@@ -47,17 +47,17 @@ class ImportedTransactionFilesController < ApplicationController
   end
 
   private
-    def set_transaction_header
-      @file = TransactionHeaderPresenter.new get_transaction_header
-    end
+  def set_transaction_header
+    @file = TransactionHeaderPresenter.new get_transaction_header
+  end
 
-    def get_transaction_header
-      set_regime
-      @regime.transaction_headers.find(params[:id])
-    end
+  def get_transaction_header
+    set_regime
+    @regime.transaction_headers.find(params[:id])
+  end
 
-    def transaction_header_params
-      params.require(:transaction_header).permit(:removal_reference,
-                                                 :removal_reason)
-    end
+  def transaction_header_params
+    params.require(:transaction_header).permit(:removal_reference,
+                                               :removal_reason)
+  end
 end

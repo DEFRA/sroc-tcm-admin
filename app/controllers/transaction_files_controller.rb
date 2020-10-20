@@ -29,14 +29,14 @@ class TransactionFilesController < ApplicationController
 
   private
     # :nocov:
-    def set_region
-      # TODO: this could be defaulted to a user's region if there are
-      # restrictions around this
-      @region = params.fetch(:region, "")
-    end
+  def set_region
+    # TODO: this could be defaulted to a user's region if there are
+    # restrictions around this
+    @region = params.fetch(:region, "")
+  end
     # :nocov:
 
-    def exporter
-      @exporter ||= TransactionFileExporter.new(@regime, @region, current_user)
-    end
+  def exporter
+    @exporter ||= TransactionFileExporter.new(@regime, @region, current_user)
+  end
 end

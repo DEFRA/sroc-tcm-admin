@@ -58,48 +58,48 @@ class AnnualBillingDataFilesController < ApplicationController
   end
 
   private
-    def set_upload
-      set_regime
-      @upload = data_service.find(params[:id])
-    end
+  def set_upload
+    set_regime
+    @upload = data_service.find(params[:id])
+  end
 
-    def file_params
-      params.require(:annual_billing_data_file).permit(:data_file)
-    end
+  def file_params
+    params.require(:annual_billing_data_file).permit(:data_file)
+  end
 
-    def present_errors(errors)
-      error_data = errors.map do |e|
-        {
-          id: e.id,
-          line_number: e.line_number,
-          message: e.message
-        }
-      end
+  def present_errors(errors)
+    error_data = errors.map do |e|
       {
-        errors: error_data,
-        pagination: {
-          current_page: errors.current_page,
-          prev_page: errors.prev_page,
-          next_page: errors.next_page,
-          per_page: errors.limit_value,
-          total_pages: errors.total_pages,
-          total_count: errors.total_count
-        }
+        id: e.id,
+        line_number: e.line_number,
+        message: e.message
       }
     end
-
-    def present_file(upload, errors)
-      {
-        filename: File.basename(upload.filename),
-        upload_date: helpers.formatted_date(upload.created_at, true),
-        status: upload.status.humanize,
-        success_count: upload.success_count,
-        failed_count: upload.failed_count,
-        error_list: present_errors(errors)
+    {
+      errors: error_data,
+      pagination: {
+        current_page: errors.current_page,
+        prev_page: errors.prev_page,
+        next_page: errors.next_page,
+        per_page: errors.limit_value,
+        total_pages: errors.total_pages,
+        total_count: errors.total_count
       }
-    end
+    }
+  end
 
-    def data_service
-      @data_service ||= AnnualBillingDataFileService.new(@regime, current_user)
-    end
+  def present_file(upload, errors)
+    {
+      filename: File.basename(upload.filename),
+      upload_date: helpers.formatted_date(upload.created_at, true),
+      status: upload.status.humanize,
+      success_count: upload.success_count,
+      failed_count: upload.failed_count,
+      error_list: present_errors(errors)
+    }
+  end
+
+  def data_service
+    @data_service ||= AnnualBillingDataFileService.new(@regime, current_user)
+  end
 end

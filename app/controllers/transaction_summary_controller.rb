@@ -20,7 +20,7 @@ class TransactionSummaryController < ApplicationController
   end
 
   private
-    def transaction_summary
-      @transaction_summary ||= TransactionSummaryService.new(@regime, current_user)
-    end
+  def transaction_summary
+    @transaction_summary ||= TransactionSummaryService.new(@regime, current_user)
+  end
 end
