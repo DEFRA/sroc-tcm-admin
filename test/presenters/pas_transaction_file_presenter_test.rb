@@ -64,7 +64,7 @@ class PasTransactionFilePresenterTest < ActiveSupport::TestCase
     @presenter.details do |row|
       rows << row
     end
-    sorted_rows = [@transaction_1, @transaction_2].sort do |a,b|
+    sorted_rows = [@transaction_1, @transaction_2].sort do |a, b|
       a.tcm_transaction_reference <=> b.tcm_transaction_reference
     end
 

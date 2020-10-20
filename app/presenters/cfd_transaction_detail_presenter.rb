@@ -22,7 +22,7 @@ class CfdTransactionDetailPresenter < TransactionDetailPresenter
   def clean_variation_percentage
     return 100 if variation_percentage.blank?
 
-    variation_percentage.gsub(/%/,"")
+    variation_percentage.gsub(/%/, "")
   end
 
   def variation_percentage

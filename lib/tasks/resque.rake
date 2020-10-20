@@ -95,7 +95,7 @@ namespace :resque do
     queues = queue.split(",")
 
     # get the git commit hash for later
-    commit_hash = `cd #{Rails.root} && cat REVISION`[0,12]
+    commit_hash = `cd #{Rails.root} && cat REVISION`[0, 12]
 
     pids = []
     child = false
