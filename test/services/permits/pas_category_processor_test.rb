@@ -267,8 +267,8 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
   end
 
 
-# Annual Billing:
-#   Single permit - Stage 1 ---------------------------------------
+  # Annual Billing:
+  #   Single permit - Stage 1 ---------------------------------------
   #     Match 1 (green)
   def test_annual_single_stage_1_single_match_is_green
     historic_data = [
@@ -304,7 +304,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
                  "Wrong stage")
   end
 
-#     Multiple matches (red)
+  #     Multiple matches (red)
   def test_annual_single_stage_1_multiple_matches_are_red
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
@@ -343,8 +343,8 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
   #     again without :customer_reference and go into Stage 2
   #     when no matches found
 
-#   Single permit - Stage 2 (ignores customer_reference) --------------
-#     Match 1 (green)
+  #   Single permit - Stage 2 (ignores customer_reference) --------------
+  #     Match 1 (green)
   def test_annual_single_stage_2_single_match_is_green
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
@@ -379,7 +379,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
                  "Wrong stage")
   end
 
-#     Multiple matches (red)
+  #     Multiple matches (red)
   def test_annual_single_stage_1_multiple_matches_are_red
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
@@ -414,7 +414,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
                  "Wrong stage")
   end
 
-#     No matches (red)
+  #     No matches (red)
   def test_annual_single_stage_2_no_matches_are_red
     @regime.transaction_details.historic.where(reference_3: "AAAA0001",
                                                customer_reference: "A").
@@ -438,8 +438,8 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
                  "Wrong stage")
   end
 
-#   Mutliple permits - Stage 1 ---------------------------------------
-#     Match same number (amber)
+  #   Mutliple permits - Stage 1 ---------------------------------------
+  #     Match same number (amber)
   def test_annual_multiple_stage_1_all_match_is_amber
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
@@ -482,7 +482,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     assert_equal(expected, assigned.sort, "Categories not assigned correctly")
   end
 
-#     Multiple matches (red)
+  #     Multiple matches (red)
   def test_annual_multiple_stage_1_all_do_not_match_is_red
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
@@ -524,11 +524,11 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
   #     again without :customer_reference and go into Stage 2
   #     when no matches found
 
-#     No matches (red)
+  #     No matches (red)
 
 
-#   Multiple permits - Stage 2 (ignores customer_reference)
-#     Match same number (amber)
+  #   Multiple permits - Stage 2 (ignores customer_reference)
+  #     Match same number (amber)
   def test_annual_multiple_stage_2_all_match_is_amber
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
@@ -571,7 +571,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     assert_equal(expected, assigned.sort, "Categories not assigned correctly")
   end
 
-#     Multiple matches (red)
+  #     Multiple matches (red)
   def test_annual_multiple_stage_2_all_do_not_match_is_red
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
@@ -609,7 +609,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     end
   end
 
-#     No matches (red)
+  #     No matches (red)
   def test_annual_multiple_stage_2_none_match_is_red
     historic_data = [
       { reference_3: "AAAA0002", customer_reference: "A", category: "2.4.5",
@@ -648,10 +648,10 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
   end
 
 
-# Supplementary Billing:
-#   Debits:
-#     Single debit - Stage 1/2 ---------------------------------------
-#       Match 1 (green)
+  # Supplementary Billing:
+  #   Debits:
+  #     Single debit - Stage 1/2 ---------------------------------------
+  #       Match 1 (green)
   def test_supplemental_single_stage_1_single_match_is_green
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
@@ -688,7 +688,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
                  sc.suggestion_stage, "Wrong stage")
   end
 
-#       Multiple matches (only one most recent period start) (amber)
+  #       Multiple matches (only one most recent period start) (amber)
   def test_supplemental_single_stage_2_multiple_match_is_amber
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
@@ -726,7 +726,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
                  sc.suggestion_stage, "Wrong stage")
   end
 
-#       Mutliple matches (no single recent) (red)
+  #       Mutliple matches (no single recent) (red)
   def test_supplemental_single_stage_2_multiple_no_single_match_is_red
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
@@ -764,8 +764,8 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
                  sc.suggestion_stage, "Wrong stage")
   end
 
-#     Single debit - Stage 3/4 (ignores customer reference) -----------
-#       Match 1 (green)
+  #     Single debit - Stage 3/4 (ignores customer reference) -----------
+  #       Match 1 (green)
   def test_supplemental_single_stage_3_single_match_is_green
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "B", category: "2.4.5",
@@ -802,7 +802,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
                  sc.suggestion_stage, "Wrong stage")
   end
 
-#       Multiple matches (only one most recent period start) (amber)
+  #       Multiple matches (only one most recent period start) (amber)
   def test_supplemental_single_stage_3_multiple_single_match_is_amber
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "B", category: "2.4.5",
@@ -840,7 +840,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
                  sc.suggestion_stage, "Wrong stage")
   end
 
-#       Mutliple matches (no single recent) (red)
+  #       Mutliple matches (no single recent) (red)
   def test_supplemental_single_stage_4_multiple_no_single_match_is_red
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "B", category: "2.4.5",
@@ -878,7 +878,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
                  sc.suggestion_stage, "Wrong stage")
   end
 
-#       No matches (red)
+  #       No matches (red)
   def test_supplemental_single_stage_3_multiple_no_matches_is_red
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
@@ -916,8 +916,8 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
                  sc.suggestion_stage, "Wrong stage")
   end
 
-#     Multiple debits - Stage 1 ---------------------------------------
-#       Match all (amber)
+  #     Multiple debits - Stage 1 ---------------------------------------
+  #       Match all (amber)
   def test_supplemental_multiple_stage_1_all_match_is_amber
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
@@ -962,8 +962,8 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     assert_equal(expected, assigned.sort, "Categories not assigned correctly")
   end
 
-#     Mutliple debits - Stage 2 ---------------------------------------
-#       Match all when using most recent period start (amber)
+  #     Mutliple debits - Stage 2 ---------------------------------------
+  #       Match all when using most recent period start (amber)
   def test_supplemental_multiple_stage_2_period_start_match_is_amber
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
@@ -1009,7 +1009,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     assert_equal(expected, assigned.sort, "Categories not assigned correctly")
   end
 
-#       Doesnt match all when using most recent period start (red)
+  #       Doesnt match all when using most recent period start (red)
   def test_supplemental_multiple_stage_2_no_period_start_match_is_red
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
@@ -1051,8 +1051,8 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     end
   end
 
-#     Multiple debits - Stage 3 (ignores customer reference)
-#       Match all (amber)
+  #     Multiple debits - Stage 3 (ignores customer reference)
+  #       Match all (amber)
   def test_supplemental_multiple_stage_3_all_match_is_amber
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "B", category: "2.4.5",
@@ -1097,7 +1097,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     assert_equal(expected, assigned.sort, "Categories not assigned correctly")
   end
 
-#       No matches (red)
+  #       No matches (red)
   def test_supplemental_multiple_stage_3_no_match_is_red
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
@@ -1138,8 +1138,8 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     end
   end
 
-#     Multiple debits - Stage 4 (ignores customer reference) ----------
-#       Match all when using most recent period start (amber)
+  #     Multiple debits - Stage 4 (ignores customer reference) ----------
+  #       Match all when using most recent period start (amber)
   def test_supplemental_multiple_stage_4_period_start_match_is_amber
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "C", category: "2.4.5",
@@ -1185,7 +1185,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     assert_equal(expected, assigned.sort, "Categories not assigned correctly")
   end
 
-#       Doesnt match all when using most recent period start (red)
+  #       Doesnt match all when using most recent period start (red)
   def test_supplemental_multiple_stage_4_no_period_start_match_is_red
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "C", category: "2.4.5",
@@ -1227,9 +1227,9 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     end
   end
 
-#   Credits:
-#     Single credit - Stage 1/2 ---------------------------------------
-#       Match 1 (green)
+  #   Credits:
+  #     Single credit - Stage 1/2 ---------------------------------------
+  #       Match 1 (green)
   def test_supplemental_credit_single_stage_1_single_match_is_green
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
@@ -1267,7 +1267,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
                  sc.suggestion_stage, "Wrong stage")
   end
 
-#       Multiple matches (only one most recent period start) (amber)
+  #       Multiple matches (only one most recent period start) (amber)
   def test_supplemental_credit_single_stage_2_multiple_match_is_amber
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
@@ -1306,7 +1306,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
                  sc.suggestion_stage, "Wrong stage")
   end
 
-#       Mutliple matches (no single recent) (red)
+  #       Mutliple matches (no single recent) (red)
   def test_supplemental_credit_single_stage_2_multiple_no_single_match_is_red
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
@@ -1345,7 +1345,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
                  sc.suggestion_stage, "Wrong stage")
   end
 
-#       No matches (red)
+  #       No matches (red)
   def test_supplemental_credit_single_stage_1_no_matches_is_red
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "B", category: "2.4.5",
@@ -1385,8 +1385,8 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
   end
 
 
-#     Multiple credits - Stage 1 ---------------------------------------
-#       Match all (amber)
+  #     Multiple credits - Stage 1 ---------------------------------------
+  #       Match all (amber)
   def test_supplemental_credit_multiple_stage_1_all_match_is_amber
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
@@ -1432,7 +1432,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     assert_equal(expected, assigned.sort, "Categories not assigned correctly")
   end
 
-#       No matches (red)
+  #       No matches (red)
   def test_supplemental_credit_multiple_stage_1_no_match_is_red
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "B", category: "2.4.5",
@@ -1474,8 +1474,8 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     end
   end
 
-#     Mutliple credits - Stage 2 ---------------------------------------
-#       Match all when using most recent period start (amber)
+  #     Mutliple credits - Stage 2 ---------------------------------------
+  #       Match all when using most recent period start (amber)
   def test_supplemental_credit_multiple_stage_2_period_start_match_is_amber
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
@@ -1522,7 +1522,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     assert_equal(expected, assigned.sort, "Categories not assigned correctly")
   end
 
-#       Doesnt match all when using most recent period start (red)
+  #       Doesnt match all when using most recent period start (red)
   def test_supplemental_credit_multiple_stage_2_no_period_start_match_is_red
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
