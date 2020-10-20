@@ -21,13 +21,13 @@ class TransactionFilesTest < ActionDispatch::IntegrationTest
   def test_should_have_pre_post_select_filter_for_cfd
     setup_cfd
     visit regime_transaction_files_path(@regime)
-    assert page.has_select? "prepost", options: ["All", "Post", "Pre"]
+    assert page.has_select? "prepost", options: %w[All Post Pre]
   end
 
   def test_should_have_pre_post_select_filter_for_pas
     setup_pas
     visit regime_transaction_files_path(@regime)
-    assert page.has_select? "prepost", options: ["All", "Post", "Pre"]
+    assert page.has_select? "prepost", options: %w[All Post Pre]
   end
 
   def test_should_not_have_pre_post_select_filter_for_waste

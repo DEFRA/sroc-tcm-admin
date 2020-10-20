@@ -110,12 +110,12 @@ module ViewModels
     end
 
     def all_region_options
-      opts = available_regions.length == 1 ? [] : [["All", "all"]]
+      opts = available_regions.length == 1 ? [] : [%w[All all]]
       options_for_select(opts + available_regions.map { |r| [r, r] }, region)
     end
 
     def financial_year_options
-      opts = available_years.length == 1 ? [] : [["All", "all"]]
+      opts = available_years.length == 1 ? [] : [%w[All all]]
       options_for_select(opts + pretty_years_list, financial_year)
     end
 

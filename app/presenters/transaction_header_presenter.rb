@@ -14,12 +14,12 @@ class TransactionHeaderPresenter < SimpleDelegator
 
   def unbilled_items
     # handle sroc and pre-sroc items
-    transaction_details.where(status: ["unbilled", "retrospective"])
+    transaction_details.where(status: %w[unbilled retrospective])
   end
 
   def billed_items
     # handle sroc and pre-sroc items
-    transaction_details.where(status: ["billed", "retro_billed"])
+    transaction_details.where(status: %w[billed retro_billed])
   end
 
   def excluded_items
