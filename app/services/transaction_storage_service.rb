@@ -33,7 +33,7 @@ class TransactionStorageService
   end
 
   def transaction_history(search = "", fy = "", page = 1, per_page = 10, region = "",
-                               order = :customer_reference, direction = "asc")
+                          order = :customer_reference, direction = "asc")
     q = regime.transaction_details.historic
     q = q.region(region) unless region.blank?
     q = q.history_search(search) unless search.blank?
