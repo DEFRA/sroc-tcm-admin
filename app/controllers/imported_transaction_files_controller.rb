@@ -12,9 +12,7 @@ class ImportedTransactionFilesController < ApplicationController
     @view_model = build_imported_transaction_files_view_model
     respond_to do |format|
       format.html do
-        if request.xhr?
-          render partial: "table", locals: { view_model: @view_model }
-        end
+        render partial: "table", locals: { view_model: @view_model } if request.xhr?
       end
     end
   end

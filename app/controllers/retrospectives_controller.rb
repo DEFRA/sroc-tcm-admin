@@ -17,9 +17,7 @@ class RetrospectivesController < ApplicationController
 
     respond_to do |format|
       format.html do
-        if request.xhr?
-          render partial: "table", locals: { view_model: @view_model }
-        end
+        render partial: "table", locals: { view_model: @view_model } if request.xhr?
       end
       format.csv do
         export_data_user_check!

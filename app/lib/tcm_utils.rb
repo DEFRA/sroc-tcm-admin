@@ -30,9 +30,7 @@ class TcmUtils
     Regime.all.each do |r|
       r.transaction_details.each do |t|
         dates = self.extract_transaction_period_dates(t, r)
-        if dates.present?
-          t.update_attributes(period_start: dates[0], period_end: dates[1])
-        end
+        t.update_attributes(period_start: dates[0], period_end: dates[1]) if dates.present?
       end
     end
   end

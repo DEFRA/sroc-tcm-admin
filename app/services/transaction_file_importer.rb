@@ -135,9 +135,7 @@ class TransactionFileImporter
       data["period_end"] = period[1]
       data["tcm_financial_year"] = determine_financial_year(period[0])
 
-      if process_retrospectives && regime.retrospective_date?(period[1])
-        data["status"] = "retrospective"
-      end
+      data["status"] = "retrospective" if process_retrospectives && regime.retrospective_date?(period[1])
     end
 
     # original file details
