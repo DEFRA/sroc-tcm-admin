@@ -16,7 +16,7 @@ class PermitCategory < ApplicationRecord
   validate :valid_from_and_valid_to_is_valid_range
   validates :code, format: {
     with: /\A(\d{1,4}|\d{1,4}\.\d{1,4}|\d{1,4}\.\d{1,4}\.\d{1,4})\z/,
-    message: "^Code must be in dotted numeric format, with 1 to 3 segments  between 1 and 4 digits long. e.g. 6, 1.2, 9.34.1, 27.111.1234" 
+    message: "^Code must be in dotted numeric format, with 1 to 3 segments  between 1 and 4 digits long. e.g. 6, 1.2, 9.34.1, 27.111.1234"
 }
   validates :code, presence: true, uniqueness: { scope: [:regime_id, :valid_from] }
   validates :description, presence: true, unless: :excluded?
