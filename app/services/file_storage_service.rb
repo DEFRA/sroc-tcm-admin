@@ -38,6 +38,7 @@ class FileStorageService
   end
 
   private
+
   def storage
     @storage ||= determine_storage_handler
   end

@@ -36,6 +36,7 @@ class RetrospectivesController < ApplicationController
   end
 
   private
+
   def redirect_if_waste
     redirect_to regime_transactions_path(@regime) if @regime.waste?
   end

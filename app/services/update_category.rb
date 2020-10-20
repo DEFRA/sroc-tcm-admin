@@ -17,6 +17,7 @@ class UpdateCategory < ServiceObject
   end
 
   private
+
   def update
     if @transaction.updateable?
       if @transaction.category != @category

@@ -21,6 +21,7 @@ class ApproveMatchingTransactions < ServiceObject
   end
 
   private
+
   def update
     q = @regime.transaction_details.region(@region).unbilled.unexcluded
     q = q.financial_year(@financial_year) unless @financial_year.blank?

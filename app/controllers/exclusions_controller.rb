@@ -35,6 +35,7 @@ class ExclusionsController < ApplicationController
   end
 
   private
+
   def set_streaming_headers
     ts = Time.zone.now.strftime("%Y%m%d%H%M%S")
     filename = "exclusions_#{ts}.csv"

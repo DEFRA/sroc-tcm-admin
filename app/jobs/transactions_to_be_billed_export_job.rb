@@ -22,6 +22,7 @@ class TransactionsToBeBilledExportJob < ApplicationJob
   end
 
   private
+
   def storage
     @storage ||= FileStorageService.new
   end

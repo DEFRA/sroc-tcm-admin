@@ -38,6 +38,7 @@ class RetrospectiveFilesController < ApplicationController
   end
 
   private
+
   # :nocov:
   def set_region
     # TODO: this could be defaulted to a user's region if there are

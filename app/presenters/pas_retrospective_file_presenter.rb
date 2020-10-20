@@ -48,7 +48,9 @@ class PasRetrospectiveFilePresenter < PasTransactionFilePresenter
       td.padded_number(td.line_amount, 3)
     ]
   end
+
   protected
+
   def trailer_invoice_total
     transaction_details.where(transaction_type: "I").sum(:line_amount).to_i
   end

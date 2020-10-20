@@ -56,6 +56,7 @@ class Regime < ApplicationRecord
   end
 
   private
+
   def generate_slug
     self.slug = name.parameterize.downcase
   end

@@ -15,6 +15,7 @@ module Query
     end
 
     private
+
     def package_summary(query, charge_field, excluded_query = nil)
       credits = query.credits.pluck(charge_field)
       invoices = query.invoices.pluck(charge_field)

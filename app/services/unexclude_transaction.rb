@@ -18,6 +18,7 @@ class UnexcludeTransaction < ServiceObject
   end
 
   private
+
   def unexclude
     if @transaction.updateable?
       @transaction.excluded = false

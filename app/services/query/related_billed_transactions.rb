@@ -28,7 +28,9 @@ module Query
       end
       q.joins(:transaction_file).merge(TransactionFile.order(generated_at: :desc))
     end
+
     private
+
     def consent_reference
       m = /\A(.*)\/(?:\d+)\/(?:\d+)\z/.match(@transaction.reference_1)
       if m.nil?

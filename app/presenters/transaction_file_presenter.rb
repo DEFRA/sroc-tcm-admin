@@ -48,6 +48,7 @@ class TransactionFilePresenter < SimpleDelegator
   end
 
   protected
+
   def transaction_file
     __getobj__
   end

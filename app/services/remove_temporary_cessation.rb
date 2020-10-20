@@ -14,6 +14,7 @@ class RemoveTemporaryCessation < ServiceObject
   end
 
   private
+
   def update
     if @transaction.updateable?
       @transaction.temporary_cessation = false

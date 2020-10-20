@@ -45,6 +45,7 @@ class TransactionFile < ApplicationRecord
   end
 
   private
+
   def set_file_id
     self.file_id = generate_file_id
     self.file_reference = base_filename

@@ -47,6 +47,7 @@ class ExclusionReasonsController < AdminController
   end
 
   private
+
   def set_reason
     @reason = @regime.exclusion_reasons.find(params[:id])
   end

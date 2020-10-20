@@ -47,6 +47,7 @@ class ImportedTransactionFilesController < ApplicationController
   end
 
   private
+
   def set_transaction_header
     @file = TransactionHeaderPresenter.new get_transaction_header
   end

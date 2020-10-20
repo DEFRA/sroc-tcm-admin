@@ -58,6 +58,7 @@ class AnnualBillingDataFilesController < ApplicationController
   end
 
   private
+
   def set_upload
     set_regime
     @upload = data_service.find(params[:id])

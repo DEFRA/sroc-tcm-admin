@@ -15,6 +15,7 @@ class ExtractAuditDetail < ServiceObject
   end
 
   private
+
   def build_audit_detail
     Enumerator.new do |y|
       d = ViewModels::AuditDetail.new

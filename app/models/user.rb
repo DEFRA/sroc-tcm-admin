@@ -78,6 +78,7 @@ class User < ApplicationRecord
   end
 
   private
+
   def set_default_regime
     reg = regimes.order(:title).first
     send("#{reg.to_param}!")

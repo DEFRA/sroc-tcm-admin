@@ -58,6 +58,7 @@ class AwsFileStore
   end
 
   private
+
   def s3
     @s3 ||= Aws::S3::Client.new(region: aws_region, credentials: credentials)
   end

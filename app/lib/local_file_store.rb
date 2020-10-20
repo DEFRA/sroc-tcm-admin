@@ -42,7 +42,9 @@ class LocalFileStore
       raise Exceptions::FileNotFoundError.new("Local file storage file not found: #{path}")
     end
   end
+
   private
+
   def file_path(path)
     File.join(@base_path, path)
   end

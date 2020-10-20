@@ -35,6 +35,7 @@ class HistoryController < ApplicationController
   end
 
   private
+
   def present_transactions(transactions)
     Kaminari.paginate_array(presenter.wrap(transactions, current_user),
                             total_count: transactions.total_count,

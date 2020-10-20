@@ -61,6 +61,7 @@ module ViewModels
     end
 
     private
+
     def old_attr_value
       describe_value(old_value)
     end

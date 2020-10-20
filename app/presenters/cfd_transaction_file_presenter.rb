@@ -50,6 +50,7 @@ class CfdTransactionFilePresenter < TransactionFilePresenter
   end
 
   protected
+
   def record_count
     transaction_details.count + 2
   end

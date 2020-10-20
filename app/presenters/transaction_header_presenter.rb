@@ -52,6 +52,7 @@ class TransactionHeaderPresenter < SimpleDelegator
   end
 
   protected
+
   def transaction_header
     __getobj__
   end

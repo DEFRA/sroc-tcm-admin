@@ -21,6 +21,7 @@ class AuditService
   end
 
   private
+
   def add_entry(action, entity, payload = nil)
     entity.audit_logs.create!(user: user, action: action, payload: payload)
   end
