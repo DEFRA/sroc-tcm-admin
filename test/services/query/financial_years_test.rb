@@ -15,7 +15,7 @@ module Query
 
       regions = FinancialYears.call(regime: @regime)
       expected = @regime.transaction_details.distinct.
-        order(:tcm_financial_year).pluck(:tcm_financial_year)
+                 order(:tcm_financial_year).pluck(:tcm_financial_year)
       assert_equal expected, regions
     end
   end

@@ -7,7 +7,7 @@ class PermitCategoryPresenter < SimpleDelegator
 
   def as_json(options = {})
     path = Rails.application.routes.url_helpers.
-      edit_regime_permit_category_path(regime, self)
+           edit_regime_permit_category_path(regime, self)
     {
       id: id,
       code: code,

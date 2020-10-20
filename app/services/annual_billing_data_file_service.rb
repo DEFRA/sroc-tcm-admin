@@ -189,7 +189,7 @@ class AnnualBillingDataFileService
 
   def find_matching_transaction(upload, line_no, key_column, ref_column, ref_value)
     transactions = regime.transaction_details.unbilled.
-      where(ref_column => ref_value).order(:updated_at)
+                   where(ref_column => ref_value).order(:updated_at)
 
     if transactions.count.zero?
       upload.log_error(line_no, "Could not find #{present_column(key_column)} matching '#{ref_value}'")

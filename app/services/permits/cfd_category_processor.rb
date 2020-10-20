@@ -77,7 +77,7 @@ module Permits
                        period_start: transaction.period_start,
                        period_end: transaction.period_end }
       invoice = find_historic_invoices(history_args).
-        order(tcm_transaction_reference: :desc).first
+                order(tcm_transaction_reference: :desc).first
 
       if invoice
         set_category(transaction, invoice, :green, "Supplementary credit", true)

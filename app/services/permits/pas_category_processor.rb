@@ -71,13 +71,13 @@ module Permits
     #
     def handle_supplementary_billing(permit_args)
       debits = header.transaction_details.invoices.where(permit_args).
-        group(:reference_3, :customer_reference, :period_end).count
+               group(:reference_3, :customer_reference, :period_end).count
       debits.each do |args, count|
         handle_supplementary_debits(group_to_args(args), count)
       end
 
       credits = header.transaction_details.credits.where(permit_args).
-        group(:reference_3, :customer_reference, :period_end).count
+                group(:reference_3, :customer_reference, :period_end).count
 
       credits.each do |args, count|
         handle_supplementary_credits(group_to_args(args), count)

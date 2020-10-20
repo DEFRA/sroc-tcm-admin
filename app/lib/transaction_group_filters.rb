@@ -60,7 +60,7 @@ module TransactionGroupFilters
 
   def pas_group_filter(base_query)
     incomplete_records = base_query.unapproved.distinct.
-      pluck(:reference_1, :reference_2, :reference_3).transpose
+                         pluck(:reference_1, :reference_2, :reference_3).transpose
 
     return base_query.approved if incomplete_records.empty? ||
       incomplete_records.flatten.reject { |v| v.nil? }.empty?

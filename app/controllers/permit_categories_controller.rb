@@ -66,7 +66,7 @@ class PermitCategoriesController < AdminController
   def new
     set_financial_year
     @permit_category = @regime.permit_categories.
-      build(valid_from: @financial_year,
+                       build(valid_from: @financial_year,
             status: "active")
   end
 
@@ -116,7 +116,7 @@ class PermitCategoriesController < AdminController
     if params[:commit] == "Remove Category"
       if can_remove_permit_category?(cat.code, @financial_year)
         @permit_category = permit_store.
-          update_or_create_new_version(
+                           update_or_create_new_version(
             cat.code, permit_category_params[:description],
             @financial_year, "excluded")
       else
@@ -129,7 +129,7 @@ class PermitCategoriesController < AdminController
         "active")
     else
       @permit_category = permit_store.
-        update_or_create_new_version(
+                         update_or_create_new_version(
           cat.code, permit_category_params[:description],
           @financial_year, cat.status)
     end

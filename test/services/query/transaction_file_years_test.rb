@@ -17,7 +17,7 @@ module Query
 
       years = TransactionFileYears.call(transaction_file: @file)
       expected = @file.transaction_details.distinct.
-        pluck(:tcm_financial_year).sort
+                 pluck(:tcm_financial_year).sort
       assert_equal expected, years
     end
   end

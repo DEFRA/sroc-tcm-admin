@@ -16,8 +16,8 @@ module Query
         r = Regime.find_by(slug: @regime)
         if r
           q = q.joins(:regime_users).
-            merge(RegimeUser.enabled).
-            merge(RegimeUser.where(regime_id: r.id))
+              merge(RegimeUser.enabled).
+              merge(RegimeUser.where(regime_id: r.id))
         end
       end
 

@@ -79,7 +79,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     set_file_content(file_data)
 
     permits = @header.transaction_details.
-      group(:reference_3, :customer_reference).count
+              group(:reference_3, :customer_reference).count
     assert_equal permits, @processor.fetch_unique_pas_permits
   end
 
@@ -112,7 +112,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
   def test_find_historic_transactions_returns_empty_collection_when_no_matches_found
     @regime.transaction_details.historic.where(reference_3: "AAAA0001",
                                                customer_reference: "A").
-                                               destroy_all
+      destroy_all
 
     assert @processor.find_historic_transactions(
       reference_3: "AAAA0001", customer_reference: "A").empty?
@@ -418,7 +418,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
   def test_annual_single_stage_2_no_matches_are_red
     @regime.transaction_details.historic.where(reference_3: "AAAA0001",
                                                customer_reference: "A").
-                                               destroy_all
+      destroy_all
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
