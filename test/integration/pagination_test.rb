@@ -14,7 +14,7 @@ class PaginationTest < ActionDispatch::IntegrationTest
     count = 27 - @regime.transaction_details.region("A").unbilled.count
     bulk_up_transaction(:cfd_unbilled_invoice_2, count)
     go_to_last_page(regime_transactions_path(@regime, region: "A",
-                                             page: 1, per_page: 5))
+                                                      page: 1, per_page: 5))
   end
 
   def test_can_navigate_to_last_page_on_history

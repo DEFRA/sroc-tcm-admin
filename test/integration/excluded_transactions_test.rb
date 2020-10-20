@@ -25,7 +25,7 @@ class ExcludedTransactionsTest < ActionDispatch::IntegrationTest
     page.has_selector? "tr.excluded" do |row|
       assert row.has_selector? "td", text: @transaction.reference_1
       assert row.has_style?("color" => "rgba(170, 170, 170, 1)",
-        "text-decoration" => /line-through/)
+                            "text-decoration" => /line-through/)
     end
 
     page.select "Excluded Transactions", from: "mode"
@@ -40,7 +40,7 @@ class ExcludedTransactionsTest < ActionDispatch::IntegrationTest
     page.has_selector? "tr.excluded" do |row|
       assert row.has_selector? "td", text: @transaction.reference_1
       assert row.has_style?("color" => "rgba(170, 170, 170, 1)",
-        "text-decoration" => /line-through/)
+                            "text-decoration" => /line-through/)
     end
   end
 end

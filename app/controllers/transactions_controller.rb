@@ -62,8 +62,8 @@ class TransactionsController < ApplicationController
         format.html do
           if request.xhr?
             render partial: "#{@regime.to_param}_transaction",
-              locals: { transaction: presenter.new(@transaction, current_user),
-                        data_path: path }
+                   locals: { transaction: presenter.new(@transaction, current_user),
+                             data_path: path }
           else
             redirect_to path, notice: "Transaction was successfully updated."
           end
@@ -72,15 +72,15 @@ class TransactionsController < ApplicationController
           render json: { transaction: presenter.new(@transaction, current_user),
                          message: "Transaction updated"
                         },
-                        status: :ok,
-                        location: path
+                 status: :ok,
+                 location: path
         }
       else
         format.html do
           if request.xhr?
             render partial: "#{@regime.to_param}_transaction",
-              locals: { transaction: presenter.new(@transaction, current_user),
-                        data_path: path }
+                   locals: { transaction: presenter.new(@transaction, current_user),
+                             data_path: path }
           else
             redirect_to path, notice: "Transaction was not updated."
           end

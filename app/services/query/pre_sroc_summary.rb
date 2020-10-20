@@ -24,11 +24,11 @@ module Query
 
       summary = ::TransactionSummary.new(@regime)
       summary.assign_attributes(
-        credit_count:   credits.length,
-        credit_total:   credit_total,
-        invoice_count:  invoices.length,
-        invoice_total:  invoice_total,
-        net_total:      invoice_total + credit_total,
+        credit_count: credits.length,
+        credit_total: credit_total,
+        invoice_count: invoices.length,
+        invoice_total: invoice_total,
+        net_total: invoice_total + credit_total,
         excluded_count: excluded_count
       )
       summary

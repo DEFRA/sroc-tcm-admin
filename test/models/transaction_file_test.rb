@@ -43,8 +43,8 @@ class TransactionFileTest < ActiveSupport::TestCase
   def test_filename_is_uppercase_for_Installations
     @regime = regimes(:pas)
     @sroc_file = @regime.transaction_files.create(user: @user,
-                                                   region: "A",
-                                                   retrospective: false)
+                                                  region: "A",
+                                                  retrospective: false)
 
     @retro_file = @regime.transaction_files.create(user: @user,
                                                    region: "B",
@@ -60,8 +60,8 @@ class TransactionFileTest < ActiveSupport::TestCase
   def test_filename_is_all_uppercase_for_Waste
     @regime = regimes(:wml)
     @sroc_file = @regime.transaction_files.create(user: @user,
-                                                   region: "A",
-                                                   retrospective: false)
+                                                  region: "A",
+                                                  retrospective: false)
 
     @retro_file = @regime.transaction_files.create(user: @user,
                                                    region: "B",

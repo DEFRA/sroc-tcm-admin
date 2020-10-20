@@ -22,7 +22,7 @@ class PermitCategory < ApplicationRecord
   validates :description, length: { maximum: 150 }
   validate :description_has_no_invalid_characters
   validates :status, inclusion: { in: %w[active excluded],
-    message: "%{value} is not a valid state" }
+                                  message: "%{value} is not a valid state" }
 
   scope :active, -> { where(status: "active") }
 

@@ -56,9 +56,9 @@ class PermitStorageService
   def build_permit_category(code, description, valid_from,
                             status = "active")
     regime.permit_categories.build(code: code,
-                                  description: description,
-                                  valid_from: valid_from,
-                                  status: status)
+                                   description: description,
+                                   valid_from: valid_from,
+                                   status: status)
   end
 
   def new_permit_category(code, description, valid_from, status = "active")

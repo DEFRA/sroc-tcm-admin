@@ -31,11 +31,11 @@ private
     invoice_total = invoices.sum
     excluded_count = excluded_query ? excluded_query.count : 0
     {
-      credit_count:   credits.length,
-      credit_total:   credit_total,
-      invoice_count:  invoices.length,
-      invoice_total:  invoice_total,
-      net_total:      invoice_total + credit_total,
+      credit_count: credits.length,
+      credit_total: credit_total,
+      invoice_count: invoices.length,
+      invoice_total: invoice_total,
+      net_total: invoice_total + credit_total,
       excluded_count: excluded_count
     }
   end
