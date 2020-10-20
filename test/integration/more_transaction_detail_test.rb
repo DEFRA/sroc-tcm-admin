@@ -21,7 +21,7 @@ class MoreTransactionDetailTest < ActionDispatch::IntegrationTest
     assert_not_nil @transaction.line_amount, "No line amount"
 
     amount = ActiveSupport::NumberHelper.number_to_currency(
-      sprintf("%.2f", @transaction.line_amount/100.0), unit: ""
+      sprintf("%.2f", @transaction.line_amount / 100.0), unit: ""
 )
 
     visit regime_transaction_path(@regime, @transaction)
@@ -36,7 +36,7 @@ class MoreTransactionDetailTest < ActionDispatch::IntegrationTest
     assert_not_nil @transaction.line_amount, "No line amount"
 
     amount = ActiveSupport::NumberHelper.number_to_currency(
-      sprintf("%.2f", @transaction.line_amount/100.0), unit: ""
+      sprintf("%.2f", @transaction.line_amount / 100.0), unit: ""
 )
 
     visit regime_transaction_path(@regime, @transaction)

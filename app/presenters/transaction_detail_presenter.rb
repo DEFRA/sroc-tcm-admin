@@ -201,7 +201,7 @@ class TransactionDetailPresenter < SimpleDelegator
         credit_debit
       else
         ActiveSupport::NumberHelper.number_to_currency(
-          sprintf("%.2f", value/100.0), unit: ""
+          sprintf("%.2f", value / 100.0), unit: ""
 )
       end
     else

@@ -12,7 +12,7 @@ class CfdTransactionFilePresenterTest < ActiveSupport::TestCase
     @transaction_1 = transaction_details(:cfd)
     @transaction_2 = @transaction_1.dup
 
-    @transaction_2.customer_reference ="A1234000A"
+    @transaction_2.customer_reference = "A1234000A"
     @transaction_2.transaction_type = "C"
     @transaction_2.line_description = "Consent No - ABCD/9999/1/2"
     @transaction_2.reference_1 = "ABCD/9999/1/2"

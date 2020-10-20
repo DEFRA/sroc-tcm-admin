@@ -17,7 +17,7 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
 
     @transaction_1.tcm_financial_year = "1819"
 
-    @transaction_2.customer_reference ="A1234000A"
+    @transaction_2.customer_reference = "A1234000A"
     @transaction_2.transaction_type = "C"
     @transaction_2.line_description = "Consent No - ABCD/9999/1/2"
     @transaction_2.reference_1 = "ABCD/9999/1/2"
@@ -25,7 +25,7 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
     @transaction_2.unit_of_measure_price = -1234
     @transaction_2.tcm_financial_year = "1819"
 
-    @transaction_3.customer_reference ="A9876000Z"
+    @transaction_3.customer_reference = "A9876000Z"
     @transaction_3.line_description = "Consent No - WXYZ/99/2/1"
     @transaction_3.reference_1 = "WXYZ/99/2/1"
     @transaction_3.tcm_financial_year = "1920"

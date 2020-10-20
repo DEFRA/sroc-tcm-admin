@@ -12,8 +12,8 @@ class WmlTransactionFilePresenterTest < ActiveSupport::TestCase
     @transaction_1 = transaction_details(:wml)
     @transaction_2 = @transaction_1.dup
 
-    @transaction_2.customer_reference ="A223344123P"
-    @transaction_2.transaction_reference ="E00555123"
+    @transaction_2.customer_reference = "A223344123P"
+    @transaction_2.transaction_reference = "E00555123"
     @transaction_2.transaction_type = "C"
     @transaction_2.line_attr_2 = "012345"
     @transaction_2.reference_1 = "012345"

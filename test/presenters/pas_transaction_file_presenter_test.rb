@@ -12,8 +12,8 @@ class PasTransactionFilePresenterTest < ActiveSupport::TestCase
     @transaction_1 = transaction_details(:pas)
     @transaction_2 = @transaction_1.dup
 
-    @transaction_2.customer_reference ="A223344123P"
-    @transaction_2.transaction_reference ="PAS00055512Y"
+    @transaction_2.customer_reference = "A223344123P"
+    @transaction_2.transaction_reference = "PAS00055512Y"
     @transaction_2.transaction_type = "C"
     @transaction_2.reference_1 = "VP1234AA"
     @transaction_2.line_amount = -1234
