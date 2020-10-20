@@ -64,7 +64,7 @@ module TransactionGroupFilters
                          pluck(:reference_1, :reference_2, :reference_3).transpose
 
     return base_query.approved if incomplete_records.empty? ||
-      incomplete_records.flatten.reject { |v| v.nil? }.empty?
+                                  incomplete_records.flatten.reject { |v| v.nil? }.empty?
 
     base_query.approved.where.
       not(reference_1: incomplete_records[0].reject(&:blank?)).

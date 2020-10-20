@@ -300,7 +300,7 @@ class TransactionDetailPresenter < SimpleDelegator
   def extract_compliance_performance
     chg = transaction_detail.charge_calculation
     chg["calculation"]["compliancePerformanceBand"] unless chg.nil? ||
-      chg["calculation"].nil?
+                                                           chg["calculation"].nil?
   end
 
   def permit_store
