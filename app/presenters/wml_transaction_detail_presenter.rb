@@ -122,8 +122,6 @@ class WmlTransactionDetailPresenter < TransactionDetailPresenter
       errors.full_messages_for(:base)
     elsif charge_calculation_error?
       charge_calculation["calculation"]["messages"]
-    else
-      nil
     end
   end
 end

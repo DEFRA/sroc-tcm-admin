@@ -37,9 +37,7 @@ class ApplyTemporaryCessation < ServiceObject
     @transaction.charge_calculation = charge.charge_calculation
     @transaction.tcm_charge = if charge.success?
       charge.amount
-    else
-      nil
-                              end
+    end
     charge
   end
 end
