@@ -27,25 +27,21 @@ module ViewModels
         else
           available_regions.first
                   end
+      elsif available_regions.include?(val)
+        val
       else
-        if available_regions.include?(val)
-          val
-        else
-          available_regions.first
-                  end
-                end
+        available_regions.first
+      end
       @region
     end
 
     def region
       if permit_all_regions && @region.blank?
         @region
+      elsif available_regions.include?(@region)
+        @region
       else
-        if available_regions.include?(@region)
-          @region
-        else
-          @region = available_regions.first
-        end
+        @region = available_regions.first
       end
     end
 
