@@ -116,6 +116,7 @@ class AnnualBillingDataFileService
         # we have a transaction
         update_columns.each do |col|
           next if failed
+
           val = row.fetch(col[:header], nil)
 
           if val.blank? && col[:mandatory]

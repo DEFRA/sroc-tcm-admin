@@ -83,6 +83,7 @@ class WmlTransactionFilePresenterTest < ActiveSupport::TestCase
     tested = false
     @presenter.transaction_details.each_with_index do |td, i|
       next unless td.invoice?
+
       td.category_description = expected_value
 
       p = WmlTransactionDetailPresenter.new(td)

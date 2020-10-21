@@ -49,6 +49,7 @@ namespace :tcm do
       permits = PermitStorageService.new(r).all_for_financial_year("1819")
       r.transaction_details.unbilled.where(tcm_financial_year: "1819").each do |t|
         next unless t.suggested_category.nil?
+
         level = levels.sample
         stage = stages.sample
         logic = logics.sample
