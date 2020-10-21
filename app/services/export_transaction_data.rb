@@ -76,7 +76,7 @@ class ExportTransactionData < ServiceObject
     end
   end
 
-  def regime_file()
+  def regime_file
     CSV.open(regime_filename, "w", write_headers: true, headers: regime_headers) do |csv|
       yield csv
     end
