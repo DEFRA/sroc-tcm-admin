@@ -40,8 +40,7 @@ class User < ApplicationRecord
 
   def self.search(str)
     m = "%#{sanitize_sql_like(str)}%"
-    where(arel_table[:first_name].matches(m).
-          or(arel_table[:last_name].matches(m)))
+    where(arel_table[:first_name].matches(m).or(arel_table[:last_name].matches(m)))
   end
 
   def full_name

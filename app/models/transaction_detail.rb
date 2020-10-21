@@ -55,41 +55,41 @@ class TransactionDetail < ApplicationRecord
   def self.search(query)
     m = "%#{sanitize_sql_like(query)}%"
 
-    where(arel_table[:customer_reference].matches(m).
-          or(arel_table[:reference_1].matches(m)).
-          or(arel_table[:transaction_reference].matches(m)))
+    where(arel_table[:customer_reference].matches(m)
+          .or(arel_table[:reference_1].matches(m))
+          .or(arel_table[:transaction_reference].matches(m)))
   end
 
   def self.history_search(query)
     m = "%#{sanitize_sql_like(query)}%"
 
-    where(arel_table[:customer_reference].matches(m).
-          or(arel_table[:reference_1].matches(m)).
-          or(arel_table[:reference_2].matches(m)).
-          or(arel_table[:transaction_reference].matches(m)).
-          or(arel_table[:category].matches(m)).
-          or(arel_table[:original_filename].matches(m)).
-          or(arel_table[:generated_filename].matches(m)).
-          or(arel_table[:tcm_transaction_reference].matches(m)))
+    where(arel_table[:customer_reference].matches(m)
+          .or(arel_table[:reference_1].matches(m))
+          .or(arel_table[:reference_2].matches(m))
+          .or(arel_table[:transaction_reference].matches(m))
+          .or(arel_table[:category].matches(m))
+          .or(arel_table[:original_filename].matches(m))
+          .or(arel_table[:generated_filename].matches(m))
+          .or(arel_table[:tcm_transaction_reference].matches(m)))
   end
 
   def self.retrospective_search(query)
     m = "%#{sanitize_sql_like(query)}%"
 
-    where(arel_table[:customer_reference].matches(m).
-          or(arel_table[:reference_1].matches(m)).
-          or(arel_table[:transaction_reference].matches(m)))
+    where(arel_table[:customer_reference].matches(m)
+          .or(arel_table[:reference_1].matches(m))
+          .or(arel_table[:transaction_reference].matches(m)))
   end
 
   def self.exclusion_search(query)
     m = "%#{sanitize_sql_like(query)}%"
 
-    where(arel_table[:customer_reference].matches(m).
-          or(arel_table[:reference_1].matches(m)).
-          or(arel_table[:reference_2].matches(m)).
-          or(arel_table[:transaction_reference].matches(m)).
-          or(arel_table[:original_filename].matches(m)).
-          or(arel_table[:excluded_reason].matches(m)))
+    where(arel_table[:customer_reference].matches(m)
+          .or(arel_table[:reference_1].matches(m))
+          .or(arel_table[:reference_2].matches(m))
+          .or(arel_table[:transaction_reference].matches(m))
+          .or(arel_table[:original_filename].matches(m))
+          .or(arel_table[:excluded_reason].matches(m)))
   end
 
   def updateable?
