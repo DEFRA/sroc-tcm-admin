@@ -22,7 +22,7 @@ module Query
                  where.not(reference_2: nil).
                  where(reference_2: @transaction.reference_2))
           elsif regime.water_quality?
-        # match consent reference
+            # match consent reference
             q.where(at[:reference_1].matches("#{consent_reference}/%"))
           else
             q.where(reference_1: @transaction.reference_1)
