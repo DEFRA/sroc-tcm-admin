@@ -32,7 +32,6 @@ module ViewModels
       else
         available_regions.first
       end
-      @region
     end
 
     def region
