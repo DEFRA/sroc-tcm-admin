@@ -2,7 +2,7 @@
 
 module Query
   class PermitCategoryYears < QueryObject
-    def initialize(opts = {})
+    def initialize(_opts = {})
       super()
     end
 
