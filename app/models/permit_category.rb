@@ -69,7 +69,7 @@ class PermitCategory < ApplicationRecord
     else
       m = /\A(\d\d)(\d\d)\z/.match(fy)
       err = m.nil?
-      err = (m[2].to_i != m[1].to_i + 1) unless err
+      err ||= (m[2].to_i != m[1].to_i + 1)
       errors.add(attr, "is not a valid 4 character financial year value") if err
     end
   end
