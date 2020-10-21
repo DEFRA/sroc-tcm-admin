@@ -84,7 +84,7 @@ class PermitCategory < ApplicationRecord
 
   def description_has_no_invalid_characters
     return unless description.present?
-    return unless description =~ /[\?\^£\u2014\u2264\u2265]/
+    return unless description =~ /[?\^£\u2014\u2264\u2265]/
 
     errors.add(
       :description,
