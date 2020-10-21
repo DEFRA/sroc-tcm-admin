@@ -159,10 +159,10 @@ module TransactionsHelper
   end
 
   def approval_check(approved)
-    if approved
-      "<span aria-hidden='true' class='oi oi-check'></span>" \
-        "<span class='sr-only'>Approved</span>".html_safe
-    end
+    return unless approved
+
+    "<span aria-hidden='true' class='oi oi-check'></span>" \
+      "<span class='sr-only'>Approved</span>".html_safe
   end
 
   def status_text(state)
