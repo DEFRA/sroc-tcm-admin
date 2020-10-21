@@ -12,7 +12,7 @@ class FileStorageService
     export_archive: "archive/export",
     csv_export: "csv",
     quarantine: "quarantine"
-  }
+  }.freeze
 
   def initialize(user = nil)
     # when instantiated from a controller the 'current_user' should
