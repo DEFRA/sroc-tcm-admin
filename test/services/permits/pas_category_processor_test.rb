@@ -169,7 +169,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
 
   def test_set_category_sets_category
     file_data = [
-      { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
+      { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 }
     ]
 
     transaction = set_file_content(file_data).first
@@ -191,7 +191,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
 
   def test_set_category_sets_matched_transaction
     file_data = [
-      { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
+      { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 }
     ]
 
     transaction = set_file_content(file_data).first
@@ -213,7 +213,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
 
   def test_set_category_sets_charge_info
     file_data = [
-      { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
+      { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 }
     ]
     transaction = set_file_content(file_data).first
 
@@ -230,7 +230,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
 
   def test_set_category_does_not_set_category_when_category_removed
     file_data = [
-      { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
+      { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 }
     ]
     transaction = set_file_content(file_data).first
 
@@ -251,7 +251,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
 
   def test_set_category_does_not_set_category_if_calculation_error
     file_data = [
-      { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
+      { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 }
     ]
     transaction = set_file_content(file_data).first
 

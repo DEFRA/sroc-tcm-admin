@@ -36,7 +36,7 @@ module AnnualBillingDataFileFormat
         header: :temporary_cessation,
         column: :temporary_cessation,
         mandatory: false
-      },
+      }
     ].freeze
   end
 

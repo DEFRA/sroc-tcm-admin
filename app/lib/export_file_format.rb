@@ -76,7 +76,7 @@ module ExportFileFormat
     { heading: "Suggestion Stage", accessor: :suggested_category_stage },
     { heading: "Checked Flag", accessor: :approved_flag },
     { heading: "Checked Date", accessor: :approved_date },
-    { heading: "TCM Compliance %", accessor: :tcm_compliance_percentage },
+    { heading: "TCM Compliance %", accessor: :tcm_compliance_percentage }
   ].freeze
 
   Columns = %i[
