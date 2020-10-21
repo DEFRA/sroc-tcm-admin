@@ -7,7 +7,7 @@ module FormErrorHelper
     default_opts = {
       resource: resource,
       title: "Check your details",
-      description: "The following #{"error".pluralize(resource.errors.count)} prevented the form from being saved:"
+      description: "The following #{'error'.pluralize(resource.errors.count)} prevented the form from being saved:"
     }
     render partial: "shared/error_header", locals: opts.reverse_merge(default_opts)
   end

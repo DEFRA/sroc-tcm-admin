@@ -193,7 +193,7 @@ class TransactionDetailPresenter < SimpleDelegator
   end
 
   def period
-    "#{transaction_detail.period_start.strftime("%d/%m/%y")} - #{transaction_detail.period_end.strftime("%d/%m/%y")}"
+    "#{transaction_detail.period_start.strftime('%d/%m/%y')} - #{transaction_detail.period_end.strftime('%d/%m/%y')}"
   end
 
   def amount
