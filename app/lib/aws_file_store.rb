@@ -8,7 +8,7 @@ class AwsFileStore
     files = resp.contents.map { |f| f.key }
 
     # handle 1000 file batching limit
-    while resp.is_truncated do
+    while resp.is_truncated
       options[:continuation_token] = resp.next_continuation_token
       resp = s3.list_objects_v2(options)
       files += resp.contents.map { |f| f.key }

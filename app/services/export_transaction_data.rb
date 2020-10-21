@@ -68,7 +68,7 @@ class ExportTransactionData < ServiceObject
     query = transactions
     count = query.count
     offset = 0
-    while offset < count do
+    while offset < count
       query.offset(offset).limit(batch_size).each do |transaction|
         yield transaction
       end

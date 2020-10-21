@@ -35,7 +35,7 @@ class BatchCsvExport < ServiceObject
     count = [count, max_limit].min unless max_limit.zero?
 
     offset = 0
-    while offset < count do
+    while offset < count
       query.offset(offset).limit(batch_size).each do |transaction|
         yield transaction
       end
