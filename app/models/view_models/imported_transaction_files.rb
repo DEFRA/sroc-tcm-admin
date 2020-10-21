@@ -22,15 +22,15 @@ module ViewModels
 
     def region=(val)
       @region = if val.blank? || val == "all"
-        if permit_all_regions
-          ""
-        else
-          available_regions.first
-        end
+                  if permit_all_regions
+                    ""
+                  else
+                    available_regions.first
+                  end
                 elsif available_regions.include?(val)
-        val
+                  val
                 else
-        available_regions.first
+                  available_regions.first
                 end
     end
 

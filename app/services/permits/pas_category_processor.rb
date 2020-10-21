@@ -113,7 +113,7 @@ module Permits
           stage = if with_customer_reference
                     "Supplementary invoice (single) - Stage 2"
                   else
-            "Supplementary invoice (single) - Stage 4"
+                    "Supplementary invoice (single) - Stage 4"
                   end
 
           if invoices.first.period_start != invoices.second.period_start

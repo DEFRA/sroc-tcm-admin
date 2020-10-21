@@ -54,25 +54,25 @@ class AnnualBillingDataFileService
   def valid_file?(file)
       # check file looks reasonable
 
-      csv = CSV.new(file,
-                    headers: true,
-                    return_headers: true,
-                    header_converters: lambda { |h|
-                                         TcmUtils.strip_bom(h).
-                                               parameterize.underscore.to_sym
-                                       },
-                    field_size_limit: 32)
-      csv.shift
-      headers = csv.headers
-      valid = true
-      mandatory_headers.each { |h| valid = false unless headers.include? h }
-      valid
-  rescue CSV::MalformedCSVError => e
-      Rails.logger.warn(e.message)
-      false
-  rescue StandardError => e
-      Rails.logger.error(e.message)
-      false
+    csv = CSV.new(file,
+                  headers: true,
+                  return_headers: true,
+                  header_converters: lambda { |h|
+                                       TcmUtils.strip_bom(h).
+                                             parameterize.underscore.to_sym
+                                     },
+                  field_size_limit: 32)
+    csv.shift
+    headers = csv.headers
+    valid = true
+    mandatory_headers.each { |h| valid = false unless headers.include? h }
+    valid
+rescue CSV::MalformedCSVError => e
+  Rails.logger.warn(e.message)
+    false
+rescue StandardError => e
+  Rails.logger.error(e.message)
+    false
   end
 
   def mandatory_headers

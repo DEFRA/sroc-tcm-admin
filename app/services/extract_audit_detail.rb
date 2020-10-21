@@ -35,9 +35,9 @@ class ExtractAuditDetail < ServiceObject
             d = ViewModels::AuditDetail.new
 
             d.action = if k == "category" && l.user == User.system_account
-              "suggestion"
+                         "suggestion"
                        else
-              l.action
+                         l.action
                        end
 
             d.when = l.created_at

@@ -72,19 +72,19 @@ class TransactionStorageService
   def transactions_related_to(transaction)
     q = regime.transaction_details.unbilled.where.not(id: transaction.id)
     q = if regime.installations?
-      q.where.not(reference_3: nil).
-        where.not(reference_3: "NA").
-        where(reference_3: transaction.reference_3).
-        or(q.where.not(reference_1: "NA").
-           where.not(reference_1: nil).
-           where(reference_1: transaction.reference_1)).
-        or(q.where.not(reference_2: "NA").
-           where.not(reference_2: nil).
-           where(reference_2: transaction.reference_2))
+          q.where.not(reference_3: nil).
+            where.not(reference_3: "NA").
+            where(reference_3: transaction.reference_3).
+            or(q.where.not(reference_1: "NA").
+               where.not(reference_1: nil).
+               where(reference_1: transaction.reference_1)).
+            or(q.where.not(reference_2: "NA").
+               where.not(reference_2: nil).
+               where(reference_2: transaction.reference_2))
         else
-      q.where.not(reference_1: nil).
-        where.not(reference_1: "NA").
-        where(reference_1: transaction.reference_1)
+          q.where.not(reference_1: nil).
+            where.not(reference_1: "NA").
+            where(reference_1: transaction.reference_1)
         end
     q.order(:reference_1)
   end

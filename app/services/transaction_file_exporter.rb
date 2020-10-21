@@ -114,9 +114,9 @@ class TransactionFileExporter
     }
 
     attrs[:status] = if tf.retrospective?
-      "retro_billed"
+                       "retro_billed"
                      else
-      "billed"
+                       "billed"
                      end
     tf.transaction_details.update_all(attrs)
     tf.update_attributes(state: "exported")
@@ -231,9 +231,9 @@ class TransactionFileExporter
 
   def next_pas_transaction_reference(retrospective)
     result = if retrospective
-      NextPasRetrospectiveReference.call(regime: regime, region: region)
+               NextPasRetrospectiveReference.call(regime: regime, region: region)
              else
-      NextPasReference.call(regime: regime, region: region)
+               NextPasReference.call(regime: regime, region: region)
              end
     if result.success?
       result.reference
@@ -270,9 +270,9 @@ class TransactionFileExporter
 
   def next_cfd_transaction_reference(retrospective)
     result = if retrospective
-      NextCfdRetrospectiveReference.call(regime: regime, region: region)
+               NextCfdRetrospectiveReference.call(regime: regime, region: region)
              else
-      NextCfdReference.call(regime: regime, region: region)
+               NextCfdReference.call(regime: regime, region: region)
              end
     if result.success?
       result.reference
