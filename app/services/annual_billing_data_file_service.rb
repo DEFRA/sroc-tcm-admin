@@ -69,10 +69,10 @@ class AnnualBillingDataFileService
       valid
     rescue CSV::MalformedCSVError => e
       Rails.logger.warn(e.message)
-      return false
+      false
     rescue StandardError => e
       Rails.logger.error(e.message)
-      return false
+      false
     end
   end
 
