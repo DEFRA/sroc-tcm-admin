@@ -84,7 +84,7 @@ module ViewModels
         extract_calculation(value)
       elsif @attribute == "tcm_charge"
         ActiveSupport::NumberHelper.number_to_currency(
-          sprintf("%<value>.2f", value: (value / 100.0)), unit: "£"
+          format("%<value>.2f", value: (value / 100.0)), unit: "£"
                 )
       elsif @attribute == "approved_for_billing"
         value ? "approved" : "unapproved"

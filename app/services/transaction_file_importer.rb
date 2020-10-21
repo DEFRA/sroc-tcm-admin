@@ -192,7 +192,7 @@ class TransactionFileImporter
 
   def determine_financial_year(date)
     y = (date.month < 4 ? date.year - 1 : date.year) % 100
-    sprintf("%<year>02d%<year_plus_one>02d", year: y, year_plus_one: ((y + 1) % 100))
+    format("%<year>02d%<year_plus_one>02d", year: y, year_plus_one: ((y + 1) % 100))
   end
 
   def sanitize_date(d)

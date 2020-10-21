@@ -76,7 +76,7 @@ class TransactionHeaderTest < ActiveSupport::TestCase
   def test_generates_the_file_reference
     # expecting CFDAI00001
     @header.save!
-    sequence = sprintf("%<sequence_number>05d", sequence_number: @header.file_sequence_number)
+    sequence = format("%<sequence_number>05d", sequence_number: @header.file_sequence_number)
     ref = [@header.feeder_source_code,
            @header.region,
            @header.file_type_flag,
