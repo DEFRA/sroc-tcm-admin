@@ -27,6 +27,7 @@ class LocalFileStore
   # stream file from disk
   def store_file(from_path, to_path)
     dst = file_path(to_path)
+    FileUtils.mkdir_p(File.dirname(dst))
     FileUtils.cp(from_path, dst)
   rescue StandardError
     raise Exceptions::FileNotFoundError.new("Local file storage file not found: #{from_path}")
