@@ -137,8 +137,8 @@ class PermitCategoriesController < AdminController
         "active"
       )
     else
-      @permit_category = permit_store.
-                         update_or_create_new_version(
+      @permit_category = permit_store
+                         .update_or_create_new_version(
                            cat.code, permit_category_params[:description],
                            @financial_year, cat.status
                          )
@@ -194,8 +194,12 @@ class PermitCategoriesController < AdminController
   def can_remove_permit_category?(code, financial_year)
     # check that no transactions for the given financial year
     # have used this code
-    @regime.transaction_details.financial_year(financial_year).
-      where(category: code).count.zero?
+    @regime
+      .transaction_details
+      .financial_year(financial_year)
+      .where(category: code)
+      .count
+      .zero?
   end
 
   def present_categories_unpaged(categories)
