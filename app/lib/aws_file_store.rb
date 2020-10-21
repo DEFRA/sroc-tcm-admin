@@ -16,7 +16,7 @@ class AwsFileStore
 
     files
   rescue Aws::S3::Errors::AccessDenied
-    raise Exceptions::PermissionError.new("No permission to list: #{path}")
+    raise Exceptions::PermissionError, "No permission to list: #{path}"
   end
 
   # to_path can be file path or io object
