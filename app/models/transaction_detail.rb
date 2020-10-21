@@ -43,8 +43,8 @@ class TransactionDetail < ApplicationRecord
   scope :with_charge_errors, -> {
     where("(charge_calculation -> 'calculation' ->> 'messages') is not null")
   }
-  scope :credits, -> { where(arel_table[:line_amount].lt 0) }
-  scope :invoices, -> { where(arel_table[:line_amount].gteq 0) }
+  scope :credits, -> { where(arel_table[:line_amount].lt(0)) }
+  scope :invoices, -> { where(arel_table[:line_amount].gteq(0)) }
   scope :region, ->(r) { where(region: r) }
   scope :with_charge, -> { where.not(tcm_charge: nil) }
   scope :without_charge, -> { where(tcm_charge: nil) }
