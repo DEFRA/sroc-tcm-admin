@@ -32,7 +32,7 @@ class FetchDataExportFile < ServiceObject
                            local_path: cached_filename)
 
     # verify checksum
-    raise RuntimeError.new("Checksum does not match stored file") unless check_file_hash(cached_filename)
+    raise "Checksum does not match stored file" unless check_file_hash(cached_filename)
 
     cached_filename
   end
