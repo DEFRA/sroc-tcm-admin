@@ -90,28 +90,28 @@ module TransactionsHelper
   def regime_columns(regime)
     if regime.installations?
       %i[customer_reference
-       permit_reference
-       sroc_category
-       compliance_band
-       period
-       amount]
+         permit_reference
+         sroc_category
+         compliance_band
+         period
+         amount]
     elsif regime.water_quality?
       %i[customer_reference
-       consent_reference
-       version
-       discharge
-       sroc_category
-       variation
-       temporary_cessation
-       period
-       amount]
+         consent_reference
+         version
+         discharge
+         sroc_category
+         variation
+         temporary_cessation
+         period
+         amount]
     elsif regime.waste?
       %i[customer_reference
-       permit_reference
-       sroc_category
-       compliance_band
-       period
-       amount]
+         permit_reference
+         sroc_category
+         compliance_band
+         period
+         amount]
     else
       raise "Unknown regime #{p regime}"
     end
@@ -131,7 +131,7 @@ module TransactionsHelper
 
   def sortable?(col)
     %i[customer_reference permit_reference sroc_category compliance_band
-     consent_reference variation].include? col
+       consent_reference variation].include? col
   end
 
   def selectable?(col)
