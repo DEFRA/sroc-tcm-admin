@@ -25,8 +25,7 @@ class PermitStorageService
   end
 
   def active_list_for_selection(financial_year)
-    all_for_financial_year(financial_year).active.
-      order("string_to_array(code, '.')::int[]")
+    all_for_financial_year(financial_year).active.order("string_to_array(code, '.')::int[]")
   end
 
   def code_for_financial_year(code, financial_year)

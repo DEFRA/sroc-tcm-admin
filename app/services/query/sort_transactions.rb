@@ -53,8 +53,7 @@ module Query
       when :generated_filename
         q.order(generated_filename: dir, id: dir)
       when :generated_file_date
-        q.includes(:transaction_file).
-          order("transaction_files.created_at #{dir}, tcm_transaction_reference #{dir}")
+        q.includes(:transaction_file).order("transaction_files.created_at #{dir}, tcm_transaction_reference #{dir}")
       when :amount
         q.order(tcm_charge: dir, id: dir)
       when :credit_debit
@@ -64,9 +63,9 @@ module Query
       when :temporary_cessation
         q.order(temporary_cessation: dir, reference_1: dir)
       else
-        q.joins(:transaction_header).
-          merge(TransactionHeader.order(region: dir, file_sequence_number: dir)).
-          order(transaction_reference: dir, id: dir)
+        q.joins(:transaction_header)
+         .merge(TransactionHeader.order(region: dir, file_sequence_number: dir))
+         .order(transaction_reference: dir, id: dir)
       end
     end
   end

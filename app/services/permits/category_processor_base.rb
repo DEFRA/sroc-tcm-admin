@@ -14,8 +14,7 @@ module Permits
     end
 
     def fetch_unique_consents
-      header.transaction_details.unbilled.distinct.order(reference_1: :asc).
-        pluck(:reference_1)
+      header.transaction_details.unbilled.distinct.order(reference_1: :asc).pluck(:reference_1)
     end
 
     def set_category(transaction, matched_transaction, confidence_level,

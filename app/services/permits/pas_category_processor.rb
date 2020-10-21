@@ -72,14 +72,20 @@ module Permits
     ### Supplementary Billing ===============================
     #
     def handle_supplementary_billing(permit_args)
-      debits = header.transaction_details.invoices.where(permit_args).
-               group(:reference_3, :customer_reference, :period_end).count
+      debits = header.transaction_details
+                     .invoices
+                     .where(permit_args)
+                     .group(:reference_3, :customer_reference, :period_end)
+                     .count
       debits.each do |args, count|
         handle_supplementary_debits(group_to_args(args), count)
       end
 
-      credits = header.transaction_details.credits.where(permit_args).
-                group(:reference_3, :customer_reference, :period_end).count
+      credits = header.transaction_details
+                      .credits
+                      .where(permit_args)
+                      .group(:reference_3, :customer_reference, :period_end)
+                      .count
 
       credits.each do |args, count|
         handle_supplementary_credits(group_to_args(args), count)
@@ -245,8 +251,7 @@ module Permits
     end
 
     def find_historic_debits(args)
-      regime.transaction_details.historic.invoices.where(args).
-        order(period_start: :desc)
+      regime.transaction_details.historic.invoices.where(args).order(period_start: :desc)
     end
 
     def find_historic_transactions(args)

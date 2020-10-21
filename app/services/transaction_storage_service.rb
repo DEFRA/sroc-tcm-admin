@@ -72,19 +72,19 @@ class TransactionStorageService
   def transactions_related_to(transaction)
     q = regime.transaction_details.unbilled.where.not(id: transaction.id)
     q = if regime.installations?
-          q.where.not(reference_3: nil).
-            where.not(reference_3: "NA").
-            where(reference_3: transaction.reference_3).
-            or(q.where.not(reference_1: "NA").
-               where.not(reference_1: nil).
-               where(reference_1: transaction.reference_1)).
-            or(q.where.not(reference_2: "NA").
-               where.not(reference_2: nil).
-               where(reference_2: transaction.reference_2))
+          q.where.not(reference_3: nil)
+           .where.not(reference_3: "NA")
+           .where(reference_3: transaction.reference_3)
+           .or(q.where.not(reference_1: "NA")
+           .where.not(reference_1: nil)
+           .where(reference_1: transaction.reference_1))
+           .or(q.where.not(reference_2: "NA")
+           .where.not(reference_2: nil)
+           .where(reference_2: transaction.reference_2))
         else
-          q.where.not(reference_1: nil).
-            where.not(reference_1: "NA").
-            where(reference_1: transaction.reference_1)
+          q.where.not(reference_1: nil)
+           .where.not(reference_1: "NA")
+           .where(reference_1: transaction.reference_1)
         end
     q.order(:reference_1)
   end
@@ -106,8 +106,7 @@ class TransactionStorageService
   end
 
   def financial_years_for(status)
-    regime.transaction_details.where(status: status).
-      distinct.order(:tcm_financial_year).pluck(:tcm_financial_year)
+    regime.transaction_details.where(status: status).distinct.order(:tcm_financial_year).pluck(:tcm_financial_year)
   end
 
   def first_region
@@ -169,8 +168,7 @@ class TransactionStorageService
     when :generated_filename
       query.order(generated_filename: dir, id: dir)
     when :generated_file_date
-      query.includes(:transaction_file).
-        order("transaction_files.created_at #{dir}, tcm_transaction_reference #{dir}")
+      query.includes(:transaction_file).order("transaction_files.created_at #{dir}, tcm_transaction_reference #{dir}")
     when :amount
       query.order(tcm_charge: dir, id: dir)
     when :excluded_reason
@@ -178,9 +176,9 @@ class TransactionStorageService
     when :temporary_cessation
       query.order(temporary_cessation: dir, reference_1: dir)
     else
-      query.joins(:transaction_header).
-        merge(TransactionHeader.order(region: dir, file_sequence_number: dir)).
-        order(transaction_reference: dir, id: dir)
+      query.joins(:transaction_header)
+           .merge(TransactionHeader.order(region: dir, file_sequence_number: dir))
+           .order(transaction_reference: dir, id: dir)
     end
   end
 

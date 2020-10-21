@@ -36,8 +36,7 @@ module Query
       when :generated_at
         query.order(generated_at: dir, id: dir)
       when :generated_by
-        query.joins(:user).merge(User.order(first_name: dir, last_name: dir)).
-          order(:id)
+        query.joins(:user).merge(User.order(first_name: dir, last_name: dir)).order(:id)
       when :credit_count
         query.order(credit_count: dir, id: dir)
       when :credit_total

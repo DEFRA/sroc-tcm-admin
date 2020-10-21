@@ -19,8 +19,7 @@ module Permits
     def only_invoices_in_file?(consent_args)
       like_clause = make_permit_discharge_matcher(consent_args[:reference_1])
       at = TransactionDetail.arel_table
-      header.transaction_details.unbilled.
-        where(at[:reference_1].matches(like_clause)).credits.count.zero?
+      header.transaction_details.unbilled.where(at[:reference_1].matches(like_clause)).credits.count.zero?
     end
 
     def handle_annual_billing(consent_args)
@@ -76,8 +75,7 @@ module Permits
       history_args = { reference_1: transaction.reference_1,
                        period_start: transaction.period_start,
                        period_end: transaction.period_end }
-      invoice = find_historic_invoices(history_args).
-                order(tcm_transaction_reference: :desc).first
+      invoice = find_historic_invoices(history_args).order(tcm_transaction_reference: :desc).first
 
       if invoice
         set_category(transaction, invoice, :green, "Supplementary credit", admin_lock: true)
@@ -87,8 +85,7 @@ module Permits
     end
 
     def find_latest_historic_invoice(consent_args)
-      find_historic_invoices(consent_args).
-        order(period_end: :desc, tcm_transaction_reference: :desc).first
+      find_historic_invoices(consent_args).order(period_end: :desc, tcm_transaction_reference: :desc).first
     end
 
     def find_historic_invoices(consent_args)
@@ -98,18 +95,25 @@ module Permits
     def find_latest_historic_invoice_version(transaction)
       like_clause = make_permit_discharge_matcher(transaction.reference_1)
       at = TransactionDetail.arel_table
-      regime.transaction_details.historic.invoices.
-        where(at[:reference_1].matches(like_clause)).
-        where(period_end: transaction.period_end).
-        order(reference_2: :desc, tcm_transaction_reference: :desc).first
+      regime
+        .transaction_details
+        .historic
+        .invoices
+        .where(at[:reference_1].matches(like_clause))
+        .where(period_end: transaction.period_end)
+        .order(reference_2: :desc, tcm_transaction_reference: :desc).first
     end
 
     def find_latest_historic_invoice_version_for_annual(transaction)
       like_clause = make_permit_discharge_matcher(transaction.reference_1)
       at = TransactionDetail.arel_table
-      regime.transaction_details.historic.invoices.
-        where(at[:reference_1].matches(like_clause)).
-        order(period_end: :desc, reference_2: :desc, tcm_transaction_reference: :desc).first
+      regime
+        .transaction_details
+        .historic
+        .invoices
+        .where(at[:reference_1].matches(like_clause))
+        .order(period_end: :desc, reference_2: :desc, tcm_transaction_reference: :desc)
+        .first
     end
 
     def consent_to_args(consent)

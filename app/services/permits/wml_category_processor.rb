@@ -86,20 +86,19 @@ module Permits
 
     def find_unique_permits(permit)
       # use charge code (reference_3) to further differentiate
-      header.transaction_details.unbilled.where(reference_1: permit).
-        group(:reference_1, :reference_3).count
+      header.transaction_details.unbilled.where(reference_1: permit).group(:reference_1, :reference_3).count
     end
 
     def find_latest_historic_transaction(where_args)
-      regime.transaction_details.historic.invoices.where(where_args).
-        order(transaction_reference: :desc).first
+      regime.transaction_details.historic.invoices.where(where_args).order(transaction_reference: :desc).first
     end
 
     def find_historic_invoices(transaction)
-      regime.transaction_details.historic.invoices.
-        where(reference_1: transaction.reference_1).
-        where(period_end: transaction.period_end).
-        order(period_start: :desc)
+      regime.transaction_details
+            .historic.invoices
+            .where(reference_1: transaction.reference_1)
+            .where(period_end: transaction.period_end)
+            .order(period_start: :desc)
     end
 
     def multiple_activities(transaction, stage)

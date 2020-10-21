@@ -49,14 +49,14 @@ class ExportTransactionData < ServiceObject
   private
 
   def transactions
-    regime.
-      transaction_details.
-      includes(:suggested_category,
-               :transaction_header,
-               :transaction_file).
-      order(:region).
-      order(:transaction_date).
-      order(:id)
+    regime
+      .transaction_details
+      .includes(:suggested_category,
+                :transaction_header,
+                :transaction_file)
+      .order(:region)
+      .order(:transaction_date)
+      .order(:id)
   end
 
   def batch_transactions(batch_size = 1000)

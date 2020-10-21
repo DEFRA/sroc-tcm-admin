@@ -15,11 +15,7 @@ module Query
       q = User.all
       unless @regime.blank?
         r = Regime.find_by(slug: @regime)
-        if r
-          q = q.joins(:regime_users).
-              merge(RegimeUser.enabled).
-              merge(RegimeUser.where(regime_id: r.id))
-        end
+        q = q.joins(:regime_users).merge(RegimeUser.enabled).merge(RegimeUser.where(regime_id: r.id)) if r
       end
 
       q = q.where(role: @role) unless @role.blank?

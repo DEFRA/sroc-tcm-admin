@@ -10,8 +10,7 @@ module Query
     end
 
     def call
-      @regime.permit_categories.by_financial_year(@financial_year).active.
-        exists?(code: @category)
+      @regime.permit_categories.by_financial_year(@financial_year).active.exists?(code: @category)
     end
   end
 end

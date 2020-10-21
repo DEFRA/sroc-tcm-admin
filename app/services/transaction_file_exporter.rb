@@ -126,8 +126,7 @@ class TransactionFileExporter
 
   def present(transaction_file)
     file_type = transaction_file.retrospective? ? "Retrospective" : "Transaction"
-    "#{regime.to_param.titlecase}#{file_type}FilePresenter".constantize.
-      new(transaction_file)
+    "#{regime.to_param.titlecase}#{file_type}FilePresenter".constantize.new(transaction_file)
   end
 
   def assign_category_descriptions(transaction_file)
@@ -169,15 +168,15 @@ class TransactionFileExporter
       positives.each do |refs|
         ref, cust = refs
         trans_ref = next_wml_transaction_reference
-        q.where(reference_1: ref).where(customer_reference: cust).where(atab[:tcm_charge].gteq(0)).
-          update_all(tcm_transaction_type: "I",
+        q.where(reference_1: ref).where(customer_reference: cust).where(atab[:tcm_charge].gteq(0))
+         .update_all(tcm_transaction_type: "I",
                      tcm_transaction_reference: trans_ref)
       end
       negatives.each do |refs|
         ref, cust = refs
         trans_ref = next_wml_transaction_reference
-        q.where(reference_1: ref).where(customer_reference: cust).where(atab[:tcm_charge].lt(0)).
-          update_all(tcm_transaction_type: "C",
+        q.where(reference_1: ref).where(customer_reference: cust).where(atab[:tcm_charge].lt(0))
+         .update_all(tcm_transaction_type: "C",
                      tcm_transaction_reference: trans_ref)
       end
     end
@@ -215,15 +214,15 @@ class TransactionFileExporter
       positives.each do |refs|
         ref, cust = refs
         trans_ref = next_pas_transaction_reference(retro)
-        q.where(reference_1: ref).where(customer_reference: cust).where(atab[charge_attr].gteq(0)).
-          update_all(tcm_transaction_type: "I",
+        q.where(reference_1: ref).where(customer_reference: cust).where(atab[charge_attr].gteq(0))
+         .update_all(tcm_transaction_type: "I",
                      tcm_transaction_reference: trans_ref)
       end
       negatives.each do |refs|
         ref, cust = refs
         trans_ref = next_pas_transaction_reference(retro)
-        q.where(reference_1: ref).where(customer_reference: cust).where(atab[charge_attr].lt(0)).
-          update_all(tcm_transaction_type: "C",
+        q.where(reference_1: ref).where(customer_reference: cust).where(atab[charge_attr].lt(0))
+         .update_all(tcm_transaction_type: "C",
                      tcm_transaction_reference: trans_ref)
       end
     end
@@ -250,19 +249,17 @@ class TransactionFileExporter
     Query::TransactionFileYears.call(transaction_file: transaction_file).each do |fy|
       q = transaction_file.transaction_details.where(tcm_financial_year: fy)
       cust_charges = if retro
-                       q.group(:customer_reference, :line_context_code).
-                         sum(:line_amount)
+                       q.group(:customer_reference, :line_context_code).sum(:line_amount)
                      else
-                       q.group(:customer_reference, :line_context_code).
-                         sum(:tcm_charge)
+                       q.group(:customer_reference, :line_context_code).sum(:tcm_charge)
                      end
 
       cust_charges.each do |k, v|
         trans_type = v.negative? ? "C" : "I"
         trans_ref = next_cfd_transaction_reference(retro)
 
-        q.where(customer_reference: k[0], line_context_code: k[1]).
-          update_all(tcm_transaction_type: trans_type,
+        q.where(customer_reference: k[0], line_context_code: k[1])
+         .update_all(tcm_transaction_type: trans_type,
                      tcm_transaction_reference: trans_ref)
       end
     end
