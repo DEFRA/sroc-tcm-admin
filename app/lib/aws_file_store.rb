@@ -23,9 +23,9 @@ class AwsFileStore
   def fetch_file(from_path, to_path)
     s3.get_object(bucket: s3_bucket_name, key: from_path, response_target: to_path)
   rescue Aws::S3::Errors::NoSuchKey
-    raise Exceptions::FileNotFoundError.new("AWS S3 storage file not found: #{from_path}")
+    raise Exceptions::FileNotFoundError, "AWS S3 storage file not found: #{from_path}"
   rescue Aws::S3::Errors::AccessDenied
-    raise Exceptions::PermissionError.new("No permission to access file: #{from_path}")
+    raise Exceptions::PermissionError, "No permission to access file: #{from_path}"
   end
 
   # stream file from disk
@@ -34,18 +34,18 @@ class AwsFileStore
       s3.put_object(bucket: s3_bucket_name, key: to_path, body: file)
     end
   rescue Errno::ENOENT
-    raise Exceptions::FileNotFoundError.new("Cannot open file: #{from_path}")
+    raise Exceptions::FileNotFoundError, "Cannot open file: #{from_path}"
   rescue Aws::S3::Errors::NoSuchKey
-    raise Exceptions::FileNotFoundError.new("AWS S3 storage file not found: #{to_path}")
+    raise Exceptions::FileNotFoundError, "AWS S3 storage file not found: #{to_path}"
   rescue Aws::S3::Errors::AccessDenied
-    raise Exceptions::PermissionError.new("No permission to access file: #{to_path}")
+    raise Exceptions::PermissionError, "No permission to access file: #{to_path}"
   end
 
   def delete_file(file_path)
     # NOTE: this doesn't raise a S3 error if the key is not found
     s3.delete_object(bucket: s3_bucket_name, key: file_path)
   rescue Aws::S3::Errors::AccessDenied
-    raise Exceptions::PermissionError.new("No permission to access file: #{file_path}")
+    raise Exceptions::PermissionError, "No permission to access file: #{file_path}"
   end
 
   # extras that can be useful
@@ -54,7 +54,7 @@ class AwsFileStore
   def copy_file(from_path, to_path)
     s3.copy_object(bucket: s3_bucket_name, copy_source: File.join(s3_bucket_name, from_path), key: to_path)
   rescue Aws::S3::Errors::AccessDenied
-    raise Exceptions::PermissionError.new("Unable to copy file: #{from_path} to #{to_path}")
+    raise Exceptions::PermissionError, "Unable to copy file: #{from_path} to #{to_path}"
   end
 
   private
