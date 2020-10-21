@@ -12,8 +12,7 @@ class TcmUtils
     Regime.all.each do |regime|
       attr = regime.waste_or_installations? ? :header_attr_3 : :line_attr_1
       regime.transaction_details.distinct.pluck(attr).each do |site|
-        regime.transaction_details.where(attr => site).
-          update_all(attr => generate_site_name)
+        regime.transaction_details.where(attr => site).update_all(attr => generate_site_name)
       end
     end
   end

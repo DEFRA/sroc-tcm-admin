@@ -60,16 +60,15 @@ module TransactionGroupFilters
   end
 
   def pas_group_filter(base_query)
-    incomplete_records = base_query.unapproved.distinct.
-                         pluck(:reference_1, :reference_2, :reference_3).transpose
+    incomplete_records = base_query.unapproved.distinct.pluck(:reference_1, :reference_2, :reference_3).transpose
 
     return base_query.approved if incomplete_records.empty? ||
                                   incomplete_records.flatten.reject(&:nil?).empty?
 
-    base_query.approved.where.
-      not(reference_1: incomplete_records[0].reject(&:blank?)).
-      where.not(reference_2: incomplete_records[1].reject(&:blank?)).
-      where.not(reference_3: incomplete_records[2].reject(&:blank?))
+    base_query.approved
+              .where.not(reference_1: incomplete_records[0].reject(&:blank?))
+              .where.not(reference_2: incomplete_records[1].reject(&:blank?))
+              .where.not(reference_3: incomplete_records[2].reject(&:blank?))
   end
 
   def pas_sorter(base_query)
