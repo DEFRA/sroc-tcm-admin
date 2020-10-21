@@ -17,7 +17,7 @@ class AnnualBillingDataFile < ApplicationRecord
   end
 
   def state
-    machine = Bstard.define do |fsm|
+    Bstard.define do |fsm|
       fsm.initial status
       fsm.event :upload, new: :uploaded
       fsm.event :process, uploaded: :processing

@@ -70,7 +70,6 @@ class TransactionStorageService
   end
 
   def transactions_related_to(transaction)
-    at = TransactionDetail.arel_table
     q = regime.transaction_details.unbilled.where.not(id: transaction.id)
     q = if regime.installations?
       q.where.not(reference_3: nil).

@@ -118,7 +118,6 @@ class PermitCategoriesController < AdminController
     # to update
     result = true
     cat = @permit_category
-    status = cat.status
 
     case params[:commit]
     when "Remove Category"

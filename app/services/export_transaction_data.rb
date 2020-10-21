@@ -16,7 +16,6 @@ class ExportTransactionData < ServiceObject
 
   def call
     # export all transactions to csv for the given regime
-    p = presenter
     # batch results
     edf = regime.export_data_file
     edf.generating!
@@ -101,7 +100,9 @@ class ExportTransactionData < ServiceObject
     # run gzip on the console
     orig_file = regime_filename
     zip_file = "#{orig_file}.gz"
-    r = `gzip -fq #{orig_file}`
+
+    # Force compression and suppress all warnings whilst you do it
+    `gzip -fq #{orig_file}`
     @filename = zip_file
   rescue StandardError => e
     TcmLogger.notify(e)

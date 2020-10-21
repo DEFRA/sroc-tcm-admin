@@ -10,15 +10,12 @@ module RegimeScope
   end
 
   def str_to_class(name)
-    
-      name.constantize
-    rescue NameError => e
-      nil
-    
+    name.constantize
+  rescue NameError
+    nil
   end
 
   def set_regime
-    last_id = cookies[:regime_id]
     r_id = params.fetch(:regime_id, nil)
 
     if r_id

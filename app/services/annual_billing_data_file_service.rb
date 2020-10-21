@@ -62,7 +62,7 @@ class AnnualBillingDataFileService
                                                parameterize.underscore.to_sym
 },
                     field_size_limit: 32)
-      row = csv.shift
+      csv.shift
       headers = csv.headers
       valid = true
       mandatory_headers.each { |h| valid = false unless headers.include? h }
@@ -139,7 +139,7 @@ class AnnualBillingDataFileService
                 raise ArgumentError if i.negative? || i > 100
 
                 val += "%" unless val.include?("%")
-              rescue ArgumentError => e
+              rescue ArgumentError
                 failed = true
               end
             when :temporary_cessation

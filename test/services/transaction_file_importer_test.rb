@@ -66,7 +66,6 @@ class TransactionFileImporterTest < ActiveSupport::TestCase
     File.foreach(file_fixture("cfd_line_descriptions.txt")).with_index do |line, idx|
       line.chomp!
       fields = @importer.extract_consent_fields(line)
-      str = ""
       str = if line.start_with? "Consent"
         "Consent No - #{fields[:reference_1]}"
       else

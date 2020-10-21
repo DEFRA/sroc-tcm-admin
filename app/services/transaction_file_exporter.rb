@@ -230,7 +230,6 @@ class TransactionFileExporter
   end
 
   def next_pas_transaction_reference(retrospective)
-    result = nil
     result = if retrospective
       NextPasRetrospectiveReference.call(regime: regime, region: region)
     else
@@ -270,7 +269,6 @@ class TransactionFileExporter
   end
 
   def next_cfd_transaction_reference(retrospective)
-    result = nil
     result = if retrospective
       NextCfdRetrospectiveReference.call(regime: regime, region: region)
     else

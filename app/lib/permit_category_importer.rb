@@ -11,7 +11,6 @@ class PermitCategoryImporter
     CSV.foreach(filename, headers: false) do |row|
       code = row[0]
       desc = row[1]
-      order = n
       if destroy_BOM
         code = TcmUtils.strip_bom(code)
         destroy_BOM = false

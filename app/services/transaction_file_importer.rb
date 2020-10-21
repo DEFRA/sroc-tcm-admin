@@ -84,7 +84,6 @@ class TransactionFileImporter
       region: header.region
     }
 
-    period = nil
     regime = header.regime
     if regime.installations?
       data.merge!({
@@ -198,7 +197,7 @@ class TransactionFileImporter
 
   def sanitize_date(d)
     Date.parse(d)
-  rescue ArguementError => e
+  rescue ArguementError
     Rails.logger.warn("Invalid date in transaction file: #{d}")
     nil
   end

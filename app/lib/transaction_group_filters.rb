@@ -93,10 +93,8 @@ module TransactionGroupFilters
   end
 
   def str_to_class(name)
-
-      name.constantize
-    rescue NameError => e
-      nil
-
+    name.constantize
+  rescue NameError
+    nil
   end
 end

@@ -21,7 +21,6 @@ module ViewModels
           # changing a value
           old_err = has_charge_calculation_error?(old_value)
           new_err = has_charge_calculation_error?(new_value)
-          template = "changed_html"
 
           if old_err && new_err
             I18n.t("error_html",

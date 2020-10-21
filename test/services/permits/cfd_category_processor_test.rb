@@ -259,7 +259,7 @@ class CfdCategoryProcessorTest < ActiveSupport::TestCase
   # Scanario 10 - Supplementary bill, new discharge added, last bill was annual
   def test_supplemental_suggested_invoice_category_blank_for_new_discharge
     fixup_supplemental(@header)
-    history = generate_historic_cfd
+    generate_historic_cfd
     @processor.suggest_categories
     t = @header.transaction_details.find_by(reference_1: "AAAB/2/2")
     assert_nil t.category
@@ -299,7 +299,7 @@ class CfdCategoryProcessorTest < ActiveSupport::TestCase
 
   def test_suggest_categories_generates_audit_records
     fixup_annual(@header)
-    history = generate_historic_cfd
+    generate_historic_cfd
     audit_count_before = AuditLog.count
     @processor.suggest_categories
     audit_count_after = AuditLog.count

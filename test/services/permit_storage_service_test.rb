@@ -151,14 +151,14 @@ class PermitStorageServiceTest < ActiveSupport::TestCase
     pc = permit_categories(:cfd_a)
     assert_nil pc.valid_to
 
-    pc2 = @service.add_permit_category_version(pc.code, "A new category version", "1920")
+    @service.add_permit_category_version(pc.code, "A new category version", "1920")
     assert_equal "1920", pc.reload.valid_to
   end
 
   def test_add_permit_category_version_updates_valid_to_when_next_version_exists
     pc = permit_categories(:cfd_a)
     assert_nil pc.valid_to
-    pc2 = @service.add_permit_category_version(pc.code, "A later version", "2223")
+    @service.add_permit_category_version(pc.code, "A later version", "2223")
     assert_equal "2223", pc.reload.valid_to
 
     pc3 = @service.add_permit_category_version(pc.code, "A between version", "1920")
