@@ -129,7 +129,7 @@ class TransactionStorageService
 
   def order_query(q, col, dir)
     dir = dir == "desc" ? :desc : :asc
-    txt_dir = (dir == :asc) ? "asc" : "desc"
+    txt_dir = dir == :asc ? "asc" : "desc"
 
     # lookup col value
     case col.to_sym
