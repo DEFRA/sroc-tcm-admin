@@ -13,7 +13,8 @@ class TransactionFileImporter
       CSV.foreach(path) do |row|
         record_type = row[Common::RecordType]
 
-        if record_type == "H"
+        case record_type
+        when "H"
           raise Exceptions::TransactionFileError, "Header record already exists?!" unless header.nil?
 
           file_type = row[Header::FileType]
@@ -36,7 +37,7 @@ class TransactionFileImporter
             generated_at: generated_at,
             filename: original_filename
           )
-        elsif record_type == "D"
+        when "D"
           # detail record
           raise Exceptions::TransactionFileError, "Detail record but no header record" if header.nil?
 
@@ -44,7 +45,7 @@ class TransactionFileImporter
           raise Exceptions::TransactionFileError, "Detail record has no reference_1" if detail[:reference_1].nil?
 
           header.transaction_details.create(detail)
-        elsif record_type == "T"
+        when "T"
           # trailer record
           raise Exceptions::TransactionFileError, "Trailer record but no header record" if header.nil?
 

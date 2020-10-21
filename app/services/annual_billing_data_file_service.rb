@@ -123,14 +123,15 @@ class AnnualBillingDataFileService
             upload.log_error(counter, "No value for mandatory field #{present_column(col[:header])}")
             failed = true
           elsif val.present?
-            if col[:header] == :permit_category
+            case col[:header]
+            when :permit_category
               # validate against categories first
               # this needs to be against the new way of working now
               # if !regime.permit_categories.where(code: val).exists
               failed = !Query::PermitCategoryExists.call(regime: @regime,
                                                          category: val,
                                                          financial_year: transaction.tcm_financial_year)
-            elsif col[:header] == :variation
+            when :variation
               # check it's a positive number between 0 - 100
               # will always be an integer as they round down any fractional values
               begin
@@ -141,7 +142,7 @@ class AnnualBillingDataFileService
               rescue ArgumentError => e
                 failed = true
               end
-            elsif col[:header] == :temporary_cessation
+            when :temporary_cessation
               # check for Y or N
               v = val.downcase
               if v != "y" && v != "n"

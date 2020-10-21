@@ -120,7 +120,8 @@ class PermitCategoriesController < AdminController
     cat = @permit_category
     status = cat.status
 
-    if params[:commit] == "Remove Category"
+    case params[:commit]
+    when "Remove Category"
       if can_remove_permit_category?(cat.code, @financial_year)
         @permit_category = permit_store.
                            update_or_create_new_version(
@@ -130,7 +131,7 @@ class PermitCategoriesController < AdminController
       else
         @permit_category.errors.add(:base, "^This code is in use and cannot be removed")
       end
-    elsif params[:commit] == "Reinstate Category"
+    when "Reinstate Category"
       @permit_category = permit_store.update_or_create_new_version(
         cat.code, permit_category_params[:description],
         @financial_year,

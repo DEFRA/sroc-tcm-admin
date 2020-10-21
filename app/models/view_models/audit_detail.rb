@@ -80,17 +80,18 @@ module ViewModels
     end
 
     def describe_value(value)
-      if @attribute == "charge_calculation"
+      case @attribute
+      when "charge_calculation"
         extract_calculation(value)
-      elsif @attribute == "tcm_charge"
+      when "tcm_charge"
         ActiveSupport::NumberHelper.number_to_currency(
           format("%<value>.2f", value: (value / 100.0)), unit: "£"
                 )
-      elsif @attribute == "approved_for_billing"
+      when "approved_for_billing"
         value ? "approved" : "unapproved"
-      elsif @attribute == "excluded"
+      when "excluded"
         value ? "excluded" : "included"
-      elsif @attribute == "temporary_cessation"
+      when "temporary_cessation"
         value ? "Yes" : "No"
       else
         value
