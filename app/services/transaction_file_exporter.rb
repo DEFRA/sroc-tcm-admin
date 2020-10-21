@@ -153,12 +153,12 @@ class TransactionFileExporter
     # should also be subject to a common invoice number in that file.
     # For SRoC transactions, this number should take the format RNNNNNNNNT, where:
     #
-    # o ‘R’ is the region indicator from header field 4
-    # o ‘NNNNNNNN’ is an 8-digit sequential number
-    # o ‘T’ is a fixed digit
+    # o 'R' is the region indicator from header field 4
+    # o 'NNNNNNNN' is an 8-digit sequential number
+    # o 'T' is a fixed digit
     #
     # E.g. the first invoice number for region A would be A00000001T, and so on.
-    # The ‘T’ suffix should ensure that there will never be any duplication with
+    # The 'T' suffix should ensure that there will never be any duplication with
     # invoice numbers previously generated in WaBS
     atab = TransactionDetail.arel_table
     Query::TransactionFileYears.call(transaction_file: transaction_file).each do |fy|
@@ -198,11 +198,11 @@ class TransactionFileExporter
     # should also be subject to a common invoice number in that file.
     # For SRoC transactions, this number should take the format PASNNNNNNNNRT,
     # where:
-    # - ‘NNNNNNNN’ is an 8-digit sequential number
-    # - ‘R’ is the region indicator from header field 4
-    # - ‘T’ is a fixed digit
+    # - 'NNNNNNNN' is an 8-digit sequential number
+    # - 'R' is the region indicator from header field 4
+    # - 'T' is a fixed digit
     # E.g. the first invoice number for region A would be PAS00000001AT, and so on.
-    # The ‘T’ suffix should ensure that there will never be any duplication with
+    # The 'T' suffix should ensure that there will never be any duplication with
     # invoice numbers previously generated in PAS
     retro = transaction_file.retrospective?
     charge_attr = retro ? :line_amount : :tcm_charge
