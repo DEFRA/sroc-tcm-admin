@@ -3,8 +3,6 @@
 class UpdateTransaction < ServiceObject
   include RegimePresenter
 
-  attr_reader :transaction
-
   def initialize(params = {})
     @params = params
   end

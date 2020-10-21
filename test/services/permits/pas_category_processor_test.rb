@@ -383,7 +383,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
   end
 
   #     Multiple matches (red)
-  def test_annual_single_stage_1_multiple_matches_are_red
+  def test_annual_single_stage_2_multiple_matches_are_red
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A", category: "2.4.5",
         line_amount: 1234, period_start: "1-JUN-2019" },

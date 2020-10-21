@@ -6,7 +6,7 @@ module ViewModels
     include RegimeScope
 
     attr_reader :regime, :user, :permit_all_regions
-    attr_accessor :region, :status, :search, :sort, :sort_direction,
+    attr_accessor :status, :search, :sort, :sort_direction,
                   :page, :per_page
 
     def initialize(params = {})

@@ -4,16 +4,8 @@ class TransactionSummary
   include ActionView::Helpers::NumberHelper
   include ActiveModel::AttributeAssignment
 
-  attr_accessor(
-    :title,
-    :credit_count,
-    :credit_total,
-    :invoice_count,
-    :invoice_total,
-    :net_total,
-    :excluded_count,
-    :path
-  )
+  attr_writer :credit_total, :invoice_total, :net_total
+  attr_accessor :title, :credit_count, :invoice_count, :excluded_count, :path
 
   def initialize(regime)
     @regime = regime
