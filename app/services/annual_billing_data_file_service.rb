@@ -52,8 +52,7 @@ class AnnualBillingDataFileService
   end
 
   def valid_file?(file)
-      # check file looks reasonable
-
+    # check file looks reasonable
     csv = CSV.new(file,
                   headers: true,
                   return_headers: true,
@@ -67,11 +66,11 @@ class AnnualBillingDataFileService
     valid = true
     mandatory_headers.each { |h| valid = false unless headers.include? h }
     valid
-rescue CSV::MalformedCSVError => e
-  Rails.logger.warn(e.message)
+  rescue CSV::MalformedCSVError => e
+    Rails.logger.warn(e.message)
     false
-rescue StandardError => e
-  Rails.logger.error(e.message)
+  rescue StandardError => e
+    Rails.logger.error(e.message)
     false
   end
 
