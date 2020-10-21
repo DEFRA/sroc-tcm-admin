@@ -117,7 +117,7 @@ module Permits
     end
 
     def make_permit_discharge_matcher(consent_reference)
-      m = /\A(.*)\/(\d+)\/(\d+)\z/.match(consent_reference)
+      m = %r{\A(.*)/(\d+)/(\d+)\z}.match(consent_reference)
       # make 'like' string from permit and discharge parts of consent reference
       raise "Badly formatted consent reference: '#{consent_reference}'" if m.nil?
 

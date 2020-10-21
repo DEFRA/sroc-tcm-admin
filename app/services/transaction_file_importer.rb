@@ -159,7 +159,7 @@ class TransactionFileImporter
       # - or -
       # Consent No - TS/18/25124/O   R/11/1
 
-      m = /\A(?>\w+\s+\w+\s+-\s+)((?:.*)\/(\d+)\/(\d+))$\z/.match(consent_data)
+      m = %r{\A(?>\w+\s+\w+\s+-\s+)((?:.*)/(\d+)/(\d+))$\z}.match(consent_data)
       if m
         parts = {
           # consent

@@ -32,7 +32,7 @@ module Query
     private
 
     def consent_reference
-      m = /\A(.*)\/(?:\d+)\/(?:\d+)\z/.match(@transaction.reference_1)
+      m = %r{\A(.*)/(?:\d+)/(?:\d+)\z}.match(@transaction.reference_1)
       if m.nil?
         "invalid reference"
       else
