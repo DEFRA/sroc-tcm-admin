@@ -116,46 +116,45 @@ class AnnualBillingDataFileService
       else
         # we have a transaction
         update_columns.each do |col|
-          unless failed
-            val = row.fetch(col[:header], nil)
+          next if failed
+          val = row.fetch(col[:header], nil)
 
-            if val.blank? && col[:mandatory]
-              upload.log_error(counter, "No value for mandatory field #{present_column(col[:header])}")
-              failed = true
-            elsif val.present?
-              if col[:header] == :permit_category
-                # validate against categories first
-                # this needs to be against the new way of working now
-                # if !regime.permit_categories.where(code: val).exists
-                failed = !Query::PermitCategoryExists.call(regime: @regime,
-                                                           category: val,
-                                                           financial_year: transaction.tcm_financial_year)
-              elsif col[:header] == :variation
-                # check it's a positive number between 0 - 100
-                # will always be an integer as they round down any fractional values
-                begin
-                  i = Integer(val.to_s, 10)
-                  raise ArgumentError if i.negative? || i > 100
+          if val.blank? && col[:mandatory]
+            upload.log_error(counter, "No value for mandatory field #{present_column(col[:header])}")
+            failed = true
+          elsif val.present?
+            if col[:header] == :permit_category
+              # validate against categories first
+              # this needs to be against the new way of working now
+              # if !regime.permit_categories.where(code: val).exists
+              failed = !Query::PermitCategoryExists.call(regime: @regime,
+                                                         category: val,
+                                                         financial_year: transaction.tcm_financial_year)
+            elsif col[:header] == :variation
+              # check it's a positive number between 0 - 100
+              # will always be an integer as they round down any fractional values
+              begin
+                i = Integer(val.to_s, 10)
+                raise ArgumentError if i.negative? || i > 100
 
-                  val += "%" unless val.include?("%")
-                rescue ArgumentError => e
-                  failed = true
-                end
-              elsif col[:header] == :temporary_cessation
-                # check for Y or N
-                v = val.downcase
-                if v != "y" && v != "n"
-                  failed = true
-                else
-                  val = (v == "y")
-                end
+                val += "%" unless val.include?("%")
+              rescue ArgumentError => e
+                failed = true
               end
-
-              if failed
-                upload.log_error(counter, "Invalid #{present_column(col[:header])} value: '#{val}'")
+            elsif col[:header] == :temporary_cessation
+              # check for Y or N
+              v = val.downcase
+              if v != "y" && v != "n"
+                failed = true
               else
-                transaction.send("#{col[:column]}=", val)
+                val = (v == "y")
               end
+            end
+
+            if failed
+              upload.log_error(counter, "Invalid #{present_column(col[:header])} value: '#{val}'")
+            else
+              transaction.send("#{col[:column]}=", val)
             end
           end
         end

@@ -82,14 +82,13 @@ class WmlTransactionFilePresenterTest < ActiveSupport::TestCase
     expected_value = "Wigwam"
     tested = false
     @presenter.transaction_details.each_with_index do |td, i|
-      if td.invoice?
-        td.category_description = expected_value
+      next unless td.invoice?
+      td.category_description = expected_value
 
-        p = WmlTransactionDetailPresenter.new(td)
-        row = @presenter.detail_row(p, i)
-        assert_equal expected_value, row[Detail::LineAttr5]
-        tested = true
-      end
+      p = WmlTransactionDetailPresenter.new(td)
+      row = @presenter.detail_row(p, i)
+      assert_equal expected_value, row[Detail::LineAttr5]
+      tested = true
     end
     assert tested, "Did not test an invoice for category_description"
   end
