@@ -44,7 +44,7 @@ class TransactionModeSelectionTest < ActionDispatch::IntegrationTest
      regime_exclusions_path(@regime)].each do |path|
         visit path
         assert page.has_select? "mode", options: @wml_options
-      end
+    end
   end
 
   def test_view_selector_has_retrospective_option_for_installations
@@ -55,7 +55,7 @@ class TransactionModeSelectionTest < ActionDispatch::IntegrationTest
      regime_exclusions_path(@regime)].each do |path|
         visit path
         assert page.has_select? "mode", options: @all_options
-      end
+    end
   end
 
   def test_view_selector_has_retrospective_option_for_water_quality
@@ -66,6 +66,6 @@ class TransactionModeSelectionTest < ActionDispatch::IntegrationTest
      regime_exclusions_path(@regime)].each do |path|
         visit path
         assert page.has_select? "mode", options: @all_options
-      end
+    end
   end
 end

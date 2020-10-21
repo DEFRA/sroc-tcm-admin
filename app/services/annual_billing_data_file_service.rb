@@ -60,7 +60,7 @@ class AnnualBillingDataFileService
                     header_converters: lambda { |h|
                                          TcmUtils.strip_bom(h).
                                                parameterize.underscore.to_sym
-},
+                                       },
                     field_size_limit: 32)
       csv.shift
       headers = csv.headers
@@ -100,7 +100,7 @@ class AnnualBillingDataFileService
                       header_converters: lambda { |h|
                                            TcmUtils.strip_bom(h).
                                                parameterize.underscore.to_sym
-},
+                                         },
                       field_size_limit: 32) do |row|
       counter += 1
       failed = false
