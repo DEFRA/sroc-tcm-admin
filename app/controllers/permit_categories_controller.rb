@@ -73,7 +73,7 @@ class PermitCategoriesController < AdminController
   def new
     set_financial_year
     @permit_category = @regime.permit_categories
-                       .build(valid_from: @financial_year,
+                              .build(valid_from: @financial_year,
             status: "active")
   end
 

@@ -13,12 +13,12 @@ module Query
       q = regime.transaction_details.historic.where.not(id: @transaction.id)
       q = if regime.installations?
         q.where.not(reference_3: nil).
-            where.not(reference_3: "NA").
-            where(reference_3: @transaction.reference_3).
-            or(q.where.not(reference_1: "NA").
+          where.not(reference_3: "NA").
+          where(reference_3: @transaction.reference_3).
+          or(q.where.not(reference_1: "NA").
              where.not(reference_1: nil).
              where(reference_1: @transaction.reference_1)).
-            or(q.where.not(reference_2: "NA").
+          or(q.where.not(reference_2: "NA").
              where.not(reference_2: nil).
              where(reference_2: @transaction.reference_2))
       elsif regime.water_quality?
