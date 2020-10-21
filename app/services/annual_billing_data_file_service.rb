@@ -159,7 +159,7 @@ class AnnualBillingDataFileService
           end
         end
 
-        if !failed
+        unless failed
           if transaction.changed?
             # (re)calculate the charge if the transaction has changed
             transaction.charge_calculation = CalculateCharge.call(transaction: transaction).charge_calculation
