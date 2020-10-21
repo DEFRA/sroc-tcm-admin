@@ -70,12 +70,12 @@ class TransactionsController < ApplicationController
             redirect_to path, notice: "Transaction was successfully updated."
           end
         end
-        format.json {
+        format.json do
           render json: { transaction: presenter.new(@transaction, current_user),
                          message: "Transaction updated"},
                  status: :ok,
                  location: path
-        }
+        end
       else
         format.html do
           if request.xhr?
