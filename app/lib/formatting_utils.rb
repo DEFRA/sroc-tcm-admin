@@ -37,6 +37,6 @@ module FormattingUtils
   def pence_to_currency(val)
     ActiveSupport::NumberHelper.number_to_currency(
       format("%<value>.2f", value: (val / 100.0)), unit: ""
-                    )
+    )
   end
 end

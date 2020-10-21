@@ -85,7 +85,7 @@ module ViewModels
       when "tcm_charge"
         ActiveSupport::NumberHelper.number_to_currency(
           format("%<value>.2f", value: (value / 100.0)), unit: "£"
-                )
+        )
       when "approved_for_billing"
         value ? "approved" : "unapproved"
       when "excluded"
