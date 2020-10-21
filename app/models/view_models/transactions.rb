@@ -93,11 +93,11 @@ module ViewModels
 
     # override me for different views
     def csv_transactions(limit = 15_000)
-      @csv ||= presenter.wrap(transactions.unexcluded.limit(limit), user)
+      @csv_transactions ||= presenter.wrap(transactions.unexcluded.limit(limit), user)
     end
 
     def present_paged_transactions
-      @ppt ||= page_and_present_transactions
+      @present_paged_transactions ||= page_and_present_transactions
     end
 
     # override me if 'all' regions is permitted in the view

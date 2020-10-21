@@ -21,7 +21,7 @@ module ViewModels
     end
 
     def csv_transactions(limit = 15_000)
-      @csv ||= presenter.wrap(transactions.limit(limit), user)
+      @csv_transactions ||= presenter.wrap(transactions.limit(limit), user)
     end
   end
 end
