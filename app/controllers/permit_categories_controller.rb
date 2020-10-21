@@ -16,7 +16,14 @@ class PermitCategoriesController < AdminController
     sort_dir = params.fetch(:sort_direction, "asc")
     pg = params.fetch(:page, 1)
     per_pg = params.fetch(:per_page, 10)
-    unpaged = !!params.fetch(:unpaged, false)
+    # As long as the param is set we want to return `true`, else return `false`.
+    # We have to pass a default return value to `fetch()` else it will return an
+    # error. So the bang at the beginning reverses the `nil?` check at the end
+    # which is how we get our true or false result
+    #
+    # unpaged not set = unpaged.nil? is true  = !true is false
+    # unpaged is set  = unpaged.nil? is false = !false is true
+    unpaged = !params.fetch(:unpaged, nil).nil?
     @financial_years = Query::PermitCategoryYears.call
 
     @categories = Query::PermitCategories.call(regime: @regime,
