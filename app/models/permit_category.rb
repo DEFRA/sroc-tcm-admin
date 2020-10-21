@@ -24,12 +24,8 @@ class PermitCategory < ApplicationRecord
   validates :description, length: { maximum: 150 }
   validate :description_has_no_invalid_characters
 
-  # At this time converting %{value} to %<value> causes test/models/permit_category_test.rb:54
-  # to error with TypeError: can't convert nil into Integer hence the exception
-  # rubocop:disable Style/FormatStringToken
   validates :status, inclusion: { in: %w[active excluded],
                                   message: "%{value} is not a valid state" }
-  # rubocop:enable Style/FormatStringToken
 
   scope :active, -> { where(status: "active") }
 

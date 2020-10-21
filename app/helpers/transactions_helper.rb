@@ -58,9 +58,7 @@ module TransactionsHelper
   def available_regions(regime)
     selected = params.fetch(:region, "")
 
-    # regions = [{ label: 'All', value: 'all', selected: selected == 'all'}]
-    regime.transaction_headers.distinct.pluck(:region).
-      sort.map { |r| { label: r, value: r, selected: selected == r } }
+    regime.transaction_headers.distinct.pluck(:region).sort.map { |r| { label: r, value: r, selected: selected == r } }
   end
 
   def permit_financial_year_options(years_list, selected)
@@ -77,10 +75,11 @@ module TransactionsHelper
   end
 
   def permit_categories(regime)
-    PermitStorageService.new(regime).active_list_for_selection("1819").
-      pluck(:code).map do |c|
-        { value: c, label: c }
-      end
+    PermitStorageService.new(regime)
+                        .active_list_for_selection("1819")
+                        .pluck(:code).map do |c|
+                          { value: c, label: c }
+                        end
   end
 
   def reason_options(reasons, selected = nil)
@@ -148,13 +147,11 @@ module TransactionsHelper
     msg = "Category confidence is #{confidence(level)}"
 
     "<span class='sr-only'>#{msg}</span>" \
-      "<span aria-hidden='true' class='#{level}-dot' title='#{msg}'></span>".
-      html_safe
+      "<span aria-hidden='true' class='#{level}-dot' title='#{msg}'></span>".html_safe
   end
 
   def lookup_category_description(regime, category, financial_year)
-    c = PermitStorageService.new(regime).
-        code_for_financial_year(category, financial_year)
+    c = PermitStorageService.new(regime).code_for_financial_year(category, financial_year)
     c&.description
   end
 

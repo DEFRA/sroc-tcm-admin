@@ -98,8 +98,7 @@ module AnnualBillingDataFileFormat
     end
 
     define_method "#{prefix}_mandatory_column_names" do
-      "AnnualBillingDataFileFormat::#{regime}::HEADERS".constantize.select { |h| h[:mandatory] }.
-        map { |h| h[:header] }
+      "AnnualBillingDataFileFormat::#{regime}::HEADERS".constantize.select { |h| h[:mandatory] }.map { |h| h[:header] }
     end
   end
 end
