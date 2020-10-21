@@ -32,11 +32,11 @@ class WmlTransactionDetailPresenter < TransactionDetailPresenter
 
     txt = transaction_detail.line_description.gsub(/Permit Ref:/, "EPR Ref:")
     prefix = "Credit of subsistence charge for permit category #{category}"
-    pos = txt.index /\sdue\s/
+    pos = txt.index(/\sdue\s/)
     if pos
       prefix + txt[pos..-1]
     else
-      pos = txt.index /\sat\s/
+      pos = txt.index(/\sat\s/)
       if pos
         "#{prefix}. At #{txt[(pos + 4)..-1]}"
       else
@@ -55,7 +55,7 @@ class WmlTransactionDetailPresenter < TransactionDetailPresenter
 
     txt = transaction_detail.line_description.gsub(/Permit Ref:/, "EPR Ref:")
     # remove leading text either "Compliance Adjustment at " or "Charge code n at "
-    pos = txt.index /\sat\s/
+    pos = txt.index(/\sat\s/)
     if pos
       "Site: #{txt[(pos + 4)..-1]}"
     else
@@ -69,7 +69,7 @@ class WmlTransactionDetailPresenter < TransactionDetailPresenter
     if !chg.nil? && !chg["calculation"].nil?
       band = chg["calculation"]["compliancePerformanceBand"]
       unless band.nil?
-        d = band.match /\A(.*)(\(\d+%\))\z/
+        d = band.match(/\A(.*)(\(\d+%\))\z/)
         val = "#{d[1]} #{d[2]}" if d.size == 3 && d[1].strip.present?
       end
     end
@@ -83,7 +83,7 @@ class WmlTransactionDetailPresenter < TransactionDetailPresenter
 
   def extract_site_from_description
     if transaction_detail.line_description.present?
-      m = transaction_detail.line_description.match /\Wat\W(.*),\s/
+      m = transaction_detail.line_description.match(/\Wat\W(.*),\s/)
       m.nil? ? "" : m[1]
     else
       ""

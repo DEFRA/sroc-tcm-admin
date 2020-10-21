@@ -275,7 +275,7 @@ class TransactionDetailPresenter < SimpleDelegator
     band = extract_compliance_performance
     return "" if band.blank? || band == "()"
 
-    d = band.match /\A.*\((\d+%)\)\z/
+    d = band.match(/\A.*\((\d+%)\)\z/)
     d && d.size == 2 ? d[1] : ""
   end
 
