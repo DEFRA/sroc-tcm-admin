@@ -31,10 +31,10 @@ class CreatePermitCategory < ServiceObject
     elsif @permit_category.save
       if @valid_from != "1819"
         @regime.permit_categories.create(code: @code,
-                                          description: @description,
-                                          valid_from: "1819",
-                                          valid_to: @valid_from,
-                                          status: "excluded")
+                                         description: @description,
+                                         valid_from: "1819",
+                                         valid_to: @valid_from,
+                                         status: "excluded")
       end
       true
     else

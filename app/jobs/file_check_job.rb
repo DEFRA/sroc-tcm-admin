@@ -48,7 +48,7 @@ class FileCheckJob < ApplicationJob
           # move file to quarantine
           Rails.logger.warn("Quarantining file because: #{e}")
           PutQuarantineFile.call(local_path: in_file.path,
-                                  remote_path: f)
+                                 remote_path: f)
           DeleteEtlImportFile.call(remote_path: f)
           quarantined += 1
         rescue StandardError => e

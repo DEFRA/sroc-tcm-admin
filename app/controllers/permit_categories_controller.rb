@@ -74,7 +74,7 @@ class PermitCategoriesController < AdminController
     set_financial_year
     @permit_category = @regime.permit_categories
                               .build(valid_from: @financial_year,
-            status: "active")
+                                     status: "active")
   end
 
   def edit
