@@ -19,7 +19,7 @@ module RegimeScope
     r_id = params.fetch(:regime_id, nil)
 
     if r_id
-      @regime = current_user.set_selected_regime(r_id)
+      @regime = current_user.apply_regime(r_id)
       redirect_to root_path unless @regime.to_param == r_id
     else
       @regime = current_user.selected_regime

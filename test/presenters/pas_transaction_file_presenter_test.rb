@@ -25,7 +25,7 @@ class PasTransactionFilePresenterTest < ActiveSupport::TestCase
       t.tcm_charge = t.line_amount
       t.tcm_transaction_type = t.transaction_type
       t.tcm_transaction_reference = generate_reference(t, 100 - i)
-      set_charge_calculation(t, "A(#{rand(50..100)}%)")
+      apply_charge_calculation(t, "A(#{rand(50..100)}%)")
     end
 
     @file = transaction_files(:pas_sroc_file)
@@ -161,7 +161,7 @@ class PasTransactionFilePresenterTest < ActiveSupport::TestCase
     )
   end
 
-  def set_charge_calculation(transaction, band)
+  def apply_charge_calculation(transaction, band)
     transaction.charge_calculation = {
       "calculation" => {
         "chargeAmount" => transaction.tcm_charge.abs,

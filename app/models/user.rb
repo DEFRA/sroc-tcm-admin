@@ -64,7 +64,7 @@ class User < ApplicationRecord
     end
   end
 
-  def set_selected_regime(regime_id)
+  def apply_regime(regime_id)
     reg = regimes.find_by(slug: regime_id)
     if reg
       send("#{reg.to_param}!") unless active_regime == reg.to_param

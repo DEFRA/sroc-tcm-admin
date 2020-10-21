@@ -77,7 +77,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    set_file_content(file_data)
+    apply_file_content(file_data)
 
     permits = @header.transaction_details.
               group(:reference_3, :customer_reference).count
@@ -91,7 +91,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    set_file_content(file_data)
+    apply_file_content(file_data)
 
     assert @processor.only_invoices_in_file?(reference_3: "AAAA0001",
                                              customer_reference: "A")
@@ -104,7 +104,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    set_file_content(file_data)
+    apply_file_content(file_data)
 
     refute @processor.only_invoices_in_file?(reference_3: "AAAA0002",
                                              customer_reference: "B")
@@ -172,7 +172,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 }
     ]
 
-    transaction = set_file_content(file_data).first
+    transaction = apply_file_content(file_data).first
 
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A",
@@ -194,7 +194,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 }
     ]
 
-    transaction = set_file_content(file_data).first
+    transaction = apply_file_content(file_data).first
 
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A",
@@ -215,7 +215,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 }
     ]
-    transaction = set_file_content(file_data).first
+    transaction = apply_file_content(file_data).first
 
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A",
@@ -232,7 +232,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 }
     ]
-    transaction = set_file_content(file_data).first
+    transaction = apply_file_content(file_data).first
 
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A",
@@ -253,7 +253,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 }
     ]
-    transaction = set_file_content(file_data).first
+    transaction = apply_file_content(file_data).first
 
     historic_data = [
       { reference_3: "AAAA0001", customer_reference: "A",
@@ -295,7 +295,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    t = set_file_content(file_data).first
+    t = apply_file_content(file_data).first
 
     @processor.suggest_categories
 
@@ -330,7 +330,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    t = set_file_content(file_data).first
+    t = apply_file_content(file_data).first
 
     @processor.suggest_categories
 
@@ -370,7 +370,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    t = set_file_content(file_data).first
+    t = apply_file_content(file_data).first
 
     @processor.suggest_categories
 
@@ -405,7 +405,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    t = set_file_content(file_data).first
+    t = apply_file_content(file_data).first
 
     @processor.suggest_categories
 
@@ -429,7 +429,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    t = set_file_content(file_data).first
+    t = apply_file_content(file_data).first
 
     @processor.suggest_categories
 
@@ -466,7 +466,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    file = set_file_content(file_data)
+    file = apply_file_content(file_data)
 
     @processor.suggest_categories
 
@@ -509,7 +509,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    file = set_file_content(file_data)
+    file = apply_file_content(file_data)
 
     @processor.suggest_categories
 
@@ -554,7 +554,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    file = set_file_content(file_data)
+    file = apply_file_content(file_data)
 
     @processor.suggest_categories
 
@@ -597,7 +597,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    file = set_file_content(file_data)
+    file = apply_file_content(file_data)
 
     @processor.suggest_categories
 
@@ -635,7 +635,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    file = set_file_content(file_data)
+    file = apply_file_content(file_data)
 
     @processor.suggest_categories
 
@@ -677,7 +677,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    t = set_file_content(file_data).first
+    t = apply_file_content(file_data).first
 
     @processor.suggest_categories
 
@@ -715,7 +715,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    t = set_file_content(file_data).first
+    t = apply_file_content(file_data).first
 
     @processor.suggest_categories
 
@@ -753,7 +753,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    t = set_file_content(file_data).first
+    t = apply_file_content(file_data).first
 
     @processor.suggest_categories
 
@@ -791,7 +791,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    t = set_file_content(file_data).first
+    t = apply_file_content(file_data).first
 
     @processor.suggest_categories
 
@@ -829,7 +829,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    t = set_file_content(file_data).first
+    t = apply_file_content(file_data).first
 
     @processor.suggest_categories
 
@@ -867,7 +867,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    t = set_file_content(file_data).first
+    t = apply_file_content(file_data).first
 
     @processor.suggest_categories
 
@@ -905,7 +905,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    t = set_file_content(file_data).first
+    t = apply_file_content(file_data).first
 
     @processor.suggest_categories
 
@@ -945,7 +945,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    file = set_file_content(file_data)
+    file = apply_file_content(file_data)
 
     @processor.suggest_categories
     expected = ["2.4.5", "2.4.6"]
@@ -992,7 +992,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    file = set_file_content(file_data)
+    file = apply_file_content(file_data)
 
     @processor.suggest_categories
     expected = ["2.4.5", "2.4.6"]
@@ -1038,7 +1038,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    file = set_file_content(file_data)
+    file = apply_file_content(file_data)
 
     @processor.suggest_categories
 
@@ -1080,7 +1080,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    file = set_file_content(file_data)
+    file = apply_file_content(file_data)
 
     @processor.suggest_categories
     expected = ["2.4.5", "2.4.6"]
@@ -1125,7 +1125,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    file = set_file_content(file_data)
+    file = apply_file_content(file_data)
 
     @processor.suggest_categories
 
@@ -1168,7 +1168,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    file = set_file_content(file_data)
+    file = apply_file_content(file_data)
 
     @processor.suggest_categories
     expected = ["2.4.5", "2.4.6"]
@@ -1214,7 +1214,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    file = set_file_content(file_data)
+    file = apply_file_content(file_data)
 
     @processor.suggest_categories
 
@@ -1255,7 +1255,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    t = set_file_content(file_data).first
+    t = apply_file_content(file_data).first
 
     @processor.suggest_categories
 
@@ -1294,7 +1294,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    t = set_file_content(file_data).first
+    t = apply_file_content(file_data).first
 
     @processor.suggest_categories
 
@@ -1333,7 +1333,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    t = set_file_content(file_data).first
+    t = apply_file_content(file_data).first
 
     @processor.suggest_categories
 
@@ -1372,7 +1372,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    t = set_file_content(file_data).first
+    t = apply_file_content(file_data).first
 
     @processor.suggest_categories
 
@@ -1413,7 +1413,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    file = set_file_content(file_data)
+    file = apply_file_content(file_data)
 
     @processor.suggest_categories
     expected = ["2.4.5", "2.4.6"]
@@ -1459,7 +1459,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    file = set_file_content(file_data)
+    file = apply_file_content(file_data)
 
     @processor.suggest_categories
 
@@ -1503,7 +1503,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    file = set_file_content(file_data)
+    file = apply_file_content(file_data)
 
     @processor.suggest_categories
     expected = ["2.4.5", "2.4.6"]
@@ -1550,7 +1550,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0002", customer_reference: "B", line_amount: -2234 }
     ]
 
-    file = set_file_content(file_data)
+    file = apply_file_content(file_data)
 
     @processor.suggest_categories
 
@@ -1565,7 +1565,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     end
   end
 
-  def set_file_content(content)
+  def apply_file_content(content)
     results = []
     t = transaction_details(:pas_annual)
 

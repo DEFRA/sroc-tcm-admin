@@ -4,7 +4,7 @@ require 'test_helper'
 
 class PasTransactionDetailPresenterTest < ActiveSupport::TestCase
   def setup
-    set_audit_user
+    apply_audit_user
     @transaction = transaction_details(:pas)
     @presenter = PasTransactionDetailPresenter.new(@transaction)
   end
@@ -16,7 +16,7 @@ class PasTransactionDetailPresenterTest < ActiveSupport::TestCase
   end
 
   def test_it_returns_calculated_compliance_adjustment
-    set_charge_calculation_compliance(@transaction, "A (110%)")
+    apply_charge_calculation_compliance(@transaction, "A (110%)")
     assert_equal("110%", @presenter.compliance_band_adjustment)
   end
 
@@ -81,7 +81,7 @@ class PasTransactionDetailPresenterTest < ActiveSupport::TestCase
     )
   end
 
-  def set_charge_calculation_compliance(transaction, band)
+  def apply_charge_calculation_compliance(transaction, band)
     transaction.charge_calculation = {
       "calculation": {
         "compliancePerformanceBand": band

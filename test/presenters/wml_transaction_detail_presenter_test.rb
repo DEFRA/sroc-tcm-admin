@@ -4,7 +4,7 @@ require 'test_helper'
 
 class WmlTransactionDetailPresenterTest < ActiveSupport::TestCase
   def setup
-    set_audit_user
+    apply_audit_user
     @transaction = transaction_details(:wml)
     @presenter = WmlTransactionDetailPresenter.new(@transaction)
   end
@@ -16,17 +16,17 @@ class WmlTransactionDetailPresenterTest < ActiveSupport::TestCase
   end
 
   def test_it_formats_compliance_band_with_percentage
-    set_charge_calculation_compliance(@transaction, "A(95%)")
+    apply_charge_calculation_compliance(@transaction, "A(95%)")
     assert_equal("A (95%)", @presenter.compliance_band_with_percent)
 
-    set_charge_calculation_compliance(@transaction,
+    apply_charge_calculation_compliance(@transaction,
                                       "Significant Improvement Needed(100%)")
     assert_equal("Significant Improvement Needed (100%)",
                  @presenter.compliance_band_with_percent)
   end
 
   def test_it_returns_blank_if_compliance_band_100_percent
-    set_charge_calculation_compliance(@transaction, " (100%)")
+    apply_charge_calculation_compliance(@transaction, " (100%)")
     assert @presenter.compliance_band_with_percent.blank?
   end
 
@@ -119,7 +119,7 @@ class WmlTransactionDetailPresenterTest < ActiveSupport::TestCase
                  }, @presenter.as_json)
   end
 
-  def set_charge_calculation_compliance(transaction, band)
+  def apply_charge_calculation_compliance(transaction, band)
     transaction.charge_calculation = {
       "calculation": {
         "compliancePerformanceBand": band

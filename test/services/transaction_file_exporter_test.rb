@@ -35,7 +35,7 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
       t.status = "unbilled"
       t.tcm_charge = t.line_amount
       t.approved_for_billing = true
-      set_charge_calculation(t)
+      apply_charge_calculation(t)
     end
 
     @exporter = TransactionFileExporter.new(@regime, @region, @user)
@@ -245,7 +245,7 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
       pluck(:tcm_transaction_reference).count
   end
 
-  def set_charge_calculation(transaction)
+  def apply_charge_calculation(transaction)
     transaction.charge_calculation = {
       "calculation" => {
         "chargeAmount" => transaction.tcm_charge.abs,

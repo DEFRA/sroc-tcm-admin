@@ -5,7 +5,7 @@ class ImportedTransactionFilesController < ApplicationController
   include RegimeScope
 
   before_action :set_regime, only: %i[index update]
-  before_action :set_transaction_header, only: %i[show edit]
+  before_action :apply_transaction_header, only: %i[show edit]
   before_action :read_only_user_check!
 
   def index
@@ -27,7 +27,7 @@ class ImportedTransactionFilesController < ApplicationController
   end
 
   def update
-    @file = get_transaction_header
+    @file = transaction_header
     parms = transaction_header_params
     result = RemoveImportedTransactionFile.call(
       transaction_header: @file,
@@ -47,11 +47,11 @@ class ImportedTransactionFilesController < ApplicationController
 
   private
 
-  def set_transaction_header
-    @file = TransactionHeaderPresenter.new get_transaction_header
+  def apply_transaction_header
+    @file = TransactionHeaderPresenter.new transaction_header
   end
 
-  def get_transaction_header
+  def transaction_header
     set_regime
     @regime.transaction_headers.find(params[:id])
   end

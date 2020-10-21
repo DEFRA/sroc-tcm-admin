@@ -23,7 +23,7 @@ class CfdTransactionFilePresenterTest < ActiveSupport::TestCase
       t.category = "2.3.4"
       t.status = "billed"
       t.tcm_charge = t.line_amount
-      set_charge_calculation(t)
+      apply_charge_calculation(t)
     end
 
     @file = transaction_files(:cfd_sroc_file)
@@ -136,7 +136,7 @@ class CfdTransactionFilePresenterTest < ActiveSupport::TestCase
     )
   end
 
-  def set_charge_calculation(transaction)
+  def apply_charge_calculation(transaction)
     transaction.charge_calculation = {
       "calculation" => {
         "chargeAmount" => transaction.tcm_charge.abs,
