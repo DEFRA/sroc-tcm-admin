@@ -30,7 +30,7 @@ class BatchCsvExport < ServiceObject
 
   private
 
-  def batch_query(&block)
+  def batch_query()
     count = query.count
     count = [count, max_limit].min unless max_limit.zero?
 

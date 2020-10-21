@@ -88,7 +88,7 @@ namespace :resque do
 
   # from https://gist.github.com/snikch/2371233
   # seems to hang capistrano/jenkins
-  def run_worker_fork(queue, count = 1, ops = {})
+  def run_worker_fork(queue, count = 1, _ops = {})
     puts "Starting #{count} worker(s) with QUEUE: #{queue}"
 
     queues = queue.split(",")

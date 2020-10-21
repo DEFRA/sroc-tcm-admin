@@ -69,7 +69,7 @@ class PasTransactionDetailPresenter < TransactionDetailPresenter
     end
   end
 
-  def as_json(options = {})
+  def as_json(_options = {})
     {
       id: id,
       customer_reference: customer_reference,

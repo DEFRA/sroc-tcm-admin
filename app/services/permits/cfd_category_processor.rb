@@ -72,7 +72,7 @@ module Permits
       end
     end
 
-    def handle_supplementary_credit(transaction, consent_args)
+    def handle_supplementary_credit(transaction, _consent_args)
       history_args = { reference_1: transaction.reference_1,
                        period_start: transaction.period_start,
                        period_end: transaction.period_end }

@@ -3,7 +3,7 @@
 class FileCheckJob < ApplicationJob
   queue_as :default
 
-  def perform(*args)
+  def perform(*_args)
     return unless SystemConfig.config.start_import
 
     begin

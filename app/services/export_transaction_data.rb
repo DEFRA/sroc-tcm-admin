@@ -59,7 +59,7 @@ class ExportTransactionData < ServiceObject
       order(:id)
   end
 
-  def batch_transactions(batch_size = 1000, &block)
+  def batch_transactions(batch_size = 1000)
     # We need to be mindful that this is all transaction records
     # for the regime and will grow so we need to batch query or we
     # will quickly run out of memory on the server.
@@ -76,7 +76,7 @@ class ExportTransactionData < ServiceObject
     end
   end
 
-  def regime_file(&block)
+  def regime_file()
     CSV.open(regime_filename, "w", write_headers: true, headers: regime_headers) do |csv|
       yield csv
     end

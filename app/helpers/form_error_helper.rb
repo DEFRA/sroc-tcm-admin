@@ -66,7 +66,7 @@ module FormErrorHelper
     message&.split("^")&.last
   end
 
-  def error_item(attr, message)
+  def error_item(_attr, message)
     content_tag(:li, error_trim(message))
   end
 end
