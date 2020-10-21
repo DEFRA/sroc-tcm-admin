@@ -26,7 +26,7 @@ class TcmUtils
     "#{a.sample} #{b.sample} #{c.sample} #{d.sample}"
   end
 
-  def self.set_period_dates()
+  def self.set_period_dates
     Regime.all.each do |r|
       r.transaction_details.each do |t|
         dates = extract_transaction_period_dates(t, r)

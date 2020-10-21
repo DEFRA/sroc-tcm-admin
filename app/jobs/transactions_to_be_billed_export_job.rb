@@ -3,7 +3,7 @@
 class TransactionsToBeBilledExportJob < ApplicationJob
   queue_as :default
 
-  def perform()
+  def perform
     ActiveRecord::Base.connection_pool.with_connection do
       Regime.all.each do |regime|
         service = TransactionExportService.new(regime)

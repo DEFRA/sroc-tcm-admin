@@ -3,7 +3,7 @@
 class DataExportJob < ApplicationJob
   queue_as :default
 
-  def perform()
+  def perform
     ActiveRecord::Base.connection_pool.with_connection do
       Regime.all.each do |regime|
         # enqueue an export job for each regime
