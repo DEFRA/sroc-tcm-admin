@@ -29,12 +29,13 @@ module ApplicationHelper
   end
 
   def flash_class(level)
-    case level
-    when :notice then "alert-info"
-    when :success then "alert-success"
-    when :error then "alert-danger"
-    when :alert then "alert-warning"
-    end
+    levels = {
+      notice: "alert-info",
+      success: "alert-success",
+      error: "alert-danger",
+      alert: "alert-warning"
+    }
+    levels[level]
   end
 
   def sortable(name, view_model)
