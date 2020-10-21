@@ -21,11 +21,11 @@ module FormattingUtils
     number_to_currency(value / 100.0, format: "%n") unless value.blank?
   end
 
-  def slash_formatted_date(date, include_time = false)
+  def slash_formatted_date(date, include_time: false)
     format_date(date, "%d/%m/%y", include_time)
   end
 
-  def formatted_date(date, include_time = false)
+  def formatted_date(date, include_time: false)
     format_date(date, "%d-%b-%Y", include_time)
   end
 

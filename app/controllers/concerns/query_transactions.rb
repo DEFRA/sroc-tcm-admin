@@ -3,7 +3,7 @@
 module QueryTransactions
   extend ActiveSupport::Concern
 
-  def build_view_model(all_regions = false)
+  def build_view_model(all_regions: false)
     regions = Query::Regions.call(regime: @regime)
     region = params.fetch(:region, cookies.fetch(:region, ""))
     region = "" if region == "all"

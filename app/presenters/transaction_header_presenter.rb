@@ -44,7 +44,7 @@ class TransactionHeaderPresenter < SimpleDelegator
   end
 
   def removed_at
-    slash_formatted_date transaction_header.removed_at, true
+    slash_formatted_date transaction_header.removed_at, include_time: true
   end
 
   def currency_line_amount

@@ -80,7 +80,7 @@ module Permits
                 order(tcm_transaction_reference: :desc).first
 
       if invoice
-        set_category(transaction, invoice, :green, "Supplementary credit", true)
+        set_category(transaction, invoice, :green, "Supplementary credit", admin_lock: true)
       else
         no_historic_transaction({ id: transaction.id }, "Supplementary credit")
       end

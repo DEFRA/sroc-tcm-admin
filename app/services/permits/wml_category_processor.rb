@@ -72,11 +72,11 @@ module Permits
         if invoices.count.zero?
           no_historic_transaction({ id: transaction.id }, stage)
         elsif invoices.count == 1
-          set_category(transaction, invoices.first, :green, stage, true)
+          set_category(transaction, invoices.first, :green, stage, admin_lock: true)
         else
           stage = "Supplementary credit stage 2"
           if invoices.first.period_start != invoices.second.period_start
-            set_category(transaction, invoices.first, :green, stage, true)
+            set_category(transaction, invoices.first, :green, stage, admin_lock: true)
           else
             multiple_historic_matches({ id: transaction.id }, stage)
           end

@@ -19,7 +19,7 @@ module Permits
     end
 
     def set_category(transaction, matched_transaction, confidence_level,
-                     stage, admin_lock = false)
+                     stage, admin_lock: false)
 
       fy = transaction.tcm_financial_year
       # need to ensure the found category is still valid
