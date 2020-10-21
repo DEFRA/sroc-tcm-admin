@@ -28,24 +28,24 @@ module Query
       sort_users(q)
     end
 
-    def sort_users(q)
+    def sort_users(query)
       dir = @sort_direction
       case @sort_column.to_sym
       when :first_name
-        q.order(first_name: dir, last_name: dir, id: dir)
+        query.order(first_name: dir, last_name: dir, id: dir)
       when :email
-        q.order(email: dir, last_name: dir, id: dir)
+        query.order(email: dir, last_name: dir, id: dir)
       when :role
-        q.order("CASE role " \
+        query.order("CASE role " \
                 "WHEN 1 THEN 0 " \
                 "WHEN 0 THEN 1 " \
                 "WHEN 3 THEN 2 " \
                 "WHEN 2 THEN 3 " \
                 "END #{dir}").order(last_name: dir, id: dir)
       when :enabled
-        q.order(enabled: dir)
+        query.order(enabled: dir)
       else
-        q.order(last_name: dir, first_name: dir, id: dir)
+        query.order(last_name: dir, first_name: dir, id: dir)
       end
     end
   end

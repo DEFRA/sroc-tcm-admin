@@ -260,8 +260,8 @@ module Permits
       end
     end
 
-    def args_from_transaction(t)
-      keys_to_args([t.reference_3, t.customer_reference])
+    def args_from_transaction(transaction)
+      keys_to_args([transaction.reference_3, transaction.customer_reference])
     end
 
     def keys_to_args(keys)

@@ -81,17 +81,17 @@ module ViewModelBuilder
     populate_view_model(vm)
   end
 
-  def populate_view_model(vm)
-    vm.region = param_or_cookie(:region, "")
-    vm.page = param_or_cookie(:page, 1)
-    vm.per_page = param_or_cookie(:per_page, 10)
-    vm.financial_year = param_or_cookie(:fy, "")
-    vm.search = param_or_cookie(:search, "")
-    vm.sort = param_or_cookie(:sort, "customer_reference")
-    vm.sort_direction = param_or_cookie(:sort_direction, "asc")
-    vm.unapproved = param_or_cookie(:unapproved, false)
-    vm.check_params
-    vm
+  def populate_view_model(view_model)
+    view_model.region = param_or_cookie(:region, "")
+    view_model.page = param_or_cookie(:page, 1)
+    view_model.per_page = param_or_cookie(:per_page, 10)
+    view_model.financial_year = param_or_cookie(:fy, "")
+    view_model.search = param_or_cookie(:search, "")
+    view_model.sort = param_or_cookie(:sort, "customer_reference")
+    view_model.sort_direction = param_or_cookie(:sort_direction, "asc")
+    view_model.unapproved = param_or_cookie(:unapproved, false)
+    view_model.check_params
+    view_model
   end
 
   def param_or_cookie(attr, default_value)

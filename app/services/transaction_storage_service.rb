@@ -32,21 +32,21 @@ class TransactionStorageService
     order_query(q, order, direction)
   end
 
-  def transaction_history(search = "", fy = "", page = 1, per_page = 10, region = "",
+  def transaction_history(search = "", financial_year = "", page = 1, per_page = 10, region = "",
                           order = :customer_reference, direction = "asc")
     q = regime.transaction_details.historic
     q = q.region(region) unless region.blank?
     q = q.history_search(search) unless search.blank?
-    q = q.where(tcm_financial_year: fy) unless fy.blank?
+    q = q.where(tcm_financial_year: financial_year) unless financial_year.blank?
     order_query(q, order, direction).page(page).per(per_page)
   end
 
-  def transaction_history_for_export(search = "", fy = "", region = "",
+  def transaction_history_for_export(search = "", financial_year = "", region = "",
                                      order = :customer_reference, direction = "asc")
     q = regime.transaction_details.historic
     q = q.region(region) unless region.blank?
     q = q.history_search(search) unless search.blank?
-    q = q.where(tcm_financial_year: fy) unless fy.blank?
+    q = q.where(tcm_financial_year: financial_year) unless financial_year.blank?
     order_query(q, order, direction)
   end
 
@@ -59,13 +59,13 @@ class TransactionStorageService
     order_query(q, order, direction).page(page).per(per_page)
   end
 
-  def excluded_transactions(search = "", fy = "", page = 1, per_page = 10,
+  def excluded_transactions(search = "", financial_year = "", page = 1, per_page = 10,
                             region = "", order = :customer_reference,
                             direction = "asc")
     q = regime.transaction_details.historic_excluded
     q = q.region(region) unless region.blank?
     q = q.exclusion_search(search) unless search.blank?
-    q = q.where(tcm_financial_year: fy) unless fy.blank?
+    q = q.where(tcm_financial_year: financial_year) unless financial_year.blank?
     order_query(q, order, direction).page(page).per(per_page)
   end
 
@@ -126,59 +126,59 @@ class TransactionStorageService
     exclusion_regions.first
   end
 
-  def order_query(q, col, dir)
+  def order_query(query, col, dir)
     dir = dir == "desc" ? :desc : :asc
     txt_dir = dir == :asc ? "asc" : "desc"
 
     # lookup col value
     case col.to_sym
     when :customer_reference
-      q.order(customer_reference: dir, id: dir)
+      query.order(customer_reference: dir, id: dir)
     when :original_filename
-      q.order(original_filename: dir, customer_reference: dir)
+      query.order(original_filename: dir, customer_reference: dir)
     when :original_file_date
-      q.order(original_file_date: dir, original_filename: dir)
+      query.order(original_file_date: dir, original_filename: dir)
     when :transaction_reference
-      q.order(transaction_reference: dir, id: dir)
+      query.order(transaction_reference: dir, id: dir)
     when :transaction_date
-      q.order(transaction_date: dir, id: dir)
+      query.order(transaction_date: dir, id: dir)
     when :permit_reference
-      q.order(reference_1: dir, id: dir)
+      query.order(reference_1: dir, id: dir)
     when :original_permit_reference
-      q.order(reference_2: dir, id: dir)
+      query.order(reference_2: dir, id: dir)
     when :consent_reference
-      q.order(reference_1: dir, reference_2: dir, reference_3: dir, id: dir)
+      query.order(reference_1: dir, reference_2: dir, reference_3: dir, id: dir)
     when :sroc_category
-      q.order(category: dir, id: dir)
+      query.order(category: dir, id: dir)
     when :compliance_band
       if regime.installations?
-        q.order(line_attr_11: dir, id: dir)
+        query.order(line_attr_11: dir, id: dir)
       else
-        q.order(line_attr_6: dir, reference_1: dir)
+        query.order(line_attr_6: dir, reference_1: dir)
       end
     when :variation
-      q.order("to_number(variation, '999%') #{txt_dir}")
+      query.order("to_number(variation, '999%') #{txt_dir}")
     when :period
-      q.order(period_start: dir, period_end: dir, id: dir)
+      query.order(period_start: dir, period_end: dir, id: dir)
     when :tcm_transaction_reference
-      q.order(tcm_transaction_reference: dir, id: dir)
+      query.order(tcm_transaction_reference: dir, id: dir)
     when :version
-      q.order(reference_2: dir, reference_1: dir)
+      query.order(reference_2: dir, reference_1: dir)
     when :discharge
-      q.order(reference_3: dir, reference_1: dir)
+      query.order(reference_3: dir, reference_1: dir)
     when :generated_filename
-      q.order(generated_filename: dir, id: dir)
+      query.order(generated_filename: dir, id: dir)
     when :generated_file_date
-      q.includes(:transaction_file).
+      query.includes(:transaction_file).
         order("transaction_files.created_at #{dir}, tcm_transaction_reference #{dir}")
     when :amount
-      q.order(tcm_charge: dir, id: dir)
+      query.order(tcm_charge: dir, id: dir)
     when :excluded_reason
-      q.order(excluded_reason: dir, reference_1: dir)
+      query.order(excluded_reason: dir, reference_1: dir)
     when :temporary_cessation
-      q.order(temporary_cessation: dir, reference_1: dir)
+      query.order(temporary_cessation: dir, reference_1: dir)
     else
-      q.joins(:transaction_header).
+      query.joins(:transaction_header).
         merge(TransactionHeader.order(region: dir, file_sequence_number: dir)).
         order(transaction_reference: dir, id: dir)
     end

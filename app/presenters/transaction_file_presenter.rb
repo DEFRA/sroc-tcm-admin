@@ -34,7 +34,7 @@ class TransactionFilePresenter < SimpleDelegator
     records
   end
 
-  def detail_row(_td, _idx)
+  def detail_row(_table_data, _idx)
     raise "Implement me in a subclass"
   end
 

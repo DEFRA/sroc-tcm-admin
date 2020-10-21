@@ -195,10 +195,10 @@ class TransactionFileImporter
     format("%<year>02d%<year_plus_one>02d", year: y, year_plus_one: ((y + 1) % 100))
   end
 
-  def sanitize_date(d)
-    Date.parse(d)
+  def sanitize_date(date)
+    Date.parse(date)
   rescue ArguementError
-    Rails.logger.warn("Invalid date in transaction file: #{d}")
+    Rails.logger.warn("Invalid date in transaction file: #{date}")
     nil
   end
 end

@@ -9,8 +9,8 @@ module FormattingUtils
     val.to_s.rjust(length, "0")
   end
 
-  def fmt_date(dt)
-    dt.strftime("%-d-%^b-%Y")
+  def fmt_date(date)
+    date.strftime("%-d-%^b-%Y")
   end
 
   def formatted_pence(value)

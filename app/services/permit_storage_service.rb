@@ -10,39 +10,39 @@ class PermitStorageService
     @user = user
   end
 
-  def search_all(fy, search, sort_col, sort_dir)
-    q = all_for_financial_year(fy)
+  def search_all(financial_year, search, sort_col, sort_dir)
+    q = all_for_financial_year(financial_year)
     q = q.search(search) unless search.blank?
     order_query(q, sort_col, sort_dir)
   end
 
-  def all_for_financial_year(fy)
-    regime.permit_categories.by_financial_year(fy)
+  def all_for_financial_year(financial_year)
+    regime.permit_categories.by_financial_year(financial_year)
   end
 
-  def active_for_financial_year(fy)
-    all_for_financial_year(fy).active
+  def active_for_financial_year(financial_year)
+    all_for_financial_year(financial_year).active
   end
 
-  def active_list_for_selection(fy)
-    all_for_financial_year(fy).active.
+  def active_list_for_selection(financial_year)
+    all_for_financial_year(financial_year).active.
       order("string_to_array(code, '.')::int[]")
   end
 
-  def code_for_financial_year(code, fy)
-    active_for_financial_year(fy).find_by(code: code)
+  def code_for_financial_year(code, financial_year)
+    active_for_financial_year(financial_year).find_by(code: code)
   end
 
-  def code_for_financial_year!(code, fy)
-    active_for_financial_year(fy).find_by!(code: code)
+  def code_for_financial_year!(code, financial_year)
+    active_for_financial_year(financial_year).find_by!(code: code)
   end
 
-  def code_for_financial_year_with_any_status(code, fy)
-    all_for_financial_year(fy).find_by(code: code)
+  def code_for_financial_year_with_any_status(code, financial_year)
+    all_for_financial_year(financial_year).find_by(code: code)
   end
 
-  def code_for_financial_year_with_any_status!(code, fy)
-    all_for_financial_year(fy).find_by!(code: code)
+  def code_for_financial_year_with_any_status!(code, financial_year)
+    all_for_financial_year(financial_year).find_by!(code: code)
   end
 
   def code_exists?(code)
@@ -76,15 +76,15 @@ class PermitStorageService
     pc
   end
 
-  def find(code, fy)
-    regime.permit_categories.find_by(code: code, valid_from: fy)
+  def find(code, financial_year)
+    regime.permit_categories.find_by(code: code, valid_from: financial_year)
   end
 
-  def update_or_create_new_version(code, description, fy, status = "active")
-    pc = regime.permit_categories.find_by(code: code, valid_from: fy)
+  def update_or_create_new_version(code, description, financial_year, status = "active")
+    pc = regime.permit_categories.find_by(code: code, valid_from: financial_year)
     if pc.nil?
       # no version to update so create a new one
-      pc = add_permit_category_version(code, description, fy, status)
+      pc = add_permit_category_version(code, description, financial_year, status)
     else
       pc.description = description
       pc.status = status
@@ -127,13 +127,13 @@ class PermitStorageService
     pc
   end
 
-  def order_query(q, col, dir)
+  def order_query(query, col, dir)
     dir = dir == "desc" ? :desc : :asc
 
     if col.to_sym == :description
-      q.order(description: dir)
+      query.order(description: dir)
     else
-      q.order("string_to_array(code, '.')::int[] #{dir}")
+      query.order("string_to_array(code, '.')::int[] #{dir}")
     end
   end
 

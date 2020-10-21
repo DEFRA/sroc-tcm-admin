@@ -44,10 +44,10 @@ class FileStorageService
     @storage ||= determine_storage_handler
   end
 
-  def zone_path(z, path = "")
-    raise ArgumentError.new("Unknown zone: #{z}") unless STORAGE_ZONES.include?(z)
+  def zone_path(zone, path = "")
+    raise ArgumentError.new("Unknown zone: #{zone}") unless STORAGE_ZONES.include?(z)
 
-    File.join(STORAGE_ZONES[z], path)
+    File.join(STORAGE_ZONES[zone], path)
   end
 
   def determine_storage_handler

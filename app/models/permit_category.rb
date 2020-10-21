@@ -33,13 +33,13 @@ class PermitCategory < ApplicationRecord
 
   scope :active, -> { where(status: "active") }
 
-  def self.by_financial_year(fy)
+  def self.by_financial_year(financial_year)
     t = arel_table
-    where(t[:valid_from].lteq(fy)).where(t[:valid_to].eq(nil).or(t[:valid_to].gt(fy)))
+    where(t[:valid_from].lteq(financial_year)).where(t[:valid_to].eq(nil).or(t[:valid_to].gt(financial_year)))
   end
 
-  def self.search(q)
-    m = "%#{sanitize_sql_like(q)}%"
+  def self.search(query)
+    m = "%#{sanitize_sql_like(query)}%"
     where(arel_table[:code].matches(m).
           or(arel_table[:description].matches(m)))
   end

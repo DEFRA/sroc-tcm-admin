@@ -52,16 +52,16 @@ class TransactionDetail < ApplicationRecord
   scope :approved, -> { where(approved_for_billing: true) }
   scope :unapproved, -> { where(approved_for_billing: false) }
 
-  def self.search(q)
-    m = "%#{sanitize_sql_like(q)}%"
+  def self.search(query)
+    m = "%#{sanitize_sql_like(query)}%"
 
     where(arel_table[:customer_reference].matches(m).
           or(arel_table[:reference_1].matches(m)).
           or(arel_table[:transaction_reference].matches(m)))
   end
 
-  def self.history_search(q)
-    m = "%#{sanitize_sql_like(q)}%"
+  def self.history_search(query)
+    m = "%#{sanitize_sql_like(query)}%"
 
     where(arel_table[:customer_reference].matches(m).
           or(arel_table[:reference_1].matches(m)).
@@ -73,16 +73,16 @@ class TransactionDetail < ApplicationRecord
           or(arel_table[:tcm_transaction_reference].matches(m)))
   end
 
-  def self.retrospective_search(q)
-    m = "%#{sanitize_sql_like(q)}%"
+  def self.retrospective_search(query)
+    m = "%#{sanitize_sql_like(query)}%"
 
     where(arel_table[:customer_reference].matches(m).
           or(arel_table[:reference_1].matches(m)).
           or(arel_table[:transaction_reference].matches(m)))
   end
 
-  def self.exclusion_search(q)
-    m = "%#{sanitize_sql_like(q)}%"
+  def self.exclusion_search(query)
+    m = "%#{sanitize_sql_like(query)}%"
 
     where(arel_table[:customer_reference].matches(m).
           or(arel_table[:reference_1].matches(m)).
