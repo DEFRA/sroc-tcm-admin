@@ -12,12 +12,12 @@ Benchmark.ips do |x|
   puts "Total system categories: #{PermitCategory.count}"
   puts "--------------------------------------\n\n"
 
-  x.report("base query") do |times|
+  x.report("base query") do |_times|
     Query::PermitCategoryLookup.call(regime: regime,
                                      financial_year: "1819").count
   end
 
-  x.report("with search") do |times|
+  x.report("with search") do |_times|
     Query::PermitCategoryLookup.call(regime: regime,
                                      financial_year: "1819",
                                      query: "1.2").count

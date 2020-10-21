@@ -13,12 +13,12 @@ Benchmark.ips do |x|
   puts "Total system transactions: #{TransactionDetail.count}"
   puts "--------------------------------------\n\n"
 
-  x.report("summary A") do |times|
+  x.report("summary A") do |_times|
     Query::PreSrocSummary.call(regime: regime,
                                region: "A")
   end
 
-  x.report("summary B") do |times|
+  x.report("summary B") do |_times|
     Query::PreSrocSummary.call(regime: regime,
                                region: "B")
   end

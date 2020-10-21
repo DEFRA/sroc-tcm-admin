@@ -13,38 +13,38 @@ Benchmark.ips do |x|
   puts "Total system transactions: #{TransactionDetail.count}"
   puts "--------------------------------------\n\n"
 
-  x.report("base query") do |times|
+  x.report("base query") do |_times|
     Query::TransactionsToBeBilled.call(regime: regime).count
   end
 
-  x.report("with region") do |times|
+  x.report("with region") do |_times|
     Query::TransactionsToBeBilled.call(regime: regime,
                                        region: "A").count
   end
 
-  x.report("with financial year") do |times|
+  x.report("with financial year") do |_times|
     Query::TransactionsToBeBilled.call(regime: regime,
                                        financial_year: "1819").count
   end
 
-  x.report("with search") do |times|
+  x.report("with search") do |_times|
     Query::TransactionsToBeBilled.call(regime: regime,
                                        search: "8RH").count
   end
 
-  x.report("sorted asc") do |times|
+  x.report("sorted asc") do |_times|
     Query::TransactionsToBeBilled.call(regime: regime,
                                        sort: :reference_1,
                                        sort_direction: "asc").count
   end
 
-  x.report("sorted desc") do |times|
+  x.report("sorted desc") do |_times|
     Query::TransactionsToBeBilled.call(regime: regime,
                                        sort: :reference_2,
                                        sort_direction: "desc").count
   end
 
-  x.report("multiple options") do |times|
+  x.report("multiple options") do |_times|
     Query::TransactionsToBeBilled.call(regime: regime,
                                        region: "A",
                                        financial_year: "1819",

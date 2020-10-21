@@ -99,7 +99,7 @@ class PaginationTest < ActionDispatch::IntegrationTest
 
   def bulk_up_transaction(id, count)
     t = transaction_details(id.to_sym)
-    count.times do |n|
+    count.times do |_n|
       tt = t.dup
       tt.save!
     end

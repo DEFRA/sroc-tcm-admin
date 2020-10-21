@@ -1592,7 +1592,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     t = transaction_details(:pas)
     history = []
 
-    content.each_with_index do |attrs, i|
+    content.each_with_index do |attrs, _i|
       t2 = t.dup
       t2.reference_1 = "0123456"
       t2.reference_2 = "AAA/A0011"
