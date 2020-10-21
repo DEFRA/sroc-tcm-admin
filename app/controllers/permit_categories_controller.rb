@@ -122,8 +122,8 @@ class PermitCategoriesController < AdminController
     case params[:commit]
     when "Remove Category"
       if can_remove_permit_category?(cat.code, @financial_year)
-        @permit_category = permit_store.
-                           update_or_create_new_version(
+        @permit_category = permit_store
+                           .update_or_create_new_version(
                              cat.code, permit_category_params[:description],
             @financial_year, "excluded"
           )
