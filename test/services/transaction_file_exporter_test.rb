@@ -133,8 +133,7 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
     # 1 and 2 different customer reference
     # 3 different financial year
     @exporter.assign_cfd_transaction_references(file)
-    assert_equal 3, file.transaction_details.distinct.
-      pluck(:tcm_transaction_reference).count
+    assert_equal 3, file.transaction_details.distinct.pluck(:tcm_transaction_reference).count
   end
 
   def test_cfd_splits_transaction_references_by_line_context_code
@@ -151,8 +150,7 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
     # 1 different context code
     # 3 different financial year
     @exporter.assign_cfd_transaction_references(file)
-    assert_equal 3, file.transaction_details.distinct.
-      pluck(:tcm_transaction_reference).count
+    assert_equal 3, file.transaction_details.distinct.pluck(:tcm_transaction_reference).count
   end
 
   def test_wml_splits_transaction_references_by_financial_year
@@ -163,8 +161,7 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
     file.transaction_details.update_all(customer_reference: "ABCD1234")
     @exporter.assign_wml_transaction_references(file)
     # 3 different references because split 1 invoice, 2 credit, 3 different FY
-    assert_equal 3, file.transaction_details.distinct.
-      pluck(:tcm_transaction_reference).count
+    assert_equal 3, file.transaction_details.distinct.pluck(:tcm_transaction_reference).count
   end
 
   def test_wml_splits_transaction_references_by_customer_reference
@@ -180,8 +177,7 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
     # 1 and 2 different customer reference
     # 3 different financial year
     @exporter.assign_wml_transaction_references(file)
-    assert_equal 3, file.transaction_details.distinct.
-      pluck(:tcm_transaction_reference).count
+    assert_equal 3, file.transaction_details.distinct.pluck(:tcm_transaction_reference).count
   end
 
   def test_wml_splits_transaction_references_by_credit_and_invoice
@@ -195,8 +191,7 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
     # 1 and 2 different credit/invoice
     # 3 different financial year
     @exporter.assign_wml_transaction_references(file)
-    assert_equal 3, file.transaction_details.distinct.
-      pluck(:tcm_transaction_reference).count
+    assert_equal 3, file.transaction_details.distinct.pluck(:tcm_transaction_reference).count
   end
 
   def test_pas_assigns_transaction_references_correctly; end
@@ -209,8 +204,7 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
     file.transaction_details.update_all(customer_reference: "ABCD1234")
     @exporter.assign_pas_transaction_references(file)
     # 3 different references because split 1 invoice, 2 credit, 3 different FY
-    assert_equal 3, file.transaction_details.distinct.
-      pluck(:tcm_transaction_reference).count
+    assert_equal 3, file.transaction_details.distinct.pluck(:tcm_transaction_reference).count
   end
 
   def test_pas_splits_transaction_references_by_customer_reference
@@ -226,8 +220,7 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
     # 1 and 2 different customer reference
     # 3 different financial year
     @exporter.assign_pas_transaction_references(file)
-    assert_equal 3, file.transaction_details.distinct.
-      pluck(:tcm_transaction_reference).count
+    assert_equal 3, file.transaction_details.distinct.pluck(:tcm_transaction_reference).count
   end
 
   def test_pas_splits_transaction_references_by_credit_and_invoice
@@ -241,8 +234,7 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
     # 1 and 2 different credit/invoice
     # 3 different financial year
     @exporter.assign_pas_transaction_references(file)
-    assert_equal 3, file.transaction_details.distinct.
-      pluck(:tcm_transaction_reference).count
+    assert_equal 3, file.transaction_details.distinct.pluck(:tcm_transaction_reference).count
   end
 
   def apply_charge_calculation(transaction)

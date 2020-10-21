@@ -16,8 +16,7 @@ module Query
       assert @file.transaction_details.count.positive?
 
       years = TransactionFileYears.call(transaction_file: @file)
-      expected = @file.transaction_details.distinct.
-                 pluck(:tcm_financial_year).sort
+      expected = @file.transaction_details.distinct.pluck(:tcm_financial_year).sort
       assert_equal expected, years
     end
   end

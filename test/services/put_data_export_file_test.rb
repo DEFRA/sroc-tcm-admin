@@ -30,9 +30,6 @@ class PutDataExportFileTest < ActiveSupport::TestCase
     transactions = @regime.transaction_details
     assert transactions.count.positive?, "No transaction data"
 
-    # FileStorageService.any_instance.stubs(:zone_path).
-    #   returns(@tmp_path.join('cfd_transactions.csv'))
-
     result = ExportTransactionData.call(regime: @regime)
     assert result.success?, "Did not create test file"
 

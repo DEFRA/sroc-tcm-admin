@@ -25,8 +25,9 @@ module Query
         categories = PermitCategoryLookup.call(regime: @regime,
                                                financial_year: financial_year,
                                                query: query)
-        expected = @regime.permit_categories.by_financial_year(financial_year).active.
-                   where(PermitCategory.arel_table[:code].matches("%#{query}%"))
+        expected = @regime.permit_categories
+                          .by_financial_year(financial_year)
+                          .active.where(PermitCategory.arel_table[:code].matches("%#{query}%"))
         assert_equal expected, categories
       end
     end
