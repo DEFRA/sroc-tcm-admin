@@ -107,13 +107,13 @@ class AnnualBillingDataFileServiceTest < ActiveSupport::TestCase
     upload = prepare_upload(file)
 
     transaction = sroc_transaction
-    transaction_2 = transaction.dup
-    transaction_2.reference_1 = "ANNF/1754/1/1"
-    transaction_2.save
+    transaction2 = transaction.dup
+    transaction2.reference_1 = "ANNF/1754/1/1"
+    transaction2.save
 
     @service.import(upload, file)
     assert_equal(true, transaction.reload.temporary_cessation)
-    assert_equal(false, transaction_2.reload.temporary_cessation)
+    assert_equal(false, transaction2.reload.temporary_cessation)
   end
 
   def test_import_handles_zero_variation
@@ -121,17 +121,17 @@ class AnnualBillingDataFileServiceTest < ActiveSupport::TestCase
     upload = prepare_upload(file)
 
     transaction = sroc_transaction
-    transaction_2 = transaction.dup
-    transaction_2.reference_1 = "ANNF/1754/1/1"
-    transaction_2.save
-    transaction_3 = transaction.dup
-    transaction_3.reference_1 = "ZNNNF/1754/1/1"
-    transaction_3.save
+    transaction2 = transaction.dup
+    transaction2.reference_1 = "ANNF/1754/1/1"
+    transaction2.save
+    transaction3 = transaction.dup
+    transaction3.reference_1 = "ZNNNF/1754/1/1"
+    transaction3.save
 
     @service.import(upload, file)
     assert_equal("22%", transaction.reload.variation)
-    assert_equal("0%", transaction_2.reload.variation)
-    assert_equal("84%", transaction_3.reload.variation)
+    assert_equal("0%", transaction2.reload.variation)
+    assert_equal("84%", transaction3.reload.variation)
   end
 
   def test_import_stores_variation_with_an_percent_suffix
@@ -139,22 +139,22 @@ class AnnualBillingDataFileServiceTest < ActiveSupport::TestCase
     upload = prepare_upload(file)
 
     transaction = sroc_transaction
-    transaction_2 = transaction.dup
-    transaction_2.reference_1 = "ANNF/1754/1/1"
-    transaction_2.save
+    transaction2 = transaction.dup
+    transaction2.reference_1 = "ANNF/1754/1/1"
+    transaction2.save
 
     @service.import(upload, file)
     assert transaction.reload.variation.end_with?("%")
-    assert transaction_2.reload.variation.end_with?("%")
+    assert transaction2.reload.variation.end_with?("%")
   end
 
   def test_import_records_total_and_errors
     file = file_fixture("cfd_abd.csv")
     upload = prepare_upload(file)
     transaction = sroc_transaction
-    transaction_2 = transaction.dup
-    transaction_2.reference_1 = "ANNF/1754/1/1"
-    transaction_2.save
+    transaction2 = transaction.dup
+    transaction2.reference_1 = "ANNF/1754/1/1"
+    transaction2.save
 
     @service.import(upload, file)
     assert_equal 2, upload.success_count
@@ -166,9 +166,9 @@ class AnnualBillingDataFileServiceTest < ActiveSupport::TestCase
     file = file_fixture("cfd_abd.csv")
     upload = prepare_upload(file)
     transaction = sroc_transaction
-    transaction_2 = transaction.dup
-    transaction_2.reference_1 = "ANNF/1754/1/1"
-    transaction_2.save!
+    transaction2 = transaction.dup
+    transaction2.reference_1 = "ANNF/1754/1/1"
+    transaction2.save!
 
     assert_difference("AuditLog.count", 2) do
       @service.import(upload, file)

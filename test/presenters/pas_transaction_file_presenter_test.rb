@@ -9,17 +9,17 @@ class PasTransactionFilePresenterTest < ActiveSupport::TestCase
     @user = users(:billing_admin)
     Thread.current[:current_user] = @user
 
-    @transaction_1 = transaction_details(:pas)
-    @transaction_2 = @transaction_1.dup
+    @transaction1 = transaction_details(:pas)
+    @transaction2 = @transaction1.dup
 
-    @transaction_2.customer_reference = "A223344123P"
-    @transaction_2.transaction_reference = "PAS00055512Y"
-    @transaction_2.transaction_type = "C"
-    @transaction_2.reference_1 = "VP1234AA"
-    @transaction_2.line_amount = -1234
-    @transaction_2.unit_of_measure_price = -1234
+    @transaction2.customer_reference = "A223344123P"
+    @transaction2.transaction_reference = "PAS00055512Y"
+    @transaction2.transaction_type = "C"
+    @transaction2.reference_1 = "VP1234AA"
+    @transaction2.line_amount = -1234
+    @transaction2.unit_of_measure_price = -1234
 
-    [@transaction_1, @transaction_2].each_with_index do |t, i|
+    [@transaction1, @transaction2].each_with_index do |t, i|
       t.category = "2.4.4"
       t.status = "billed"
       t.tcm_charge = t.line_amount
@@ -29,8 +29,8 @@ class PasTransactionFilePresenterTest < ActiveSupport::TestCase
     end
 
     @file = transaction_files(:pas_sroc_file)
-    @file.transaction_details << @transaction_1
-    @file.transaction_details << @transaction_2
+    @file.transaction_details << @transaction1
+    @file.transaction_details << @transaction2
 
     @presenter = PasTransactionFilePresenter.new(@file)
   end
@@ -64,7 +64,7 @@ class PasTransactionFilePresenterTest < ActiveSupport::TestCase
     @presenter.details do |row|
       rows << row
     end
-    sorted_rows = [@transaction_1, @transaction_2].sort do |a, b|
+    sorted_rows = [@transaction1, @transaction2].sort do |a, b|
       a.tcm_transaction_reference <=> b.tcm_transaction_reference
     end
 

@@ -9,21 +9,21 @@ class WmlTransactionFilePresenterTest < ActiveSupport::TestCase
     @user = users(:billing_admin)
     Thread.current[:current_user] = @user
 
-    @transaction_1 = transaction_details(:wml)
-    @transaction_2 = @transaction_1.dup
+    @transaction1 = transaction_details(:wml)
+    @transaction2 = @transaction1.dup
 
-    @transaction_2.customer_reference = "A223344123P"
-    @transaction_2.transaction_reference = "E00555123"
-    @transaction_2.transaction_type = "C"
-    @transaction_2.line_attr_2 = "012345"
-    @transaction_2.reference_1 = "012345"
-    @transaction_2.reference_2 = "XZ3333PG/A001"
-    @transaction_2.line_amount = -1234
-    @transaction_2.unit_of_measure_price = -1234
+    @transaction2.customer_reference = "A223344123P"
+    @transaction2.transaction_reference = "E00555123"
+    @transaction2.transaction_type = "C"
+    @transaction2.line_attr_2 = "012345"
+    @transaction2.reference_1 = "012345"
+    @transaction2.reference_2 = "XZ3333PG/A001"
+    @transaction2.line_amount = -1234
+    @transaction2.unit_of_measure_price = -1234
 
-    @transaction_3 = transaction_details(:wml_invoice)
+    @transaction3 = transaction_details(:wml_invoice)
 
-    [@transaction_1, @transaction_2, @transaction_3].each_with_index do |t, i|
+    [@transaction1, @transaction2, @transaction3].each_with_index do |t, i|
       t.category = "2.4.4"
       t.status = "billed"
       t.tcm_charge = t.line_amount
@@ -33,9 +33,9 @@ class WmlTransactionFilePresenterTest < ActiveSupport::TestCase
     end
 
     @file = transaction_files(:wml_sroc_file)
-    @file.transaction_details << @transaction_1
-    @file.transaction_details << @transaction_2
-    @file.transaction_details << @transaction_3
+    @file.transaction_details << @transaction1
+    @file.transaction_details << @transaction2
+    @file.transaction_details << @transaction3
 
     @presenter = WmlTransactionFilePresenter.new(@file)
   end
@@ -69,7 +69,7 @@ class WmlTransactionFilePresenterTest < ActiveSupport::TestCase
     @presenter.details do |row|
       rows << row
     end
-    sorted_rows = [@transaction_1, @transaction_2, @transaction_3].sort do |a, b|
+    sorted_rows = [@transaction1, @transaction2, @transaction3].sort do |a, b|
       a.tcm_transaction_reference <=> b.tcm_transaction_reference
     end
 
