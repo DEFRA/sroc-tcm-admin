@@ -36,8 +36,7 @@ class PermitCategory < ApplicationRecord
 
   def self.search(query)
     m = "%#{sanitize_sql_like(query)}%"
-    where(arel_table[:code].matches(m).
-          or(arel_table[:description].matches(m)))
+    where(arel_table[:code].matches(m).or(arel_table[:description].matches(m)))
   end
 
   def active?
