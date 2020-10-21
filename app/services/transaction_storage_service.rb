@@ -167,8 +167,6 @@ class TransactionStorageService
       q.order(reference_2: dir, reference_1: dir)
     when :discharge
       q.order(reference_3: dir, reference_1: dir)
-    when :original_filename
-      q.order(original_filename: dir, id: dir)
     when :generated_filename
       q.order(generated_filename: dir, id: dir)
     when :generated_file_date
