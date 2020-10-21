@@ -33,8 +33,8 @@ module FormErrorHelper
       html_class += " #{error_class(resource, attr)}"
       html_opts.merge!(class: html_class)
       el = []
-      resource.errors.full_messages_for(attr).each do |message|
-        el << error_trim(message)
+      resource.errors.full_messages_for(attr).each do |msg|
+        el << error_trim(msg)
       end
       message = content_tag(:div, class: "error-item") do
         safe_join(el, "\n")
