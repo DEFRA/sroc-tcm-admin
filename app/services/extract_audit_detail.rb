@@ -36,7 +36,7 @@ class ExtractAuditDetail < ServiceObject
 
             d.action = if k == "category" && l.user == User.system_account
               "suggestion"
-            else
+                       else
               l.action
                        end
 

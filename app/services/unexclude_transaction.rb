@@ -12,7 +12,7 @@ class UnexcludeTransaction < ServiceObject
   def call
     @result = if @transaction.excluded?
       unexclude
-    else
+              else
       false
               end
     self

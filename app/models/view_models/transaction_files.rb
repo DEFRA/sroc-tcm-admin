@@ -27,9 +27,9 @@ module ViewModels
         else
           available_regions.first
         end
-      elsif available_regions.include?(val)
+                elsif available_regions.include?(val)
         val
-      else
+                else
         available_regions.first
                 end
     end

@@ -81,7 +81,7 @@ class TransactionStorageService
         or(q.where.not(reference_2: "NA").
            where.not(reference_2: nil).
            where(reference_2: transaction.reference_2))
-    else
+        else
       q.where.not(reference_1: nil).
         where.not(reference_1: "NA").
         where(reference_1: transaction.reference_1)

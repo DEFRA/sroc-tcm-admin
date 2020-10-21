@@ -14,7 +14,7 @@ class UnapproveTransaction < ServiceObject
       @transaction.update_attributes(approved_for_billing: false,
                                                approver: @approver,
                                                approved_for_billing_at: Time.zone.now)
-    else
+              else
       false
               end
     self
