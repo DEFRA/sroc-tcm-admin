@@ -18,7 +18,7 @@ class TransactionExportServiceTest < ActiveSupport::TestCase
     data = @exporter.export(presenter.wrap(transactions))
     idx = 0
     CSV.parse(data, headers: true) do |row|
-      assert_equal @exporter.regime_columns, row.headers()
+      assert_equal @exporter.regime_columns, row.headers
       assert_equal row["Reference 1"], transactions[idx].reference_1
       idx += 1
     end
@@ -35,7 +35,7 @@ class TransactionExportServiceTest < ActiveSupport::TestCase
     idx = 0
 
     CSV.parse(data, headers: true) do |row|
-      assert_equal @exporter.regime_columns, row.headers()
+      assert_equal @exporter.regime_columns, row.headers
       category = @permit_store.code_for_financial_year(code, row["Tcm Financial Year"])
       if category
         assert_equal category.description, row["Category Description"]
@@ -53,7 +53,7 @@ class TransactionExportServiceTest < ActiveSupport::TestCase
     data = @exporter.export_history(presenter.wrap(transactions))
     idx = 0
     CSV.parse(data, headers: true) do |row|
-      assert_equal @exporter.regime_history_columns, row.headers()
+      assert_equal @exporter.regime_history_columns, row.headers
       assert_equal row["Reference 1"], transactions[idx].reference_1
       idx += 1
     end
