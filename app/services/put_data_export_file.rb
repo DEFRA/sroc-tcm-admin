@@ -11,7 +11,7 @@ class PutDataExportFile < ServiceObject
 
   def call
     # store data export file in S3 (or local in DEV mode)
-    if File.exists? filename
+    if File.exist? filename
       basename = File.basename(filename)
 
       begin

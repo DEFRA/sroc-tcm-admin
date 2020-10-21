@@ -13,7 +13,7 @@ class ExportTransactionDataTest < ActiveSupport::TestCase
   def teardown
     edf = @regime.export_data_file
     filename = Rails.root.join("tmp", edf.filename)
-    File.delete(filename) if File.exists?(filename)
+    File.delete(filename) if File.exist?(filename)
   end
 
   def test_it_generates_a_file
@@ -22,7 +22,7 @@ class ExportTransactionDataTest < ActiveSupport::TestCase
     result = ExportTransactionData.call(regime: @regime)
     assert result.success?, "Result unsuccessful"
 
-    assert File.exists?(result.filename), "File not found #{result.filename}"
+    assert File.exist?(result.filename), "File not found #{result.filename}"
     assert_equal @regime.export_data_file.reload.exported_filename,
                  File.basename(result.filename), "Filenames do not match"
   end

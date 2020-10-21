@@ -10,7 +10,7 @@ namespace :tcm do
   task check_rails_running: :environment do
     path = Rails.root.join("tmp", "pids", "server.pid")
     rails_running = true
-    if File.exists? path
+    if File.exist? path
       pid = File.read(path).to_i
       begin
         Process.getpgid pid
