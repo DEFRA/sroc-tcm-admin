@@ -55,10 +55,10 @@ class BatchCsvExport < ServiceObject
   end
 
   def regime_headings
-    ExportFileFormat::ExportColumns.map { |c| c[:heading] }
+    ExportFileFormat::EXPORT_COLUMNS.map { |c| c[:heading] }
   end
 
   def regime_columns
-    @regime_columns ||= ExportFileFormat::ExportColumns.map { |c| c[:accessor] }
+    @regime_columns ||= ExportFileFormat::EXPORT_COLUMNS.map { |c| c[:accessor] }
   end
 end

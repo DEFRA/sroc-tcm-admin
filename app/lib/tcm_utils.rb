@@ -37,12 +37,12 @@ class TcmUtils
 
   def self.extract_transaction_period_dates(transaction, regime = nil)
     regime = transaction.regime if regime.nil?
-    info = TcmConstants::PeriodDates[regime.slug.to_sym]
+    info = TcmConstants::PERIOD_DATES[regime.slug.to_sym]
     extract_period_dates(transaction.send(info[:attr_name]), info[:format])
   end
 
   def self.extract_csv_period_dates(regime, row)
-    info = TcmConstants::PeriodDates[regime.slug.to_sym]
+    info = TcmConstants::PERIOD_DATES[regime.slug.to_sym]
     period_index = "TransactionFileFormat::Detail::#{info[:attr_name].to_s.classify}".constantize
     if regime.waste?
       extract_waste_period_dates(row[period_index], info[:format])

@@ -9,7 +9,7 @@ class AnnualBillingDataFile < ApplicationRecord
   validates :status, inclusion: { in: %w[new uploaded processing completed failed] }
 
   def file_types
-    AnnualBillingDataFileFormat::FileTypes
+    AnnualBillingDataFileFormat::FILE_TYPES
   end
 
   def log_error(line, msg)

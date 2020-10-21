@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module AnnualBillingDataFileFormat
-  FileTypes = %w[.csv].freeze
+  FILE_TYPES = %w[.csv].freeze
 
-  Descriptions = {
+  DESCRIPTIONS = {
     consent_reference: "Unique consent reference including discharge and version",
     permit_reference: "Unique permit reference",
     region: "Single letter region identifier",
@@ -15,7 +15,7 @@ module AnnualBillingDataFileFormat
   }.freeze
 
   module CFD
-    Headers = [
+    HEADERS = [
       {
         header: :consent_reference,
         column: :reference_1,
@@ -41,7 +41,7 @@ module AnnualBillingDataFileFormat
   end
 
   module PAS
-    Headers = [
+    HEADERS = [
       {
         header: :permit_reference,
         column: :reference_1,
@@ -62,7 +62,7 @@ module AnnualBillingDataFileFormat
   end
 
   module WML
-    Headers = [
+    HEADERS = [
       {
         header: :permit_reference,
         column: :reference_1,
@@ -90,15 +90,15 @@ module AnnualBillingDataFileFormat
     prefix = regime.downcase
 
     define_method "#{prefix}_columns" do
-      "AnnualBillingDataFileFormat::#{regime}::Headers".constantize
+      "AnnualBillingDataFileFormat::#{regime}::HEADERS".constantize
     end
 
     define_method "#{prefix}_column_names" do
-      "AnnualBillingDataFileFormat::#{regime}::Headers".constantize.map { |h| h[:header] }
+      "AnnualBillingDataFileFormat::#{regime}::HEADERS".constantize.map { |h| h[:header] }
     end
 
     define_method "#{prefix}_mandatory_column_names" do
-      "AnnualBillingDataFileFormat::#{regime}::Headers".constantize.select { |h| h[:mandatory] }.
+      "AnnualBillingDataFileFormat::#{regime}::HEADERS".constantize.select { |h| h[:mandatory] }.
         map { |h| h[:header] }
     end
   end

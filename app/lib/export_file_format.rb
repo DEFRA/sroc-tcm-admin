@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ExportFileFormat
-  ExportColumns = [
+  EXPORT_COLUMNS = [
     { heading: "Customer Reference", accessor: :customer_reference },
     { heading: "Transaction Date", accessor: :original_transaction_date },
     { heading: "Transaction Type", accessor: :transaction_type },
@@ -79,7 +79,7 @@ module ExportFileFormat
     { heading: "TCM Compliance %", accessor: :tcm_compliance_percentage }
   ].freeze
 
-  Columns = %i[
+  COLUMNS = %i[
     customer_reference
     transaction_date
     transaction_type
@@ -138,7 +138,7 @@ module ExportFileFormat
     currency_tcm_charge
   ].freeze
 
-  HistoryColumns = Columns + %i[
+  HISTORY_COLUMNS = COLUMNS + %i[
     generated_filename
     tcm_file_date
     tcm_transaction_type

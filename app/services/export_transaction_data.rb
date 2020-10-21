@@ -115,11 +115,11 @@ class ExportTransactionData < ServiceObject
   end
 
   def regime_headers
-    ExportFileFormat::ExportColumns.map { |c| c[:heading] }
+    ExportFileFormat::EXPORT_COLUMNS.map { |c| c[:heading] }
   end
 
   def regime_columns
-    ExportFileFormat::ExportColumns.map { |c| c[:accessor] }
+    ExportFileFormat::EXPORT_COLUMNS.map { |c| c[:accessor] }
   end
 
   def regime_filename

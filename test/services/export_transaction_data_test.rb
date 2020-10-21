@@ -43,7 +43,7 @@ class ExportTransactionDataTest < ActiveSupport::TestCase
     idx = 0
     CSV.parse(data, headers: true) do |row|
       t = presenter.new(transactions[idx])
-      ExportFileFormat::ExportColumns.each do |c|
+      ExportFileFormat::EXPORT_COLUMNS.each do |c|
         val = row[c[:heading]]
         val = "" if val.nil?
 
@@ -135,7 +135,7 @@ class ExportTransactionDataTest < ActiveSupport::TestCase
     ]
 
     assert_equal expected,
-                 ExportFileFormat::ExportColumns.map { |c| c[:heading] },
+                 ExportFileFormat::EXPORT_COLUMNS.map { |c| c[:heading] },
                  "Column mismatch"
   end
 end
