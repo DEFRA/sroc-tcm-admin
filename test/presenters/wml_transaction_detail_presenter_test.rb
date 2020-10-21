@@ -20,7 +20,7 @@ class WmlTransactionDetailPresenterTest < ActiveSupport::TestCase
     assert_equal("A (95%)", @presenter.compliance_band_with_percent)
 
     apply_charge_calculation_compliance(@transaction,
-                                      "Significant Improvement Needed(100%)")
+                                        "Significant Improvement Needed(100%)")
     assert_equal("Significant Improvement Needed (100%)",
                  @presenter.compliance_band_with_percent)
   end

@@ -30,8 +30,8 @@ class ExportTransactionDataTest < ActiveSupport::TestCase
   def test_it_exports_csv_data
     transactions = @regime.transaction_details.
                    includes(:suggested_category,
-               :transaction_header,
-               :transaction_file).
+                            :transaction_header,
+                            :transaction_file).
                    order(:region, :transaction_date, :id)
 
     assert transactions.count.positive?, "No transaction data"
