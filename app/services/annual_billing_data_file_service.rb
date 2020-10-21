@@ -53,7 +53,7 @@ class AnnualBillingDataFileService
 
   def valid_file?(file)
     # check file looks reasonable
-    begin
+    
       csv = CSV.new(file,
                     headers: true,
                     return_headers: true,
@@ -73,7 +73,7 @@ class AnnualBillingDataFileService
     rescue StandardError => e
       Rails.logger.error(e.message)
       false
-    end
+    
   end
 
   def mandatory_headers

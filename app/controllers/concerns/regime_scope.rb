@@ -10,11 +10,11 @@ module RegimeScope
   end
 
   def str_to_class(name)
-    begin
+    
       name.constantize
     rescue NameError => e
       nil
-    end
+    
   end
 
   def set_regime

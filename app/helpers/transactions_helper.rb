@@ -26,11 +26,11 @@ module TransactionsHelper
   end
 
   def str_to_class(name)
-    begin
+    
       name.constantize
     rescue NameError => e
       nil
-    end
+    
   end
 
   def view_options(selected_mode)

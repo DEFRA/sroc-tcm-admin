@@ -7,10 +7,10 @@ module RegimePresenter
   end
 
   def str_to_class(name)
-    begin
+    
       name.constantize
     rescue NameError => e
       nil
-    end
+    
   end
 end
