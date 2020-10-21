@@ -104,7 +104,7 @@ namespace :resque do
     ::ActiveRecord::Base.clear_all_connections!
     count.times do
       pid = Process.fork
-      if pid.nil? then
+      if pid.nil?
         # In child
         child = true
 
