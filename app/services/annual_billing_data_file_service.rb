@@ -73,7 +73,6 @@ class AnnualBillingDataFileService
     rescue StandardError => e
       Rails.logger.error(e.message)
       false
-
   end
 
   def mandatory_headers
