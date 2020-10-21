@@ -36,8 +36,6 @@ module Query
     end
 
     # for group filters
-    def regime
-      @regime
-    end
+    attr_reader :regime
   end
 end
