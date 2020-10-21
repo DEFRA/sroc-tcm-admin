@@ -76,7 +76,7 @@ class TcmUtils
     # e.g.
     # '10/06/17 - 22/12/17'
     # '23/06/2017 - 31/03/2017'
-    period.split(" ").select { |i| i != "-" }.each do |d|
+    period.split(" ").reject { |i| i == "-" }.each do |d|
       dates << Date.strptime(d, date_format)
     end
     dates

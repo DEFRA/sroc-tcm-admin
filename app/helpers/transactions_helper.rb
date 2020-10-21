@@ -26,11 +26,11 @@ module TransactionsHelper
   end
 
   def str_to_class(name)
-    
+
       name.constantize
     rescue NameError => e
       nil
-    
+
   end
 
   def view_options(selected_mode)
@@ -45,8 +45,8 @@ module TransactionsHelper
        { "data-path" => regime_exclusions_path(@regime) }]
     ]
 
-    opts = opts.select { |o| o[1] != "retrospective" } if @regime.waste?
-    opts = opts.select { |o| o[1] != "excluded" } if current_user.can_read_only?
+    opts = opts.reject { |o| o[1] == "retrospective" } if @regime.waste?
+    opts = opts.reject { |o| o[1] == "excluded" } if current_user.can_read_only?
     options_for_select opts, selected_mode
   end
 

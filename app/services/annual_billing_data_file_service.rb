@@ -53,7 +53,7 @@ class AnnualBillingDataFileService
 
   def valid_file?(file)
     # check file looks reasonable
-    
+
       csv = CSV.new(file,
                     headers: true,
                     return_headers: true,
@@ -73,7 +73,7 @@ class AnnualBillingDataFileService
     rescue StandardError => e
       Rails.logger.error(e.message)
       false
-    
+
   end
 
   def mandatory_headers
@@ -94,7 +94,7 @@ class AnnualBillingDataFileService
     key_header = headers.select { |h| h.fetch(:unique_reference, false) }.first
     key_column = key_header[:header]
     ref_column = key_header[:column]
-    update_columns = headers.select { |h| h[:header] != key_column }
+    update_columns = headers.reject { |h| h[:header] == key_column }
 
     counter = 1
     CSV.foreach(path, headers: true,

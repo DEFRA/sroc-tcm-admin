@@ -23,7 +23,7 @@ class FileStorageService
   def list_files_in(zone)
     path = zone_path(zone)
     files = storage.list path
-    files.select { |f| f != path }.map { |f| f.sub(path, "") }
+    files.reject { |f| f == path }.map { |f| f.sub(path, "") }
   end
 
   def fetch_file_from(zone, from_path, to_path)
