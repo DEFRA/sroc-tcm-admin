@@ -15,7 +15,7 @@ class AnnualBillingDataFileServiceTest < ActiveSupport::TestCase
     # @service.stubs(:calculator).returns(@calculator)
   end
 
-  def test_new_upload_returns_instance_of_AnnualBillingDataFile
+  def test_new_upload_returns_instance_of_annual_billing_data_file
     upload = @service.new_upload
     assert_instance_of AnnualBillingDataFile, upload
   end

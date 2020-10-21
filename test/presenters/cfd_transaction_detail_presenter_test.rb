@@ -95,12 +95,12 @@ class CfdTransactionDetailPresenterTest < ActiveSupport::TestCase
     assert_equal(@presenter.discharge_reference, @transaction.reference_3)
   end
 
-  def test_temporary_cessation_flag_returns_Y_when_true
+  def test_temporary_cessation_flag_returns_y_when_true
     @presenter.temporary_cessation = true
     assert_equal("Y", @presenter.temporary_cessation_flag)
   end
 
-  def test_temporary_cessation_flag_returns_N_when_false
+  def test_temporary_cessation_flag_returns_n_when_false
     @presenter.temporary_cessation = false
     assert_equal("N", @presenter.temporary_cessation_flag)
   end
@@ -122,12 +122,12 @@ class CfdTransactionDetailPresenterTest < ActiveSupport::TestCase
     assert_equal("Discharge Location: ", @presenter.discharge_location)
   end
 
-  def test_pre_sroc_flag_returns_Y_for_retrospective_transactions
+  def test_pre_sroc_flag_returns_y_for_retrospective_transactions
     @transaction.status = "retrospective"
     assert_equal "Y", @presenter.pre_sroc_flag, "Pre-SRoC flag incorrect"
   end
 
-  def test_pre_sroc_flag_returns_Y_for_retro_billed_transactions
+  def test_pre_sroc_flag_returns_y_for_retro_billed_transactions
     @transaction.status = "retro_billed"
     assert_equal "Y", @presenter.pre_sroc_flag, "Pre-SRoC flag incorrect"
   end
