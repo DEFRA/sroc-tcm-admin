@@ -43,10 +43,8 @@ namespace :resque do
     # pid_file_path = Rails.root.join('tmp', 'pids', 'resque.pid')
     return [] unless File.exists?(pid_file_path)
 
-    file_contents = File.open(pid_file_path, "r") do |f|
-      f.read
-    end
-    file_contents.split(",").collect { |p| p.to_i }
+    file_contents = File.open(pid_file_path, "r", &:read)
+    file_contents.split(",").collect(&:to_i)
   end
 
   def pid_file_path

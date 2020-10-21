@@ -5,13 +5,13 @@ class AwsFileStore
     options = { bucket: s3_bucket_name }
     options[:prefix] = path if path.present?
     resp = s3.list_objects_v2(options)
-    files = resp.contents.map { |f| f.key }
+    files = resp.contents.map(&:key)
 
     # handle 1000 file batching limit
     while resp.is_truncated
       options[:continuation_token] = resp.next_continuation_token
       resp = s3.list_objects_v2(options)
-      files += resp.contents.map { |f| f.key }
+      files += resp.contents.map(&:key)
     end
 
     files

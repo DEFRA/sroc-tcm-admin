@@ -11,6 +11,6 @@ module UsersHelper
   end
 
   def regime_names(user)
-    user.regimes.map { |r| r.title }.join(", ")
+    user.regimes.map(&:title).join(", ")
   end
 end

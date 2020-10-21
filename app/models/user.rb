@@ -91,7 +91,7 @@ class User < ApplicationRecord
   end
 
   def at_least_one_regime_selected
-    selected = regime_users.select { |ru| ru.enabled? }.count
+    selected = regime_users.select(&:enabled?).count
     errors.add :regime, "^Access to at least one Regime is required" if selected.zero?
   end
 
