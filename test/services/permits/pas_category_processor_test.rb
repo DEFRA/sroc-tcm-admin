@@ -134,7 +134,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    transactions = set_historic_content(historic_data)
+    transactions = apply_historic_content(historic_data)
 
     matches = @processor.find_historic_transactions(
       reference_3: "AAAA0001", customer_reference: "A"
@@ -157,7 +157,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    transactions = set_historic_content(historic_data)
+    transactions = apply_historic_content(historic_data)
 
     matches = @processor.find_historic_transactions(
       reference_3: "AAAA0001", customer_reference: "A"
@@ -179,7 +179,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: 1234, period_start: "2-JUN-2019" }
     ]
 
-    matched = set_historic_content(historic_data).first
+    matched = apply_historic_content(historic_data).first
 
     @processor.set_category(transaction, matched, :green, "Level 99")
     assert_equal matched.category, transaction.reload.category
@@ -201,7 +201,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: 1234, period_start: "2-JUN-2019" }
     ]
 
-    matched = set_historic_content(historic_data).first
+    matched = apply_historic_content(historic_data).first
 
     @processor.set_category(transaction, matched, :amber, "Level")
     assert_equal matched.category, transaction.reload.category
@@ -221,7 +221,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0001", customer_reference: "A",
         line_amount: 1234, period_start: "2-JUN-2019" }
     ]
-    matched = set_historic_content(historic_data).first
+    matched = apply_historic_content(historic_data).first
 
     @processor.set_category(transaction, matched, :green, "Level")
     assert_not_nil transaction.charge_calculation, "Charge calculation not set"
@@ -238,7 +238,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0001", customer_reference: "A",
         line_amount: 1234, period_start: "2-JUN-2019" }
     ]
-    matched = set_historic_content(historic_data).first
+    matched = apply_historic_content(historic_data).first
 
     p = PermitStorageService.new(@header.regime)
     p.update_or_create_new_version(matched.category, "test", "1920", "excluded")
@@ -259,7 +259,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
       { reference_3: "AAAA0001", customer_reference: "A",
         line_amount: 1234, period_start: "2-JUN-2019" }
     ]
-    matched = set_historic_content(historic_data).first
+    matched = apply_historic_content(historic_data).first
 
     build_mock_calculator_with_error
 
@@ -287,7 +287,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
@@ -322,7 +322,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
@@ -362,7 +362,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "C", line_amount: 1234 },
@@ -397,7 +397,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "C", line_amount: 1234 },
@@ -457,7 +457,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
@@ -500,7 +500,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
@@ -545,7 +545,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "C", line_amount: 1234 },
@@ -588,7 +588,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "C", line_amount: 1234 },
@@ -626,7 +626,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "C", line_amount: 1234 },
@@ -668,7 +668,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
@@ -706,7 +706,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
@@ -744,7 +744,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
@@ -782,7 +782,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
@@ -820,7 +820,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
@@ -858,7 +858,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
@@ -896,7 +896,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
@@ -935,7 +935,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
@@ -982,7 +982,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
@@ -1028,7 +1028,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
@@ -1070,7 +1070,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
@@ -1115,7 +1115,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
@@ -1158,7 +1158,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
@@ -1204,7 +1204,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: 1234 },
@@ -1246,7 +1246,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: -234 },
@@ -1285,7 +1285,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: -234 },
@@ -1324,7 +1324,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: -234 },
@@ -1363,7 +1363,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: -234 },
@@ -1403,7 +1403,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: -234 },
@@ -1449,7 +1449,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: -234 },
@@ -1493,7 +1493,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: -234 },
@@ -1540,7 +1540,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
         line_amount: -2234, period_start: "3-JUN-2019" }
     ]
 
-    set_historic_content(historic_data)
+    apply_historic_content(historic_data)
 
     file_data = [
       { reference_3: "AAAA0001", customer_reference: "A", line_amount: -234 },
@@ -1587,7 +1587,7 @@ class PasCategoryProcessorTest < ActiveSupport::TestCase
     results
   end
 
-  def set_historic_content(content)
+  def apply_historic_content(content)
     f = transaction_files(:pas_sroc_file)
     t = transaction_details(:pas)
     history = []
