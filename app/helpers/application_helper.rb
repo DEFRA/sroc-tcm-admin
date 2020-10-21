@@ -45,7 +45,7 @@ module ApplicationHelper
     cls = "sort-link"
     if name.to_sym == sort_col
       span = "<span class='oi oi-caret-#{top_or_bottom(sort_dir)}'></span>"
-      cls = cls + " sorted sorted-#{sort_dir}"
+      cls += " sorted sorted-#{sort_dir}"
     else
       span = ""
     end
