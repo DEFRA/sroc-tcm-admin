@@ -27,12 +27,12 @@ module ViewModels
           "all"
         else
           available_regions.first
-                  end
+        end
       elsif available_regions.include?(val)
         val
       else
         available_regions.first
-      end
+                end
     end
 
     def region
