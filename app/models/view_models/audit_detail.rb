@@ -9,7 +9,7 @@ module ViewModels
       when "modify"
         if old_value.nil?
           # setting a value
-          if has_charge_calculation_error?(new_value)
+          if charge_calculation_error?(new_value)
             I18n.t("error_html", scope: audit_scope, message: new_attr_value)
           else
             I18n.t("added_html", scope: audit_scope, value: new_attr_value)
@@ -19,8 +19,8 @@ module ViewModels
           I18n.t("removed_html", scope: audit_scope, value: old_attr_value)
         else
           # changing a value
-          old_err = has_charge_calculation_error?(old_value)
-          new_err = has_charge_calculation_error?(new_value)
+          old_err = charge_calculation_error?(old_value)
+          new_err = charge_calculation_error?(new_value)
 
           if old_err && new_err
             I18n.t("error_html",
@@ -69,7 +69,7 @@ module ViewModels
       describe_value(new_value)
     end
 
-    def has_charge_calculation_error?(val)
+    def charge_calculation_error?(val)
       @attribute == "charge_calculation" &&
         val["calculation"] && val["calculation"]["messages"]
     end

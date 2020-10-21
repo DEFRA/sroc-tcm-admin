@@ -23,7 +23,7 @@ class TransactionSummary
     number_to_currency(@net_total / 100.0)
   end
 
-  def has_transactions_to_bill?
+  def transactions_to_bill?
     credit_count.positive? || invoice_count.positive?
   end
 end
