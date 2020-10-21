@@ -19,9 +19,9 @@ module Devise
                    update_attributes(params, *options)
                  else
                    assign_attributes(params, *options)
-          valid?
-          errors.add(:current_password, current_password.blank? ? :blank : :invalid)
-          false
+                   valid?
+                   errors.add(:current_password, current_password.blank? ? :blank : :invalid)
+                   false
                  end
 
         clean_up_passwords

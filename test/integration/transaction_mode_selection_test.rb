@@ -43,7 +43,7 @@ class TransactionModeSelectionTest < ActionDispatch::IntegrationTest
      regime_history_index_path(@regime),
      regime_exclusions_path(@regime)].each do |path|
       visit path
-        assert page.has_select? "mode", options: @wml_options
+      assert page.has_select? "mode", options: @wml_options
     end
   end
 
@@ -54,7 +54,7 @@ class TransactionModeSelectionTest < ActionDispatch::IntegrationTest
      regime_retrospectives_path(@regime),
      regime_exclusions_path(@regime)].each do |path|
       visit path
-        assert page.has_select? "mode", options: @all_options
+      assert page.has_select? "mode", options: @all_options
     end
   end
 
@@ -65,7 +65,7 @@ class TransactionModeSelectionTest < ActionDispatch::IntegrationTest
      regime_retrospectives_path(@regime),
      regime_exclusions_path(@regime)].each do |path|
       visit path
-        assert page.has_select? "mode", options: @all_options
+      assert page.has_select? "mode", options: @all_options
     end
   end
 end
