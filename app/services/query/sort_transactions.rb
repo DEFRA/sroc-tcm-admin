@@ -3,6 +3,7 @@
 module Query
   class SortTransactions < QueryObject
     def initialize(opts = {})
+      super()
       @regime = opts.fetch(:regime)
       @query = opts.fetch(:query)
       @sort_column = opts.fetch(:sort, :customer_name)

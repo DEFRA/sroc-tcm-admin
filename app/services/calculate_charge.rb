@@ -6,6 +6,7 @@ class CalculateCharge < ServiceObject
   include RegimeScope
 
   def initialize(params = {})
+    super()
     @transaction = params.fetch(:transaction)
     @regime = @transaction.regime
     # this needs to  be decorated by a presenter to provide charge params etc

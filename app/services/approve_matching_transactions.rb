@@ -4,6 +4,7 @@ class ApproveMatchingTransactions < ServiceObject
   attr_reader :transaction, :count
 
   def initialize(params = {})
+    super()
     @regime = params.fetch(:regime)
     @region = params.fetch(:region)
     @financial_year = params.fetch(:financial_year, "")

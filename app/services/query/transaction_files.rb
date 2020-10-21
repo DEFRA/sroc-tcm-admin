@@ -3,6 +3,7 @@
 module Query
   class TransactionFiles < QueryObject
     def initialize(opts = {})
+      super()
       @regime = opts.fetch(:regime)
       @region = opts.fetch(:region, "")
       @prepost = opts.fetch(:prepost, "")

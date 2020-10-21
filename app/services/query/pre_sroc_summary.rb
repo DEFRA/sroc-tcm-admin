@@ -5,6 +5,7 @@ module Query
     include TransactionGroupFilters
 
     def initialize(params = {})
+      super()
       @regime = params.fetch(:regime)
       @region = params.fetch(:region)
     end

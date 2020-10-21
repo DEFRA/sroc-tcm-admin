@@ -4,6 +4,7 @@ class CreatePermitCategory < ServiceObject
   attr_reader :permit_category
 
   def initialize(params = {})
+    super()
     @regime = params.fetch(:regime)
     @valid_from = params.fetch(:valid_from)
     @user = params.fetch(:user)

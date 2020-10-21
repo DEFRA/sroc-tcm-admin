@@ -3,6 +3,7 @@
 module Query
   class FindTransaction < QueryObject
     def initialize(opts = {})
+      super()
       @regime = opts.fetch(:regime)
       @transaction_id = opts.fetch(:transaction_id)
     end

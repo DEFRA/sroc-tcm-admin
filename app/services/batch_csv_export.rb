@@ -8,6 +8,7 @@ class BatchCsvExport < ServiceObject
   attr_reader :regime, :query, :csv_stream, :max_limit, :batch_size
 
   def initialize(params = {})
+    super()
     @regime = params.fetch(:regime)
     @query = params.fetch(:query)
     @max_limit = params.fetch(:max_limit, 15_000)

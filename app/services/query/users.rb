@@ -3,6 +3,7 @@
 module Query
   class Users < QueryObject
     def initialize(opts = {})
+      super()
       @regime = opts.fetch(:regime, "")
       @role = opts.fetch(:role, "")
       @sort_column = opts.fetch(:sort, :last_name)

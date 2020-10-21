@@ -6,6 +6,7 @@ class PutDataExportFile < ServiceObject
   attr_reader :filename
 
   def initialize(params = {})
+    super()
     @filename = params.fetch(:filename)
   end
 

@@ -3,6 +3,7 @@
 module Query
   class ImportedTransactionFiles < QueryObject
     def initialize(opts = {})
+      super()
       @regime = opts.fetch(:regime)
       @region = opts.fetch(:region, "")
       @status = opts.fetch(:status, "")

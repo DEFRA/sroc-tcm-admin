@@ -4,6 +4,7 @@ class ApplyTemporaryCessation < ServiceObject
   attr_reader :transaction
 
   def initialize(params = {})
+    super()
     @transaction = params.fetch(:transaction)
     @user = params.fetch(:user)
   end

@@ -3,6 +3,7 @@
 module Query
   class PermitCategories < QueryObject
     def initialize(opts = {})
+      super()
       @regime = opts.fetch(:regime)
       @financial_year = opts.fetch(:financial_year)
       @search = opts.fetch(:search, "")

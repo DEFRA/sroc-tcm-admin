@@ -4,6 +4,7 @@ class ExtractAuditDetail < ServiceObject
   attr_reader :transaction, :audit_details
 
   def initialize(params = {})
+    super()
     @transaction = params.fetch(:transaction)
     @audit_details = nil
   end

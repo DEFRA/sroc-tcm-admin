@@ -8,6 +8,7 @@ class FetchDataExportFile < ServiceObject
   attr_reader :regime, :filename
 
   def initialize(params = {})
+    super()
     @regime = params.fetch(:regime)
     @edf = @regime.export_data_file
     @filename = nil

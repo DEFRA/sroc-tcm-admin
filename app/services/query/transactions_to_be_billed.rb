@@ -3,6 +3,7 @@
 module Query
   class TransactionsToBeBilled < QueryObject
     def initialize(opts = {})
+      super()
       @regime = opts.fetch(:regime)
       @region = opts.fetch(:region, "")
       @unapproved = opts.fetch(:unapproved, false)

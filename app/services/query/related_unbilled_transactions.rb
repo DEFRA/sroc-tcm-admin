@@ -3,6 +3,7 @@
 module Query
   class RelatedUnbilledTransactions < QueryObject
     def initialize(opts = {})
+      super()
       @transaction = opts.fetch(:transaction)
     end
 

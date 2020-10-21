@@ -4,6 +4,7 @@ class UpdateCategory < ServiceObject
   attr_reader :transaction
 
   def initialize(params = {})
+    super()
     @transaction = params.fetch(:transaction)
     @category = params.fetch(:category)
     @user = params.fetch(:user)

@@ -5,6 +5,7 @@ class PutQuarantineFile < ServiceObject
   include FileStorage
 
   def initialize(params = {})
+    super()
     @local_path = params.fetch(:local_path)
     @remote_path = params.fetch(:remote_path)
   end

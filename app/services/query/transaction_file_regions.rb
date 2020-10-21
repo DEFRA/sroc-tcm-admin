@@ -3,6 +3,7 @@
 module Query
   class TransactionFileRegions < QueryObject
     def initialize(opts = {})
+      super()
       @regime = opts.fetch(:regime)
     end
 

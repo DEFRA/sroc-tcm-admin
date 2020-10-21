@@ -3,6 +3,7 @@
 module Query
   class Exclusions < QueryObject
     def initialize(opts = {})
+      super()
       @regime = opts.fetch(:regime)
     end
 

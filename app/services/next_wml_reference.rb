@@ -4,6 +4,7 @@ class NextWmlReference < ServiceObject
   attr_accessor :reference
 
   def initialize(params = {})
+    super()
     @regime = params.fetch(:regime)
     @region = params.fetch(:region)
   end

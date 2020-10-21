@@ -6,6 +6,7 @@ class ListEtlImportFiles < ServiceObject
   attr_reader :files
 
   def initialize(_params = {})
+    super()
     @files = []
   end
 

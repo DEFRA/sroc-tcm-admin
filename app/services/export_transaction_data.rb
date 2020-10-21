@@ -10,6 +10,7 @@ class ExportTransactionData < ServiceObject
   attr_reader :regime, :batch_size, :filename
 
   def initialize(params = {})
+    super()
     @regime = params.fetch(:regime)
     @batch_size = params.fetch(:batch_size, 1000)
   end

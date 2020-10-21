@@ -6,6 +6,7 @@ class BillRunManager < ServiceObject
   attr_reader :regime, :region, :pre_sroc, :bill_run_id
 
   def initialize(params = {})
+    super()
     @regime = params.fetch(:regime)
     @region = params.fetch(:region)
     @pre_sroc = params.fetch(:pre_sroc)

@@ -3,6 +3,7 @@
 module Query
   class SortPermitCategories < QueryObject
     def initialize(opts = {})
+      super()
       @query = opts.fetch(:query)
       @sort_column = opts.fetch(:sort, :code)
       @sort_direction = opts.fetch(:sort_direction, "asc")

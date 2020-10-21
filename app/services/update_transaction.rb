@@ -4,6 +4,7 @@ class UpdateTransaction < ServiceObject
   include RegimePresenter
 
   def initialize(params = {})
+    super()
     @params = params
   end
 

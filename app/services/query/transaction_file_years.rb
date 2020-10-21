@@ -3,6 +3,7 @@
 module Query
   class TransactionFileYears < QueryObject
     def initialize(params = {})
+      super()
       @transaction_file = params.fetch(:transaction_file)
     end
 

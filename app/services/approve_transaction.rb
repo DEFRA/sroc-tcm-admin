@@ -4,6 +4,7 @@ class ApproveTransaction < ServiceObject
   attr_reader :transaction
 
   def initialize(params = {})
+    super()
     @transaction = params.fetch(:transaction)
     @approver = params.fetch(:approver)
   end

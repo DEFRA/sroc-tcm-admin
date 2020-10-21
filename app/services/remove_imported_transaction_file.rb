@@ -4,6 +4,7 @@ class RemoveImportedTransactionFile < ServiceObject
   attr_reader :transaction_header
 
   def initialize(params = {})
+    super()
     @transaction_header = TransactionHeaderPresenter.new(params.fetch(:transaction_header))
     @remover = params.fetch(:remover)
     @removal_reason = params.fetch(:removal_reason, "")

@@ -3,6 +3,7 @@
 module Query
   class PreSrocTransactions < QueryObject
     def initialize(opts = {})
+      super()
       @regime = opts.fetch(:regime)
       @region = opts.fetch(:region, "")
       @search = opts.fetch(:search, "")
