@@ -43,9 +43,7 @@ class UnexcludeTransaction < ServiceObject
   def generate_charge
     charge = CalculateCharge.call(transaction: @transaction)
     @transaction.charge_calculation = charge.charge_calculation
-    @transaction.tcm_charge = if charge.success?
-      charge.amount
-    end
+    @transaction.tcm_charge = (charge.amount if charge.success?)
     charge
   end
 end
