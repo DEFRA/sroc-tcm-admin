@@ -67,10 +67,10 @@ class AnnualBillingDataFileService
       valid = true
       mandatory_headers.each { |h| valid = false unless headers.include? h }
       valid
-    rescue CSV::MalformedCSVError => e
+  rescue CSV::MalformedCSVError => e
       Rails.logger.warn(e.message)
       false
-    rescue StandardError => e
+  rescue StandardError => e
       Rails.logger.error(e.message)
       false
   end
