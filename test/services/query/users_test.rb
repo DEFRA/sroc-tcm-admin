@@ -15,7 +15,7 @@ module Query
   end
 
   def test_filter_by_role
-    User.roles.values.each do |n|
+    User.roles.each_value do |n|
       count = User.where(role: n).count
 
       users = Users.call(role: n.to_s)

@@ -23,7 +23,7 @@ class UsersTest < ActionDispatch::IntegrationTest
   def test_can_filter_by_role
     visit users_path
 
-    User.roles.keys.each do |r|
+    User.roles.each_key do |r|
       txt = I18n.t(r, scope: "user.roles")
       page.select txt, from: "role"
       tbl = page.find "div.tcm-table table"

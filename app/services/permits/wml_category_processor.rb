@@ -17,7 +17,7 @@ module Permits
     def handle_annual_billing(permit)
       grouped_permits = find_unique_permits(permit)
 
-      grouped_permits.keys.each do |k|
+      grouped_permits.each_key do |k|
         permit_args = keys_to_args(k)
         historic_transaction = find_latest_historic_transaction(permit_args)
         if historic_transaction
