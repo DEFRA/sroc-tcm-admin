@@ -57,7 +57,7 @@ class AnnualBillingDataFileService
       csv = CSV.new(file,
                     headers: true,
                     return_headers: true,
-                    header_converters: ->(h) {
+                    header_converters: lambda { |h|
                                          TcmUtils.strip_bom(h).
                                                parameterize.underscore.to_sym
 },
@@ -98,7 +98,7 @@ class AnnualBillingDataFileService
 
     counter = 1
     CSV.foreach(path, headers: true,
-                      header_converters: ->(h) {
+                      header_converters: lambda { |h|
                                            TcmUtils.strip_bom(h).
                                                parameterize.underscore.to_sym
 },

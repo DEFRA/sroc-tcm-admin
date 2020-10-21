@@ -40,7 +40,7 @@ class TransactionDetail < ApplicationRecord
 
   scope :unbilled_exclusions, -> { where(status: "unbilled", excluded: true) }
 
-  scope :with_charge_errors, -> {
+  scope :with_charge_errors, lambda {
     where("(charge_calculation -> 'calculation' ->> 'messages') is not null")
   }
   scope :credits, -> { where(arel_table[:line_amount].lt(0)) }
