@@ -11,7 +11,7 @@ module AnnualBillingDataFileFormat
     variation: "A percentage variation charge modifier e.g. 96",
     temporary_cessation: "Whether temporary cessation applies, either 'Y' or 'N'",
     temporary_cessation_start: "Date temporary cessation start in DD-MMM-YYYY format e.g. '12-MAY-2018'",
-    temporary_cessation_end: "Date temporary cessation ends in DD-MMM-YYYY format e.g. '01-FEB-2019'",
+    temporary_cessation_end: "Date temporary cessation ends in DD-MMM-YYYY format e.g. '01-FEB-2019'"
   }.freeze
 
   module CFD
