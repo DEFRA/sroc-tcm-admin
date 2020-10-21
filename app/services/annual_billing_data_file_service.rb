@@ -57,8 +57,7 @@ class AnnualBillingDataFileService
                   headers: true,
                   return_headers: true,
                   header_converters: lambda { |h|
-                                       TcmUtils.strip_bom(h).
-                                             parameterize.underscore.to_sym
+                                       TcmUtils.strip_bom(h).parameterize.underscore.to_sym
                                      },
                   field_size_limit: 32)
     csv.shift
@@ -97,8 +96,7 @@ class AnnualBillingDataFileService
     counter = 1
     CSV.foreach(path, headers: true,
                       header_converters: lambda { |h|
-                                           TcmUtils.strip_bom(h).
-                                               parameterize.underscore.to_sym
+                                           TcmUtils.strip_bom(h).parameterize.underscore.to_sym
                                          },
                       field_size_limit: 32) do |row|
       counter += 1
@@ -189,8 +187,7 @@ class AnnualBillingDataFileService
   end
 
   def find_matching_transaction(upload, line_no, key_column, ref_column, ref_value)
-    transactions = regime.transaction_details.unbilled.
-                   where(ref_column => ref_value).order(:updated_at)
+    transactions = regime.transaction_details.unbilled.where(ref_column => ref_value).order(:updated_at)
 
     if transactions.count.zero?
       upload.log_error(line_no, "Could not find #{present_column(key_column)} matching '#{ref_value}'")
@@ -219,8 +216,7 @@ class AnnualBillingDataFileService
   end
 
   def regions_for_transactions(list)
-    TransactionHeader.where(id: list.pluck(:transaction_header_id).uniq).
-      pluck(:region).uniq.sort
+    TransactionHeader.where(id: list.pluck(:transaction_header_id).uniq).pluck(:region).uniq.sort
   end
 
   def set_current_user
