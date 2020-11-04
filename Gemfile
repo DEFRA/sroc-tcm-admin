@@ -1,16 +1,10 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
-
 ruby "2.7.1"
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 5.1.1"
+gem "rails", "~> 6.0.3"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 0.18"
 
@@ -61,7 +55,7 @@ group :development do
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem "web-console", ">= 3.3.0"
+  gem "web-console"
 end
 
 group :development, :test do
