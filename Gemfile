@@ -62,7 +62,7 @@ group :development, :test do
   # and test
   gem "dotenv-rails"
   # Use Puma as the app server in development as test
-  gem "puma", "~> 3.7"
+  gem "puma"
   # Project uses RSpec as its test framework
   gem "rspec-rails"
 end
