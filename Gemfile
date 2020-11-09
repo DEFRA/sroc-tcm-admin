@@ -12,8 +12,6 @@ gem "aws-sdk", "~> 2"
 # bootstrap 4
 gem "bootstrap", "~> 4.3.1"
 gem "bstard"
-# Use CoffeeScript for .coffee assets and views
-gem "coffee-rails", "~> 4.2"
 gem "devise"
 gem "devise_invitable"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
