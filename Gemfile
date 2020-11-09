@@ -74,7 +74,10 @@ group :test do
   gem "mocha"
   gem "rails-controller-testing"
   gem "selenium-webdriver"
-  gem "simplecov", require: false
+  # Generates a test coverage report on every `bundle exec rspec` call. We use
+  # the output to feed SonarCloud's stats and analysis. It does not yet support
+  # v0.18 hence locked to 0.17
+  gem "simplecov", "~> 0.17.1", require: false
   # Stubbing HTTP requests
   gem "webmock"
 end
