@@ -31,11 +31,11 @@ Capybara.register_driver :headless_chrome do |app|
   capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
     chromeOptions: { args: %w[headless disable-gpu no-sandbox disable-dev-shm-usage window-size=1600,1000] }
   )
-  driver_options = { verbose: true, log_path: "tmp/chromedriver.log" }
+  service = Selenium::WebDriver::Service.chrome(args: { verbose: true, log_path: "tmp/chromedriver.log" })
   Capybara::Selenium::Driver.new(app,
                                  browser: :chrome,
                                  desired_capabilities: capabilities,
-                                 driver_opts: driver_options)
+                                 service: service)
 end
 
 # Capybara.javascript_driver = :chrome
