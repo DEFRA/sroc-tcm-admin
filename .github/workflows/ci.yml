@@ -56,10 +56,6 @@ jobs:
         with:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
-      # Performs a clean installation of all dependencies in the `Gemfile.lock` file
-      - name: Install Ruby dependencies
-        run: bundle install
-
       - name: Database migrations
         run: |
           RAILS_ENV=test bundle exec rake db:migrate
