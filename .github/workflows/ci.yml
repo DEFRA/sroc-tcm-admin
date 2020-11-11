@@ -31,16 +31,6 @@ jobs:
         # Set health checks to wait until postgres has started. You must have this so the runner knows to wait till
         # postgres is up and running before proceeding
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-      # Label used to access the service container
-      redis:
-        # Docker Hub image
-        image: redis:4-alpine
-        # Set health checks to wait until redis has started
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
 
     steps:
       # Downloads a copy of the code in your repository before running CI tests
