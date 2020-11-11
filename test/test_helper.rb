@@ -11,17 +11,11 @@ require "capybara/rails"
 require "capybara/minitest"
 require "capybara/minitest/spec"
 
-require "minitest/reporters"
-Minitest::Reporters.use!
-
 require "selenium/webdriver"
 
 require "mocha/minitest"
 
 Dir[Rails.root.join("test/support/**/*.rb")].sort.each { |f| require f }
-
-# remove http auth which is only for heroku deployment
-ENV["HEROKU"] = nil
 
 Capybara.register_driver :chrome do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome)
