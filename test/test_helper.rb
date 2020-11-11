@@ -24,13 +24,13 @@ end
 Capybara.register_driver :headless_chrome do |app|
   Capybara::Selenium::Driver.load_selenium
   browser_options = ::Selenium::WebDriver::Chrome::Options.new.tap do |opts|
-    opts.args << '--headless'
-    opts.args << '--disable-gpu' if Gem.win_platform?
-    opts.args << '--no-sandbox'
-    opts.args << '--disable-dev-shm-usage'
-    opts.args << '--window-size=1600,1000'
+    opts.args << "--headless"
+    opts.args << "--disable-gpu" if Gem.win_platform?
+    opts.args << "--no-sandbox"
+    opts.args << "--disable-dev-shm-usage"
+    opts.args << "--window-size=1600,1000"
     # Workaround https://bugs.chromium.org/p/chromedriver/issues/detail?id=2650&q=load&sort=-id&colspec=ID%20Status%20Pri%20Owner%20Summary
-    opts.args << '--disable-site-isolation-trials'
+    opts.args << "--disable-site-isolation-trials"
   end
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: browser_options)
 end
