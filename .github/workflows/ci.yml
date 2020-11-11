@@ -12,6 +12,7 @@ jobs:
       POSTGRES_PASSWORD: pinafore
       POSTGRES_PORT: 5432
       POSTGRES_USERNAME: postgres
+      # Though we don't have redis running, we keep the env var so the app does not complain about a missing env var
       REDIS_URL: "redis://localhost:6379"
 
     # Service containers to run with `runner-job`
