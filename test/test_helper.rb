@@ -38,6 +38,8 @@ end
 driver = ENV.fetch("TEST_DRIVER", :headless_chrome)
 Capybara.javascript_driver = driver.to_sym
 
+Capybara.server = :puma, { Silent: true }
+
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
