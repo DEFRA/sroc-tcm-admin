@@ -87,9 +87,7 @@ module ApplicationHelper
         if Rails.env.production?
           capistrano_file = Rails.root.join "REVISION"
 
-          if File.exist? capistrano_file
-            File.open(capistrano_file, &:gets)
-          end
+          File.open(capistrano_file, &:gets) if File.exist? capistrano_file
         else
           `git rev-parse HEAD`
         end
