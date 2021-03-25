@@ -7,13 +7,13 @@ ruby "2.7.1"
 # RubyGems. See https://github.com/rails/rails/issues/41750
 # Referencing the rails dependencies directly was inspired by
 # https://github.com/DFE-Digital/early-careers-framework/pull/178
-#gem "rails", "~> 6.0.3"
+# gem "rails", "~> 6.0.3"
 # These rails gems need to be commented out to avoid bringing mimemagic in
 # activestorage is the gem that has a dependency on marcel, which has the dependency on mimemagic
-#gem "activestorage", "~> 6.0.3"
+# gem "activestorage", "~> 6.0.3"
 # actionmailbox and actiontext both have a dependency on activestorage
-#gem "actionmailbox", "~> 6.0.3"
-#gem "actiontext", "~> 6.0.3"
+# gem "actionmailbox", "~> 6.0.3"
+# gem "actiontext", "~> 6.0.3"
 gem "actioncable", "~> 6.0.3"
 gem "actionmailer", "~> 6.0.3"
 gem "actionpack", "~> 6.0.3"
