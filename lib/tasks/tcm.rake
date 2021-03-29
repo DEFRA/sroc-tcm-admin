@@ -16,6 +16,7 @@ namespace :tcm do
     abort("Cannot generate charge") unless result &&
                                            result["calculation"] &&
                                            result["calculation"]["chargeValue"]
+    puts "Successfully generated charge"
   end
 
   desc "Generate suggested categories"
