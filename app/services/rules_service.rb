@@ -31,7 +31,7 @@ class RulesService  < ServiceObject
                      "at the Charge Service.\nPlease try again later")
     else
       # something unexpected happened
-      TcmLogger.notify(Exceptions::CalculationServiceError.new(response.value))
+      TcmLogger.notify(Exceptions::RulesServiceError.new(response.value))
       error_response("Unable to calculate charge due to an unexpected error."\
                      "\nPlease try again later")
     end

@@ -66,7 +66,7 @@ class CalculateCharge < ServiceObject
       false
     else
       # something unexpected happened
-      TcmLogger.notify(CalculationServiceError.new(@response.value))
+      TcmLogger.notify(RulesServiceError.new(@response.value))
       @body = build_error_response("Unable to calculate charge due to an " \
                                    "unexpected error.\nPlease try again later")
       false
