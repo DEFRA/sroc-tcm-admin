@@ -9,12 +9,13 @@ class RulesService  < ServiceObject
   end
 
   def call
-    regime = Regime.find_by!(slug: "cfd")
-    financial_year = 2018
+    regime = @params.fetch(:regime)
+    financial_year = @params.fetch(:financial_year)
+    payload = @params.fetch(:payload)
 
     path = determine_path(regime.slug, financial_year)
     @url = build_url(path)
-    request = build_request(payload(regime))
+    request = build_request(payload)
     response = connection.request(request)
 
     case response
@@ -40,6 +41,22 @@ class RulesService  < ServiceObject
     error_response("Unable to calculate charge due to the rules service "\
                    "being unavailable. Please log a call with the "\
                    "service desk.")
+  end
+
+  def self.test_payload(regime)
+    {
+      tcmChargingRequest: {
+        permitCategoryRef: regime.permit_categories.first.code,
+        percentageAdjustment: "100",
+        temporaryCessation: false,
+        compliancePerformanceBand: "B",
+        billableDays: 365,
+        financialDays: 365,
+        chargePeriod: "FY1819",
+        preConstruction: false,
+        environmentFlag: "TEST"
+      }
+    }
   end
 
   private
@@ -69,24 +86,7 @@ class RulesService  < ServiceObject
     request.body = payload.to_json
     request.basic_auth(ENV.fetch("RULES_SERVICE_USER"), ENV.fetch("RULES_SERVICE_PASSWORD"))
 
-
     request
-  end
-
-  def payload(regime)
-    {
-      tcmChargingRequest: {
-        permitCategoryRef: regime.permit_categories.first.code,
-        percentageAdjustment: "100",
-        temporaryCessation: false,
-        compliancePerformanceBand: "B",
-        billableDays: 365,
-        financialDays: 365,
-        chargePeriod: "FY1819",
-        preConstruction: false,
-        environmentFlag: "TEST"
-      }
-    }
   end
 
   def error_response(text)
