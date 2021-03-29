@@ -23,7 +23,7 @@ class RulesService  < ServiceObject
       # successfully completed charge calculation or
       # an error in the calculation or a ruleset issue
       # we want to show an error at the front end if there's an issue
-      JSON.parse(response.body)
+      build_response(JSON.parse(response.body))
     when Net::HTTPInternalServerError
       TcmLogger.error("Calculate charge problem: #{JSON.parse(response.body)}")
       # some kind of server error at the charging service
@@ -87,6 +87,16 @@ class RulesService  < ServiceObject
     request.basic_auth(ENV.fetch("RULES_SERVICE_USER"), ENV.fetch("RULES_SERVICE_PASSWORD"))
 
     request
+  end
+
+  def build_response(body)
+    response = {
+      uuid: body["__DecisionID__"],
+      generatedAt: Time.new,
+      calculation: body["tcmChargingResponse"]
+    }
+
+    response.with_indifferent_access()
   end
 
   def error_response(text)
