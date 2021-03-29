@@ -9,6 +9,7 @@ class RulesService  < ServiceObject
   end
 
   def call
+    @result = false
     regime = @params.fetch(:regime)
     financial_year = @params.fetch(:financial_year)
     payload = @params.fetch(:payload)
@@ -23,6 +24,7 @@ class RulesService  < ServiceObject
       # successfully completed charge calculation or
       # an error in the calculation or a ruleset issue
       # we want to show an error at the front end if there's an issue
+      @result = true
       build_response(JSON.parse(response.body))
     when Net::HTTPInternalServerError
       TcmLogger.error("Calculate charge problem: #{JSON.parse(response.body)}")
