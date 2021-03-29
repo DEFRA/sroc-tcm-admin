@@ -8,11 +8,8 @@ namespace :tcm do
 
   desc "Check charging service accessible"
   task check_charge_service: :environment do
-    regime = Regime.find_by!(slug: "cfd")
-    financial_year = 2018
-    payload = RulesService.test_payload(regime)
+    result = CalculateCharge.test_connection().charge_calculation()
 
-    result = RulesService.new({regime: regime, financial_year: financial_year, payload: payload}).call()
     abort("Cannot generate charge") unless result &&
                                            result["calculation"] &&
                                            result["calculation"]["chargeValue"]
