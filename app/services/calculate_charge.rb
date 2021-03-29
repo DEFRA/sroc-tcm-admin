@@ -13,7 +13,7 @@ class CalculateCharge < ServiceObject
     transaction = presenter.new(@transaction)
     @charge_params = transaction.charge_params
     @financial_year = transaction.financial_year
-    @url = build_url()
+    @url = build_url
 
     @result = @body = @full_response = @amount = nil
   end
@@ -39,24 +39,24 @@ class CalculateCharge < ServiceObject
     @amount ||= extract_charge_amount
   end
 
-  def self.test_connection()
+  def self.test_connection
     regime = Regime.find_by!(slug: "cfd")
     transaction_detail = TransactionDetail.new(
       regime: regime,
       category: "2.3.1",
       temporary_cessation: false,
-      period_start: Date.new(2018,4,1),
-      period_end: Date.new(2019,3,31),
+      period_start: Date.new(2018, 4, 1),
+      period_end: Date.new(2019, 3, 31),
       tcm_financial_year: "1819"
     )
 
-    CalculateCharge.new(transaction: transaction_detail).call()
+    CalculateCharge.new(transaction: transaction_detail).call
   end
 
   private
 
   def calculate_charge
-    request = build_request()
+    request = build_request
     @response = http_connection.request(request)
 
     case @response
@@ -89,20 +89,20 @@ class CalculateCharge < ServiceObject
     false
   end
 
-  def build_url()
-    URI.parse(File.join(ENV.fetch("RULES_SERVICE_URL"), determine_path()))
+  def build_url
+    URI.parse(File.join(ENV.fetch("RULES_SERVICE_URL"), determine_path))
   end
 
-  def determine_path()
+  def determine_path
     env_slug = @regime.slug.upcase.squish
     year_suffix = "_#{@financial_year}_#{(@financial_year + 1).to_s[-2..3]}"
 
     path = File.join(ENV.fetch("#{env_slug}_APP"), ENV.fetch("#{env_slug}_RULESET"))
 
-    return "#{path}#{year_suffix}"
+    "#{path}#{year_suffix}"
   end
 
-  def build_request()
+  def build_request
     request = Net::HTTP::Post.new(@url.request_uri, 'Content-Type': "application/json")
     request.body = { tcmChargingRequest: @charge_params }.to_json
     request.basic_auth(ENV.fetch("RULES_SERVICE_USER"), ENV.fetch("RULES_SERVICE_PASSWORD"))
@@ -124,7 +124,7 @@ class CalculateCharge < ServiceObject
       calculation: body["tcmChargingResponse"]
     }
 
-    response.with_indifferent_access()
+    response.with_indifferent_access
   end
 
   def build_error_response(text)
