@@ -13,7 +13,6 @@ class CalculateCharge < ServiceObject
     transaction = presenter.new(@transaction)
     @charge_params = transaction.charge_params
     @financial_year = transaction.financial_year
-    @url = build_url
 
     @result = @body = @full_response = @amount = nil
   end
@@ -56,6 +55,7 @@ class CalculateCharge < ServiceObject
   private
 
   def calculate_charge
+    @url = build_url
     request = build_request
     @response = http_connection.request(request)
 
