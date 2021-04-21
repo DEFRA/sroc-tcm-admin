@@ -241,7 +241,17 @@ RSpec.describe FileImportService do
         allow_any_instance_of(SystemConfig).to receive(:start_import).and_return(false)
       end
 
-      it "doesn't attempt to import any files" do
+      it "does not import any data" do
+        service.call
+
+        transaction_headers = TransactionHeader.all
+        transaction_details = TransactionDetail.all
+
+        expect(transaction_headers.length).to eq(0)
+        expect(transaction_details.length).to eq(0)
+      end
+
+      it "leaves the file in 'import'" do
         service.call
 
         expect(etl_file_store.list("import")).to include("import/#{import_file}")
