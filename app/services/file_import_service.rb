@@ -52,11 +52,9 @@ class FileImportService < ServiceObject
                                  remote_path: f)
           DeleteEtlImportFile.call(remote_path: f)
           quarantined += 1
-          @result = false
         rescue StandardError => e
           puts("Failed to import file #{f}: #{e}")
           failed += 1
-          @result = false
         ensure
           in_file.close
           in_file.unlink
