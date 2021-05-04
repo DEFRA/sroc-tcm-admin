@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     resources :transaction_summary, only: %i[index show]
     resources :retrospective_files, only: [:create]
     resources :retrospective_summary, only: [:index]
-    resources :annual_billing_data_files, except: [:destroy]
+    resources :annual_billing_data_files, only: %i[index show]
     resources :exclusion_reasons, except: [:show]
     resources :data_export, only: [:index] do
       get "download", on: :collection
