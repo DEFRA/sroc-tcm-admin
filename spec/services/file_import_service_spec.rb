@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe FileImportService, focus: true do
+RSpec.describe FileImportService do
   describe "#call" do
     let(:service) { FileImportService.new }
     let(:etl_file_store) { LocalFileStore.new("etl_bucket") }
