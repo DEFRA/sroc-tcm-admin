@@ -32,6 +32,40 @@ RSpec.describe ExportTransactionDataService do
       expect(regime.export_data_file).to have_received(:generating!)
     end
 
+    context "when there is data to export" do
+      let(:transaction_header) { create(:transaction_header, regime: regime) }
+      let!(:transaction_detail) { create(:transaction_detail, transaction_header: transaction_header) }
+
+      it "creates an export file" do
+        result = service.call(regime: regime)
+
+        expect(File.exist?(result.filename)).to be(true)
+      end
+
+      it "updates the 'ExportDataFile's export related fields" do
+        before_timestamp = DateTime.now
+        result = service.call(regime: regime)
+        sha1 = Digest::SHA1.file(result.filename).hexdigest
+
+        expect(regime.export_data_file.last_exported_at).to be > before_timestamp
+        expect(regime.export_data_file.exported_filename).to eq(File.basename(result.filename))
+        expect(regime.export_data_file.exported_filename_hash).to eq(sha1)
+      end
+
+      it "the status of the regime's 'ExportDataFile' to success" do
+        service.call(regime: regime)
+
+        expect(regime.export_data_file.status).to eq("success")
+      end
+
+      it "marks the export as successful" do
+        result = service.call(regime: regime)
+
+        expect(result.success?).to be(true)
+        expect(result.failed?).to be(false)
+      end
+    end
+
     context "when there is no data to export" do
       it "still creates an export file" do
         result = service.call(regime: regime)
