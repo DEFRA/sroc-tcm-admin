@@ -3,7 +3,6 @@
 require "test_helper"
 
 class ExportTransactionDataServiceTest < ActiveSupport::TestCase
-  include GenerateHistory
   include RegimePresenter
 
   def setup
