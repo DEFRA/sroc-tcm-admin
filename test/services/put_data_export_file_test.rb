@@ -30,7 +30,7 @@ class PutDataExportFileTest < ActiveSupport::TestCase
     transactions = @regime.transaction_details
     assert transactions.count.positive?, "No transaction data"
 
-    result = ExportTransactionData.call(regime: @regime)
+    result = ExportTransactionDataService.call(regime: @regime)
     assert result.success?, "Did not create test file"
 
     filename = result.filename

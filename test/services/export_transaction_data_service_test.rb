@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class ExportTransactionDataTest < ActiveSupport::TestCase
+class ExportTransactionDataServiceTest < ActiveSupport::TestCase
   include GenerateHistory
   include RegimePresenter
 
@@ -19,7 +19,7 @@ class ExportTransactionDataTest < ActiveSupport::TestCase
   def test_it_generates_a_file
     transactions = @regime.transaction_details
     assert transactions.count.positive?, "No transaction data"
-    result = ExportTransactionData.call(regime: @regime)
+    result = ExportTransactionDataService.call(regime: @regime)
     assert result.success?, "Result unsuccessful"
 
     assert File.exist?(result.filename), "File not found #{result.filename}"
@@ -35,7 +35,7 @@ class ExportTransactionDataTest < ActiveSupport::TestCase
                           .order(:region, :transaction_date, :id)
 
     assert transactions.count.positive?, "No transaction data"
-    result = ExportTransactionData.call(regime: @regime)
+    result = ExportTransactionDataService.call(regime: @regime)
     assert result.success?, "Result unsuccessful"
 
     data = File.read(result.filename)

@@ -4,7 +4,7 @@ require "csv"
 require "digest"
 require "fileutils"
 
-class ExportTransactionData < ServiceObject
+class ExportTransactionDataService < ServiceObject
   include RegimePresenter
 
   attr_reader :regime, :batch_size, :filename
