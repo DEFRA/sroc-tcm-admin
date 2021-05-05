@@ -22,9 +22,9 @@ RSpec.describe FileImportService, focus: true do
 
     after(:each) do
       # Clean up - ensure any files we create irrespective of whether the test is successful or not is deleted
-      Helpers::FileHelpers.clean_file(import_file, etl_file_store.base_path, "import")
-      Helpers::FileHelpers.clean_file(import_file, archive_file_store.base_path, "import")
-      Helpers::FileHelpers.clean_file(import_file, archive_file_store.base_path, "quarantine")
+      Helpers::FileHelpers.clean_up(import_file, etl_file_store.base_path, "import")
+      Helpers::FileHelpers.clean_up(import_file, archive_file_store.base_path, "import")
+      Helpers::FileHelpers.clean_up(import_file, archive_file_store.base_path, "quarantine")
     end
 
     context "when no other import is running" do

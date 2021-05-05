@@ -2,7 +2,7 @@
 
 module Helpers
   module FileHelpers
-    def self.clean_file(filename, *folders)
+    def self.clean_up(filename, *folders)
       return unless filename
 
       full_path = File.join(*folders, filename)
