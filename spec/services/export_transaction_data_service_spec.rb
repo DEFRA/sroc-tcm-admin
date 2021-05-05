@@ -40,7 +40,7 @@ RSpec.describe ExportTransactionDataService do
       end
 
       it "still updates the 'ExportDataFile's export related fields" do
-        before_timestamp = DateTime.now()
+        before_timestamp = DateTime.now
         result = service.call(regime: regime)
         sha1 = Digest::SHA1.file(result.filename).hexdigest
 
