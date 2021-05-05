@@ -62,7 +62,7 @@ Naming/ConstantName:
 # SupportedStylesForLeadingUnderscores: disallowed, required, optional
 Naming/MemoizedInstanceVariableName:
   Exclude:
-    - 'app/services/export_transaction_data.rb'
+    - 'app/services/export_transaction_data_service.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -77,7 +77,7 @@ Style/ClassAndModuleChildren:
 Style/ExplicitBlockArgument:
   Exclude:
     - 'app/services/batch_csv_export.rb'
-    - 'app/services/export_transaction_data.rb'
+    - 'app/services/export_transaction_data_service.rb'
 
 # Offense count: 1
 # Configuration parameters: EnforcedStyle.
