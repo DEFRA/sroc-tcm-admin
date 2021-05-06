@@ -82,21 +82,6 @@ class ExportTransactionDataService < ServiceObject
     end
   end
 
-  def compress_file
-    orig_file = regime_filename
-    zip_file = "#{orig_file}.gz"
-    Zlib::GzipWriter.open(zip_file) do |gz|
-      gz.mtime = File.mtime(orig_file)
-      gz.orig_name = orig_file
-      gz.write IO.binread(orig_file)
-    end
-    @filename = zip_file
-    File.delete(orig_file) if File.exist?(orig_file)
-  rescue StandardError => e
-    TcmLogger.notify(e)
-    @filename = orig_file
-  end
-
   def ext_compress_file
     # run gzip on the console
     orig_file = regime_filename
