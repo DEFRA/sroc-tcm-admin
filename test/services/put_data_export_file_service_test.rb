@@ -3,7 +3,7 @@
 require "test_helper"
 require "fileutils"
 
-class PutDataExportFileTest < ActiveSupport::TestCase
+class PutDataExportFileServiceTest < ActiveSupport::TestCase
   include FileStorage
   include GenerateHistory
   include RegimePresenter
@@ -34,7 +34,7 @@ class PutDataExportFileTest < ActiveSupport::TestCase
     assert result.success?, "Did not create test file"
 
     filename = result.filename
-    result = PutDataExportFile.call(filename: filename)
+    result = PutDataExportFileService.call(filename: filename)
     assert result.success?, "Failed to store file"
 
     # when Rails.env.development? or Rails.env.test? the file
