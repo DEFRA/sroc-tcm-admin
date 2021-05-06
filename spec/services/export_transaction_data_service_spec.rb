@@ -129,5 +129,18 @@ RSpec.describe ExportTransactionDataService do
         expect(result.failed?).to be(false)
       end
     end
+
+    context "when an error is thrown" do
+      before(:each) do
+        allow(ExportDataFile).to receive(:transaction).and_raise("boom")
+      end
+
+      it "marks the export as failed" do
+        result = service.call(regime: regime)
+
+        expect(result.success?).to be(false)
+        expect(result.failed?).to be(true)
+      end
+    end
   end
 end
