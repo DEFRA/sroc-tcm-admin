@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PutDataExportFile < ServiceObject
+class PutDataExportFileService < ServiceObject
   include FileStorage
 
   attr_reader :filename

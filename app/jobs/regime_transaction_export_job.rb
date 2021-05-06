@@ -11,7 +11,7 @@ class RegimeTransactionExportJob < ApplicationJob
         TcmLogger.error("Failed to export transactions for #{regime.name}")
       else
         # store file
-        result = PutDataExportFile.call(filename: result.filename)
+        result = PutDataExportFileService.call(filename: result.filename)
         TcmLogger.error("Failed to store export data file for #{regime.name}") if result.failed?
       end
     end
