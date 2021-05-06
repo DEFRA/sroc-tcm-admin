@@ -17,7 +17,7 @@ RSpec.describe PutDataExportFileService do
       let(:export_file) { "cfd_transactions.csv" }
 
       it "copys the file to the archive csv folder" do
-        result = service.call(filename: File.join(fixture_path, export_file))
+        service.call(filename: File.join(fixture_path, export_file))
 
         # We check both the source and the destination folders to confirm the file was just copied, and not copied then
         # deleted
