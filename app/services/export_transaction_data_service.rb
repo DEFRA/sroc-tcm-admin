@@ -29,7 +29,7 @@ class ExportTransactionDataService < ServiceObject
           end
         end
       end
-      compress_file if edf.compress?
+      package_file(edf.compress?)
 
       sha1 = generate_file_hash(filename)
 
@@ -82,17 +82,16 @@ class ExportTransactionDataService < ServiceObject
     end
   end
 
-  def compress_file
-    # run gzip on the console
-    orig_file = regime_filename
-    zip_file = "#{orig_file}.gz"
-
-    # Force compression and suppress all warnings whilst you do it
-    `gzip -fq #{orig_file}`
-    @filename = zip_file
+  def package_file(compress)
+    @filename = compress_file(regime_filename) if compress
   rescue StandardError => e
     TcmLogger.notify(e)
-    @filename = orig_file
+  end
+
+  def compress_file(file_to_compress)
+    # Force compression and suppress all warnings whilst you do it
+    `gzip -fq #{file_to_compress}`
+    "#{file_to_compress}.gz"
   end
 
   def generate_file_hash(file)

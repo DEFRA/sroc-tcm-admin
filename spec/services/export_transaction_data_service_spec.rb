@@ -64,6 +64,41 @@ RSpec.describe ExportTransactionDataService do
         expect(result.success?).to be(true)
         expect(result.failed?).to be(false)
       end
+
+      context "and the 'ExportDataFile' compression is set to true" do
+        context "but the compression fails" do
+          it "creates the export as a valid csv file" do
+            allow_any_instance_of(ExportTransactionDataService).to receive(:compress_file).and_raise("boom")
+            result = service.call(regime: regime)
+
+            expect(File.exist?(result.filename)).to be(true)
+            expect(File.extname(result.filename)).to eq(".csv")
+          end
+        end
+
+        it "creates the export as a valid gzip file" do
+          result = service.call(regime: regime)
+
+          expect(File.exist?(result.filename)).to be(true)
+          expect(File.extname(result.filename)).to eq(".gz")
+          # -t tells gzip to test the file. A blank result means the file is valid. See
+          # https://www.gnu.org/software/gzip/manual/gzip.html#Invoking-gzip for more details
+          expect(`gzip -t #{result.filename}`).to eq("")
+        end
+      end
+
+      context "and the 'ExportDataFile' compression is set to false" do
+        before(:each) do
+          regime.export_data_file.compress = false
+        end
+
+        it "creates the export as a valid csv file" do
+          result = service.call(regime: regime)
+
+          expect(File.exist?(result.filename)).to be(true)
+          expect(File.extname(result.filename)).to eq(".csv")
+        end
+      end
     end
 
     context "when there is no data to export" do
