@@ -36,12 +36,6 @@ RSpec.describe ExportTransactionDataService do
       let(:transaction_header) { create(:transaction_header, regime: regime) }
       let!(:transaction_detail) { create(:transaction_detail, transaction_header: transaction_header) }
 
-      it "creates an export file" do
-        result = service.call(regime: regime)
-
-        expect(File.exist?(result.filename)).to be(true)
-      end
-
       it "updates the 'ExportDataFile's export related fields" do
         before_timestamp = DateTime.now
         result = service.call(regime: regime)
