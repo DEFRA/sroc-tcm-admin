@@ -91,6 +91,10 @@ RSpec.describe ExportTransactionDataService do
 
           expect(File.exist?(result.filename)).to be(true)
           expect(File.extname(result.filename)).to eq(".csv")
+
+          # With this we are checking the file can be parsed and that it contains the data we expect (1 header and 1
+          # transaction line)
+          expect(CSV.read(result.filename).count).to eq(2)
         end
       end
     end
