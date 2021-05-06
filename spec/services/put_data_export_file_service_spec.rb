@@ -13,6 +13,26 @@ RSpec.describe PutDataExportFileService do
   end
 
   describe "#call" do
+    context "when the file exists" do
+      let(:export_file) { "cfd_transactions.csv" }
+
+      it "copys the file to the archive csv folder" do
+        result = service.call(filename: File.join(fixture_path, export_file))
+
+        # We check both the source and the destination folders to confirm the file was just copied, and not copied then
+        # deleted
+        expect(File.exist?(File.join(archive_path, export_file))).to be(true)
+        expect(File.exist?(File.join(fixture_path, export_file))).to be(true)
+      end
+
+      it "marks the export as failed" do
+        result = service.call(filename: File.join(fixture_path, export_file))
+
+        expect(result.success?).to be(true)
+        expect(result.failed?).to be(false)
+      end
+    end
+
     context "when the file does not exist" do
       let(:export_file) { "foo.csv" }
 
