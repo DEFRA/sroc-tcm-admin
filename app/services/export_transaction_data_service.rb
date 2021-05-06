@@ -29,7 +29,7 @@ class ExportTransactionDataService < ServiceObject
           end
         end
       end
-      ext_compress_file if edf.compress?
+      compress_file if edf.compress?
 
       sha1 = generate_file_hash(filename)
 
@@ -82,7 +82,7 @@ class ExportTransactionDataService < ServiceObject
     end
   end
 
-  def ext_compress_file
+  def compress_file
     # run gzip on the console
     orig_file = regime_filename
     zip_file = "#{orig_file}.gz"
