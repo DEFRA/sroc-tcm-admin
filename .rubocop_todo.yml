@@ -57,13 +57,6 @@ Naming/ConstantName:
   Exclude:
     - 'app/lib/transaction_file_format.rb'
 
-# Offense count: 1
-# Configuration parameters: EnforcedStyleForLeadingUnderscores.
-# SupportedStylesForLeadingUnderscores: disallowed, required, optional
-Naming/MemoizedInstanceVariableName:
-  Exclude:
-    - 'app/services/export_transaction_data_service.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.

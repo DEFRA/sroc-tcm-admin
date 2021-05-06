@@ -7,7 +7,7 @@ require "fileutils"
 class ExportTransactionDataService < ServiceObject
   include RegimePresenter
 
-  attr_reader :regime, :batch_size, :filename
+  attr_reader :regime, :batch_size
 
   def initialize(params = {})
     super()
@@ -46,6 +46,10 @@ class ExportTransactionDataService < ServiceObject
     self
   end
 
+  def filename
+    @filename ||= File.join(cache_path, regime.export_data_file.filename).to_s
+  end
+
   private
 
   def transactions
@@ -77,13 +81,13 @@ class ExportTransactionDataService < ServiceObject
   end
 
   def regime_file
-    CSV.open(regime_filename, "w", write_headers: true, headers: regime_headers) do |csv|
+    CSV.open(filename, "w", write_headers: true, headers: regime_headers) do |csv|
       yield csv
     end
   end
 
   def package_file(compress)
-    @filename = compress_file(regime_filename) if compress
+    @filename = compress_file(filename) if compress
   rescue StandardError => e
     TcmLogger.notify(e)
   end
@@ -104,10 +108,6 @@ class ExportTransactionDataService < ServiceObject
 
   def regime_columns
     ExportFileFormat::EXPORT_COLUMNS.map { |c| c[:accessor] }
-  end
-
-  def regime_filename
-    @filename ||= File.join(cache_path, regime.export_data_file.filename).to_s
   end
 
   def cache_path
