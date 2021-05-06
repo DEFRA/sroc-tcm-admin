@@ -70,7 +70,6 @@ Style/ClassAndModuleChildren:
 Style/ExplicitBlockArgument:
   Exclude:
     - 'app/services/batch_csv_export.rb'
-    - 'app/services/export_transaction_data_service.rb'
 
 # Offense count: 1
 # Configuration parameters: EnforcedStyle.

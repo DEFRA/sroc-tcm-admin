@@ -16,17 +16,13 @@ class ExportTransactionDataService < ServiceObject
   end
 
   def call
-    # export all transactions to csv for the given regime
-    # batch results
+    # export all transactions to csv for the given regime batch results
     edf = regime.export_data_file
     edf.generating!
     begin
       ExportDataFile.transaction do
         CSV.open(filename, "w", write_headers: true, headers: regime_headers) do |csv|
-          batch_transactions(batch_size) do |transaction|
-            t = presenter.new(transaction)
-            csv << regime_columns.map { |c| t.send(c) }
-          end
+          export_transactions(csv)
         end
       end
       package_file(edf.compress?)
@@ -63,18 +59,17 @@ class ExportTransactionDataService < ServiceObject
       .order(:id)
   end
 
-  def batch_transactions(batch_size = 1000)
-    # We need to be mindful that this is all transaction records
-    # for the regime and will grow so we need to batch query or we
-    # will quickly run out of memory on the server.
-    # However, ActiveRecord#find_each ignores any order clause
-    # (it uses :id only) so we are rolling our own here
+  def export_transactions(csv)
+    # We need to be mindful that this is all transaction records for the regime and will grow so we need to batch query
+    # or we will quickly run out of memory on the server. However, ActiveRecord#find_each ignores any order clause (it
+    # uses :id only) so we are rolling our own here
     query = transactions
     count = query.count
     offset = 0
     while offset < count
-      query.offset(offset).limit(batch_size).each do |transaction|
-        yield transaction
+      query.offset(offset).limit(@batch_size).each do |transaction|
+        t = presenter.new(transaction)
+        csv << regime_columns.map { |c| t.send(c) }
       end
       offset += batch_size
     end
