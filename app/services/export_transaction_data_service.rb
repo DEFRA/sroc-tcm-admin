@@ -22,7 +22,7 @@ class ExportTransactionDataService < ServiceObject
     edf.generating!
     begin
       ExportDataFile.transaction do
-        regime_file do |csv|
+        CSV.open(filename, "w", write_headers: true, headers: regime_headers) do |csv|
           batch_transactions(batch_size) do |transaction|
             t = presenter.new(transaction)
             csv << regime_columns.map { |c| t.send(c) }
@@ -77,12 +77,6 @@ class ExportTransactionDataService < ServiceObject
         yield transaction
       end
       offset += batch_size
-    end
-  end
-
-  def regime_file
-    CSV.open(filename, "w", write_headers: true, headers: regime_headers) do |csv|
-      yield csv
     end
   end
 
