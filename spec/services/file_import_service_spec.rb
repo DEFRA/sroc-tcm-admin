@@ -22,14 +22,9 @@ RSpec.describe FileImportService do
 
     after(:each) do
       # Clean up - ensure any files we create irrespective of whether the test is successful or not is deleted
-      full_path = File.join(etl_file_store.base_path, "import", import_file)
-      FileUtils.rm(full_path) if File.exist?(full_path)
-
-      full_path = File.join(archive_file_store.base_path, "import", import_file)
-      FileUtils.rm(full_path) if File.exist?(full_path)
-
-      full_path = File.join(archive_file_store.base_path, "quarantine", import_file)
-      FileUtils.rm(full_path) if File.exist?(full_path)
+      Helpers::FileHelpers.clean_up(import_file, etl_file_store.base_path, "import")
+      Helpers::FileHelpers.clean_up(import_file, archive_file_store.base_path, "import")
+      Helpers::FileHelpers.clean_up(import_file, archive_file_store.base_path, "quarantine")
     end
 
     context "when no other import is running" do
