@@ -1,17 +1,18 @@
 # frozen_string_literal: true
 
 class DataExportService < ServiceObject
-  def initialize(_params = {})
+  def initialize(params = {})
     super()
+    @regimes = regimes(params.fetch(:regime, nil))
   end
 
   def call
     @result = false
     begin
       puts("Started transaction data export")
-      Regime.all.each do |regime|
+      @regimes.each do |regime|
         puts("Processing regime #{regime.name}")
-        result = ExportTransactionDataService.call(regime: regime, batch_size: 1000)
+        result = ExportTransactionDataService.call(regime: regime)
         if result.failed?
           TcmLogger.error("Failed to export transactions for #{regime.name}")
         else
@@ -28,4 +29,12 @@ class DataExportService < ServiceObject
     end
     self
   end
+end
+
+private
+
+def regimes(regime)
+  return [regime] if regime
+
+  Regime.all
 end

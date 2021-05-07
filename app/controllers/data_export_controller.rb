@@ -22,8 +22,9 @@ class DataExportController < ApplicationController
   def generate
     raise ActionController::RoutingError, "Not Found" unless SystemConfig.config.can_generate_export?
 
-    RegimeTransactionExportJob.perform_later(@regime.id)
+    DataExportService.call(regime: @regime)
+
     redirect_to regime_data_export_index_path(@regime),
-                notice: "Your request has been queued. Check back in a few minutes."
+                notice: "Your export has been generated."
   end
 end
