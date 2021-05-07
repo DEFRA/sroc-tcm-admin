@@ -17,15 +17,15 @@ RSpec.describe DataExportService do
       let!(:regime) { create(:regime) }
 
       before(:each) do
-        exportDouble = double("ExportTransactionDataService", :failed? => false, :filename => "cfd_transactions.csv.gz")
-        allow(ExportTransactionDataService).to receive(:call) { exportDouble }
+        export_double = double("ExportTransactionDataService", failed?: false, filename: "cfd_transactions.csv.gz")
+        allow(ExportTransactionDataService).to receive(:call) { export_double }
 
-        putFileDouble = double("PutDataExportFileService", :failed? => false)
-        allow(PutDataExportFileService).to receive(:call) { putFileDouble }
+        put_file_double = double("PutDataExportFileService", failed?: false)
+        allow(PutDataExportFileService).to receive(:call) { put_file_double }
       end
 
       it "marks the export as successful" do
-        result = service.call()
+        result = service.call
 
         expect(result.success?).to be(true)
         expect(result.failed?).to be(false)
@@ -36,15 +36,15 @@ RSpec.describe DataExportService do
       let!(:regime) { create(:regime) }
 
       before(:each) do
-        exportDouble = double("ExportTransactionDataService", :failed? => true)
-        allow(ExportTransactionDataService).to receive(:call) { exportDouble }
+        export_double = double("ExportTransactionDataService", failed?: true)
+        allow(ExportTransactionDataService).to receive(:call) { export_double }
       end
 
       it "still marks the export as successful" do
         # If exporting the transactions fails then PutDataExportFileServiceshould never be called
         expect(PutDataExportFileService).to_not receive(:call)
 
-        result = service.call()
+        result = service.call
 
         expect(result.success?).to be(true)
         expect(result.failed?).to be(false)
@@ -55,15 +55,15 @@ RSpec.describe DataExportService do
       let!(:regime) { create(:regime) }
 
       before(:each) do
-        exportDouble = double("ExportTransactionDataService", :failed? => false, :filename => "cfd_transactions.csv.gz")
-        allow(ExportTransactionDataService).to receive(:call) { exportDouble }
+        export_double = double("ExportTransactionDataService", failed?: false, filename: "cfd_transactions.csv.gz")
+        allow(ExportTransactionDataService).to receive(:call) { export_double }
 
-        putFileDouble = double("PutDataExportFileService", :failed? => true)
-        allow(PutDataExportFileService).to receive(:call) { putFileDouble }
+        put_file_double = double("PutDataExportFileService", failed?: true)
+        allow(PutDataExportFileService).to receive(:call) { put_file_double }
       end
 
       it "still marks the export as successful" do
-        result = service.call()
+        result = service.call
 
         expect(result.success?).to be(true)
         expect(result.failed?).to be(false)
@@ -78,7 +78,7 @@ RSpec.describe DataExportService do
       end
 
       it "marks the export as failed" do
-        result = service.call()
+        result = service.call
 
         expect(result.success?).to be(false)
         expect(result.failed?).to be(true)
