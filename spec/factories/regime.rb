@@ -7,5 +7,17 @@ FactoryBot.define do
     title { "Water Quality" }
 
     export_data_file { association :export_data_file, regime: instance }
+
+    trait :pas do
+      name { "PAS" }
+      slug { "pas" }
+      title { "Installations" }
+    end
+
+    trait :wml do
+      name { "WML" }
+      slug { "wml" }
+      title { "Waste" }
+    end
   end
 end

@@ -10,7 +10,7 @@ every 15.minutes, roles: [:db] do
 end
 
 every 1.day, at: "5:30 am", roles: [:db] do
-  runner "DataExportJob.perform_now"
+  rake "jobs:data_export"
 end
 
 # want to run this on both app servers while we are using the filesystem
