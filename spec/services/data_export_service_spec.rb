@@ -4,9 +4,6 @@ require "rails_helper"
 
 RSpec.describe DataExportService do
   describe "#call" do
-    # Used in clean up of any files created during testing
-    exported_files = []
-
     let(:service) { DataExportService }
 
     before(:each) do
@@ -14,13 +11,6 @@ RSpec.describe DataExportService do
       # output in our tests so we use this to silence it. If you need to debug anything whilst working on tests
       # for it just comment out this line temporarily
       allow($stdout).to receive(:puts)
-    end
-
-    after(:each) do
-      # Clean up - ensure any files we create irrespective of whether the test is successful or not are deleted
-      exported_files.each do |file|
-        Helpers::FileHelpers.clean_up(file)
-      end
     end
 
     context "when exporting the transactions fails" do
@@ -44,15 +34,15 @@ RSpec.describe DataExportService do
     context "when 'putting' the file fails" do
       let!(:regime) { create(:regime) }
       before(:each) do
-        exportDouble = double("PutDataExportFileService", :failed? => true)
-        allow(PutDataExportFileService).to receive(:call) { exportDouble }
+        exportDouble = double("ExportTransactionDataService", :failed? => false, :filename => "cfd_transactions.csv.gz")
+        allow(ExportTransactionDataService).to receive(:call) { exportDouble }
+
+        putFileDouble = double("PutDataExportFileService", :failed? => true)
+        allow(PutDataExportFileService).to receive(:call) { putFileDouble }
       end
 
       it "still marks the export as successful" do
         result = service.call()
-
-        # Captured for cleanup
-        exported_files = result.exported_files
 
         expect(result.success?).to be(true)
         expect(result.failed?).to be(false)

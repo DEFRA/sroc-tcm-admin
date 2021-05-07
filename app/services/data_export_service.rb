@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
 class DataExportService < ServiceObject
-  attr_reader :exported_files
-
   def initialize(_params = {})
     super()
-    @exported_files = []
   end
 
   def call
@@ -19,7 +16,6 @@ class DataExportService < ServiceObject
           TcmLogger.error("Failed to export transactions for #{regime.name}")
         else
           # store file
-          @exported_files.push(result.filename)
           result = PutDataExportFileService.call(filename: result.filename)
           TcmLogger.error("Failed to store export data file for #{regime.name}") if result.failed?
         end
