@@ -13,8 +13,28 @@ RSpec.describe DataExportService do
       allow($stdout).to receive(:puts)
     end
 
+    context "when exporting the transactions succeeds" do
+      let!(:regime) { create(:regime) }
+
+      before(:each) do
+        exportDouble = double("ExportTransactionDataService", :failed? => false, :filename => "cfd_transactions.csv.gz")
+        allow(ExportTransactionDataService).to receive(:call) { exportDouble }
+
+        putFileDouble = double("PutDataExportFileService", :failed? => false)
+        allow(PutDataExportFileService).to receive(:call) { putFileDouble }
+      end
+
+      it "marks the export as successful" do
+        result = service.call()
+
+        expect(result.success?).to be(true)
+        expect(result.failed?).to be(false)
+      end
+    end
+
     context "when exporting the transactions fails" do
       let!(:regime) { create(:regime) }
+
       before(:each) do
         exportDouble = double("ExportTransactionDataService", :failed? => true)
         allow(ExportTransactionDataService).to receive(:call) { exportDouble }
@@ -33,6 +53,7 @@ RSpec.describe DataExportService do
 
     context "when 'putting' the file fails" do
       let!(:regime) { create(:regime) }
+
       before(:each) do
         exportDouble = double("ExportTransactionDataService", :failed? => false, :filename => "cfd_transactions.csv.gz")
         allow(ExportTransactionDataService).to receive(:call) { exportDouble }
