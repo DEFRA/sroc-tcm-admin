@@ -11,9 +11,9 @@ class DataExportService < ServiceObject
   def call
     @result = false
     begin
-      puts("Started data export")
+      puts("Started transaction data export")
       Regime.all.each do |regime|
-        puts("Checking regime #{regime.name}")
+        puts("Processing regime #{regime.name}")
         result = ExportTransactionDataService.call(regime: regime, batch_size: 1000)
         if result.failed?
           TcmLogger.error("Failed to export transactions for #{regime.name}")
@@ -28,7 +28,7 @@ class DataExportService < ServiceObject
     rescue StandardError => e
       TcmLogger.notify(e)
     ensure
-      puts("Finished data export")
+      puts("Finished transaction data export")
     end
     self
   end
