@@ -5,7 +5,6 @@
 </div>
 
 <%= form_for(resource, as: resource_name, url: user_registration_path, html: { method: :patch }) do |f| %>
-  <%#= devise_error_messages! %>
   <%= error_header(resource) %>
 
   <%= render partial: 'shared/password_help' %>
