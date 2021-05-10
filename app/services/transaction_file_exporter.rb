@@ -232,7 +232,7 @@ class TransactionFileExporter
     result = if retrospective
                NextPasRetrospectiveReference.call(regime: regime, region: region)
              else
-               NextPasReference.call(regime: regime, region: region)
+               NextReferenceService.call(regime: regime, region: region)
              end
     if result.success?
       result.reference
@@ -269,7 +269,7 @@ class TransactionFileExporter
     result = if retrospective
                NextCfdRetrospectiveReference.call(regime: regime, region: region)
              else
-               NextCfdReference.call(regime: regime, region: region)
+               NextReferenceService.call(regime: regime, region: region)
              end
     if result.success?
       result.reference
