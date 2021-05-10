@@ -7,6 +7,7 @@ class NextReferenceService < ServiceObject
     super()
     @regime = params.fetch(:regime)
     @region = params.fetch(:region)
+    @retrospective = params.fetch(:retrospective, false)
   end
 
   def call
@@ -22,11 +23,13 @@ class NextReferenceService < ServiceObject
   private
 
   def cfd(invoice_number)
-    "#{invoice_number.to_s.rjust(5, "0")}1#{@region}T"
+    terminator = @retrospective ? "2#{@region}" : "1#{@region}T"
+    "#{invoice_number.to_s.rjust(5, "0")}#{terminator}"
   end
 
   def pas(invoice_number)
-    "PAS#{invoice_number.to_s.rjust(8, '0')}#{@region}T"
+    terminator = @retrospective ? "" : "T"
+    "PAS#{invoice_number.to_s.rjust(8, '0')}#{@region}#{terminator}"
   end
 
   def wml(invoice_number)

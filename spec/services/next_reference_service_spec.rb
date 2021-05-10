@@ -27,6 +27,14 @@ RSpec.describe NextReferenceService do
 
         expect(result.reference).to eq("000011AT")
       end
+
+      describe "and retrospective is 'true'" do
+        it "generates a CFD retrospective formatted reference" do
+          result = service.call(regime: regime, region: region, retrospective: true)
+
+          expect(result.reference).to eq("000012A")
+        end
+      end
     end
 
     describe "when the regime is Installations (PAS)" do
@@ -37,6 +45,14 @@ RSpec.describe NextReferenceService do
 
         expect(result.reference).to eq("PAS00000001AT")
       end
+
+      describe "and retrospective is 'true'" do
+        it "generates a PAS retrospective formatted reference" do
+          result = service.call(regime: regime, region: region, retrospective: true)
+
+          expect(result.reference).to eq("PAS00000001A")
+        end
+      end
     end
 
     describe "when the regime is Waste (WML)" do
@@ -46,6 +62,14 @@ RSpec.describe NextReferenceService do
         result = service.call(regime: regime, region: region)
 
         expect(result.reference).to eq("A00000001T")
+      end
+
+      describe "and retrospective is 'true'" do
+        it "generates a WML formatted reference (WML does not support retrospective)" do
+          result = service.call(regime: regime, region: region, retrospective: true)
+
+          expect(result.reference).to eq("A00000001T")
+        end
       end
     end
   end
