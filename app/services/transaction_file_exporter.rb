@@ -266,11 +266,8 @@ class TransactionFileExporter
   end
 
   def next_cfd_transaction_reference(retrospective)
-    result = if retrospective
-               NextCfdRetrospectiveReference.call(regime: regime, region: region)
-             else
-               NextReferenceService.call(regime: regime, region: region)
-             end
+    result = NextReferenceService.call(regime: regime, region: region, retrospective: retrospective)
+
     if result.success?
       result.reference
     else
