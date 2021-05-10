@@ -167,27 +167,18 @@ class TransactionFileExporter
 
       positives.each do |refs|
         ref, cust = refs
-        trans_ref = next_wml_transaction_reference
+        trans_ref = next_transaction_reference(false)
         q.where(reference_1: ref).where(customer_reference: cust).where(atab[:tcm_charge].gteq(0))
          .update_all(tcm_transaction_type: "I",
                      tcm_transaction_reference: trans_ref)
       end
       negatives.each do |refs|
         ref, cust = refs
-        trans_ref = next_wml_transaction_reference
+        trans_ref = next_transaction_reference(false)
         q.where(reference_1: ref).where(customer_reference: cust).where(atab[:tcm_charge].lt(0))
          .update_all(tcm_transaction_type: "C",
                      tcm_transaction_reference: trans_ref)
       end
-    end
-  end
-
-  def next_wml_transaction_reference
-    result = NextReferenceService.call(regime: regime, region: region)
-    if result.success?
-      result.reference
-    else
-      ""
     end
   end
 
@@ -213,28 +204,18 @@ class TransactionFileExporter
 
       positives.each do |refs|
         ref, cust = refs
-        trans_ref = next_pas_transaction_reference(retro)
+        trans_ref = next_transaction_reference(retro)
         q.where(reference_1: ref).where(customer_reference: cust).where(atab[charge_attr].gteq(0))
          .update_all(tcm_transaction_type: "I",
                      tcm_transaction_reference: trans_ref)
       end
       negatives.each do |refs|
         ref, cust = refs
-        trans_ref = next_pas_transaction_reference(retro)
+        trans_ref = next_transaction_reference(retro)
         q.where(reference_1: ref).where(customer_reference: cust).where(atab[charge_attr].lt(0))
          .update_all(tcm_transaction_type: "C",
                      tcm_transaction_reference: trans_ref)
       end
-    end
-  end
-
-  def next_pas_transaction_reference(retrospective)
-    result = NextReferenceService.call(regime: regime, region: region, retrospective: retrospective)
-
-    if result.success?
-      result.reference
-    else
-      ""
     end
   end
 
@@ -253,7 +234,7 @@ class TransactionFileExporter
 
       cust_charges.each do |k, v|
         trans_type = v.negative? ? "C" : "I"
-        trans_ref = next_cfd_transaction_reference(retro)
+        trans_ref = next_transaction_reference(retro)
 
         q.where(customer_reference: k[0], line_context_code: k[1])
          .update_all(tcm_transaction_type: trans_type,
@@ -262,14 +243,11 @@ class TransactionFileExporter
     end
   end
 
-  def next_cfd_transaction_reference(retrospective)
+  def next_transaction_reference(retrospective)
     result = NextReferenceService.call(regime: regime, region: region, retrospective: retrospective)
+    return result.reference if result.success?
 
-    if result.success?
-      result.reference
-    else
-      ""
-    end
+    ""
   end
 
   def permit_store
