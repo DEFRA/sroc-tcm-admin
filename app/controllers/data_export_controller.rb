@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class DataExportController < ApplicationController
-  include FinancialYear
   include RegimeScope
   before_action :set_regime, only: %i[index download generate]
 
