@@ -183,7 +183,7 @@ class TransactionFileExporter
   end
 
   def next_wml_transaction_reference
-    result = NextWmlReference.call(regime: regime, region: region)
+    result = NextReferenceService.call(regime: regime, region: region)
     if result.success?
       result.reference
     else
