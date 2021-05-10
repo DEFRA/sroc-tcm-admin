@@ -229,11 +229,8 @@ class TransactionFileExporter
   end
 
   def next_pas_transaction_reference(retrospective)
-    result = if retrospective
-               NextPasRetrospectiveReference.call(regime: regime, region: region)
-             else
-               NextReferenceService.call(regime: regime, region: region)
-             end
+    result = NextReferenceService.call(regime: regime, region: region, retrospective: retrospective)
+
     if result.success?
       result.reference
     else
