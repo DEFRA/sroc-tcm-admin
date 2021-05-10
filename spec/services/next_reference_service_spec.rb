@@ -11,7 +11,7 @@ RSpec.describe NextReferenceService do
     before(:each) do
       # Stub the underlying sequence counter call. We know it just returns the next available invoice number so we just
       # need a value. In a new DB the first record would have a value of 1
-      allow(SequenceCounter).to receive('next_invoice_number') { 1 }
+      allow(SequenceCounter).to receive("next_invoice_number") { 1 }
     end
 
     it "marks the action as successful" do

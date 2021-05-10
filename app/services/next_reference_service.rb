@@ -24,7 +24,7 @@ class NextReferenceService < ServiceObject
 
   def cfd(invoice_number)
     terminator = @retrospective ? "2#{@region}" : "1#{@region}T"
-    "#{invoice_number.to_s.rjust(5, "0")}#{terminator}"
+    "#{invoice_number.to_s.rjust(5, '0')}#{terminator}"
   end
 
   def pas(invoice_number)
