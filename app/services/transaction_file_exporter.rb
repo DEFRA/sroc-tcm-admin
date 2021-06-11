@@ -45,8 +45,7 @@ class TransactionFileExporter
     end
     # 'remove' excluded transactions
     excluded_transactions_by_region(region).update_all(status: "excluded")
-    # queue the background job to create the file
-    FileExportJob.perform_later(file.id) unless file.nil?
+
     file
   end
 
@@ -80,8 +79,6 @@ class TransactionFileExporter
       end
     end
 
-    # queue the background job to create the file
-    FileExportJob.perform_later(file.id) unless file.nil?
     file
   end
 
