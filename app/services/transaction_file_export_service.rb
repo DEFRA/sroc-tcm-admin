@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TransactionFileExportService < ServiceObject
-  def initialize()
+  def initialize
     super()
   end
 
