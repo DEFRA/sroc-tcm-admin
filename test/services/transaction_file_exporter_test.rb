@@ -3,8 +3,6 @@
 require "test_helper"
 
 class TransactionFileExporterTest < ActiveSupport::TestCase
-  include ActiveJob::TestHelper
-
   def setup
     @regime = regimes(:cfd)
     @region = "A"
@@ -43,12 +41,6 @@ class TransactionFileExporterTest < ActiveSupport::TestCase
 
   def test_export_creates_file_record
     assert_difference "TransactionFile.count" do
-      @exporter.export
-    end
-  end
-
-  def test_export_queues_job_for_generating_file
-    assert_enqueued_with(job: FileExportJob) do
       @exporter.export
     end
   end
