@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class TransactionFileExportService < ServiceObject
+  def initialize(_params = {})
+    super()
+  end
+
   def call
     @result = false
     begin
