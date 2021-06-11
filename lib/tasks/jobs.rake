@@ -10,4 +10,9 @@ namespace :jobs do
   task data_export: :environment do
     DataExportService.call
   end
+
+  desc "Export queued transaction files"
+  task file_export: :environment do
+    TransactionFileExportService.call
+  end
 end
