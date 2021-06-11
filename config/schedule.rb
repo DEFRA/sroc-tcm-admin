@@ -5,6 +5,10 @@
 # It's helpful, but not entirely necessary to understand cron before proceeding.
 # http://en.wikipedia.org/wiki/Cron
 
+every 10.minutes, roles: [:db] do
+  rake "jobs:file_export"
+end
+
 every 15.minutes, roles: [:db] do
   rake "jobs:file_import"
 end
