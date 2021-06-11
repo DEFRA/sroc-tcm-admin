@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TransactionFileExportService < ServiceObject
-  def initialize(params = {})
+  def initialize()
     super()
   end
 
@@ -17,7 +17,7 @@ class TransactionFileExportService < ServiceObject
           transaction_file.user
         )
         exporter.generate_output_file(transaction_file)
-        puts("Exported transaction file #{transaction_file.file_id}")
+        puts("Exported transaction file #{transaction_file.file_reference}")
       end
       @result = true
     rescue StandardError => e
