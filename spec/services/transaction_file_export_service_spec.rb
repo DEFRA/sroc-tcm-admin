@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe TransactionFileExportService, focus: true do
+RSpec.describe TransactionFileExportService do
   let(:regime) { create(:regime) }
   let(:user) { create(:user_with_regime, regime: regime) }
   let(:service) { TransactionFileExportService }
