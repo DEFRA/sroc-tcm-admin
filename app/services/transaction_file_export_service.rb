@@ -1,16 +1,12 @@
 # frozen_string_literal: true
 
 class TransactionFileExportService < ServiceObject
-  def initialize
-    super()
-  end
-
   def call
     @result = false
     begin
       puts("Started transaction file export")
 
-      TransactionFile.where(state: 'initialised').each do |transaction_file|
+      TransactionFile.where(state: "initialised").each do |transaction_file|
         exporter = TransactionFileExporter.new(
           transaction_file.regime,
           transaction_file.region,
