@@ -20,7 +20,7 @@ class TransactionFilesController < ApplicationController
   def create
     set_region
     file = exporter.export
-    msg = "Successfully generated transaction file <b>#{file.filename}</b>"
+    msg = "Successfully queued transaction file <b>#{file.filename}</b> for export"
     flash[:success] = msg
     # force page 1 on redirect to prevent possibile invalid page selection
     redirect_to regime_transactions_path(@regime, page: 1)

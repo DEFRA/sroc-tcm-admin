@@ -22,7 +22,7 @@ class RetrospectiveFilesController < ApplicationController
     retro_file = exporter.export_retrospectives
 
     # Accept and continue to create transaction file
-    msg = "Successfully generated retrospective file <b>#{retro_file.filename}</b>"
+    msg = "Successfully queued retrospective file <b>#{retro_file.filename}</b> for export"
 
     flash[:success] = msg
     # force page 1 on redirect to prevent possibile invalid page selection
