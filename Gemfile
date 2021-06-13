@@ -27,9 +27,6 @@ gem "kaminari"
 # authenticate with the Charging Module API
 gem "oauth2"
 gem "rails-i18n"
-# Use Redis adapter to run Action Cable in production
-gem "redis", "~> 3.2"
-gem "resque"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 5.0"
 gem "secure_headers"
