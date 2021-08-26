@@ -2,7 +2,7 @@ name: CI
 
 # We want this workflow to trigger when
 #
-# - a change is made to `main` either because of a direct push or when a PR is merged
+# - a change is made to `master` either because of a direct push or when a PR is merged
 # - whenever a PR is created or updated by a team member
 # - whenever a PR is created or updated by Dependabot
 #
@@ -19,7 +19,7 @@ name: CI
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
   pull_request_target:
 
