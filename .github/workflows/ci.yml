@@ -41,10 +41,6 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of sonarcloud analysis
 
-      - name: Debug
-        run: |
-          echo "Actor is ${{ github.actor }}"
-
       # We don't have to specify the ruby version, or grab it from .ruby-verion. This action supports reading the
       # version from .ruby-verion itself
       - name: Install Ruby
