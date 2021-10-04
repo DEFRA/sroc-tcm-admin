@@ -1,10 +1,10 @@
 # Strategic Review of Charges - Tactical Charging Module
 
-![Build Status](https://github.com/DEFRA/sroc-tcm-admin/workflows/CI/badge.svg?branch=master)
+![Build Status](https://github.com/DEFRA/sroc-tcm-admin/workflows/CI/badge.svg?branch=main)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_sroc-tcm-admin&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=DEFRA_sroc-tcm-admin)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_sroc-tcm-admin&metric=sqale_index)](https://sonarcloud.io/dashboard?id=DEFRA_sroc-tcm-admin)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_sroc-tcm-admin&metric=coverage)](https://sonarcloud.io/dashboard?id=DEFRA_sroc-tcm-admin)
-[![security](https://hakiri.io/github/DEFRA/sroc-tcm-admin/master.svg)](https://hakiri.io/github/DEFRA/sroc-tcm-admin/master)
+[![security](https://hakiri.io/github/DEFRA/sroc-tcm-admin/main.svg)](https://hakiri.io/github/DEFRA/sroc-tcm-admin/main)
 [![Known Vulnerabilities](https://snyk.io/test/github/DEFRA/sroc-tcm-admin/badge.svg)](https://snyk.io/test/github/DEFRA/sroc-tcm-admin)
 [![Licence](https://img.shields.io/badge/Licence-OGLv3-blue.svg)](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3)
 
