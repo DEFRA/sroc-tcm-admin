@@ -69,6 +69,15 @@ RSpec.describe FileImportService do
           expect(service.failed?).to be(false)
         end
 
+        it "returns details of the successful file in the results" do
+          results = service.call
+
+          expect(results[:succeeded]).to eq(["import/cfdti999.dat.csv"])
+
+          expect(results[:failed]).to be_empty
+          expect(results[:quarantined]).to be_empty
+        end
+
         context "but no category can be suggested" do
           before(:each) do
             allow_any_instance_of(Permits::CfdCategoryProcessor).to receive(:fetch_unique_consents).and_return(nil)
@@ -103,6 +112,15 @@ RSpec.describe FileImportService do
             expect(service.success?).to be(true)
             expect(service.failed?).to be(false)
           end
+
+          it "still returns details of the successful file in the results" do
+            results = service.call
+
+            expect(results[:succeeded]).to eq(["import/cfdti999.dat.csv"])
+
+            expect(results[:failed]).to be_empty
+            expect(results[:quarantined]).to be_empty
+          end
         end
       end
 
@@ -132,6 +150,15 @@ RSpec.describe FileImportService do
             expect(service.success?).to be(false)
             expect(service.failed?).to be(true)
           end
+
+          it "returns details of the failed file in the results" do
+            results = service.call
+
+            expect(results[:failed]).to eq(["import/cfdti.dat.csv"])
+
+            expect(results[:succeeded]).to be_empty
+            expect(results[:quarantined]).to be_empty
+          end
         end
 
         context "because the regime is unrecognised" do
@@ -158,6 +185,15 @@ RSpec.describe FileImportService do
 
             expect(service.success?).to be(false)
             expect(service.failed?).to be(true)
+          end
+
+          it "returns details of the failed file in the results" do
+            results = service.call
+
+            expect(results[:failed]).to eq(["import/footi999.dat.csv"])
+
+            expect(results[:succeeded]).to be_empty
+            expect(results[:quarantined]).to be_empty
           end
         end
 
@@ -192,6 +228,15 @@ RSpec.describe FileImportService do
             expect(service.success?).to be(false)
             expect(service.failed?).to be(true)
           end
+
+          it "returns details of the quarantined file in the results" do
+            results = service.call
+
+            expect(results[:quarantined]).to eq(["import/cfdti666.dat.csv"])
+
+            expect(results[:succeeded]).to be_empty
+            expect(results[:failed]).to be_empty
+          end
         end
 
         context "because the file is not an import file" do
@@ -224,6 +269,15 @@ RSpec.describe FileImportService do
 
             expect(service.success?).to be(false)
             expect(service.failed?).to be(true)
+          end
+
+          it "returns details of the quarantined file in the results" do
+            results = service.call
+
+            expect(results[:quarantined]).to eq(["import/unrecognised.txt"])
+
+            expect(results[:succeeded]).to be_empty
+            expect(results[:failed]).to be_empty
           end
         end
       end
@@ -258,7 +312,14 @@ RSpec.describe FileImportService do
         expect(service.success?).to be(false)
         expect(service.failed?).to be(true)
       end
+
+      it "returns empty results" do
+        results = service.call
+
+        expect(results[:succeeded]).to be_empty
+        expect(results[:failed]).to be_empty
+        expect(results[:quarantined]).to be_empty
+      end
     end
   end
-
 end

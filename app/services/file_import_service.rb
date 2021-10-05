@@ -8,17 +8,14 @@ class FileImportService < ServiceObject
   def call
     # Default the overall import result to `false`
     @result = false
-    return unless SystemConfig.config.start_import
+    results = default_results
+    return results unless SystemConfig.config.start_import
 
     begin
       # Look to see whether there are any files that need processing
       user = User.system_account
       Thread.current[:current_user] = user
       importer = TransactionFileImporter.new
-
-      success = 0
-      failed = 0
-      quarantined = 0
 
       result = ListEtlImportFiles.call
       result.files.each do |f|
@@ -35,7 +32,7 @@ class FileImportService < ServiceObject
                                     remote_path: f)
 
           DeleteEtlImportFile.call(remote_path: f)
-          success += 1
+          results[:succeeded].push(f)
 
           begin
             processor = category_processor(transaction_file, user)
@@ -51,10 +48,10 @@ class FileImportService < ServiceObject
           PutQuarantineFile.call(local_path: in_file.path,
                                  remote_path: f)
           DeleteEtlImportFile.call(remote_path: f)
-          quarantined += 1
+          results[:quarantined].push(f)
         rescue StandardError => e
           puts("Failed to import file #{f}: #{e}")
-          failed += 1
+          results[:failed].push(f)
         ensure
           in_file.close
           in_file.unlink
@@ -66,9 +63,11 @@ class FileImportService < ServiceObject
       # Set the service object result to `true` as long as nothing got quarantined or failed. Even if there are no files
       # imported the importer can be said to have completed 'successfully'. But we set the result to 'false' if any one
       # file fails
-      @result = true unless (quarantined + failed).positive?
+      @result = true unless (results[:quarantined].length + results[:failed].length).positive?
 
-      puts("Successfully copied #{success} files, failed to copy #{failed}, quarantined #{quarantined} files")
+      log_result(results)
+
+      results
     ensure
       SystemConfig.config.stop_import
     end
@@ -76,5 +75,23 @@ class FileImportService < ServiceObject
 
   def category_processor(header, user)
     "Permits::#{header.regime.slug.capitalize}CategoryProcessor".constantize.new(header, user)
+  end
+
+  private
+
+  def default_results
+    return {
+      succeeded: [],
+      quarantined: [],
+      failed: []
+    }
+  end
+
+  def log_result(results)
+    message = "Successfully copied #{results[:succeeded].length} files, "\
+      "failed to copy #{results[:failed].length}, "\
+      "quarantined #{results[:quarantined].length} files"
+
+    puts(message)
   end
 end
