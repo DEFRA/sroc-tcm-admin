@@ -12,12 +12,24 @@ RSpec.describe "Jobs", type: :request do
 
       context "and they are an admin" do
         let(:user) { create(:user_with_regime, :admin, regime: regime) }
+        let(:results) do
+          {
+            succeeded: ["import/cfdti999.dat.csv"],
+            quarantined: ["import/cfdti666.dat.csv"],
+            failed: ["import/cfdti.dat.csv"]
+          }
+        end
+
+        before(:each) do
+          allow(FileImportService).to receive(:call) { results }
+        end
 
         context "and the request format is valid (json)" do
-          it "renders empty JSON and returns a 200 response" do
+          it "renders JSON containing the results and returns a 200 response" do
             patch "/jobs/import", as: :json
 
             expect(response).to have_http_status(200)
+            expect(response.body).to eq(results.to_json)
           end
         end
 
