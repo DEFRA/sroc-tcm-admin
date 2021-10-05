@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "Jobs", type: :request do
-  describe "/jobs/import", :focus do
+  describe "/jobs/import" do
     let(:regime) { create(:regime) }
     context "when a user is signed in" do
       before do
