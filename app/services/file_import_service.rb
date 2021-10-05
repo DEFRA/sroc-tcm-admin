@@ -80,7 +80,7 @@ class FileImportService < ServiceObject
   private
 
   def default_results
-    return {
+    {
       succeeded: [],
       quarantined: [],
       failed: []
