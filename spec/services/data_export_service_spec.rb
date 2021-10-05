@@ -14,7 +14,7 @@ RSpec.describe DataExportService do
       allow($stdout).to receive(:puts)
     end
 
-    context "when no regime is specified" do
+    context "when no regime is specified", :focus do
       before(:each) do
         # Create the additional regimes
         create(:regime, :pas)
