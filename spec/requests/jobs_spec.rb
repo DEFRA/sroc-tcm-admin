@@ -24,19 +24,11 @@ RSpec.describe "Jobs", type: :request do
           allow(FileImportService).to receive(:call) { results }
         end
 
-        context "and the request format is valid (json)" do
-          it "renders JSON containing the results and returns a 200 response" do
-            patch "/jobs/import", as: :json
+        it "renders JSON containing the results and returns a 200 response" do
+          get "/jobs/import"
 
-            expect(response).to have_http_status(200)
-            expect(response.body).to eq(results.to_json)
-          end
-        end
-
-        context "and the request format is not valid (html)" do
-          it "responds with an error" do
-            expect { patch "/jobs/import" }.to raise_error(ActionController::UnknownFormat)
-          end
+          expect(response).to have_http_status(200)
+          expect(response.body).to eq(results.to_json)
         end
       end
 
@@ -44,7 +36,7 @@ RSpec.describe "Jobs", type: :request do
         let(:user) { create(:user_with_regime, :billing, regime: regime) }
 
         it "responds with an error" do
-          patch "/jobs/import", as: :json
+          get "/jobs/import"
 
           expect(response).to have_http_status(403)
         end
@@ -54,7 +46,7 @@ RSpec.describe "Jobs", type: :request do
 
   context "when a user is not signed in" do
     it "responds with 401 Unauthorized" do
-      patch "/jobs/import", as: :json
+      get "/jobs/import"
 
       expect(response).to have_http_status(401)
     end

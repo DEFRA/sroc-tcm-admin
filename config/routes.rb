@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     end
   end
 
-  patch "/jobs/import", to: "jobs#import", as: :jobs_import
+  get "/jobs/import", to: "jobs#import", as: :jobs_import
 
   root to: "transactions#index"
 

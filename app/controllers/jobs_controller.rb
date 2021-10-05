@@ -4,11 +4,9 @@ class JobsController < ApplicationController
   before_action :admin_only_check
 
   def import
-    results = FileImportService.call if request.format.symbol == :json
+    results = FileImportService.call
 
-    respond_to do |format|
-      format.json { render json: results.to_json, status: :ok }
-    end
+    render json: results.to_json, status: :ok
   end
 
   private
