@@ -41,20 +41,12 @@ class FileStorageService
   private
 
   def storage
-    @storage ||= determine_storage_handler
+    @storage ||= AwsFileStore.new
   end
 
   def zone_path(zone, path = "")
     raise(ArgumentError, "Unknown zone: #{zone}") unless STORAGE_ZONES.include?(z)
 
     File.join(STORAGE_ZONES[zone], path)
-  end
-
-  def determine_storage_handler
-    if Rails.env.development? || Rails.env.test?
-      LocalFileStore.new
-    else
-      AwsFileStore.new
-    end
   end
 end
