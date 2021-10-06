@@ -8,6 +8,34 @@ FactoryBot.define do
     role { "admin" }
     password { "Secret123" }
 
+    trait :admin do
+      email { "admin@sroc.gov.uk" }
+      first_name { "Admin" }
+      last_name { "User" }
+      role { "admin" }
+    end
+
+    trait :billing do
+      email { "billing@sroc.gov.uk" }
+      first_name { "Billing" }
+      last_name { "User" }
+      role { "billing" }
+    end
+
+    trait :read_only do
+      email { "readonly@sroc.gov.uk" }
+      first_name { "Readonly" }
+      last_name { "User" }
+      role { "read_only" }
+    end
+
+    trait :read_only_export do
+      email { "readonlyexport@sroc.gov.uk" }
+      first_name { "Readonlyexport" }
+      last_name { "User" }
+      role { "read_only_export" }
+    end
+
     factory :user_with_regime do
       transient do
         regime { create(:regime) }

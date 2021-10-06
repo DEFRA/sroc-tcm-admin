@@ -35,6 +35,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get "/jobs/import", to: "jobs#import", as: :jobs_import
+
   root to: "transactions#index"
 
   match "/404", to: "errors#not_found", via: :all
