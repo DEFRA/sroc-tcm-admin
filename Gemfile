@@ -23,9 +23,6 @@ gem "jbuilder", "~> 2.5"
 gem "jquery-rails"
 gem "jquery-ui-rails"
 gem "kaminari"
-# Wrapper for the OAuth 2.0 specification (https://oauth.net/2/). Needed to
-# authenticate with the Charging Module API
-gem "oauth2"
 gem "rails-i18n"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 5.0"

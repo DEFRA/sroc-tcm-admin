@@ -136,6 +136,9 @@ en:
         removed_at: 'Removal Date'
         removal_reference: 'Support Incident No.'
         removal_reason: 'Reason for Removal'
+      permit_categories:
+        code: 'Code'
+        description: 'Description'
   views:
     amount_with_unit: "Amount (£)"
     pagination:
