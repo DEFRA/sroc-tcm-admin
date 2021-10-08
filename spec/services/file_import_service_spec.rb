@@ -5,26 +5,26 @@ require "rails_helper"
 RSpec.describe FileImportService do
   describe "#call" do
     let(:service) { FileImportService.new }
-    let(:etl_file_store) { LocalFileStore.new("etl_bucket") }
-    let(:archive_file_store) { LocalFileStore.new("archive_bucket") }
+    let(:s3_list_regex) { Helpers::S3Helpers.list_uploads_regex("import") }
+    let(:s3_uploads_regex) { Helpers::S3Helpers.uploads_regex("import", import_file_name) }
+    let(:s3_archives_regex) { Helpers::S3Helpers.archives_regex("import", import_file_name) }
+    let(:s3_quarantine_regex) { Helpers::S3Helpers.archives_regex("quarantine", import_file_name) }
+    let(:s3_list_response) { Helpers::S3Helpers.list_response("import", import_file_name)}
+    let(:import_file_content) do
+      Helpers::FileHelpers.fixture_content(import_file_name, "import_files")
+    end
 
     before(:each) do
-      # Copy our import fixture to the import folder. It doesn't matter if it already exists as we just overwrite
-      etl_file_store.store_file(
-        Rails.root.join("spec", "fixtures", "import_files", import_file), File.join("import", import_file)
-      )
+      stub_request(:get, s3_list_regex).and_return(status: 200, body: s3_list_response)
+      stub_request(:get, s3_uploads_regex).to_return(status: 200, body: import_file_content)
+      stub_request(:put, s3_archives_regex).with(body: import_file_content)
+      stub_request(:put, s3_quarantine_regex).with(body: import_file_content)
+      stub_request(:delete, s3_uploads_regex)
 
       # The file importer uses `puts()` to ensure details are logged when run from a rake task. We don't want that
       # output in our tests so we use this to silence it. If you need to debug anything whilst working on tests
       # for it just comment out this line temporarily
       allow($stdout).to receive(:puts)
-    end
-
-    after(:each) do
-      # Clean up - ensure any files we create irrespective of whether the test is successful or not is deleted
-      Helpers::FileHelpers.clean_up(import_file, etl_file_store.base_path, "import")
-      Helpers::FileHelpers.clean_up(import_file, archive_file_store.base_path, "import")
-      Helpers::FileHelpers.clean_up(import_file, archive_file_store.base_path, "quarantine")
     end
 
     context "when no other import is running" do
@@ -37,7 +37,7 @@ RSpec.describe FileImportService do
       end
 
       context "and the import file is valid" do
-        let(:import_file) { "cfdti999.dat.csv" }
+        let(:import_file_name) { "cfdti999.dat.csv" }
 
         it "imports the transaction data" do
           service.call
@@ -45,7 +45,7 @@ RSpec.describe FileImportService do
           transaction_header = TransactionHeader.first
           transaction_details = TransactionDetail.all
 
-          expect(transaction_header.filename).to eq(import_file)
+          expect(transaction_header.filename).to eq(import_file_name)
           expect(transaction_header.file_reference).to eq("CFDTI00999")
           expect(transaction_details.length).to eq(3)
         end
@@ -53,13 +53,13 @@ RSpec.describe FileImportService do
         it "creates a copy in the 'archive_bucket'" do
           service.call
 
-          expect(archive_file_store.list("import")).to include("import/#{import_file}")
+          expect(WebMock).to have_requested(:put, s3_archives_regex).once
         end
 
         it "deletes the original import file" do
           service.call
 
-          expect(etl_file_store.list("import")).not_to include("import/#{import_file}")
+          expect(WebMock).to have_requested(:delete, s3_uploads_regex).once
         end
 
         it "marks the import as successful" do
@@ -89,7 +89,7 @@ RSpec.describe FileImportService do
             transaction_header = TransactionHeader.first
             transaction_details = TransactionDetail.all
 
-            expect(transaction_header.filename).to eq(import_file)
+            expect(transaction_header.filename).to eq(import_file_name)
             expect(transaction_header.file_reference).to eq("CFDTI00999")
             expect(transaction_details.length).to eq(3)
           end
@@ -97,13 +97,13 @@ RSpec.describe FileImportService do
           it "still creates a copy in the 'archive_bucket'" do
             service.call
 
-            expect(archive_file_store.list("import")).to include("import/#{import_file}")
+            expect(WebMock).to have_requested(:put, s3_archives_regex).once
           end
 
           it "still deletes the original import file" do
             service.call
 
-            expect(etl_file_store.list("import")).not_to include("import/#{import_file}")
+            expect(WebMock).to have_requested(:delete, s3_uploads_regex).once
           end
 
           it "still marks the import as successful" do
@@ -126,7 +126,7 @@ RSpec.describe FileImportService do
 
       context "and the import file is invalid" do
         context "because the file is missing required data" do
-          let(:import_file) { "cfdti.dat.csv" }
+          let(:import_file_name) { "cfdti.dat.csv" }
 
           it "does not import any data" do
             service.call
@@ -141,7 +141,7 @@ RSpec.describe FileImportService do
           it "leaves the file in 'import'" do
             service.call
 
-            expect(etl_file_store.list("import")).to include("import/#{import_file}")
+            expect(WebMock).not_to have_requested(:delete, s3_uploads_regex)
           end
 
           it "marks the import as failed" do
@@ -162,7 +162,7 @@ RSpec.describe FileImportService do
         end
 
         context "because the regime is unrecognised" do
-          let(:import_file) { "footi999.dat.csv" }
+          let(:import_file_name) { "footi999.dat.csv" }
 
           it "does not import any data" do
             service.call
@@ -177,7 +177,7 @@ RSpec.describe FileImportService do
           it "leaves the file in 'import'" do
             service.call
 
-            expect(etl_file_store.list("import")).to include("import/#{import_file}")
+            expect(WebMock).not_to have_requested(:delete, s3_uploads_regex)
           end
 
           it "marks the import as failed" do
@@ -198,7 +198,7 @@ RSpec.describe FileImportService do
         end
 
         context "because the file type is not 'I'" do
-          let(:import_file) { "cfdti666.dat.csv" }
+          let(:import_file_name) { "cfdti666.dat.csv" }
 
           it "does not import any data" do
             service.call
@@ -213,13 +213,13 @@ RSpec.describe FileImportService do
           it "creates a copy in 'quarantine'" do
             service.call
 
-            expect(archive_file_store.list("quarantine")).to include("quarantine/#{import_file}")
+            expect(WebMock).to have_requested(:put, s3_quarantine_regex).once
           end
 
           it "deletes the original import file" do
             service.call
 
-            expect(etl_file_store.list("import")).not_to include("import/#{import_file}")
+            expect(WebMock).to have_requested(:delete, s3_uploads_regex).once
           end
 
           it "marks the import as failed" do
@@ -240,7 +240,7 @@ RSpec.describe FileImportService do
         end
 
         context "because the file is not an import file" do
-          let(:import_file) { "unrecognised.txt" }
+          let(:import_file_name) { "unrecognised.txt" }
 
           it "does not import any data" do
             service.call
@@ -255,13 +255,13 @@ RSpec.describe FileImportService do
           it "creates a copy in 'quarantine'" do
             service.call
 
-            expect(archive_file_store.list("quarantine")).to include("quarantine/#{import_file}")
+            expect(WebMock).to have_requested(:put, s3_quarantine_regex).once
           end
 
           it "deletes the original import file" do
             service.call
 
-            expect(etl_file_store.list("import")).not_to include("import/#{import_file}")
+            expect(WebMock).to have_requested(:delete, s3_uploads_regex).once
           end
 
           it "marks the import as failed" do
@@ -284,7 +284,7 @@ RSpec.describe FileImportService do
     end
 
     context "when another import is running" do
-      let(:import_file) { "cfdti999.dat.csv" }
+      let(:import_file_name) { "cfdti999.dat.csv" }
 
       before(:each) do
         allow_any_instance_of(SystemConfig).to receive(:start_import).and_return(false)
@@ -303,7 +303,7 @@ RSpec.describe FileImportService do
       it "leaves the file in 'import'" do
         service.call
 
-        expect(etl_file_store.list("import")).to include("import/#{import_file}")
+        expect(WebMock).not_to have_requested(:delete, s3_uploads_regex)
       end
 
       it "marks the import as failed" do
