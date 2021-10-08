@@ -15,6 +15,10 @@ jobs:
       POSTGRES_USERNAME: postgres
       # Though we don't have redis running, we keep the env var so the app does not complain about a missing env var
       REDIS_URL: "redis://localhost:6379"
+      FILE_UPLOAD_ACCESS_KEY: iamanawss3accesskey
+      FILE_UPLOAD_SECRET_KEY: iamanawss3secretkey
+      FILE_UPLOAD_BUCKET: file-uploads-example-gov-uk
+      ARCHIVE_BUCKET: file-archive-example-gov-uk
 
     # Service containers to run with `runner-job`
     services:
