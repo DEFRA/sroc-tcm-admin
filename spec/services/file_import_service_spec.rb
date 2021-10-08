@@ -9,7 +9,7 @@ RSpec.describe FileImportService do
     let(:s3_uploads_regex) { Helpers::S3Helpers.uploads_regex("import", import_file_name) }
     let(:s3_archives_regex) { Helpers::S3Helpers.archives_regex("import", import_file_name) }
     let(:s3_quarantine_regex) { Helpers::S3Helpers.archives_regex("quarantine", import_file_name) }
-    let(:s3_list_response) { Helpers::S3Helpers.list_response("import", import_file_name)}
+    let(:s3_list_response) { Helpers::S3Helpers.list_response("import", import_file_name) }
     let(:import_file_content) do
       Helpers::FileHelpers.fixture_content(import_file_name, "import_files")
     end
