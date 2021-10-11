@@ -34,8 +34,14 @@ FactoryBot.define do
     period_end { "10-Aug-2017" }
     original_filename { "CFDBI00123" }
     original_file_date { 2.weeks.ago.to_date }
-    tcm_financial_year { "1718" }
+    tcm_financial_year { "2021" }
     region { "A" }
+    tcm_charge { 23_747 }
+
+    trait :approved do
+      approved_for_billing { true }
+      approved_for_billing_at { 2.months.ago }
+    end
 
     association :transaction_header, factory: :transaction_header
   end

@@ -2,6 +2,10 @@
 
 module Helpers
   module S3Helpers
+    def self.any_request
+      %r{https://.*\.s3\.eu-west-1\.amazonaws\.com/.*}
+    end
+
     def self.any_bucket_regex(path = "", file_name = "")
       %r{https://.*\.s3\.eu-west-1\.amazonaws\.com/#{path}/#{file_name}}
     end
