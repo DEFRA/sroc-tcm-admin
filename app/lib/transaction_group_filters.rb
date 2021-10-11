@@ -47,6 +47,14 @@ module TransactionGroupFilters
   end
 
   def cfd_group_filter(base_query)
+    # Note: pluck() is a shortcut to select one or more attributes without loading a bunch of records just to grab the
+    # attributes needed. For example
+    #   Person.pluck(:name)
+    #   # SELECT people.name FROM people
+    #   # => ['David', 'Jeremy', 'Jose']
+    # So, this appears to be calling the base query, adding the unapproved filter to it and then extracting a distinct
+    # list of references. The intent appears to be to ensure that if we have two transaction detail records with the
+    # same reference but only one 'approved', it doesn't get included until the other one is approved
     incomplete_records = base_query.unapproved.distinct.pluck(:reference_1)
     return base_query.approved if incomplete_records.empty?
 
