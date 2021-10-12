@@ -2,18 +2,6 @@
 
 require "rails_helper"
 
-class Filters
-  include TransactionGroupFilters
-
-  attr_reader :regime, :region, :user
-
-  def initialize(regime, region, user)
-    @regime = regime
-    @region = region
-    @user = user
-  end
-end
-
 RSpec.describe TransactionFileExporter do
   let(:regime) { create(:regime) }
   let(:region) { "A" }
