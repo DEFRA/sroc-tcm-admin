@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe CfdTransactionDetailPresenter, :focus do
+RSpec.describe CfdTransactionDetailPresenter do
   let(:subject) { CfdTransactionDetailPresenter.new(transaction_detail) }
   let(:regime) { build(:regime) }
   let(:transaction_header) { build(:transaction_header, regime: regime) }
@@ -140,6 +140,14 @@ RSpec.describe CfdTransactionDetailPresenter, :focus do
 
     it "returns the correct value" do
       expect(subject.site).to eq("Green Rd. Pig Disposal")
+    end
+  end
+
+  describe "#transaction_date" do
+    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+
+    it "returns the correct value" do
+      expect(subject.transaction_date).to eq("13-AUG-2021")
     end
   end
 
