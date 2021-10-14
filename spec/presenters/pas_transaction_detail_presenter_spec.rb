@@ -7,6 +7,14 @@ RSpec.describe PasTransactionDetailPresenter do
   let(:regime) { build(:regime) }
   let(:transaction_header) { build(:transaction_header, regime: regime) }
 
+  describe "#absolute_original_permit_reference" do
+    let(:transaction_detail) { build(:transaction_detail, :pas, transaction_header: transaction_header) }
+
+    it "returns the correct value" do
+      expect(subject.absolute_original_permit_reference).to eq("ZZ1234ZZ")
+    end
+  end
+
   describe "#as_json" do
     let(:transaction_detail) { build(:transaction_detail, :pas, transaction_header: transaction_header) }
 
@@ -38,6 +46,25 @@ RSpec.describe PasTransactionDetailPresenter do
           excluded: false,
           excluded_reason: "",
           error_message: nil
+        }
+      )
+    end
+  end
+
+  describe "#charge_params" do
+    let(:transaction_detail) { build(:transaction_detail, :pas, transaction_header: transaction_header) }
+
+    it "returns the correct value" do
+      expect(subject.charge_params).to eq(
+        {
+          permitCategoryRef: nil,
+          temporaryCessation: false,
+          compliancePerformanceBand: "F",
+          billableDays: 132,
+          financialDays: 365,
+          chargePeriod: "FY2021",
+          preConstruction: false,
+          environmentFlag: "TEST"
         }
       )
     end
