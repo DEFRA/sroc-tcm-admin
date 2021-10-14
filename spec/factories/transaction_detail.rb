@@ -38,6 +38,28 @@ FactoryBot.define do
     region { "A" }
     tcm_charge { 23_747 }
 
+    trait :pas do
+      header_attr_2 { "Site" }
+      header_attr_3 { "Red St. Hill Farm" }
+      header_attr_8 { "AB12 1AB" }
+      line_attr_1 { "" }
+      line_attr_2 { "" }
+      line_attr_3 { "" }
+      line_attr_4 { "" }
+      line_attr_5 { "" }
+      line_attr_6 { "" }
+      line_attr_7 { "" }
+      line_attr_8 { "" }
+      line_attr_9 { "" }
+      line_attr_11 { "F 3.0" }
+      line_attr_15 { "Directly Associated Activity only" }
+      reference_1 { "VP3839DA" }
+      reference_2 { "ABC1234A" }
+      reference_3 { "ZZ1234ZZ" }
+      filename { "PASYI00337.dat.transfered-19062017" }
+      original_filename { "PASYI00337" }
+    end
+
     trait :approved do
       approved_for_billing { true }
       approved_for_billing_at { 2.months.ago }

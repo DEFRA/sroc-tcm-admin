@@ -108,6 +108,35 @@ RSpec.describe TransactionDetailPresenter do
     end
   end
 
+  describe "#tcm_compliance_percentage" do
+    test_data = [
+      { example: "blank", band: "", expected: ""},
+      { example: "'()'", band: "()", expected: ""},
+      { example: "'A'", band: "A", expected: ""},
+      { example: "'A (110%)'", band: "A (110%)", expected: "110%"},
+    ]
+
+    test_data.each do |data|
+      context "when 'compliancePerformanceBand' in the charge_calculation is #{data[:example]}" do
+        let(:transaction_detail) do
+          build(
+            :transaction_detail,
+            transaction_header: transaction_header,
+            charge_calculation: {
+              "calculation": {
+                "compliancePerformanceBand": data[:band]
+              }
+            }
+          )
+        end
+
+        it "returns the correct value" do
+          expect(subject.tcm_compliance_percentage).to eq(data[:expected])
+        end
+      end
+    end
+  end
+
   describe "#temporary_cessation_file" do
     context "when temporary_cessation is true" do
       let(:transaction_detail) do
