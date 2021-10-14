@@ -72,10 +72,12 @@ RSpec.describe PasTransactionDetailPresenter do
 
   describe "#compliance_band" do
     context "when line_attr_11 is blank" do
-      let(:transaction_detail) { build(:transaction_detail, :pas, transaction_header: transaction_header) }
+      let(:transaction_detail) do
+        build(:transaction_detail, :pas, transaction_header: transaction_header, line_attr_11: "")
+      end
 
       it "returns the correct value" do
-        expect(subject.compliance_band).to eq("F")
+        expect(subject.compliance_band).to eq("")
       end
     end
 
