@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe PasTransactionDetailPresenter do
   let(:subject) { PasTransactionDetailPresenter.new(transaction_detail) }
   let(:regime) { build(:regime) }
-  let(:transaction_header) { build(:transaction_header, regime: regime) }
+  let(:transaction_header) { build(:transaction_header, :pas, regime: regime) }
 
   describe "#absolute_original_permit_reference" do
     let(:transaction_detail) { build(:transaction_detail, :pas, transaction_header: transaction_header) }

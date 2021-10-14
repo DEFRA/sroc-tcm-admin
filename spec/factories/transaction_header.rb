@@ -11,6 +11,14 @@ FactoryBot.define do
     invoice_total { 0 }
     credit_total { 0 }
 
+    trait :pas do
+      feeder_source_code { "PAS" }
+    end
+
+    trait :wml do
+      feeder_source_code { "WML" }
+    end
+
     association :regime, factory: :regime
   end
 end
