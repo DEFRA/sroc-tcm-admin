@@ -110,10 +110,10 @@ RSpec.describe TransactionDetailPresenter do
 
   describe "#tcm_compliance_percentage" do
     test_data = [
-      { example: "blank", band: "", expected: ""},
-      { example: "'()'", band: "()", expected: ""},
-      { example: "'A'", band: "A", expected: ""},
-      { example: "'A (110%)'", band: "A (110%)", expected: "110%"},
+      { example: "blank", band: "", expected: "" },
+      { example: "'()'", band: "()", expected: "" },
+      { example: "'A'", band: "A", expected: "" },
+      { example: "'A (110%)'", band: "A (110%)", expected: "110%" }
     ]
 
     test_data.each do |data|

@@ -114,7 +114,7 @@ RSpec.describe PasTransactionDetailPresenter do
 
   describe "#site" do
     let(:transaction_detail) do
-      build(:transaction_detail, :pas,transaction_header: transaction_header)
+      build(:transaction_detail, :pas, transaction_header: transaction_header)
     end
 
     it "returns the correct value" do
@@ -124,7 +124,7 @@ RSpec.describe PasTransactionDetailPresenter do
 
   describe "#site_address" do
     let(:transaction_detail) do
-      build(:transaction_detail, :pas,transaction_header: transaction_header)
+      build(:transaction_detail, :pas, transaction_header: transaction_header)
     end
 
     it "returns the correct value" do
