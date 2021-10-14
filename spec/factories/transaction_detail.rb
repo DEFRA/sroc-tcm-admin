@@ -4,12 +4,12 @@ FactoryBot.define do
   factory :transaction_detail do
     sequence_number { 1 }
     customer_reference { "A1234B" }
-    transaction_date { 2.months.ago }
+    transaction_date { Date.new(2021, 8, 13) }
     transaction_type { "I" }
     status { "unbilled" }
     transaction_reference { rand(36**8).to_s(36).upcase }
     currency_code { "GBP" }
-    header_attr_1 { 2.months.ago.strftime("%d-%^b-%Y") }
+    header_attr_1 { "13-AUG-2021" }
     line_amount { 23_747 }
     line_description { "Consent No - TONY/1234/1/1" }
     line_area_code { "3" }
@@ -33,7 +33,7 @@ FactoryBot.define do
     period_start { "01-Apr-2017" }
     period_end { "10-Aug-2017" }
     original_filename { "CFDBI00123" }
-    original_file_date { 2.weeks.ago.to_date }
+    original_file_date { Date.new(2021, 9, 29) }
     tcm_financial_year { "2021" }
     region { "A" }
     tcm_charge { 23_747 }

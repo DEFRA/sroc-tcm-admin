@@ -19,7 +19,7 @@ RSpec.describe PasTransactionDetailPresenter do
           generated_filename: nil,
           generated_file_date: nil,
           original_filename: "PASYI00337",
-          original_file_date: "30/09/21",
+          original_file_date: "29/09/21",
           permit_reference: "VP3839DA",
           original_permit_reference: "ABC1234A",
           compliance_band: "F",
