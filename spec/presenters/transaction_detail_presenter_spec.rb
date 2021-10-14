@@ -180,4 +180,38 @@ RSpec.describe TransactionDetailPresenter do
       end
     end
   end
+
+  describe "#transaction_date" do
+    context "when 'generatedAt' in the charge_calculation is nil" do
+      let(:transaction_detail) do
+        build(
+          :transaction_detail,
+          transaction_header: transaction_header,
+          charge_calculation: {
+            "generatedAt": nil
+          }
+        )
+      end
+
+      it "returns the correct value" do
+        expect(subject.transaction_date).to eq(Date.new(2021, 8, 13))
+      end
+    end
+
+    context "when 'generatedAt' in the charge_calculation is not blank" do
+      let(:transaction_detail) do
+        build(
+          :transaction_detail,
+          transaction_header: transaction_header,
+          charge_calculation: {
+            "generatedAt": "2021-10-01"
+          }
+        )
+      end
+
+      it "returns the correct value" do
+        expect(subject.transaction_date).to eq("2021-10-01".to_date)
+      end
+    end
+  end
 end
