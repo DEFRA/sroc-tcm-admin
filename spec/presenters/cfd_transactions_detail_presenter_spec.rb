@@ -11,33 +11,35 @@ RSpec.describe CfdTransactionDetailPresenter do
     let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
 
     it "returns the correct value" do
-      expect(subject.as_json).to eq({
-        amount: "Debit (TBC)",
-        can_update_category: true,
-        category_locked: nil,
-        confidence_level: nil,
-        consent_reference: "TONY/1234/1/1",
-        customer_reference: "A1234B",
-        discharge: "1",
-        error_message: nil,
-        excluded: false,
-        excluded_reason: "",
-        financial_year: "FY2021",
-        generated_file_date: nil,
-        generated_filename: nil,
-        id: nil,
-        line_amount: "237.47",
-        original_file_date: "29/09/21",
-        original_filename: "CFDBI00123",
-        period: "01/04/17 - 10/08/17",
-        region: "A",
-        sroc_category: nil,
-        tcm_financial_year: "2021",
-        tcm_transaction_reference: nil,
-        temporary_cessation: "N",
-        variation: 100,
-        version: "1"
-      })
+      expect(subject.as_json).to eq(
+        {
+          amount: "Debit (TBC)",
+          can_update_category: true,
+          category_locked: nil,
+          confidence_level: nil,
+          consent_reference: "TONY/1234/1/1",
+          customer_reference: "A1234B",
+          discharge: "1",
+          error_message: nil,
+          excluded: false,
+          excluded_reason: "",
+          financial_year: "FY2021",
+          generated_file_date: nil,
+          generated_filename: nil,
+          id: nil,
+          line_amount: "237.47",
+          original_file_date: "29/09/21",
+          original_filename: "CFDBI00123",
+          period: "01/04/17 - 10/08/17",
+          region: "A",
+          sroc_category: nil,
+          tcm_financial_year: "2021",
+          tcm_transaction_reference: nil,
+          temporary_cessation: "N",
+          variation: 100,
+          version: "1"
+        }
+      )
     end
   end
 
@@ -45,17 +47,19 @@ RSpec.describe CfdTransactionDetailPresenter do
     let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
 
     it "returns the correct value" do
-      expect(subject.charge_params).to eq({
-        billableDays: 132,
-        chargePeriod: "FY2021",
-        compliancePerformanceBand: "B",
-        environmentFlag: "TEST",
-        financialDays: 365,
-        percentageAdjustment: 100,
-        permitCategoryRef: nil,
-        preConstruction: false,
-        temporaryCessation: false
-      })
+      expect(subject.charge_params).to eq(
+        {
+          billableDays: 132,
+          chargePeriod: "FY2021",
+          compliancePerformanceBand: "B",
+          environmentFlag: "TEST",
+          financialDays: 365,
+          percentageAdjustment: 100,
+          permitCategoryRef: nil,
+          preConstruction: false,
+          temporaryCessation: false
+        }
+      )
     end
   end
 
