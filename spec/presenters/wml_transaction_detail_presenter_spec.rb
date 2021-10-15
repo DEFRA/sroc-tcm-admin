@@ -58,10 +58,12 @@ RSpec.describe WmlTransactionDetailPresenter do
   end
 
   describe "#compliance_band" do
+    let(:transaction_detail) do
+      build(:transaction_detail, :wml, transaction_header: transaction_header, line_attr_6: line_attr_6)
+    end
+
     context "when line_attr_6 is blank" do
-      let(:transaction_detail) do
-        build(:transaction_detail, :wml, transaction_header: transaction_header)
-      end
+      let(:line_attr_6) { "" }
 
       it "returns the correct value" do
         expect(subject.compliance_band).to eq("")
@@ -69,9 +71,7 @@ RSpec.describe WmlTransactionDetailPresenter do
     end
 
     context "when line_attr_6 is not blank" do
-      let(:transaction_detail) do
-        build(:transaction_detail, :wml, transaction_header: transaction_header, line_attr_6: "A(95%)")
-      end
+      let(:line_attr_6) { "A(95%)" }
 
       it "returns the correct value" do
         expect(subject.compliance_band).to eq("A")

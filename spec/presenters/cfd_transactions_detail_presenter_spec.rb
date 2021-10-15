@@ -64,8 +64,12 @@ RSpec.describe CfdTransactionDetailPresenter do
   end
 
   describe "#clean_variation_percentage" do
+    let(:transaction_detail) do
+      build(:transaction_detail, transaction_header: transaction_header, variation: variation)
+    end
+
     context "when variation is blank" do
-      let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+      let(:variation) { "" }
 
       it "returns the correct value" do
         expect(subject.clean_variation_percentage).to eq(100)
@@ -73,7 +77,7 @@ RSpec.describe CfdTransactionDetailPresenter do
     end
 
     context "when variation is not blank" do
-      let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header, variation: "90%") }
+      let(:variation) { "90%" }
 
       it "returns the correct value" do
         expect(subject.clean_variation_percentage).to eq("90")
@@ -114,8 +118,12 @@ RSpec.describe CfdTransactionDetailPresenter do
   end
 
   describe "#discharge_location" do
+    let(:transaction_detail) do
+      build(:transaction_detail, transaction_header: transaction_header, line_attr_1: line_attr_1)
+    end
+
     context "when line_attr_1 is blank" do
-      let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header, line_attr_1: "") }
+      let(:line_attr_1) { "" }
 
       it "returns the correct value" do
         expect(subject.discharge_location).to eq("Discharge Location: ")
@@ -123,7 +131,7 @@ RSpec.describe CfdTransactionDetailPresenter do
     end
 
     context "when line_attr_1 is not blank" do
-      let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+      let(:line_attr_1) { "Green Rd. Pig Disposal" }
 
       it "returns the correct value" do
         expect(subject.discharge_location).to eq("Discharge Location: Green Rd. Pig Disposal")
@@ -164,8 +172,12 @@ RSpec.describe CfdTransactionDetailPresenter do
   end
 
   describe "#variation_percentage_file" do
+    let(:transaction_detail) do
+      build(:transaction_detail, transaction_header: transaction_header, variation: variation)
+    end
+
     context "when variation is 100%" do
-      let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header, variation: "100%") }
+      let(:variation) { "100%" }
 
       it "returns the correct value" do
         expect(subject.variation_percentage_file).to eq("")
@@ -173,7 +185,7 @@ RSpec.describe CfdTransactionDetailPresenter do
     end
 
     context "when variation is not 100%" do
-      let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header, variation: "90%") }
+      let(:variation) { "90%" }
 
       it "returns the correct value" do
         expect(subject.variation_percentage_file).to eq("90%")

@@ -52,10 +52,10 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#pre_sroc_flag" do
+    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header, status: status) }
+
     context "when status is 'retrospective'" do
-      let(:transaction_detail) do
-        build(:transaction_detail, transaction_header: transaction_header, status: "retrospective")
-      end
+      let(:status) { "retrospective" }
 
       it "returns the correct value" do
         expect(subject.pre_sroc_flag).to eq("Y")
@@ -63,9 +63,7 @@ RSpec.describe TransactionDetailPresenter do
     end
 
     context "when status is 'retro_billed'" do
-      let(:transaction_detail) do
-        build(:transaction_detail, transaction_header: transaction_header, status: "retro_billed")
-      end
+      let(:status) { "retro_billed" }
 
       it "returns the correct value" do
         expect(subject.pre_sroc_flag).to eq("Y")
@@ -73,9 +71,7 @@ RSpec.describe TransactionDetailPresenter do
     end
 
     context "when status is not 'retrospective' or 'retro_billed'" do
-      let(:transaction_detail) do
-        build(:transaction_detail, transaction_header: transaction_header)
-      end
+      let(:status) { "unbilled" }
 
       it "returns the correct value" do
         expect(subject.pre_sroc_flag).to eq("N")
@@ -84,15 +80,18 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#pro_rata_days" do
+    let(:transaction_detail) do
+      build(
+        :transaction_detail,
+        transaction_header: transaction_header,
+        period_start: period_start,
+        period_end: period_end
+      )
+    end
+
     context "when billable days equals financial year days" do
-      let(:transaction_detail) do
-        build(
-          :transaction_detail,
-          period_start: "01-Apr-2017",
-          period_end: "31-Mar-2018",
-          transaction_header: transaction_header
-        )
-      end
+      let(:period_start) { "01-Apr-2017" }
+      let(:period_end) { "31-Mar-2018" }
 
       it "returns the correct value" do
         expect(subject.pro_rata_days).to eq("")
@@ -100,7 +99,8 @@ RSpec.describe TransactionDetailPresenter do
     end
 
     context "when billable days does not equal financial year days" do
-      let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+      let(:period_start) { "01-Apr-2017" }
+      let(:period_end) { "10-Aug-2017" }
 
       it "returns the correct value" do
         expect(subject.pro_rata_days).to eq("132/365")
@@ -138,10 +138,12 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#temporary_cessation_file" do
+    let(:transaction_detail) do
+      build(:transaction_detail, transaction_header: transaction_header, temporary_cessation: temporary_cessation)
+    end
+
     context "when temporary_cessation is true" do
-      let(:transaction_detail) do
-        build(:transaction_detail, transaction_header: transaction_header, temporary_cessation: true)
-      end
+      let(:temporary_cessation) { true }
 
       it "returns the correct value" do
         expect(subject.temporary_cessation_file).to eq("50%")
@@ -149,9 +151,7 @@ RSpec.describe TransactionDetailPresenter do
     end
 
     context "when temporary_cessation is false" do
-      let(:transaction_detail) do
-        build(:transaction_detail, transaction_header: transaction_header, temporary_cessation: false)
-      end
+      let(:temporary_cessation) { false }
 
       it "returns the correct value" do
         expect(subject.temporary_cessation_file).to eq("")
@@ -160,10 +160,12 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#temporary_cessation_flag" do
+    let(:transaction_detail) do
+      build(:transaction_detail, transaction_header: transaction_header, temporary_cessation: temporary_cessation)
+    end
+
     context "when temporary_cessation is true" do
-      let(:transaction_detail) do
-        build(:transaction_detail, transaction_header: transaction_header, temporary_cessation: true)
-      end
+      let(:temporary_cessation) { true }
 
       it "returns the correct value" do
         expect(subject.temporary_cessation_flag).to eq("Y")
@@ -171,9 +173,7 @@ RSpec.describe TransactionDetailPresenter do
     end
 
     context "when temporary_cessation is false" do
-      let(:transaction_detail) do
-        build(:transaction_detail, transaction_header: transaction_header, temporary_cessation: false)
-      end
+      let(:temporary_cessation) { false }
 
       it "returns the correct value" do
         expect(subject.temporary_cessation_flag).to eq("N")
@@ -182,16 +182,18 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#transaction_date" do
+    let(:transaction_detail) do
+      build(
+        :transaction_detail,
+        transaction_header: transaction_header,
+        charge_calculation: {
+          "generatedAt": generatedAt
+        }
+      )
+    end
+
     context "when 'generatedAt' in the charge_calculation is nil" do
-      let(:transaction_detail) do
-        build(
-          :transaction_detail,
-          transaction_header: transaction_header,
-          charge_calculation: {
-            "generatedAt": nil
-          }
-        )
-      end
+      let(:generatedAt) { nil }
 
       it "returns the correct value" do
         expect(subject.transaction_date).to eq(Date.new(2021, 8, 13))
@@ -199,15 +201,7 @@ RSpec.describe TransactionDetailPresenter do
     end
 
     context "when 'generatedAt' in the charge_calculation is not blank" do
-      let(:transaction_detail) do
-        build(
-          :transaction_detail,
-          transaction_header: transaction_header,
-          charge_calculation: {
-            "generatedAt": "2021-10-01"
-          }
-        )
-      end
+      let(:generatedAt) { "2021-10-01" }
 
       it "returns the correct value" do
         expect(subject.transaction_date).to eq("2021-10-01".to_date)
