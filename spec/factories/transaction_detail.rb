@@ -60,6 +60,25 @@ FactoryBot.define do
       original_filename { "PASYI00337" }
     end
 
+    trait :wml do
+      header_attr_10 { "From 06/03/2018" }
+      line_description { "In cancellation of invoice no. E01181293: Credit of subsistence charge due to the licence being surrendered.wef 6/3/2018 at Hairy Wigwam, Big Pig Farm, Great Upperford, Big Town, BT5 5EL, Permit Ref: XZ3333PG/A001" }
+      line_attr_1 { "" }
+      line_attr_2 { "026101" }
+      line_attr_3 { "From 6th March 2018 (26 Days)" }
+      line_attr_4 { "" }
+      line_attr_5 { "" }
+      line_attr_6 { "" }
+      line_attr_7 { "" }
+      line_attr_8 { "" }
+      line_attr_9 { "" }
+      reference_1 { "026101" }
+      reference_2 { "XZ3333PG/A001" }
+      reference_3 { "1" }
+      category { "2.15.2" }
+      original_filename { "WMLEI07892" }
+    end
+
     trait :approved do
       approved_for_billing { true }
       approved_for_billing_at { 2.months.ago }
