@@ -38,6 +38,25 @@ RSpec.describe WmlTransactionDetailPresenter do
     end
   end
 
+  describe "#charge_params" do
+    let(:transaction_detail) { build(:transaction_detail, :wml, transaction_header: transaction_header) }
+
+    it "returns the correct value" do
+      expect(subject.charge_params).to eq(
+        {
+          billableDays: 132,
+          chargePeriod: "FY2021",
+          compliancePerformanceBand: "",
+          environmentFlag: "TEST",
+          financialDays: 365,
+          permitCategoryRef: "2.15.2",
+          preConstruction: false,
+          temporaryCessation: false
+        }
+      )
+    end
+  end
+
   describe "#compliance_band" do
     context "when line_attr_6 is blank" do
       let(:transaction_detail) do
@@ -240,6 +259,67 @@ RSpec.describe WmlTransactionDetailPresenter do
 
     it "returns the correct value" do
       expect(subject.permit_reference).to eq("026101")
+    end
+  end
+
+  describe "#site" do
+    let(:transaction_detail) do
+      build(:transaction_detail, :wml, transaction_header: transaction_header, line_description: line_description)
+    end
+
+    context "when line_description is 'nil'" do
+      let(:line_description) { nil }
+
+      it "returns an empty string" do
+        expect(subject.site).to eq("")
+      end
+    end
+
+    context "when line_description is not 'nil'" do
+      context "and it contains the word 'at'" do
+        let(:line_description) do
+          "Charge Code 1 at Hairy Wigwam, Big Pig Farm, Great Upperford, Big Town, BT5 5EL, Permit Ref: XZ3333PG/A001"
+        end
+
+        it "returns everything after the 'at' and up to the last comma" do
+          expect(subject.site).to eq(
+            "Hairy Wigwam, Big Pig Farm, Great Upperford, Big Town, BT5 5EL"
+          )
+        end
+      end
+
+      context "and it doesn't contain the word 'at'" do
+        let(:line_description) do
+          "Compliance adjustment for Hairy Wigwam, Big Pig Farm, Great Upperford, Big Town, BT5 5EL, "\
+          "Permit Ref: XXX/123"
+        end
+
+        it "returns an empty string" do
+          expect(subject.site).to eq("")
+        end
+      end
+    end
+  end
+
+  describe "#temporary_cessation_adjustment" do
+    let(:transaction_detail) do
+      build(:transaction_detail, :wml, transaction_header: transaction_header, temporary_cessation: temporary_cessation)
+    end
+
+    context "when temporary_cessation is true" do
+      let(:temporary_cessation) { true }
+
+      it "returns the correct value" do
+        expect(subject.temporary_cessation_adjustment).to eq("50%")
+      end
+    end
+
+    context "when temporary_cessation is false" do
+      let(:temporary_cessation) { false }
+
+      it "returns the correct value" do
+        expect(subject.temporary_cessation_adjustment).to eq("")
+      end
     end
   end
 end
