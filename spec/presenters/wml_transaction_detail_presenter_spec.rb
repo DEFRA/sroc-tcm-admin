@@ -148,7 +148,8 @@ RSpec.describe WmlTransactionDetailPresenter do
         it "adds it and everything after it to the end of the standard prefix" do
           expect(subject.credit_line_description).to eq(
             "Credit of subsistence charge for permit category 2.15.2 due to the licence being surrendered.wef "\
-            "6/3/2018 at Hairy Wigwam, Big Pig Farm, Great Upperford, Big Town, BT5 5EL, EPR Ref: XZ3333PG/A001")
+            "6/3/2018 at Hairy Wigwam, Big Pig Farm, Great Upperford, Big Town, BT5 5EL, EPR Ref: XZ3333PG/A001"
+          )
         end
       end
 
