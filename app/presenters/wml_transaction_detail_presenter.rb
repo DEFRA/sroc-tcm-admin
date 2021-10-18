@@ -114,14 +114,4 @@ class WmlTransactionDetailPresenter < TransactionDetailPresenter
       error_message: error_message
     }
   end
-
-  def extract_errors
-    if errors[:category].any?
-      errors.full_messages_for(:category)
-    elsif errors[:base].any?
-      errors.full_messages_for(:base)
-    elsif charge_calculation_error?
-      charge_calculation["calculation"]["messages"]
-    end
-  end
 end
