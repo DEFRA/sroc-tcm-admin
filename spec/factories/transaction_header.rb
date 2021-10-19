@@ -6,7 +6,7 @@ FactoryBot.define do
     region { "A" }
     file_type_flag { "I" }
     file_sequence_number { 371 }
-    generated_at { 2.months.ago.to_date }
+    generated_at { Date.new(2021, 8, 13) }
     transaction_count { 1 }
     invoice_total { 0 }
     credit_total { 0 }

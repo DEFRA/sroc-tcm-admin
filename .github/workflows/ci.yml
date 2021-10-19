@@ -13,7 +13,6 @@ jobs:
       POSTGRES_PASSWORD: pinafore
       POSTGRES_PORT: 5432
       POSTGRES_USERNAME: postgres
-      # Though we don't have redis running, we keep the env var so the app does not complain about a missing env var
       REDIS_URL: "redis://localhost:6379"
       FILE_UPLOAD_ACCESS_KEY: iamanawss3accesskey
       FILE_UPLOAD_SECRET_KEY: iamanawss3secretkey
@@ -59,6 +58,12 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+      # Coverband, the gem we use to track production code usage depends on being able to connect to redis
+      - name: Start Redis
+        uses: supercharge/redis-github-action@1.2.0
+        with:
+          redis-version: 6
 
       - name: Database migrations
         run: |
