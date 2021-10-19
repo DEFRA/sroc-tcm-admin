@@ -627,7 +627,7 @@ RSpec.describe TransactionDetailPresenter do
     let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
 
     it "returns the correct value" do
-      expect(subject.generated_at).to eq("18-AUG-2021")
+      expect(subject.generated_at).to eq("13-AUG-2021")
     end
   end
 
