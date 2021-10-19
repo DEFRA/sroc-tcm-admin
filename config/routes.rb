@@ -35,6 +35,8 @@ Rails.application.routes.draw do
     end
   end
 
+  mount Coverband::Reporters::Web.new, at: "/coverage"
+
   get "/jobs/import", to: "jobs#import", as: :jobs_import
 
   root to: "transactions#index"
