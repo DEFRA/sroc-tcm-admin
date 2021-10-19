@@ -59,7 +59,7 @@ jobs:
         with:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
-      # Coverband, then gem we use to track code usage depends on being able to connect to redis
+      # Coverband, the gem we use to track production code usage depends on being able to connect to redis
       - name: Start Redis
         uses: supercharge/redis-github-action@1.2.0
         with:
