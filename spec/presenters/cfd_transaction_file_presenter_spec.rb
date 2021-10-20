@@ -9,7 +9,7 @@ RSpec.describe CfdTransactionFilePresenter do
   let(:transaction_header) { create(:transaction_header, regime: regime) }
   let(:transaction_details) do
     [
-      create(:transaction_detail, transaction_header: transaction_header)
+      create(:transaction_detail, :cfd, transaction_header: transaction_header)
     ]
   end
   let(:transaction_file) do
