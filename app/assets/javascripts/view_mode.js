@@ -1,3 +1,6 @@
+// To prevent StandardJS erroring on `history.back()`, we define history as a global:
+/* global history */
+
 var $ = window.$
 //
 // $(document).on('turbolinks:load', function () {
