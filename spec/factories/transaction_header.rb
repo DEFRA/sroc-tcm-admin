@@ -19,6 +19,13 @@ FactoryBot.define do
       feeder_source_code { "WML" }
     end
 
+    trait :removed do
+      removed { true }
+      removal_reference { rand(36**8).to_s(36).upcase }
+      removal_reason { "Removed for test purposes" }
+      removed_at { Date.new(2021, 8, 13) }
+    end
+
     association :regime, factory: :regime
   end
 end
