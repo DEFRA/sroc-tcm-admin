@@ -33,30 +33,6 @@ class CfdTransactionFilePresenterTest < ActiveSupport::TestCase
     @presenter = CfdTransactionFilePresenter.new(@file)
   end
 
-  def test_it_returns_a_header_record
-    assert_equal(
-      [
-        "H",
-        "0000000",
-        "CFD",
-        "B",
-        "I",
-        @file.file_id,
-        "",
-        @file.generated_at.strftime("%-d-%^b-%Y")
-      ],
-      @presenter.header
-    )
-  end
-
-  def test_it_produces_detail_records
-    rows = []
-    @presenter.details do |row|
-      rows << row
-    end
-    assert_equal(@file.transaction_details.count, rows.count)
-  end
-
   def test_detail_records_have_correct_line_attr_4_pro_rata_days
     @presenter.transaction_details.each_with_index do |td, i|
       p = CfdTransactionDetailPresenter.new(td)
@@ -120,20 +96,6 @@ class CfdTransactionFilePresenterTest < ActiveSupport::TestCase
       row = @presenter.detail_row(p, i)
       assert_equal expected_value, row[Detail::LineAttr5]
     end
-  end
-
-  def test_is_returns_a_trailer_record
-    count = @presenter.transaction_details.count
-    assert_equal(
-      [
-        "T",
-        (count + 1).to_s.rjust(7, "0"),
-        (count + 2).to_s.rjust(7, "0"),
-        @presenter.transaction_details.where(tcm_transaction_type: "I").sum(:tcm_charge).to_i,
-        @presenter.transaction_details.where(tcm_transaction_type: "C").sum(:tcm_charge).to_i
-      ],
-      @presenter.trailer
-    )
   end
 
   def apply_charge_calculation(transaction)

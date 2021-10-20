@@ -40,30 +40,6 @@ class WmlTransactionFilePresenterTest < ActiveSupport::TestCase
     @presenter = WmlTransactionFilePresenter.new(@file)
   end
 
-  def test_it_returns_a_header_record
-    assert_equal(
-      [
-        "H",
-        "0000000",
-        "WML",
-        "B",
-        "I",
-        @file.file_id,
-        "",
-        @file.generated_at.strftime("%-d-%^b-%Y")
-      ],
-      @presenter.header
-    )
-  end
-
-  def test_it_produces_detail_records
-    rows = []
-    @presenter.details do |row|
-      rows << row
-    end
-    assert_equal(3, rows.count)
-  end
-
   def test_it_sorts_detail_rows_by_tcm_transaction_reference
     rows = []
     @presenter.details do |row|
