@@ -54,36 +54,6 @@ class WmlTransactionFilePresenterTest < ActiveSupport::TestCase
     end
   end
 
-  def test_detail_record_has_correct_category_description
-    expected_value = "Wigwam"
-    tested = false
-    @presenter.transaction_details.each_with_index do |td, i|
-      next unless td.invoice?
-
-      td.category_description = expected_value
-
-      p = WmlTransactionDetailPresenter.new(td)
-      row = @presenter.detail_row(p, i)
-      assert_equal expected_value, row[Detail::LineAttr5]
-      tested = true
-    end
-    assert tested, "Did not test an invoice for category_description"
-  end
-
-  def test_is_returns_a_trailer_record
-    count = @presenter.transaction_details.count
-    assert_equal(
-      [
-        "T",
-        (count + 1).to_s.rjust(7, "0"),
-        (count + 2).to_s.rjust(7, "0"),
-        @presenter.transaction_details.where(tcm_transaction_type: "I").sum(:tcm_charge).to_i,
-        @presenter.transaction_details.where(tcm_transaction_type: "C").sum(:tcm_charge).to_i
-      ],
-      @presenter.trailer
-    )
-  end
-
   def apply_charge_calculation(transaction, band)
     transaction.charge_calculation = {
       "calculation" => {
