@@ -1,9 +1,7 @@
 {
   "name": "sroc-tcm-admin",
   "private": true,
-  "dependencies": {
-    "babel-polyfill": "6.26.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "standard": "^16.0.4"
   },
