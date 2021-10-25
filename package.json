@@ -2,8 +2,7 @@
   "name": "sroc-tcm-admin",
   "private": true,
   "dependencies": {
-    "babel-polyfill": "6.26.0",
-    "coffeescript": "1.12.7"
+    "babel-polyfill": "6.26.0"
   },
   "devDependencies": {
     "standard": "^16.0.4"
