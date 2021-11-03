@@ -8,7 +8,7 @@ RSpec.describe CfdTransactionDetailPresenter do
   let(:transaction_header) { build(:transaction_header, regime: regime) }
 
   describe "#as_json" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.as_json).to eq(
@@ -44,7 +44,7 @@ RSpec.describe CfdTransactionDetailPresenter do
   end
 
   describe "#charge_params" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.charge_params).to eq(
@@ -65,7 +65,7 @@ RSpec.describe CfdTransactionDetailPresenter do
 
   describe "#clean_variation_percentage" do
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, variation: variation)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, variation: variation)
     end
 
     context "when variation is blank" do
@@ -86,7 +86,7 @@ RSpec.describe CfdTransactionDetailPresenter do
   end
 
   describe "#tcm_compliance_percentage" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.tcm_compliance_percentage).to eq("")
@@ -94,7 +94,7 @@ RSpec.describe CfdTransactionDetailPresenter do
   end
 
   describe "#consent_reference" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.consent_reference).to eq("TONY/1234/1/1")
@@ -102,7 +102,7 @@ RSpec.describe CfdTransactionDetailPresenter do
   end
 
   describe "#permit_reference" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.permit_reference).to eq("TONY/1234/1/1")
@@ -110,7 +110,7 @@ RSpec.describe CfdTransactionDetailPresenter do
   end
 
   describe "#discharge_description" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.discharge_description).to eq("STORM SEWAGE OVERFLOW")
@@ -119,7 +119,7 @@ RSpec.describe CfdTransactionDetailPresenter do
 
   describe "#discharge_location" do
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, line_attr_1: line_attr_1)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, line_attr_1: line_attr_1)
     end
 
     context "when line_attr_1 is blank" do
@@ -140,7 +140,7 @@ RSpec.describe CfdTransactionDetailPresenter do
   end
 
   describe "#discharge_reference" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.discharge_reference).to eq("1")
@@ -148,7 +148,7 @@ RSpec.describe CfdTransactionDetailPresenter do
   end
 
   describe "#site" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.site).to eq("Green Rd. Pig Disposal")
@@ -156,7 +156,7 @@ RSpec.describe CfdTransactionDetailPresenter do
   end
 
   describe "#transaction_date" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.transaction_date).to eq("13-AUG-2021")
@@ -164,7 +164,7 @@ RSpec.describe CfdTransactionDetailPresenter do
   end
 
   describe "#version" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.version).to eq("1")
@@ -173,7 +173,7 @@ RSpec.describe CfdTransactionDetailPresenter do
 
   describe "#variation_percentage_file" do
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, variation: variation)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, variation: variation)
     end
 
     context "when variation is 100%" do
