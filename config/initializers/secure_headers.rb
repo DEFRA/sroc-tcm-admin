@@ -15,10 +15,4 @@ SecureHeaders::Configuration.default do |config|
     style_src: %w['self' 'unsafe-inline']
   }
   # rubocop:enable Lint/PercentStringArray
-
-  # permit access to webpack devserver
-  # if Rails.env.development?
-  #   config.csp[:connect_src] << 'localhost:3035'
-  #   config.csp[:connect_src] << 'ws://localhost:3035'
-  # end
 end
