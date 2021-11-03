@@ -11,6 +11,7 @@ RSpec.describe TransactionDetailPresenter do
     let(:transaction_detail) do
       build(
         :transaction_detail,
+        :cfd,
         transaction_header: transaction_header,
         tcm_charge: tcm_charge,
         charge_calculation: charge_calculation
@@ -50,7 +51,12 @@ RSpec.describe TransactionDetailPresenter do
   describe "#approved_date" do
     let(:approved_for_billing_at) { Date.new(2021, 9, 29) }
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, approved_for_billing_at: approved_for_billing_at)
+      build(
+        :transaction_detail,
+        :cfd,
+        transaction_header: transaction_header,
+        approved_for_billing_at: approved_for_billing_at
+      )
     end
 
     it "returns the correct value" do
@@ -60,7 +66,7 @@ RSpec.describe TransactionDetailPresenter do
 
   describe "#approved_flag" do
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, approved_for_billing: approved_for_billing)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, approved_for_billing: approved_for_billing)
     end
 
     context "when approved_for_billing is 'true'" do
@@ -82,7 +88,7 @@ RSpec.describe TransactionDetailPresenter do
 
   describe "#error_message" do
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, charge_calculation: charge_calculation)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, charge_calculation: charge_calculation)
     end
 
     context "when a charge_calculation is 'nil'" do
@@ -140,7 +146,7 @@ RSpec.describe TransactionDetailPresenter do
 
   describe "#baseline_charge" do
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, charge_calculation: charge_calculation)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, charge_calculation: charge_calculation)
     end
 
     context "when a charge_calculation is 'nil'" do
@@ -185,7 +191,7 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#billable_days" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.billable_days).to eq(132)
@@ -199,7 +205,7 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#calculated_amount" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.calculated_amount).to eq(23_747)
@@ -209,7 +215,7 @@ RSpec.describe TransactionDetailPresenter do
   describe "#can_update_category?" do
     let(:suggested_category) { build(:suggested_category, admin_lock: admin_lock) }
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, suggested_category: suggested_category)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, suggested_category: suggested_category)
     end
 
     context "if the suggested_category has admin_lock set to 'false'" do
@@ -245,7 +251,7 @@ RSpec.describe TransactionDetailPresenter do
   describe "#category_description" do
     context "when category_description is not blank" do
       let(:transaction_detail) do
-        build(:transaction_detail, transaction_header: transaction_header, category_description: "category stuff")
+        build(:transaction_detail, :cfd, transaction_header: transaction_header, category_description: "category stuff")
 
         it "returns category_description" do
           expect(subject.category_description).to eq("category stuff")
@@ -256,7 +262,7 @@ RSpec.describe TransactionDetailPresenter do
     context "when category_description is blank" do
       context "and the status is 'unbilled'" do
         let(:transaction_detail) do
-          build(:transaction_detail, transaction_header: transaction_header, category: "2.3.4")
+          build(:transaction_detail, :cfd, transaction_header: transaction_header, category: "2.3.4")
         end
 
         before(:each) do
@@ -282,7 +288,7 @@ RSpec.describe TransactionDetailPresenter do
 
       context "but status is not 'unbilled'" do
         let(:transaction_detail) do
-          build(:transaction_detail, transaction_header: transaction_header, status: "exported")
+          build(:transaction_detail, :cfd, transaction_header: transaction_header, status: "exported")
         end
 
         it "returns 'nil'" do
@@ -292,7 +298,7 @@ RSpec.describe TransactionDetailPresenter do
 
       context "but category is not set" do
         let(:transaction_detail) do
-          build(:transaction_detail, transaction_header: transaction_header, category: nil)
+          build(:transaction_detail, :cfd, transaction_header: transaction_header, category: nil)
 
           it "returns 'nil'" do
             expect(subject.category_description).to be_nil
@@ -305,7 +311,7 @@ RSpec.describe TransactionDetailPresenter do
   describe "#category_locked" do
     let(:suggested_category) { build(:suggested_category) }
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, suggested_category: suggested_category)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, suggested_category: suggested_category)
     end
 
     it "returns the correct value" do
@@ -314,7 +320,7 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#charge_amount" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.charge_amount).to eq(23_747)
@@ -322,7 +328,7 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#charge_period" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.charge_period).to eq("FY2021")
@@ -332,7 +338,7 @@ RSpec.describe TransactionDetailPresenter do
   describe "#confidence_level" do
     let(:suggested_category) { build(:suggested_category) }
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, suggested_category: suggested_category)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, suggested_category: suggested_category)
     end
 
     it "returns the correct value" do
@@ -355,6 +361,7 @@ RSpec.describe TransactionDetailPresenter do
         let(:transaction_detail) do
           build(
             :transaction_detail,
+            :cfd,
             transaction_header: transaction_header,
             line_amount: data[:line_amount],
             status: data[:status]
@@ -380,6 +387,7 @@ RSpec.describe TransactionDetailPresenter do
         let(:transaction_detail) do
           build(
             :transaction_detail,
+            :cfd,
             transaction_header: transaction_header,
             line_amount: data[:line_amount]
           )
@@ -394,7 +402,7 @@ RSpec.describe TransactionDetailPresenter do
 
   describe "#currency_baseline_charge" do
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, charge_calculation: charge_calculation)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, charge_calculation: charge_calculation)
     end
 
     context "when a charge_calculation is 'nil'" do
@@ -439,7 +447,7 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#currency_line_amount" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.currency_line_amount).to eq("237.47")
@@ -447,7 +455,7 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#currency_unit_of_measure_price" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.currency_unit_of_measure_price).to eq("237.47")
@@ -456,7 +464,7 @@ RSpec.describe TransactionDetailPresenter do
 
   describe "#currency_tcm_charge" do
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, tcm_charge: tcm_charge)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, tcm_charge: tcm_charge)
     end
 
     context "when a tcm_charge is 'nil'" do
@@ -478,7 +486,7 @@ RSpec.describe TransactionDetailPresenter do
 
   describe "#customer_name" do
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, customer_name: customer_name)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, customer_name: customer_name)
     end
 
     context "when customer_name is 'nil'" do
@@ -500,7 +508,7 @@ RSpec.describe TransactionDetailPresenter do
 
   describe "#date_received" do
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, created_at: Date.new(2021, 8, 13))
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, created_at: Date.new(2021, 8, 13))
     end
 
     it "returns the correct value" do
@@ -525,6 +533,7 @@ RSpec.describe TransactionDetailPresenter do
         let(:transaction_detail) do
           build(
             :transaction_detail,
+            :cfd,
             transaction_header: transaction_header,
             status: data[:status],
             excluded: data[:excluded],
@@ -578,6 +587,7 @@ RSpec.describe TransactionDetailPresenter do
         let(:transaction_detail) do
           build(
             :transaction_detail,
+            :cfd,
             transaction_header: transaction_header,
             excluded_reason: "No shirt, no entry",
             status: data[:status],
@@ -594,7 +604,7 @@ RSpec.describe TransactionDetailPresenter do
 
   describe "#file_reference" do
     let(:transaction_header) { build(:transaction_header, regime: regime, file_reference: "CFDTI00999") }
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.file_reference).to eq("CFDTI00999")
@@ -602,7 +612,7 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#financial_year" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.financial_year).to eq(2017)
@@ -610,7 +620,7 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#financial_year_days" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.financial_year_days).to eq(365)
@@ -624,7 +634,7 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#generated_at" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.generated_at).to eq("13-AUG-2021")
@@ -633,7 +643,7 @@ RSpec.describe TransactionDetailPresenter do
 
   describe "#generated_file_date" do
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, generated_file_at: generated_file_at)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, generated_file_at: generated_file_at)
     end
 
     context "when a generated_file_at is 'nil'" do
@@ -654,7 +664,7 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#original_charge" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.original_charge).to eq("237.47")
@@ -662,7 +672,7 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#original_file_date" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.original_file_date).to eq("29-SEP-2021")
@@ -670,7 +680,7 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#original_file_date_table" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.original_file_date_table).to eq("29/09/21")
@@ -678,7 +688,7 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#original_transaction_date" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.original_transaction_date).to eq(Date.new(2021, 8, 13))
@@ -686,7 +696,7 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#period" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.period).to eq("01/04/17 - 10/08/17")
@@ -694,7 +704,7 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#period_start" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.period_start).to eq("1-APR-2017")
@@ -702,7 +712,7 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#period_end" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.period_end).to eq("10-AUG-2017")
@@ -710,7 +720,9 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#pre_sroc_flag" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header, status: status) }
+    let(:transaction_detail) do
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, status: status)
+    end
 
     context "when status is 'retrospective'" do
       let(:status) { "retrospective" }
@@ -738,7 +750,7 @@ RSpec.describe TransactionDetailPresenter do
   end
 
   describe "#pretty_status" do
-    let(:transaction_detail) { build(:transaction_detail, transaction_header: transaction_header) }
+    let(:transaction_detail) { build(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
     it "returns the correct value" do
       expect(subject.pretty_status).to eq("Unbilled")
@@ -777,7 +789,7 @@ RSpec.describe TransactionDetailPresenter do
   describe "#suggested_category_admin_lock_flag" do
     let(:suggested_category) { build(:suggested_category, admin_lock: admin_lock) }
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, suggested_category: suggested_category)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, suggested_category: suggested_category)
     end
 
     context "when admin_lock in the suggested_category is 'true'" do
@@ -800,7 +812,7 @@ RSpec.describe TransactionDetailPresenter do
   describe "#suggested_category_code" do
     let(:suggested_category) { build(:suggested_category, category: "2.3.4") }
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, suggested_category: suggested_category)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, suggested_category: suggested_category)
     end
 
     it "returns the correct value" do
@@ -811,7 +823,7 @@ RSpec.describe TransactionDetailPresenter do
   describe "#suggested_category_confidence_level" do
     let(:suggested_category) { build(:suggested_category) }
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, suggested_category: suggested_category)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, suggested_category: suggested_category)
     end
 
     it "returns the correct value" do
@@ -822,7 +834,7 @@ RSpec.describe TransactionDetailPresenter do
   describe "#suggested_category_logic" do
     let(:suggested_category) { build(:suggested_category) }
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, suggested_category: suggested_category)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, suggested_category: suggested_category)
     end
 
     it "returns the correct value" do
@@ -833,7 +845,7 @@ RSpec.describe TransactionDetailPresenter do
   describe "#suggested_category_stage" do
     let(:suggested_category) { build(:suggested_category) }
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, suggested_category: suggested_category)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, suggested_category: suggested_category)
     end
 
     it "returns the correct value" do
@@ -844,7 +856,7 @@ RSpec.describe TransactionDetailPresenter do
   describe "#suggested_category_overridden_flag" do
     let(:suggested_category) { build(:suggested_category, overridden: overridden) }
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, suggested_category: suggested_category)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, suggested_category: suggested_category)
     end
 
     context "when overridden in the suggested_category is 'true'" do
@@ -877,6 +889,7 @@ RSpec.describe TransactionDetailPresenter do
         let(:transaction_detail) do
           build(
             :transaction_detail,
+            :cfd,
             transaction_header: transaction_header,
             charge_calculation: {
               "calculation": {
@@ -895,7 +908,7 @@ RSpec.describe TransactionDetailPresenter do
 
   describe "#tcm_file_date" do
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, transaction_file: transaction_file)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, transaction_file: transaction_file)
     end
 
     context "when a transaction_file exists" do
@@ -917,7 +930,7 @@ RSpec.describe TransactionDetailPresenter do
 
   describe "#temporary_cessation_file" do
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, temporary_cessation: temporary_cessation)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, temporary_cessation: temporary_cessation)
     end
 
     context "when temporary_cessation is true" do
@@ -939,7 +952,7 @@ RSpec.describe TransactionDetailPresenter do
 
   describe "#temporary_cessation_flag" do
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, temporary_cessation: temporary_cessation)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, temporary_cessation: temporary_cessation)
     end
 
     context "when temporary_cessation is true" do
@@ -961,7 +974,7 @@ RSpec.describe TransactionDetailPresenter do
 
   describe "#temporary_cessation_yes_no" do
     let(:transaction_detail) do
-      build(:transaction_detail, transaction_header: transaction_header, temporary_cessation: temporary_cessation)
+      build(:transaction_detail, :cfd, transaction_header: transaction_header, temporary_cessation: temporary_cessation)
     end
 
     context "when temporary_cessation is true" do
@@ -1012,8 +1025,8 @@ RSpec.describe TransactionDetailPresenter do
   describe ".wrap" do
     let(:transactions) do
       [
-        build(:transaction_detail, transaction_header: transaction_header),
-        build(:transaction_detail, transaction_header: transaction_header)
+        build(:transaction_detail, :cfd, transaction_header: transaction_header),
+        build(:transaction_detail, :cfd, transaction_header: transaction_header)
       ]
     end
 

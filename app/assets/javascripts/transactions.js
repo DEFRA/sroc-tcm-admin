@@ -1,5 +1,8 @@
 'use strict'
 
+// The uglifier compressor cannot handle ES6 syntax so we disable the no-var rule since we cannot use `let` and `const`
+/* eslint-disable no-var */
+
 var $ = window.$
 
 function init () {

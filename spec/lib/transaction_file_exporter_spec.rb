@@ -30,7 +30,7 @@ RSpec.describe TransactionFileExporter do
       let(:transaction_header) { create(:transaction_header, regime: regime) }
 
       context "but they are not approved" do
-        let!(:transaction_detail) { create(:transaction_detail, transaction_header: transaction_header) }
+        let!(:transaction_detail) { create(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
         it "still adds a transaction file record to the db" do
           expect { export }.to change { TransactionFile.count }.by 1
@@ -48,7 +48,7 @@ RSpec.describe TransactionFileExporter do
 
       context "and they are approved" do
         let!(:transaction_detail) do
-          create(:transaction_detail, :approved, approver: user, transaction_header: transaction_header)
+          create(:transaction_detail, :cfd, :approved, approver: user, transaction_header: transaction_header)
         end
 
         it "adds a transaction file record to the db" do
@@ -110,6 +110,7 @@ RSpec.describe TransactionFileExporter do
       [
         create(
           :transaction_detail,
+          :cfd,
           :approved,
           approver: user,
           customer_reference: customer_references[0],
@@ -119,6 +120,7 @@ RSpec.describe TransactionFileExporter do
         ),
         create(
           :transaction_detail,
+          :cfd,
           :approved,
           approver: user,
           customer_reference: customer_references[1],
@@ -128,6 +130,7 @@ RSpec.describe TransactionFileExporter do
         ),
         create(
           :transaction_detail,
+          :cfd,
           :approved,
           approver: user,
           customer_reference: customer_references[2],
@@ -200,6 +203,7 @@ RSpec.describe TransactionFileExporter do
       [
         create(
           :transaction_detail,
+          :cfd,
           :approved,
           approver: user,
           customer_reference: customer_references[0],
@@ -209,6 +213,7 @@ RSpec.describe TransactionFileExporter do
         ),
         create(
           :transaction_detail,
+          :cfd,
           :approved,
           approver: user,
           customer_reference: customer_references[1],
@@ -218,6 +223,7 @@ RSpec.describe TransactionFileExporter do
         ),
         create(
           :transaction_detail,
+          :cfd,
           :approved,
           approver: user,
           customer_reference: customer_references[2],
@@ -290,6 +296,7 @@ RSpec.describe TransactionFileExporter do
       [
         create(
           :transaction_detail,
+          :cfd,
           :approved,
           approver: user,
           customer_reference: customer_references[0],
@@ -299,6 +306,7 @@ RSpec.describe TransactionFileExporter do
         ),
         create(
           :transaction_detail,
+          :cfd,
           :approved,
           approver: user,
           customer_reference: customer_references[1],
@@ -308,6 +316,7 @@ RSpec.describe TransactionFileExporter do
         ),
         create(
           :transaction_detail,
+          :cfd,
           :approved,
           approver: user,
           customer_reference: customer_references[2],

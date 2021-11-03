@@ -15,28 +15,31 @@ FactoryBot.define do
     line_area_code { "3" }
     line_income_stream_code { "C" }
     line_context_code { "D" }
-    line_attr_1 { "Green Rd. Pig Disposal" }
-    line_attr_2 { "STORM SEWAGE OVERFLOW" }
-    line_attr_3 { "01/04/17 - 10/08/17" }
-    line_attr_4 { "365/132" }
-    line_attr_5 { "C 1" }
-    line_attr_6 { "E 1" }
-    line_attr_7 { "S 1" }
-    line_attr_8 { "684" }
-    line_attr_9 { "96%" }
     line_quantity { 1 }
-    reference_1 { "TONY/1234/1/1" }
-    reference_2 { "1" }
-    reference_3 { "1" }
     unit_of_measure { "Each" }
     unit_of_measure_price { 23_747 }
     period_start { "01-Apr-2017" }
     period_end { "10-Aug-2017" }
-    original_filename { "CFDBI00123" }
     original_file_date { Date.new(2021, 9, 29) }
     tcm_financial_year { "2021" }
     region { "A" }
     tcm_charge { 23_747 }
+
+    trait :cfd do
+      line_attr_1 { "Green Rd. Pig Disposal" }
+      line_attr_2 { "STORM SEWAGE OVERFLOW" }
+      line_attr_3 { "01/04/17 - 10/08/17" }
+      line_attr_4 { "365/132" }
+      line_attr_5 { "C 1" }
+      line_attr_6 { "E 1" }
+      line_attr_7 { "S 1" }
+      line_attr_8 { "684" }
+      line_attr_9 { "96%" }
+      reference_1 { "TONY/1234/1/1" }
+      reference_2 { "1" }
+      reference_3 { "1" }
+      original_filename { "CFDBI00123" }
+    end
 
     trait :pas do
       header_attr_2 { "Site" }

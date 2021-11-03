@@ -34,7 +34,7 @@ RSpec.describe ExportTransactionDataService do
 
     context "when there is data to export" do
       let(:transaction_header) { create(:transaction_header, regime: regime) }
-      let!(:transaction_detail) { create(:transaction_detail, transaction_header: transaction_header) }
+      let!(:transaction_detail) { create(:transaction_detail, :cfd, transaction_header: transaction_header) }
 
       it "updates the 'ExportDataFile's export related fields" do
         before_timestamp = DateTime.now
