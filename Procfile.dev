@@ -1,2 +1,1 @@
 tcm: RAILS_ENV=development bundle exec rails server -p 3000
-webpack: ./bin/webpack-dev-server --hot --host 127.0.0.1
