@@ -1,5 +1,8 @@
 'use strict';
 
+// The uglifier compressor cannot handle ES6 syntax so we disable the no-var rule since we cannot use `let` and `const`
+/* eslint-disable no-var */
+
 (function ($) {
   $.fn.tcmSelect = function (options) {
     return this.each(function () {
@@ -321,26 +324,6 @@
       })
     }
   }
-
-  // function fetchCategoriesOld (elements, query, successCallback) {
-  //   var d = elements.wrapper.data()
-  //   $.ajax({
-  //     url: d.categoryPath,
-  //     data: {
-  //       fy: d.financialYear,
-  //       q: query
-  //     },
-  //     success: successCallback,
-  //     error: function (xhr, status, err) {
-  //       console.log('Error fetching categories: ' + xhr.status + ' : ' + err)
-  //       if (xhr.status === 401) {
-  //         // unauthorized so force login again
-  //         window.location.reload(true)
-  //       }
-  //     },
-  //     dataType: 'json'
-  //   })
-  // }
 
   function makeList (data, selectedValue) {
     var outer = $("<div class='tcm-select-list-wrapper'></div>")

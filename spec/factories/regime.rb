@@ -6,7 +6,8 @@ FactoryBot.define do
     slug { "cfd" }
     title { "Water Quality" }
 
-    export_data_file { association :export_data_file, regime: instance }
+    trait :cfd do
+    end
 
     trait :pas do
       name { "PAS" }
@@ -19,5 +20,7 @@ FactoryBot.define do
       slug { "wml" }
       title { "Waste" }
     end
+
+    export_data_file { association :export_data_file, regime: instance }
   end
 end

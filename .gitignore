@@ -23,7 +23,6 @@ passenger.*.lock
 passenger.*.pid
 /.byebug_history
 /node_modules
-/yarn-error.log
 APPVERSION
 
 # IDE's and text editors #
