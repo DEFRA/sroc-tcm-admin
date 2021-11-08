@@ -31,7 +31,6 @@ Rails.application.routes.draw do
     resources :exclusion_reasons, except: [:show]
     resources :data_export, only: [:index] do
       get "download", on: :collection
-      get "generate", on: :collection
     end
   end
 
