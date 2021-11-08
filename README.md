@@ -1,4 +1,4 @@
-# Strategic Review of Charges - Tactical Charging Module
+# SROC Tactical Charging Module
 
 ![Build Status](https://github.com/DEFRA/sroc-tcm-admin/workflows/CI/badge.svg?branch=main)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_sroc-tcm-admin&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=DEFRA_sroc-tcm-admin)
@@ -8,106 +8,79 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/DEFRA/sroc-tcm-admin/badge.svg)](https://snyk.io/test/github/DEFRA/sroc-tcm-admin)
 [![Licence](https://img.shields.io/badge/Licence-OGLv3-blue.svg)](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3)
 
-The Tactical Charging Module (TCM) is a web application designed to enable billing adminstrators to apply new categories to permit charges to enable correct amounts to be processed.
+The Strategic Review of Charges (SROC) Tactical Charging Module (TCM) is a web application designed to enable billing adminstrators to apply new categories to permit charges to ensure correct amounts are processed.
 
-This service is an internally facing service only, used by billing administration staff.  Despite being a tactical solution the system is developed in accordance with the [Digital by Default service standard](https://www.gov.uk/service-manual/digital-by-default), where possible, putting user needs first and delivered iteratively.
+This service is used by billing administration staff and internally facing only.
 
-The application sends emails using the Send-grid e-mail service.
+## Prerequisites
 
-## Development Environment
+You'll need [Ruby 2.7.1](https://www.ruby-lang.org/en/) installed plus the [Bundler](http://bundler.io/) gem.
 
-## Install global system dependencies
+## Installation
 
-The following system dependencies are required, regardless of how you install the development environment.
+First clone the repository and then drop into your new local repo
 
-* [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+```bash
+git clone https://github.com/DEFRA/sroc-tcm-admin.git && cd sroc-tcm-admin
+```
 
-### Obtain the source code
+Next download and install the dependencies
 
-Clone the repository, copying the project into a working directory:
+```bash
+bundle install
+```
 
-    git clone https://github.com/DEFRA/sroc-tcm-admin.git
-    cd sroc-tcm-admin
+## Running locally
 
-The TCM application relies on the [sroc-charging-service](https://github.com/DEFRA/sroc-charging-service) to communicate with an externally hosted Rules Execution service enabling the calculation of new permit charges.
+A [Vagrant](https://www.vagrantup.com/) instance has been created allowing easy setup of the waste exemptions service. It includes installing all applications, databases and dependencies. This is located within GitLab (speak to the [Charging Module team](https://github.com/DEFRA/sroc-service-team)).
 
-The SRoC Charging Service should be configured and running on the local system and be able to communicate with an instance of the Rules Execution Service if you wish to generate charges.
+Download the Vagrant project and create the VM using the instructions in its README.
 
-### Local Installation
+However, if you intend to work with the app locally (as opposed to on the Vagrant instance) and just use the box for dependencies, you'll need to:
 
-#### Local system dependencies
+- Log in into the Vagrant instance
+- Using `ps ax`, identify the pid of the running back office app
+- Kill it using `kill [pid id]`
+- Exit the vagrant instance
 
-* [Ruby 2.7.1](https://www.ruby-lang.org) (e.g. via [RVM](https://rvm.io) or [Rbenv](https://github.com/sstephenson/rbenv/blob/master/README.md))
-* [Postgresql](http://www.postgresql.org/download)
-* [Redis](https://redis.io)
-* [Phantomjs](https://github.com/teampoltergeist/poltergeist#installing-phantomjs) (test specs)
+Once you've created a `.env` file (see below) you should be ready to work with and run the project locally.
 
-#### Application gems _(local)_
+## Configuration
 
-Run the following to download the app dependencies ([rubygems](https://www.ruby-lang.org/en/libraries/))
+Any configuration is expected to be driven by environment variables when the service is run in production as per [12 factor app](https://12factor.net/config).
 
-    cd sroc-tcm-admin
-    gem install bundler
-    bundle install
+However when running locally in development mode or in test it makes use of the [Dotenv](https://github.com/bkeepers/dotenv) gem. This is a shim that will load values stored in a `.env` file into the environment which the service will then pick up as though they were there all along.
 
-#### Databases _(local)_
+Check out [.env.example](/.env.example) for details of what you need in your `.env` file, and what environment variables you'll need in production.
 
-There are several databases per environment, therefore, ensure you run the following:
+## Databases
 
-    bundle exec rake db:create:all
-    bundle exec rake db:migrate db:seed
+If you are running the TCM Vagrant VM, you have nothing to do! All databases are already created and the appropriate ports opened for access from the host to the VM.
 
-#### .env configuration file
+If you intend to run it standalone, you'll need to have [PostgreSQL](https://www.postgresql.org/) installed and can then use `bundle exec rake db:create:all` to create the databases for the develop and test environments. You'll also need [Redis](https://redis.io) as it is a dependency of [Coverband](https://github.com/danmayer/coverband), a tool we use to track production code usage.
 
-The project uses the [dotenv](https://github.com/bkeepers/dotenv) gem which allows enviroment variables to be loaded from a ```.env``` configuration file in the project root.
+## Running the app
 
-Duplicate ```./dotenv.example``` and rename the copy as ```./.env```. Open it and update SECRET_KEY_BASE and settings for database, email etc.
+Simply start the app using `bundle exec rails s`. If you are in an environment with other Rails apps running you might find the default port of 3000 is in use and so get an error.
 
-#### Start the service _(local)_
+If that's the case use `bundle exec rails s -p 8000` swapping `8000` for whatever port you want to use.
 
-To start the service locally simply run:
+## Testing the app
 
-    bundle exec rails server
+The project originally used [minitest](https://github.com/seattlerb/minitest) for unit testing. Any new tests should be written with [RSpec](https://rspec.info/) as it is the Defra standard for Ruby and Rails based projects. The existing minitests are slowly being reviewed and migrated to RSpec.
 
-You can then access the web site at http://localhost:3000
+To run the minitest suite use `bundle exec rails test`.
 
-#### Intercepting email in development
+To run the RSpec suite use `bundle exec rspec`
 
-You can use mailcatcher to trap and view outgoing email.
+## Code usage
 
-Make sure you have the following in your `.env` or `.env.development` file:
+To help us assess which parts of the code base are actually being used in production we have implemented [Coverband](https://github.com/danmayer/coverband).
 
-    EMAIL_USERNAME=''
-    EMAIL_PASSWORD=''
-    EMAIL_APP_DOMAIN=''
-    EMAIL_HOST='localhost'
-    EMAIL_PORT='1025'
+To check the current usage of a running instance go to `/coverage`. It is our intent to review the data in the near future to
 
-Start mailcatcher with `$ mailcatcher` and navigate to
-[http://127.0.0.1:1080](http://127.0.0.1:1080) in your browser.
-
-Note that [mail_safe](https://github.com/myronmarston/mail_safe) maybe also be running in which
-case any development email will seem to be sent to your global git config email address.
-
-## Quality
-
-We use tools like [rubocop](https://github.com/bbatsov/rubocop), [brakeman](https://github.com/presidentbeef/brakeman) to help maintain quality, reusable code.
-
-
-## Tests
-
-We use [minitest](https://github.com/seattlerb/minitest) for unit testing.
-
-### Test database seeding
-
-Before executing the tests for the first time, you will need to seed the database:
-
-    bundle exec rake db:seed RAILS_ENV=test
-
-To execute the unit tests simply enter:
-
-    bundle exec rails test
-
+- confirm our suspicion there is redundant code in the project
+- to identify which classes and methods to target first for removal
 
 ## Contributing to this project
 
