@@ -19,10 +19,3 @@
       class: "btn btn-primary", data: { turbolinks: false } %>
   </div>
 <% end %>
-<% if SystemConfig.config.can_generate_export? %>
-  <div class="mt-4">
-    <%= link_to "TEST: Regenerate Export File",
-      generate_regime_data_export_index_path(@regime),
-      class: "btn btn-warning", data: { turbolinks: false } %>
-  </div>
-<% end %>
