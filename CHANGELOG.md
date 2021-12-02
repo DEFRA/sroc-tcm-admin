@@ -1,5 +1,63 @@
 # Changelog
 
+## [v3.2.1](https://github.com/DEFRA/sroc-tcm-admin/tree/v3.2.1) (2021-12-02)
+
+[Full Changelog](https://github.com/DEFRA/sroc-tcm-admin/compare/v3.2.0...v3.2.1)
+
+**Implemented enhancements:**
+
+- Add non-UI endpoint to trigger file import process [\#467](https://github.com/DEFRA/sroc-tcm-admin/pull/467) ([Cruikshanks](https://github.com/Cruikshanks))
+
+**Fixed bugs:**
+
+- Fix sort order defect [\#497](https://github.com/DEFRA/sroc-tcm-admin/pull/497) ([StuAA78](https://github.com/StuAA78))
+
+**Housekeeping updates:**
+
+- Add spec for PermitCategoryPresenter [\#498](https://github.com/DEFRA/sroc-tcm-admin/pull/498) ([Cruikshanks](https://github.com/Cruikshanks))
+- Add spec for DataExportController [\#491](https://github.com/DEFRA/sroc-tcm-admin/pull/491) ([Cruikshanks](https://github.com/Cruikshanks))
+- Add specs for RetrospectiveFilePresenters [\#490](https://github.com/DEFRA/sroc-tcm-admin/pull/490) ([Cruikshanks](https://github.com/Cruikshanks))
+- Add spec for TransactionCsvPresenter [\#489](https://github.com/DEFRA/sroc-tcm-admin/pull/489) ([Cruikshanks](https://github.com/Cruikshanks))
+- Add spec for TransactionHeaderPresenter [\#488](https://github.com/DEFRA/sroc-tcm-admin/pull/488) ([Cruikshanks](https://github.com/Cruikshanks))
+- Remove React frontend and other unused dependencies [\#487](https://github.com/DEFRA/sroc-tcm-admin/pull/487) ([StuAA78](https://github.com/StuAA78))
+- Migrate & expand Trans.FilePresenter minitests [\#485](https://github.com/DEFRA/sroc-tcm-admin/pull/485) ([Cruikshanks](https://github.com/Cruikshanks))
+- Enable view tracking in coverband [\#484](https://github.com/DEFRA/sroc-tcm-admin/pull/484) ([Cruikshanks](https://github.com/Cruikshanks))
+- Remove features/ & script/ folders [\#483](https://github.com/DEFRA/sroc-tcm-admin/pull/483) ([Cruikshanks](https://github.com/Cruikshanks))
+- Update sonar-project.properties [\#481](https://github.com/DEFRA/sroc-tcm-admin/pull/481) ([Cruikshanks](https://github.com/Cruikshanks))
+- Add coverband support to the project [\#479](https://github.com/DEFRA/sroc-tcm-admin/pull/479) ([Cruikshanks](https://github.com/Cruikshanks))
+- Migrate & expand Trans.DetailPresenter minitests [\#474](https://github.com/DEFRA/sroc-tcm-admin/pull/474) ([Cruikshanks](https://github.com/Cruikshanks))
+- Remove jobs folder [\#473](https://github.com/DEFRA/sroc-tcm-admin/pull/473) ([Cruikshanks](https://github.com/Cruikshanks))
+- Remove local file store [\#472](https://github.com/DEFRA/sroc-tcm-admin/pull/472) ([Cruikshanks](https://github.com/Cruikshanks))
+- Turn on translation errors [\#471](https://github.com/DEFRA/sroc-tcm-admin/pull/471) ([Cruikshanks](https://github.com/Cruikshanks))
+- Update dev environment config for web console [\#470](https://github.com/DEFRA/sroc-tcm-admin/pull/470) ([Cruikshanks](https://github.com/Cruikshanks))
+- Remove all Charging Module API code [\#469](https://github.com/DEFRA/sroc-tcm-admin/pull/469) ([Cruikshanks](https://github.com/Cruikshanks))
+- Add rspec :focus tag check to CI workflow [\#468](https://github.com/DEFRA/sroc-tcm-admin/pull/468) ([Cruikshanks](https://github.com/Cruikshanks))
+- Changes need to support switch to 'main' branch [\#466](https://github.com/DEFRA/sroc-tcm-admin/pull/466) ([Cruikshanks](https://github.com/Cruikshanks))
+
+**Documentation updates:**
+
+- Remove hotfix/ folder [\#482](https://github.com/DEFRA/sroc-tcm-admin/pull/482) ([Cruikshanks](https://github.com/Cruikshanks))
+- Update README [\#480](https://github.com/DEFRA/sroc-tcm-admin/pull/480) ([Cruikshanks](https://github.com/Cruikshanks))
+- Add custom sections to CHANGELOG [\#462](https://github.com/DEFRA/sroc-tcm-admin/pull/462) ([Cruikshanks](https://github.com/Cruikshanks))
+
+**Dependency updates:**
+
+- Bump selenium-webdriver from 4.0.3 to 4.1.0 [\#501](https://github.com/DEFRA/sroc-tcm-admin/pull/501) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump web-console from 4.1.0 to 4.2.0 [\#500](https://github.com/DEFRA/sroc-tcm-admin/pull/500) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump jbuilder from 2.11.2 to 2.11.3 [\#499](https://github.com/DEFRA/sroc-tcm-admin/pull/499) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump capybara from 3.35.3 to 3.36.0 [\#496](https://github.com/DEFRA/sroc-tcm-admin/pull/496) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump lodash from 4.17.20 to 4.17.21 [\#495](https://github.com/DEFRA/sroc-tcm-admin/pull/495) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump minimist from 1.2.0 to 1.2.5 [\#494](https://github.com/DEFRA/sroc-tcm-admin/pull/494) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump selenium-webdriver from 4.0.2 to 4.0.3 [\#492](https://github.com/DEFRA/sroc-tcm-admin/pull/492) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump selenium-webdriver from 4.0.0 to 4.0.2 [\#486](https://github.com/DEFRA/sroc-tcm-admin/pull/486) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump selenium-webdriver from 3.142.7 to 4.0.0 [\#478](https://github.com/DEFRA/sroc-tcm-admin/pull/478) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 5.5.1 to 5.5.2 [\#477](https://github.com/DEFRA/sroc-tcm-admin/pull/477) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump eslint-plugin-import from 2.24.2 to 2.25.2 [\#476](https://github.com/DEFRA/sroc-tcm-admin/pull/476) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 5.5.0 to 5.5.1 [\#475](https://github.com/DEFRA/sroc-tcm-admin/pull/475) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.12.3 to 1.12.5 [\#465](https://github.com/DEFRA/sroc-tcm-admin/pull/465) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump tmpl from 1.0.4 to 1.0.5 [\#464](https://github.com/DEFRA/sroc-tcm-admin/pull/464) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 5.4.0 to 5.5.0 [\#463](https://github.com/DEFRA/sroc-tcm-admin/pull/463) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v3.2.0](https://github.com/DEFRA/sroc-tcm-admin/tree/v3.2.0) (2021-09-09)
 
 [Full Changelog](https://github.com/DEFRA/sroc-tcm-admin/compare/v3.1.0...v3.2.0)
