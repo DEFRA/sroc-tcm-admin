@@ -53,6 +53,16 @@ PermitCategoryImporter.import(r, Rails.root.join("db", "categories", "installati
   SequenceCounter.find_or_create_by(regime_id: r.id, region: region)
 end
 
+[
+  "Extra line auto-created by feeder system",
+  "Extra line created by PAS manual invoice function (permit category)",
+  "Extra line created by PAS manual invoice function (temporary cessation)",
+  "Incorrect Compliance Band in PAS file",
+  "Pre-Construction site charge rate set to zero"
+].each do |reason|
+  ExclusionReason.find_or_create_by(regime_id: r.id, reason: reason)
+end
+
 r = Regime.find_by!(slug: "cfd")
 r.permit_categories.destroy_all
 PermitCategoryImporter.import(r, Rails.root.join("db", "categories", "water_quality.csv"))
@@ -61,12 +71,31 @@ PermitCategoryImporter.import(r, Rails.root.join("db", "categories", "water_qual
   SequenceCounter.find_or_create_by(regime_id: r.id, region: region)
 end
 
+[
+  "Transaction line not required to generate correct bill"
+].each do |reason|
+  ExclusionReason.find_or_create_by(regime_id: r.id, reason: reason)
+end
+
 r = Regime.find_by!(slug: "wml")
 r.permit_categories.destroy_all
 PermitCategoryImporter.import(r, Rails.root.join("db", "categories", "waste.csv"))
 
 %w[A B E N S T U Y].each do |region|
   SequenceCounter.find_or_create_by(regime_id: r.id, region: region)
+end
+
+[
+  "Credit note for invoice that was never issued",
+  "Extra line created by PAS manual invoice function (permit category)",
+  "Embargoed TX (Permit edit during AB shutdown)",
+  "Invoice generated in error",
+  "Invoice incorrect",
+  "No charge code provided",
+  "Permit edit pending",
+  "Transfer/variation/surrender processed in error"
+].each do |reason|
+  ExclusionReason.find_or_create_by(regime_id: r.id, reason: reason)
 end
 
 # add region to all transactions
