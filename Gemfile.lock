@@ -109,7 +109,7 @@ GEM
     childprocess (4.1.0)
     chronic (0.10.2)
     concurrent-ruby (1.1.9)
-    coverband (5.2.0)
+    coverband (5.2.1)
       redis
     crack (0.4.5)
       rexml
