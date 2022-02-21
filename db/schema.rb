@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 2021_11_08_161905) do
     t.integer "number_of_records", default: 0, null: false
     t.integer "success_count", default: 0, null: false
     t.integer "failed_count", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["regime_id"], name: "index_annual_billing_data_files_on_regime_id"
   end
 
@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 2021_11_08_161905) do
     t.integer "auditable_id"
     t.string "action", null: false
     t.json "payload"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["action"], name: "index_audit_logs_on_action"
     t.index ["auditable_type", "auditable_id"], name: "index_audit_logs_on_auditable_type_and_auditable_id"
     t.index ["user_id"], name: "index_audit_logs_on_user_id"
@@ -51,8 +51,8 @@ ActiveRecord::Schema.define(version: 2021_11_08_161905) do
     t.bigint "regime_id"
     t.string "reason", null: false
     t.boolean "active", default: true, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["regime_id", "reason"], name: "index_exclusion_reasons_on_regime_id_and_reason", unique: true
     t.index ["regime_id"], name: "index_exclusion_reasons_on_regime_id"
   end
@@ -60,10 +60,10 @@ ActiveRecord::Schema.define(version: 2021_11_08_161905) do
   create_table "export_data_files", force: :cascade do |t|
     t.bigint "regime_id"
     t.string "filename", null: false
-    t.datetime "last_exported_at"
+    t.datetime "last_exported_at", precision: 6
     t.integer "status", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.boolean "compress", default: true, null: false
     t.string "exported_filename"
     t.string "exported_filename_hash"
@@ -75,8 +75,8 @@ ActiveRecord::Schema.define(version: 2021_11_08_161905) do
     t.string "code", null: false
     t.string "description"
     t.string "status", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "valid_from", default: "1819", null: false
     t.string "valid_to"
     t.index ["code", "regime_id", "valid_from"], name: "index_permit_categories_on_code_and_regime_id_and_valid_from", unique: true
@@ -92,17 +92,17 @@ ActiveRecord::Schema.define(version: 2021_11_08_161905) do
     t.string "discharge_reference"
     t.string "operator"
     t.string "permit_category", null: false
-    t.datetime "effective_date", null: false
+    t.datetime "effective_date", precision: 6, null: false
     t.string "status", null: false
     t.boolean "pre_construction", null: false
-    t.datetime "pre_construction_end"
+    t.datetime "pre_construction_end", precision: 6
     t.boolean "temporary_cessation", null: false
-    t.datetime "temporary_cessation_start"
-    t.datetime "temporary_cessation_end"
+    t.datetime "temporary_cessation_start", precision: 6
+    t.datetime "temporary_cessation_end", precision: 6
     t.string "compliance_score"
     t.string "compliance_band"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["permit_reference"], name: "index_permits_on_permit_reference"
     t.index ["regime_id"], name: "index_permits_on_regime_id"
   end
@@ -119,11 +119,11 @@ ActiveRecord::Schema.define(version: 2021_11_08_161905) do
 
   create_table "regimes", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "slug", null: false
     t.string "title"
-    t.datetime "retrospective_cut_off_date", default: "2018-04-01 00:00:00", null: false
+    t.datetime "retrospective_cut_off_date", precision: 6, default: "2018-04-01 00:00:00", null: false
     t.index ["name"], name: "index_regimes_on_name", unique: true
     t.index ["slug"], name: "th_regime_slug", unique: true
   end
@@ -133,8 +133,8 @@ ActiveRecord::Schema.define(version: 2021_11_08_161905) do
     t.string "region", null: false
     t.integer "file_number", default: 50001, null: false
     t.integer "invoice_number", default: 1, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["regime_id", "region"], name: "index_sequence_counters_on_regime_id_and_region", unique: true
     t.index ["regime_id"], name: "index_sequence_counters_on_regime_id"
   end
@@ -148,8 +148,8 @@ ActiveRecord::Schema.define(version: 2021_11_08_161905) do
     t.string "suggestion_stage", null: false
     t.string "logic", null: false
     t.bigint "matched_transaction_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["confidence_level"], name: "index_suggested_categories_on_confidence_level"
     t.index ["matched_transaction_id"], name: "index_suggested_categories_on_matched_transaction_id"
     t.index ["transaction_detail_id"], name: "index_suggested_categories_on_transaction_detail_id"
@@ -157,9 +157,9 @@ ActiveRecord::Schema.define(version: 2021_11_08_161905) do
 
   create_table "system_configs", force: :cascade do |t|
     t.boolean "importing", default: false, null: false
-    t.datetime "import_started_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "import_started_at", precision: 6
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.boolean "process_retrospectives", default: true, null: false
   end
 
@@ -167,7 +167,7 @@ ActiveRecord::Schema.define(version: 2021_11_08_161905) do
     t.bigint "transaction_header_id"
     t.integer "sequence_number"
     t.string "customer_reference"
-    t.datetime "transaction_date"
+    t.datetime "transaction_date", precision: 6
     t.string "transaction_type"
     t.string "transaction_reference"
     t.string "related_reference"
@@ -207,36 +207,36 @@ ActiveRecord::Schema.define(version: 2021_11_08_161905) do
     t.integer "line_quantity"
     t.string "unit_of_measure"
     t.integer "unit_of_measure_price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "status", default: "unbilled", null: false
     t.string "filename"
     t.string "reference_1"
     t.string "reference_2"
     t.string "reference_3"
     t.string "generated_filename"
-    t.datetime "generated_file_at"
+    t.datetime "generated_file_at", precision: 6
     t.boolean "temporary_cessation", default: false, null: false
-    t.datetime "temporary_cessation_start"
-    t.datetime "temporary_cessation_end"
+    t.datetime "temporary_cessation_start", precision: 6
+    t.datetime "temporary_cessation_end", precision: 6
     t.string "category"
     t.json "charge_calculation"
-    t.datetime "period_start"
-    t.datetime "period_end"
+    t.datetime "period_start", precision: 6
+    t.datetime "period_end", precision: 6
     t.bigint "transaction_file_id"
     t.bigint "tcm_charge"
     t.string "tcm_transaction_type"
     t.string "tcm_transaction_reference"
     t.string "variation"
     t.string "original_filename"
-    t.datetime "original_file_date"
+    t.datetime "original_file_date", precision: 6
     t.string "tcm_financial_year"
     t.boolean "excluded", default: false, null: false
     t.string "excluded_reason"
     t.string "category_description"
     t.boolean "approved_for_billing", default: false, null: false
     t.bigint "approver_id"
-    t.datetime "approved_for_billing_at"
+    t.datetime "approved_for_billing_at", precision: 6
     t.string "customer_name"
     t.string "region"
     t.index ["approver_id"], name: "index_transaction_details_on_approver_id"
@@ -254,11 +254,11 @@ ActiveRecord::Schema.define(version: 2021_11_08_161905) do
     t.string "region", null: false
     t.string "file_id"
     t.string "state", default: "initialised", null: false
-    t.datetime "generated_at"
+    t.datetime "generated_at", precision: 6
     t.bigint "invoice_total"
     t.bigint "credit_total"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.boolean "retrospective", default: false, null: false
     t.bigint "user_id"
     t.integer "credit_count"
@@ -278,19 +278,19 @@ ActiveRecord::Schema.define(version: 2021_11_08_161905) do
     t.string "region"
     t.integer "file_sequence_number"
     t.string "bill_run_id"
-    t.datetime "generated_at"
+    t.datetime "generated_at", precision: 6
     t.integer "transaction_count"
     t.integer "invoice_total"
     t.integer "credit_total"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "file_type_flag"
     t.string "filename"
     t.boolean "removed", default: false, null: false
     t.string "removal_reference"
     t.text "removal_reason"
     t.bigint "removed_by_id"
-    t.datetime "removed_at"
+    t.datetime "removed_at", precision: 6
     t.string "file_reference"
     t.index ["file_reference"], name: "index_transaction_headers_on_file_reference"
     t.index ["regime_id"], name: "index_transaction_headers_on_regime_id"
@@ -301,25 +301,25 @@ ActiveRecord::Schema.define(version: 2021_11_08_161905) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: 6
+    t.datetime "remember_created_at", precision: 6
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: 6
+    t.datetime "last_sign_in_at", precision: 6
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
-    t.datetime "locked_at"
+    t.datetime "locked_at", precision: 6
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.boolean "enabled", default: true, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "invitation_token"
-    t.datetime "invitation_created_at"
-    t.datetime "invitation_sent_at"
-    t.datetime "invitation_accepted_at"
+    t.datetime "invitation_created_at", precision: 6
+    t.datetime "invitation_sent_at", precision: 6
+    t.datetime "invitation_accepted_at", precision: 6
     t.integer "invitation_limit"
     t.string "invited_by_type"
     t.bigint "invited_by_id"
