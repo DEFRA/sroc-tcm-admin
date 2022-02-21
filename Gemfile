@@ -37,7 +37,7 @@ gem "whenever", require: false
 gem "turbolinks", "~> 5"
 
 group :production do
-  gem "airbrake", "~> 11.0"
+  gem "airbrake", "~> 13.0"
   # Use passenger as the app server in production. The environment web-ops have
   # built currently expects this to be the case
   gem "passenger", "~> 5.1", require: false
