@@ -71,13 +71,21 @@ Rails.application.configure do
 
   # The rails web console allows you to execute arbitrary code on the server. By
   # default, only requests coming from IPv4 and IPv6 localhosts are allowed.
-  # When running in a vagrant box it'll use a different IP e.g. 10.0.2.2 so
-  # to stop getting `Cannot render console from 10.0.2.2!` in the logs you need
-  # to add its IP to this white list. The SSH_CLIENT holds this value but it
-  # contains some other stuff as well e.g. 10.0.2.2 59811 22. Hence we use fetch
-  # so we can assign the default (for none vagrant boxes) else grab the env var
-  # but just the first part of it.
+  # When running in a vagrant box it'll use a different IP e.g. 10.0.2.2 which
+  # leads `Cannot render console from 10.0.2.2!` appearing in the logs. Exactly
+  # the same issue applies when running in a Docker container. You need to add
+  # either the Vagrant or Docker IP to `whitelisted_ips`.
+  #
+  # In vagrant SSH_CLIENT holds this value but it contains some other stuff as
+  # well e.g. 10.0.2.2 59811 22. Hence we use fetch so we can assign the default
+  # (for none vagrant boxes) else grab the env var but just the first part of
+  # it.
   # https://github.com/rails/web-console#configuration
   # https://stackoverflow.com/a/29417509
-  config.web_console.whitelisted_ips = ENV.fetch("SSH_CLIENT", "127.0.0.1").split(" ").first
+  if ENV.fetch("LOG_TO_STDOUT", "0") == "1"
+    host_ip = `/sbin/ip route|awk '/default/ { print $3 }'`.strip
+    config.web_console.whitelisted_ips = host_ip
+  else
+    config.web_console.whitelisted_ips = ENV.fetch("SSH_CLIENT", "127.0.0.1").split(" ").first
+  end
 end
