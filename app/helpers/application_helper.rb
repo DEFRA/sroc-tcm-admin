@@ -82,17 +82,6 @@ module ApplicationHelper
   end
 
   def current_git_commit
-    @current_git_commit ||= begin
-      sha =
-        if Rails.env.production?
-          capistrano_file = Rails.root.join "REVISION"
-
-          File.open(capistrano_file, &:gets) if File.exist? capistrano_file
-        else
-          `git rev-parse HEAD`
-        end
-
-      sha[0...7] if sha.present?
-    end
+    @current_git_commit ||= ENV.fetch("GIT_COMMIT", "UNKNOWN")
   end
 end
