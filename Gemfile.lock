@@ -109,8 +109,8 @@ GEM
     childprocess (4.1.0)
     chronic (0.10.2)
     concurrent-ruby (1.1.9)
-    coverband (5.2.1)
-      redis
+    coverband (5.2.2)
+      redis (>= 3.0)
     crack (0.4.5)
       rexml
     crass (1.0.6)
@@ -263,7 +263,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rbtree3 (0.7.0)
-    redis (4.5.1)
+    redis (4.6.0)
     regexp_parser (2.1.1)
     responders (3.0.1)
       actionpack (>= 5.0)
