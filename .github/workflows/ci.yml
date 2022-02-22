@@ -12,7 +12,7 @@ jobs:
       POSTGRES_HOST: localhost
       POSTGRES_PASSWORD: pinafore
       POSTGRES_PORT: 5432
-      POSTGRES_USERNAME: postgres
+      POSTGRES_USER: postgres
       REDIS_URL: "redis://localhost:6379"
       FILE_UPLOAD_ACCESS_KEY: iamanawss3accesskey
       FILE_UPLOAD_SECRET_KEY: iamanawss3secretkey
