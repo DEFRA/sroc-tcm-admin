@@ -17,7 +17,7 @@ ENV LOG_TO_STDOUT=1
 # requirement following PEN testing. We also add the dependencies we need to support using PostgreSQL. Finish with
 # clearing the cache created during this to keep the image as small as possible (using Docker we can't benefit from
 # using the cache)
-RUN apk update e&& apk add \
+RUN apk update && apk add \
   postgresql-client \
   nodejs \
   tzdata \
@@ -120,6 +120,14 @@ ENV GIT_COMMIT=$GIT_COMMIT
 # not a permitted address in `Rails.config.hosts`. If you don't set `RAILS_ENV` then rails will default to `development`
 # whern starting the server and `test` when running tests.
 # ENV RAILS_ENV=development
+
+# This RUN command adds dependencies we need to allow us to run the integration tests. Installing chrome on Alpine is
+# very difficult but chromimum is fine and just as good for our tests. We only add then to our development image to
+# support running the unit tests. This is not something we'd do in the production image.
+RUN apk add \
+  chromium \
+  chromium-chromedriver \
+  && rm -rf /var/cache/apk/*
 
 # Our chosen root directory for the app in the image
 WORKDIR /usr/src/app
