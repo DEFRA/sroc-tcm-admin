@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+puts "Seeding started for #{Rails.env}."
+
 def create_user(details)
   user = User.new(
     first_name: details["firstname"],
@@ -117,3 +119,5 @@ TransactionHeader.where(file_reference: nil).each do |th|
   th.send :generate_file_reference
   th.save!
 end
+
+puts "Seeding completed for #{Rails.env}."

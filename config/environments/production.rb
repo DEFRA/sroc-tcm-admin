@@ -21,9 +21,12 @@ Rails.application.configure do
   # `config/secrets.yml.key`.
   config.read_encrypted_secrets = true
 
-  # Disable serving static files from the `/public` folder by default since
-  # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
+  # Typically, you'd serve your static assets from a web server like Nginx in production. As it can act as both a load
+  # balancer and deal with requests for your static CSS/Javascript assets it's commonly used with Rails.
+  # We've opted for simplicity when it comes to our Docker environment and therefore have dropped using a separate
+  # web server. If scale was an issue for us we'd think differently. But we only have to server a handful of users at
+  # any given time so having Rails also server public assets should not affect performance.
+  config.public_file_server.enabled = true
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier

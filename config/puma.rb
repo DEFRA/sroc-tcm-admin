@@ -1,60 +1,23 @@
 # frozen_string_literal: true
 
-# Puma can serve each request in a thread from an internal thread pool.
-# The `threads` method setting takes two numbers: a minimum and maximum.
-# Any libraries that use thread pools should be configured to match
-# the maximum value specified for Puma. Default is set to 5 threads for minimum
-# and maximum; this matches the default thread size of Active Record. We set the
-# minimum to be 1 as currently we are only using puma in development and test
-# so typically we only expect to be running 1 thread.
-#
-threads_count = ENV.fetch("RAILS_MAX_THREADS", 5)
-threads 1, threads_count
+# Config based on a mix of things taken from
+# https://runnable.com/docker/rails/docker-configuration
+# https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server
+# https://www.digitalocean.com/community/tutorials/how-to-deploy-a-rails-app-with-puma-and-nginx-on-ubuntu-14-04
+# Plus what we already found in the file
 
-# Specifies the `port` that Puma will listen on to receive requests; default is 3000.
-#
-port        ENV.fetch("PORT", 3000)
+# Specifies the `port` that Puma will listen on to receive requests; default is 3000 to match rails.
+port ENV.fetch("RAILS_PORT", 3000)
 
-# Specifies the `environment` that Puma will run in.
-#
+# Tells puma what environment we're running in. We always specify `RAILS_ENV=production` in our production environments
+# which is why we default it to `development` for those environments where the env var isn't set.
 environment ENV.fetch("RAILS_ENV", "development")
 
-# Specifies the number of `workers` to boot in clustered mode.
-# Workers are forked webserver processes. If using threads and workers together
-# the concurrency of the application would be max `threads` * `workers`.
-# Workers do not work on JRuby or Windows (both of which do not support
-# processes).
-#
-# workers ENV.fetch("WEB_CONCURRENCY") { 2 }
+# Tell puma to use the pid file we're also managing in our entrypoint.sh. That way there should be no surprises.
+pidfile "tmp/pids/server.pid"
 
-# Use the `preload_app!` method when specifying a `workers` number.
-# This directive tells Puma to first boot the application and load code
-# before forking the application. This takes advantage of Copy On Write
-# process behavior so workers use less memory. If you use this option
-# you need to make sure to reconnect any threads in the `on_worker_boot`
-# block.
-#
-# preload_app!
-
-# If you are preloading your application and using Active Record, it's
-# recommended that you close any connections to the database before workers
-# are forked to prevent connection leakage.
-#
-# before_fork do
-#   ActiveRecord::Base.connection_pool.disconnect! if defined?(ActiveRecord)
-# end
-
-# The code in the `on_worker_boot` will be called if you are using
-# clustered mode by specifying a number of `workers`. After each worker
-# process is booted, this block will be run. If you are using the `preload_app!`
-# option, you will want to use this block to reconnect to any threads
-# or connections that may have been created at application boot, as Ruby
-# cannot share connections between processes.
-#
-# on_worker_boot do
-#   ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
-# end
-#
-
-# Allow puma to be restarted by `rails restart` command.
-plugin :tmp_restart
+# Puma can serve each request in a thread from an internal thread pool. The `threads` method setting takes two numbers:
+# a minimum and maximum. The default is "0, 16". Based on some reading it is suggested that you should not allow your
+# maximum to exceed the size of your database connection pool. As we are using ActiveRecord, the default is 5.
+# https://devcenter.heroku.com/articles/concurrency-and-database-connections
+threads 1, ENV.fetch("RAILS_MAX_THREADS", 5)

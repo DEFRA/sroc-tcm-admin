@@ -1,0 +1,20 @@
+# ignore everything - except the dirs/files we want to include
+*
+
+!app
+!bin
+!config
+!db
+!lib/tasks
+!config.ru
+!entrypoint.sh
+!Gemfile
+!Gemfile.lock
+!Rakefile
+
+# re-ignore (!!) these files. Doing it this way means we avoid having to breakdown our entries above. For example, to
+# exclude app/assets the alternate would be to specify `!app/controllers, !app/helpers` etc above. This is less flexible
+# than using this method where we first include everything then add an exclusion for `app/assets`. We don't know how it
+# works but it does!
+config/brakeman.ignore
+app/assets

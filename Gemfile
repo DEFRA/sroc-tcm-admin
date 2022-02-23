@@ -25,6 +25,9 @@ gem "jbuilder", "~> 2.5"
 gem "jquery-rails"
 gem "jquery-ui-rails"
 gem "kaminari"
+# Default web server for rails. For those coming from Rails 4 this replaces webrick in development. For those working
+# on other Defra services this replaces passenger.
+gem "puma"
 gem "rails-i18n"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 5.0"
@@ -35,13 +38,6 @@ gem "whenever", require: false
 
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem "turbolinks", "~> 5"
-
-group :production do
-  gem "airbrake", "~> 13.0"
-  # Use passenger as the app server in production. The environment web-ops have
-  # built currently expects this to be the case
-  gem "passenger", "~> 5.1", require: false
-end
 
 group :development do
   # Manages our rubocop style rules for all defra ruby projects
@@ -60,8 +56,6 @@ group :development, :test do
   # Shim to load environment variables from a .env file into ENV in development
   # and test
   gem "dotenv-rails"
-  # Use Puma as the app server in development as test
-  gem "puma"
   # Project uses RSpec as its test framework
   gem "rspec-rails"
 end
@@ -81,4 +75,8 @@ group :test do
   gem "simplecov", "~> 0.17.1", require: false
   # Stubbing HTTP requests
   gem "webmock"
+end
+
+group :production do
+  gem "airbrake", "~> 13.0"
 end
