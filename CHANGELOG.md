@@ -1,5 +1,32 @@
 # Changelog
 
+## [v3.3.0](https://github.com/DEFRA/sroc-tcm-admin/tree/v3.3.0) (2022-02-23)
+
+[Full Changelog](https://github.com/DEFRA/sroc-tcm-admin/compare/v3.2.1...v3.3.0)
+
+**Housekeeping updates:**
+
+- Add exclusion reasons to seeding [\#502](https://github.com/DEFRA/sroc-tcm-admin/pull/502) ([Cruikshanks](https://github.com/Cruikshanks))
+
+**Dependency updates:**
+
+- Bump rails-i18n from 7.0.1 to 7.0.2 [\#525](https://github.com/DEFRA/sroc-tcm-admin/pull/525) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump coverband from 5.2.1 to 5.2.2 [\#524](https://github.com/DEFRA/sroc-tcm-admin/pull/524) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails from 7.0.1 to 7.0.2.2 [\#523](https://github.com/DEFRA/sroc-tcm-admin/pull/523) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 5.6.0 to 5.6.2 [\#522](https://github.com/DEFRA/sroc-tcm-admin/pull/522) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-rails from 5.0.2 to 5.1.0 [\#518](https://github.com/DEFRA/sroc-tcm-admin/pull/518) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 5.5.2 to 5.6.0 [\#517](https://github.com/DEFRA/sroc-tcm-admin/pull/517) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump pg from 1.2.3 to 1.3.0 [\#516](https://github.com/DEFRA/sroc-tcm-admin/pull/516) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump coverband from 5.2.0 to 5.2.1 [\#514](https://github.com/DEFRA/sroc-tcm-admin/pull/514) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails from 6.1.4.4 to 7.0.1 [\#513](https://github.com/DEFRA/sroc-tcm-admin/pull/513) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump coverband from 5.1.1 to 5.2.0 [\#512](https://github.com/DEFRA/sroc-tcm-admin/pull/512) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump kaminari from 1.2.1 to 1.2.2 [\#511](https://github.com/DEFRA/sroc-tcm-admin/pull/511) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails-i18n from 6.0.0 to 7.0.1 [\#510](https://github.com/DEFRA/sroc-tcm-admin/pull/510) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump jbuilder from 2.11.3 to 2.11.5 [\#508](https://github.com/DEFRA/sroc-tcm-admin/pull/508) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump devise from 4.8.0 to 4.8.1 [\#506](https://github.com/DEFRA/sroc-tcm-admin/pull/506) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump devise\_invitable from 2.0.5 to 2.0.6 [\#505](https://github.com/DEFRA/sroc-tcm-admin/pull/505) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails from 6.1.4.1 to 6.1.4.4 [\#504](https://github.com/DEFRA/sroc-tcm-admin/pull/504) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v3.2.1](https://github.com/DEFRA/sroc-tcm-admin/tree/v3.2.1) (2021-12-02)
 
 [Full Changelog](https://github.com/DEFRA/sroc-tcm-admin/compare/v3.2.0...v3.2.1)
