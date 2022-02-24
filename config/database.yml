@@ -3,20 +3,21 @@ default: &default
   encoding: unicode
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV["RAILS_MAX_THREADS"] || 5 %>
+  pool: 5
   host: <%= ENV["POSTGRES_HOST"] || "localhost" %>
   port: <%= ENV["POSTGRES_PORT"] || 5432 %>
-  username: <%= ENV["POSTGRES_USER"] || "vagrant" %>
-  password: <%= ENV["POSTGRES_PASSWORD"] || "vagrant" %>
+  username: <%= ENV["POSTGRES_USER"] || "tcm" %>
+  password: <%= ENV["POSTGRES_PASSWORD"] || "password" %>
 
 development:
   <<: *default
-  database: <%= ENV["POSTGRES_DB"] || "sroc-tcm-admin" %>
+  database: <%= ENV["POSTGRES_DB"] || "sroc_tcm_dev" %>
 
 test:
   <<: *default
-  database: <%= ENV["POSTGRES_DB_TEST"] || "sroc-tcm-admin_test" %>
+  database: <%= ENV["POSTGRES_DB_TEST"] || "sroc_tcm_test" %>
+  min_messages: WARNING
 
 production:
   <<: *default
-  database: <%= ENV["POSTGRES_DB"] || "sroc" %>
+  database: <%= ENV["POSTGRES_DB"] || "sroc_tcm" %>
