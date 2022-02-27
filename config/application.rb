@@ -49,7 +49,7 @@ module SrocTcmAdmin
     #
     # Our default log level is :info but we allow for this to be overidden using an env var, for example, when running
     # lovcally and you need to switch to :debug.
-    config.log_level =  ENV.fetch("LOG_LEVEL", "info").downcase.strip.to_sym
+    config.log_level = ENV.fetch("LOG_LEVEL", "info").downcase.strip.to_sym
     config.log_tags = {
       request_id: :request_id
     }
