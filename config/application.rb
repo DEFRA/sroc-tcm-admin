@@ -62,20 +62,19 @@ module SrocTcmAdmin
     #
     # We need to cater for running in Docker. We don't want Rails logging to file. We need it logging to STDOUT so we
     # can capture the output from the containers to see it locally and in AWS Cloudwatch.
-    if ENV.fetch("LOG_TO_STDOUT", "0") == "1"
-      # The only exception is when running our unit tests in a container. If we wrote the log to STDOUT then our
-      # minitest and rspec output would be messed up log messages. This is because normally rspec will be writing to
-      # STDOUT and Rails will be writing to a file. When we tell Rails to also write to STDOUT during a test we mess up
-      # the output.
-      unless Rails.env.test?
-        # Normally `puts` does not write immediately to `STDOUT`, but buffers the strings internally and writes the
-        # output in bigger chunks. To instead write immediately to `STDOUT` you set it into 'sync' mode. We want this
-        # behaviour to ensure nothing is missed from the logs in the case the container is killed unexpectedly.
-        $stdout.sync = true
-        # Configure semantic logger to not log to file and instead log to STDOUT in JSON format
-        config.rails_semantic_logger.add_file_appender = false
-        config.semantic_logger.add_appender(io: $stdout, formatter: :json)
-      end
+    #
+    # The only exception is when running our unit tests in a container. If we wrote the log to STDOUT then our
+    # minitest and rspec output would be messed up log messages. This is because normally rspec will be writing to
+    # STDOUT and Rails will be writing to a file. When we tell Rails to also write to STDOUT during a test we mess up
+    # the output.
+    if ENV.fetch("LOG_TO_STDOUT", "0") == "1" && Rails.env.test? == false
+      # Normally `puts` does not write immediately to `STDOUT`, but buffers the strings internally and writes the
+      # output in bigger chunks. To instead write immediately to `STDOUT` you set it into 'sync' mode. We want this
+      # behaviour to ensure nothing is missed from the logs in the case the container is killed unexpectedly.
+      $stdout.sync = true
+      # Configure semantic logger to not log to file and instead log to STDOUT in JSON format
+      config.rails_semantic_logger.add_file_appender = false
+      config.semantic_logger.add_appender(io: $stdout, formatter: :json)
     end
   end
 end
