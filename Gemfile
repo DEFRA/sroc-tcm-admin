@@ -29,6 +29,7 @@ gem "kaminari"
 # on other Defra services this replaces passenger.
 gem "puma"
 gem "rails-i18n"
+gem "rails_semantic_logger"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 5.0"
 gem "secure_headers"
