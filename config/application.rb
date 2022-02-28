@@ -62,7 +62,7 @@ module SrocTcmAdmin
     #
     # We need to cater for running in Docker. We don't want Rails logging to file. We need it logging to STDOUT so we
     # can capture the output from the containers to see it locally and in AWS Cloudwatch.
-    if  ENV.fetch("LOG_TO_STDOUT", "0") == "1"
+    if ENV.fetch("LOG_TO_STDOUT", "0") == "1"
       # The only exception is when running our unit tests in a container. If we wrote the log to STDOUT then our
       # minitest and rspec output would be messed up log messages. This is because normally rspec will be writing to
       # STDOUT and Rails will be writing to a file. When we tell Rails to also write to STDOUT during a test we mess up
