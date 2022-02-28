@@ -34,6 +34,21 @@
       }
     },
     {
+      "label": "🔄 Restart (TCM)",
+      "detail": "Restart just the app container",
+      "type": "shell",
+      "command": "docker-compose stop app && GIT_COMMIT=$(git rev-parse HEAD) docker-compose start app",
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "never",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true
+      }
+    },
+    {
       "label": "🛑 STOP (TCM)",
       "detail": "Stop all running containers",
       "type": "shell",
@@ -43,7 +58,7 @@
         "echo": true,
         "reveal": "always",
         "focus": true,
-        "panel": "dedicated",
+        "panel": "shared",
         "showReuseMessage": false,
         "clear": true
       }
