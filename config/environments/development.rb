@@ -74,7 +74,7 @@ Rails.application.configure do
   # When not running on directly on the host, for example in a Docker container
   # it'll use a different IP which causes `Cannot render console from 10.0.2.2!`
   # to appear in the logs. To fix this you need to add the Docker IP to
-  # `whitelisted_ips`.
+  # `allowed_ips`.
   #
   # https://github.com/rails/web-console#configuration
   # https://stackoverflow.com/a/29417509
@@ -83,8 +83,8 @@ Rails.application.configure do
   # which is why our logic hinges on it
   if ENV.fetch("LOG_TO_STDOUT", "0") == "1"
     host_ip = `/sbin/ip route|awk '/default/ { print $3 }'`.strip
-    config.web_console.whitelisted_ips = host_ip
+    config.web_console.allowed_ips = host_ip
   else
-    config.web_console.whitelisted_ips = "127.0.0.1"
+    config.web_console.allowed_ips = "127.0.0.1"
   end
 end
