@@ -38,6 +38,11 @@ Rails.application.routes.draw do
 
   get "/jobs/import", to: "jobs#import", as: :jobs_import
 
+  get "/last-email",
+      to: "last_email#show",
+      as: "last_email",
+      constraints: ->(_request) { ENV.fetch("ENABLE_LAST_EMAIL", "false") == "true" }
+
   root to: "transactions#index"
 
   match "/404", to: "errors#not_found", via: :all
