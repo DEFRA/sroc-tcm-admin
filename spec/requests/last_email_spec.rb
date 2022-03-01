@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe "LastEmail", type: :request do
   describe "/last-email" do
-    before(:each) {  stub_const("ENV", ENV.to_hash.merge("ENABLE_LAST_EMAIL" => enable_last_email)) }
+    before(:each) { stub_const("ENV", ENV.to_hash.merge("ENABLE_LAST_EMAIL" => enable_last_email)) }
 
     context "when the env var ENABLE_LAST_EMAIL is 'true'" do
       let(:enable_last_email) { "true" }
