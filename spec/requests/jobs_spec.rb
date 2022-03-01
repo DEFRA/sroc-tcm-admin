@@ -61,21 +61,19 @@ RSpec.describe "Jobs", type: :request do
 
       context "and they are an admin" do
         let(:user) { create(:user_with_regime, :admin, regime: regime) }
-        let(:results) do
-          {
-            succeeded: ["cfd/cfdai50001t.dat", "cfd/cfdai50002t.dat"]
-          }
+        let(:result) do
+          OpenStruct.new(results: { succeeded: ["cfd/cfdai50001t.dat", "cfd/cfdai50002t.dat"] })
         end
 
         before(:each) do
-          allow(TransactionFileExportService).to receive(:call) { results }
+          allow(TransactionFileExportService).to receive(:call) { result }
         end
 
         it "renders JSON containing the results and returns a 200 response" do
           get jobs_export_path
 
           expect(response).to have_http_status(200)
-          expect(response.body).to eq(results.to_json)
+          expect(response.body).to eq(result.results.to_json)
         end
       end
 
