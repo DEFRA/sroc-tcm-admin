@@ -9,6 +9,12 @@ class JobsController < ApplicationController
     render json: results.to_json, status: :ok
   end
 
+  def export
+    result = TransactionFileExportService.call
+
+    render json: result.results.to_json, status: :ok
+  end
+
   private
 
   def admin_only_check
