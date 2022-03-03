@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
 class TransactionFileExportService < ServiceObject
+  attr_reader :results
+
   def initialize(_params = {})
     super()
+
+    @results = { succeeded: [] }
   end
 
   def call
@@ -17,6 +21,7 @@ class TransactionFileExportService < ServiceObject
           transaction_file.user
         )
         exporter.generate_output_file(transaction_file)
+        @results[:succeeded].push(transaction_file.path)
         puts("Exported transaction file #{transaction_file.file_reference}")
       end
       @result = true

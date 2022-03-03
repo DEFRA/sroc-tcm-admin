@@ -55,6 +55,12 @@ RSpec.describe TransactionFileExportService do
         expect(result.success?).to be(true)
         expect(result.failed?).to be(false)
       end
+
+      it "records details of the exported files in the results" do
+        result = service.call
+
+        expect(result.results[:succeeded]).to eq(["cfd/cfdai50001t.dat", "cfd/cfdai50002t.dat"])
+      end
     end
 
     context "when an error occurs" do
@@ -68,6 +74,12 @@ RSpec.describe TransactionFileExportService do
         expect(TcmLogger).to receive(:notify).with(error)
 
         service.call
+      end
+
+      it "returns no exported files in the results" do
+        result = service.call
+
+        expect(result.results[:succeeded]).to be_empty
       end
     end
   end
