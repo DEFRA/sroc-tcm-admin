@@ -4,6 +4,8 @@
 # Use alpine version to help reduce size of image and improve security (less things installed from the get go)
 FROM ruby:2.7.1-alpine AS rails_base
 
+LABEL org.opencontainers.image.description="The Strategic Review of Charges (SROC) Tactical Charging Module (TCM) is a web application designed to enable billing adminstrators to apply new categories to permit charges to ensure correct amounts are processed."
+
 # If set bundler will install all gems to this location. In our case we want a known location so we can easily copy the
 # installed and compiled gems between images
 ENV BUNDLE_PATH=/usr/src/gems

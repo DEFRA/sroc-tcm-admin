@@ -69,7 +69,6 @@ jobs:
           target: production
           build-args: |
             GIT_COMMIT=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
-            DOCKER_TAG=${{ fromJSON(steps.meta.outputs.json).tags[0] }}
           push: true
           labels: ${{ steps.meta_github.outputs.labels }}
           tags: ${{ env.ALL_TAGS }}
