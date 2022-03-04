@@ -86,15 +86,6 @@ We also use [rubocop](https://github.com/rubocop/rubocop) to lint the code. To r
 
 - **🔎 LINT (TCM)**
 
-## Code usage
-
-To help us assess which parts of the code base are actually being used in production we have implemented [Coverband](https://github.com/danmayer/coverband).
-
-To check the current usage of a running instance go to `/coverage`. It is our intent to review the data in the near future to
-
-- confirm our suspicion there is redundant code in the project
-- to identify which classes and methods to target first for removal
-
 ## Contributing to this project
 
 If you have an idea you'd like to contribute please log an issue.
