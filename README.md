@@ -17,7 +17,6 @@ Make sure you already have:
 
 - [Ruby 2.7.1](https://www.ruby-lang.org/en/)
 - [PostgreSQL v12](https://www.postgresql.org/)
-- [Redis](https://redis.io/)
 
 ## Installation
 
