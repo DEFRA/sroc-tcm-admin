@@ -17,7 +17,6 @@ Make sure you already have:
 
 - [Ruby 2.7.1](https://www.ruby-lang.org/en/)
 - [PostgreSQL v12](https://www.postgresql.org/)
-- [Redis](https://redis.io/)
 
 ## Installation
 
@@ -85,15 +84,6 @@ To run just the RSpec suite find and select
 We also use [rubocop](https://github.com/rubocop/rubocop) to lint the code. To run it find and select
 
 - **🔎 LINT (TCM)**
-
-## Code usage
-
-To help us assess which parts of the code base are actually being used in production we have implemented [Coverband](https://github.com/danmayer/coverband).
-
-To check the current usage of a running instance go to `/coverage`. It is our intent to review the data in the near future to
-
-- confirm our suspicion there is redundant code in the project
-- to identify which classes and methods to target first for removal
 
 ## Contributing to this project
 
