@@ -15,8 +15,6 @@ gem "aws-sdk", "~> 2"
 # bootstrap 4
 gem "bootstrap", "~> 4.3.1"
 gem "bstard"
-# Measures production code usage
-gem "coverband"
 gem "devise"
 gem "devise_invitable"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
