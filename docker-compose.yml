@@ -47,7 +47,6 @@ services:
     # up and running before starting the app. So do not use this to manage critical dependency ordering.
     depends_on:
       - db
-      - redis
       - mail
 
 volumes:
