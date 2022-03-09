@@ -14,7 +14,7 @@ module FormErrorHelper
 
   def error_list(resource)
     el = []
-    resource.errors.keys.sort.each do |k|
+    resource.errors.messages.sort.to_h.each_key do |k|
       resource.errors.full_messages_for(k).each do |message|
         el << error_item(k, message)
       end
