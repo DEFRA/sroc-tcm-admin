@@ -85,6 +85,26 @@ We also use [rubocop](https://github.com/rubocop/rubocop) to lint the code. To r
 
 - **🔎 LINT (TCM)**
 
+### Test support endpoints
+
+The app includes endpoints that support our [acceptance tests](https://github.com/DEFRA/sroc-acceptance-tests). They are split between those that are only enabled in our non-production environments and those that can be accessed but you must be an admin. All respond in JSON format.
+
+#### Non-production only
+
+Either because they are distructive or sensitive these endpoints are only available in non-production environments.
+
+> We are referring to when running it locally or in our development, test or pre-production environments. This is different to the Rails environment specified by `RAILS_ENV`.
+
+- `/clean` Will reset most tables in the database. This means, for example, removing all transaction data and resetting the sequence counters. Seeded data, for example, regimes, permit categories and users are retained. We use it to automate resetting the DB for running some of our acceptance tests
+- `/last-email` Will return the details and content of the last email sent from the app. We use it to allow us to automate checking the content of emails sent from the system and completing journeys that require following a link provided in an email
+
+#### Admin only
+
+Though built to support testing these endpoints are available in production but only by those with the `admin`. There may be times it would be helpful to peform these tasks outside of a test setting.
+
+- `/jobs/import` trigger the transaction file import process
+- `/jobs/export` trigger the transaction file export process
+
 ## Contributing to this project
 
 If you have an idea you'd like to contribute please log an issue.
