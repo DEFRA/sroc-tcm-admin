@@ -42,6 +42,11 @@ Rails.application.routes.draw do
       as: "last_email",
       constraints: ->(_request) { ENV.fetch("ENABLE_LAST_EMAIL", "false") == "true" }
 
+  get "/clean",
+      to: "clean#show",
+      as: "clean",
+      constraints: ->(_request) { ENV.fetch("TCM_ENVIRONMENT", "production") != "production" }
+
   root to: "transactions#index"
 
   match "/404", to: "errors#not_found", via: :all
