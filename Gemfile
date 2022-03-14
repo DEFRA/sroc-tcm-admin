@@ -23,6 +23,8 @@ gem "jbuilder", "~> 2.5"
 gem "jquery-rails"
 gem "jquery-ui-rails"
 gem "kaminari"
+# GOV.UK Notify gem. Allows us to send email via the Notify web API
+gem "notifications-ruby-client"
 # Default web server for rails. For those coming from Rails 4 this replaces webrick in development. For those working
 # on other Defra services this replaces passenger.
 gem "puma"
