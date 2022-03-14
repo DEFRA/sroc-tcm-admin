@@ -4,10 +4,10 @@ require "rails_helper"
 
 RSpec.describe "LastEmail", type: :request do
   describe "/last-email" do
-    before(:each) { stub_const("ENV", ENV.to_hash.merge("ENABLE_LAST_EMAIL" => enable_last_email)) }
+    before(:each) { stub_const("ENV", ENV.to_hash.merge("TCM_ENVIRONMENT" => tcm_environment)) }
 
-    context "when the env var ENABLE_LAST_EMAIL is 'true'" do
-      let(:enable_last_email) { "true" }
+    context "when the env var TCM_ENVIRONMENT is not 'production'" do
+      let(:tcm_environment) { "local" }
 
       before(:each) { TestMailer.text_email("test@example.com").deliver_now }
 
@@ -19,8 +19,8 @@ RSpec.describe "LastEmail", type: :request do
       end
     end
 
-    context "when the env var ENABLE_LAST_EMAIL is 'false'" do
-      let(:enable_last_email) { "false" }
+    context "when the env var TCM_ENVIRONMENT is 'production'" do
+      let(:tcm_environment) { "production" }
 
       it "cannot load the page" do
         expect { get last_email_path }.to raise_error(ActionController::RoutingError)

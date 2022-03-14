@@ -7,7 +7,7 @@ RSpec.describe "Clean", type: :request do
     before(:each) { stub_const("ENV", ENV.to_hash.merge("TCM_ENVIRONMENT" => tcm_environment)) }
 
     context "when the env var TCM_ENVIRONMENT is not 'production'" do
-      let(:tcm_environment) { "development" }
+      let(:tcm_environment) { "local" }
       let(:result) do
         double("CleanDbService", results: { succeeded: %w[table_1 table_2] })
       end
