@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   get "/last-email",
       to: "last_email#show",
       as: "last_email",
-      constraints: ->(_request) { ENV.fetch("ENABLE_LAST_EMAIL", "false") == "true" }
+      constraints: ->(_request) { ENV.fetch("TCM_ENVIRONMENT", "production") != "production" }
 
   get "/clean",
       to: "clean#show",
