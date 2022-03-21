@@ -26,27 +26,18 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  # Sending e-mails is required for confirmation emails
+  # Sending e-mails is required for user account management. We send invitation, reset password and unlock account
+  # emails to users.
   config.action_mailer.default_url_options = {
     host: ENV.fetch("DEFAULT_URL_HOST", "http://localhost:3000"),
     protocol: "http"
   }
 
   # Don't care if the mailer can't send (if set to false)
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_caching = false
-  config.action_mailer.delivery_method = :smtp
-
-  # Default settings are for mailcatcher
-  config.action_mailer.smtp_settings = {
-    user_name: ENV.fetch("EMAIL_USERNAME", ""),
-    password: ENV.fetch("EMAIL_PASSWORD", ""),
-    domain: ENV.fetch("DEFAULT_URL_HOST", "http://localhost:3000"),
-    address: ENV.fetch("EMAIL_HOST", "localhost"),
-    port: ENV.fetch("EMAIL_PORT", 1025),
-    authentication: :plain,
-    enable_starttls_auto: true
-  }
+  config.action_mailer.delivery_method = :notify_mail
+  config.action_mailer.notify_mail_settings = { api_key: ENV.fetch("NOTIFY_API_KEY")}
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
