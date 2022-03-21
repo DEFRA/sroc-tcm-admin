@@ -89,4 +89,19 @@ class UserMailer < ActionMailer::Base
       }
     )
   end
+
+  def test
+    @name = "Test Mailer"
+    @environment = ENV.fetch("TCM_ENVIRONMENT", "production")
+
+    mail(
+      to: "test.mailer@example.com",
+      subject: "TCM Email Test",
+      template_id: "c5bf56d3-d2da-4372-b680-7782f1115542",
+      personalisation: {
+        name: @name,
+        environment: @environment,
+      }
+    )
+  end
 end
