@@ -41,13 +41,13 @@ class UserMailer < ActionMailer::Base
 
   default from: ENV.fetch("DEVISE_MAILER_SENDER")
 
-  def invitation(email, name, invitation_link)
-    @email = email
-    @name = name
-    @link = invitation_link
+  def invitation_instructions(record)
+    @email = record.email
+    @name = record.full_name
+    @link = accept_user_invitation_url(invitation_token: record.raw_invitation_token)
 
     mail(
-      to: email,
+      to: @email,
       subject: "Account created - SRoC Tactical Charging Module",
       template_id: "52f3a778-79b3-4de4-8939-9cccb52026a5",
       personalisation: {
