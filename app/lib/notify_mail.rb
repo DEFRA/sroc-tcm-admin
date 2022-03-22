@@ -45,6 +45,9 @@ class NotifyMail
       template_id: mail[:template_id].to_s,
       personalisation: mail_field_to_hash(mail[:personalisation])
     )
+    # Add the response to the mail object. This means any ActionMailer observers will have access to the data in the
+    # response
+    mail[:response] = response.to_json
     Rails.logger.info(response.to_json)
 
     response
