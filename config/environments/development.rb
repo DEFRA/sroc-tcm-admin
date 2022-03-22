@@ -37,7 +37,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_caching = false
   config.action_mailer.delivery_method = :notify_mail
-  config.action_mailer.notify_mail_settings = { api_key: ENV.fetch("NOTIFY_API_KEY")}
+  config.action_mailer.notify_mail_settings = { api_key: ENV.fetch("NOTIFY_API_KEY") }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

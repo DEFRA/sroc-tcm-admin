@@ -50,7 +50,7 @@ namespace :tcm do
   namespace :test do
     desc "Send a test email via Notify to confirm setup"
     task email: :environment do
-      UserMailer.test().deliver_now
+      UserMailer.test.deliver_now
     end
   end
 end

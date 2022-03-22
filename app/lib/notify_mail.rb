@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'notifications/client'
+require "notifications/client"
 
 ##
 # A custom mailer that is compatible with ActionMailer but sends emails via

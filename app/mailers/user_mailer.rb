@@ -58,7 +58,7 @@ class UserMailer < ActionMailer::Base
     )
   end
 
-  def reset_password_instructions(record, token, opts={})
+  def reset_password_instructions(record, token, _opts = {})
     @token = token
     @name = record.full_name
     @link = edit_password_url(record, reset_password_token: token)
@@ -74,7 +74,7 @@ class UserMailer < ActionMailer::Base
     )
   end
 
-  def unlock_instructions(record, token, opts={})
+  def unlock_instructions(record, token, _opts = {})
     @token = token
     @name = record.full_name
     @link = unlock_url(record, unlock_token: @token)
@@ -100,7 +100,7 @@ class UserMailer < ActionMailer::Base
       template_id: "c5bf56d3-d2da-4372-b680-7782f1115542",
       personalisation: {
         name: @name,
-        environment: @environment,
+        environment: @environment
       }
     )
   end

@@ -66,5 +66,5 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: ENV["DEFAULT_URL_HOST"] }
   config.action_mailer.delivery_method = :notify_mail
-  config.action_mailer.notify_mail_settings = { api_key: ENV.fetch("NOTIFY_API_KEY")}
+  config.action_mailer.notify_mail_settings = { api_key: ENV.fetch("NOTIFY_API_KEY") }
 end
