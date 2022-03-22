@@ -14,7 +14,10 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = ENV.fetch("DEVISE_MAILER_SENDER")
+  # NOTE: The above comment comes from Devise. Our experience is that if we don't set it in our custom mailer UserMailer
+  # then `:from` simply doesn't get set. But we we don't specify it here then things like rake tasks start breaking. So,
+  # you will find this set in both places.
+  config.mailer_sender = "no-reply@environment-agency.gov.uk"
 
   # Configure the class responsible to send e-mails.
   #

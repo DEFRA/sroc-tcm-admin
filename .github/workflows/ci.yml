@@ -8,7 +8,6 @@ jobs:
     # You must use a Linux environment when using service containers or container jobs
     runs-on: ubuntu-latest
     env:
-      DEVISE_MAILER_SENDER: no-reply@example.com
       POSTGRES_HOST: localhost
       POSTGRES_PASSWORD: pinafore
       POSTGRES_PORT: 5432

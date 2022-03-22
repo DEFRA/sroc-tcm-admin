@@ -39,7 +39,7 @@ class UserMailer < ActionMailer::Base
   include Rails.application.routes.mounted_helpers
   include Devise::Controllers::UrlHelpers
 
-  default from: ENV.fetch("DEVISE_MAILER_SENDER")
+  default from: "no-reply@environment-agency.gov.uk"
 
   def invitation_instructions(record)
     @email = record.email
