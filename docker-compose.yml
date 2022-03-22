@@ -10,13 +10,6 @@ services:
       - "54321:5432"
     env_file:
       - .env
-  # We use this locally to to allow us to easily access any emails sent and not worry about creating real email
-  # accounts. When the environment is running go to http://localhost:1080 to access any emails sent
-  mail:
-    image: schickling/mailcatcher
-    ports:
-      - "1025:1025"
-      - "1080:1080"
 
   app:
     build:
@@ -47,7 +40,6 @@ services:
     # up and running before starting the app. So do not use this to manage critical dependency ordering.
     depends_on:
       - db
-      - mail
 
 volumes:
   tcm_db_volume:
