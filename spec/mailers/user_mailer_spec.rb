@@ -3,6 +3,7 @@
 require "rails_helper"
 
 RSpec.describe UserMailer, type: :mailer do
+  let(:host) { ENV.fetch("DEFAULT_URL_HOST", "http://localhost:3000") }
   let(:token) { "abcde12345" }
   let(:user) do
     double(
@@ -26,7 +27,7 @@ RSpec.describe UserMailer, type: :mailer do
       expect(mail.subject).to eq("Account created - SRoC Tactical Charging Module")
       expect(mail[:template_id].to_s).to eq("52f3a778-79b3-4de4-8939-9cccb52026a5")
       expect(mail[:personalisation].to_s).to eq(
-        "{:name=>\"Grace Hopper\", :link=>\"http://localhost:3001/auth/invitation/accept?invitation_token=abcde12345\", :email=>\"grace.hopper@example.com\"}"
+        "{:name=>\"Grace Hopper\", :link=>\"#{host}/auth/invitation/accept?invitation_token=abcde12345\", :email=>\"grace.hopper@example.com\"}"
       )
     end
   end
@@ -39,7 +40,7 @@ RSpec.describe UserMailer, type: :mailer do
       expect(mail.subject).to eq("Reset password - SRoC Tactical Charging Module")
       expect(mail[:template_id].to_s).to eq("427b45a3-3262-452d-b0b9-6302288f07dc")
       expect(mail[:personalisation].to_s).to eq(
-        "{:name=>\"Grace Hopper\", :link=>\"http://localhost:3001/auth/password/edit?reset_password_token=abcde12345\"}"
+        "{:name=>\"Grace Hopper\", :link=>\"#{host}/auth/password/edit?reset_password_token=abcde12345\"}"
       )
     end
   end
@@ -52,7 +53,7 @@ RSpec.describe UserMailer, type: :mailer do
       expect(mail.subject).to eq("Unlock account - SRoC Tactical Charging Module")
       expect(mail[:template_id].to_s).to eq("aaea1a2f-4a9d-4aab-aaae-b672cb80e7b3")
       expect(mail[:personalisation].to_s).to eq(
-        "{:name=>\"Grace Hopper\", :link=>\"http://localhost:3001/auth/unlock?unlock_token=abcde12345\"}"
+        "{:name=>\"Grace Hopper\", :link=>\"#{host}/auth/unlock?unlock_token=abcde12345\"}"
       )
     end
   end
