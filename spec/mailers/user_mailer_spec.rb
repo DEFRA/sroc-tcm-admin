@@ -66,7 +66,7 @@ RSpec.describe UserMailer, type: :mailer do
       expect(mail.subject).to eq("TCM Email Test")
       expect(mail[:template_id].to_s).to eq("c5bf56d3-d2da-4372-b680-7782f1115542")
       expect(mail[:personalisation].to_s).to eq(
-        "{:name=>\"Test Mailer\", :environment=>\"#{ENV.fetch("TCM_ENVIRONMENT", "test")}\"}"
+        "{:name=>\"Test Mailer\", :environment=>\"#{ENV.fetch('TCM_ENVIRONMENT', 'test')}\"}"
       )
     end
   end
