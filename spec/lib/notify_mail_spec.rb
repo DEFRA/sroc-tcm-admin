@@ -15,7 +15,7 @@ RSpec.describe NotifyMail do
       {
         to: "radi.perlman@example.com",
         template_id: "1234567890",
-        personalisation: { unparsed_value: { name: "Radia Perlman", environment: "test"}}
+        personalisation: { unparsed_value: { name: "Radia Perlman", environment: "test" } }
       }
     end
 
@@ -29,7 +29,7 @@ RSpec.describe NotifyMail do
           {
             email_address: "radi.perlman@example.com",
             template_id: "1234567890",
-            personalisation: { name: "Radia Perlman", environment: "test"}
+            personalisation: { name: "Radia Perlman", environment: "test" }
           }
         )
       end
