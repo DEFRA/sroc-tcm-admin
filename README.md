@@ -105,6 +105,10 @@ Though built to support testing these endpoints are available in production but 
 - `/jobs/import` trigger the transaction file import process
 - `/jobs/export` trigger the transaction file export process
 
+## GOV.UK Notify
+
+The TCM uses [Notify](https://www.notifications.service.gov.uk/using-notify/get-started) to send email. It does this using Notify's [web API](https://docs.notifications.service.gov.uk/ruby.html). The key difference is that the templates for all emails are stored in Notify. Any mailer views found in the TCM code are there purely as reference to what the Notify templates contain and to allow us to replicate the email body.
+
 ## Contributing to this project
 
 If you have an idea you'd like to contribute please log an issue.
