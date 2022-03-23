@@ -9,7 +9,7 @@ RSpec.describe LastEmailCache do
 
   let(:recipient) { "test@example.com" }
   let(:add_attachment) { false }
-  let(:expected_keys) { %w[date from to bcc cc reply_to subject body attachments] }
+  let(:expected_keys) { %w[date from to bcc cc reply_to subject body attachments template_id personalisation response] }
 
   describe "#last_email_json" do
 
@@ -138,7 +138,7 @@ RSpec.describe LastEmailCache do
       it "contains the details of the last email sent" do
         result = JSON.parse(instance.last_email_json)
 
-        expect(result["last_email"]["to"]).to eq([last_recipient])
+        expect(result["last_email"]["to"]).to eq(last_recipient)
       end
     end
   end

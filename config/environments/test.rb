@@ -29,6 +29,16 @@ Rails.application.configure do
 
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
+
+  # You wouldn't normally need to set this in test.rb because it's only needed if you are actually sending an email. But
+  # we have included both Rails and Devise URL helpers in app/mailers/user_mailer.rb and they expect to be able to
+  # access a `default_url_options()` method which returns a valid value in the context they are used. This is needed for
+  # them to be able to generate links.
+  config.action_mailer.default_url_options = {
+    host: ENV.fetch("DEFAULT_URL_HOST", "http://localhost:3000"),
+    protocol: "http"
+  }
+
   config.action_mailer.perform_caching = false
 
   # Tell Action Mailer not to deliver emails to the real world.

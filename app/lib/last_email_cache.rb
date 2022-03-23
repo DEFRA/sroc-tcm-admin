@@ -3,7 +3,7 @@
 class LastEmailCache
   include Singleton
 
-  EMAIL_ATTRIBUTES = %i[date from to bcc cc reply_to subject].freeze
+  EMAIL_ATTRIBUTES = %i[date from to bcc cc reply_to subject template_id personalisation response].freeze
 
   attr_accessor :last_email
 
@@ -17,7 +17,7 @@ class LastEmailCache
 
     message_hash = {}
     EMAIL_ATTRIBUTES.each do |attribute|
-      message_hash[attribute] = last_email.public_send(attribute)
+      message_hash[attribute] = last_email[attribute].to_s
     end
     message_hash[:body] = email_body
     message_hash[:attachments] = last_email.attachments.map(&:filename)

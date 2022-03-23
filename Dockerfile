@@ -79,13 +79,6 @@ RUN apk del --no-cache build-dependencies
 # changes and see them immediately in the UI when developing
 FROM gem_builder AS asset_builder
 
-# In our experience any project that uses devise for authentication hits an issue when trying to run any rake task in
-# an environment where DEVISE_MAILER_SENDER is not defined. This is because all rake tasks are initialised even though
-# you are only running a specific one. So, any env vars referenced by a rake task must be available, even for tasks that
-# are part of other gems.
-ARG DEVISE_MAILER_SENDER=no-reply@environment-agency.gov.uk
-ENV DEVISE_MAILER_SENDER=$DEVISE_MAILER_SENDER
-
 WORKDIR /usr/src/app
 
 # Pre-compile the assets
