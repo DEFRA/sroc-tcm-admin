@@ -39,7 +39,9 @@ class CleanDbService < ServiceObject
 
   def do_not_touch_tables
     @do_not_touch_tables ||= %w[
+      annual_billing_data_files
       ar_internal_metadata
+      data_upload_errors
       exclusion_reasons
       permit_categories
       regime_users
