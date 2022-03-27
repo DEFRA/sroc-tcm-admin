@@ -59,7 +59,9 @@ def seed_annual_billing_data_files
   data_files = seeds["annual_billing_data_files"]
 
   data_files.each do |data_file|
-    create_annual_billing_data_file(data_file) unless AnnualBillingDataFile.where(filename: data_file["filename"]).exists?
+    unless AnnualBillingDataFile.where(filename: data_file["filename"]).exists?
+      create_annual_billing_data_file(data_file)
+    end
   end
 end
 
