@@ -32,6 +32,39 @@ def seed_users
   end
 end
 
+def create_annual_billing_data_file(details)
+  data_file = AnnualBillingDataFile.new(
+    regime_id: details["regime_id"],
+    filename: details["filename"],
+    status: details["status"],
+    success_count: details["success_count"],
+    failed_count: details["failed_count"],
+    created_at: details["created_at"],
+    updated_at: details["updated_at"]
+  )
+  data_file.save!
+
+  details["data_upload_errors"].each do |detail|
+    data_upload_error = DataUploadError.new(
+      line_number: detail["line_number"],
+      message: detail["message"]
+    )
+    data_upload_error.annual_billing_data_file = data_file
+    data_upload_error.save!
+  end
+end
+
+def seed_annual_billing_data_files
+  seeds = JSON.parse(File.read("#{Rails.root}/db/seeds/annual_billing_data_files.json"))
+  data_files = seeds["annual_billing_data_files"]
+
+  data_files.each do |data_file|
+    unless AnnualBillingDataFile.where(filename: data_file["filename"]).exists?
+      create_annual_billing_data_file(data_file)
+    end
+  end
+end
+
 if Regime.count.zero?
   Regime.create!(name: "PAS", title: "Installations")
   Regime.create!(name: "CFD", title: "Water Quality")
@@ -46,6 +79,7 @@ Regime.all.each do |r|
 end
 
 seed_users
+seed_annual_billing_data_files
 
 r = Regime.find_by!(slug: "pas")
 r.permit_categories.destroy_all
