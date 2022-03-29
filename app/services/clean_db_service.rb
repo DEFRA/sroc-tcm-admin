@@ -43,6 +43,7 @@ class CleanDbService < ServiceObject
       ar_internal_metadata
       data_upload_errors
       exclusion_reasons
+      export_data_files
       permit_categories
       regime_users
       regimes
