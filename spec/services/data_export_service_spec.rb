@@ -23,7 +23,7 @@ RSpec.describe DataExportService do
         export_double = double("ExportTransactionDataService", failed?: false, filename: "cfd_transactions.csv.gz")
         allow(ExportTransactionDataService).to receive(:call) { export_double }
 
-        put_file_double = double("PutDataExportFileService", failed?: false)
+        put_file_double = double("PutDataExportFileService", failed?: false, filename: "cfd_transactions.csv.gz")
         allow(PutDataExportFileService).to receive(:call) { put_file_double }
       end
 
@@ -34,6 +34,14 @@ RSpec.describe DataExportService do
         expect(result.success?).to be(true)
         expect(result.failed?).to be(false)
       end
+
+      it "records details of the exported files in the results" do
+        result = service.call
+
+        expect(result.results[:succeeded]).to eq(
+          ["cfd_transactions.csv.gz", "cfd_transactions.csv.gz", "cfd_transactions.csv.gz"]
+        )
+      end
     end
 
     context "when a regime is specified" do
@@ -41,17 +49,23 @@ RSpec.describe DataExportService do
         export_double = double("ExportTransactionDataService", failed?: false, filename: "cfd_transactions.csv.gz")
         allow(ExportTransactionDataService).to receive(:call) { export_double }
 
-        put_file_double = double("PutDataExportFileService", failed?: false)
+        put_file_double = double("PutDataExportFileService", failed?: false, filename: "cfd_transactions.csv.gz")
         allow(PutDataExportFileService).to receive(:call) { put_file_double }
       end
 
-      it "runs the export 3 times, one for each regime" do
+      it "runs the export just once, one for the specified regime" do
         result = service.call(regime: regime)
 
         expect(ExportTransactionDataService).to have_received(:call).exactly(1).times
         expect(ExportTransactionDataService).to have_received(:call).with({ regime: regime })
         expect(result.success?).to be(true)
         expect(result.failed?).to be(false)
+      end
+
+      it "records details of the exported file in the results" do
+        result = service.call
+
+        expect(result.results[:succeeded]).to eq(["cfd_transactions.csv.gz"])
       end
     end
 
@@ -60,7 +74,7 @@ RSpec.describe DataExportService do
         export_double = double("ExportTransactionDataService", failed?: false, filename: "cfd_transactions.csv.gz")
         allow(ExportTransactionDataService).to receive(:call) { export_double }
 
-        put_file_double = double("PutDataExportFileService", failed?: false)
+        put_file_double = double("PutDataExportFileService", failed?: false, filename: "cfd_transactions.csv.gz")
         allow(PutDataExportFileService).to receive(:call) { put_file_double }
       end
 
@@ -74,7 +88,7 @@ RSpec.describe DataExportService do
 
     context "when exporting the transactions fails" do
       before(:each) do
-        export_double = double("ExportTransactionDataService", failed?: true)
+        export_double = double("ExportTransactionDataService", failed?: true, filename: "cfd_transactions.csv.gz")
         allow(ExportTransactionDataService).to receive(:call) { export_double }
       end
 
@@ -87,6 +101,14 @@ RSpec.describe DataExportService do
         expect(result.success?).to be(true)
         expect(result.failed?).to be(false)
       end
+
+      it "records details of the failed files in the results" do
+        result = service.call
+
+        # Though we don't specify a regime we only create one at the start of the spec which is why only one file is
+        # recorded
+        expect(result.results[:failed]).to eq(["cfd_transactions.csv.gz"])
+      end
     end
 
     context "when 'putting' the file fails" do
@@ -94,7 +116,7 @@ RSpec.describe DataExportService do
         export_double = double("ExportTransactionDataService", failed?: false, filename: "cfd_transactions.csv.gz")
         allow(ExportTransactionDataService).to receive(:call) { export_double }
 
-        put_file_double = double("PutDataExportFileService", failed?: true)
+        put_file_double = double("PutDataExportFileService", failed?: true, filename: "cfd_transactions.csv.gz")
         allow(PutDataExportFileService).to receive(:call) { put_file_double }
       end
 
@@ -103,6 +125,14 @@ RSpec.describe DataExportService do
 
         expect(result.success?).to be(true)
         expect(result.failed?).to be(false)
+      end
+
+      it "records details of the failed files in the results" do
+        result = service.call
+
+        # Though we don't specify a regime we only create one at the start of the spec which is why only one file is
+        # recorded
+        expect(result.results[:failed]).to eq(["cfd_transactions.csv.gz"])
       end
     end
 
@@ -116,6 +146,12 @@ RSpec.describe DataExportService do
 
         expect(result.success?).to be(false)
         expect(result.failed?).to be(true)
+      end
+
+      it "records nothing in the results" do
+        result = service.call
+
+        expect(result.results).to eq({ succeeded: [], failed: [] })
       end
     end
   end

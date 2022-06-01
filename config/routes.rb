@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
   get "/jobs/import", to: "jobs#import", as: :jobs_import
   get "/jobs/export", to: "jobs#export", as: :jobs_export
+  get "/jobs/data", to: "jobs#data", as: :jobs_data
 
   get "/last-email",
       to: "last_email#show",
