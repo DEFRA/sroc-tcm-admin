@@ -15,6 +15,12 @@ class JobsController < ApplicationController
     render json: result.results.to_json, status: :ok
   end
 
+  def data
+    result = DataExportService.call
+
+    render json: result.results.to_json, status: :ok
+  end
+
   private
 
   def admin_only_check
