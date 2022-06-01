@@ -21,14 +21,14 @@ class DataExportService < ServiceObject
         puts("Processing regime #{regime.name}")
         result = ExportTransactionDataService.call(regime: regime)
         if result.failed?
-          recordFailure(result, "Failed to export transactions for #{regime.name}")
+          record_failure(result, "Failed to export transactions for #{regime.name}")
         else
           # store file
           result = PutDataExportFileService.call(filename: result.filename)
           if result.failed?
-            recordFailure(result, "Failed to store export data file for #{regime.name}")
+            record_failure(result, "Failed to store export data file for #{regime.name}")
           else
-            recordSuccess(result)
+            record_success(result)
           end
         end
       end
@@ -50,16 +50,16 @@ def regimes(regime)
   Regime.all
 end
 
-def recordFailure(result, message)
+def record_failure(result, message)
   TcmLogger.error(message)
-  @results[:failed].push(filenameOnly(result.filename))
+  @results[:failed].push(filename_only(result.filename))
 end
 
-def recordSuccess(result)
-  @results[:succeeded].push(filenameOnly(result.filename))
+def record_success(result)
+  @results[:succeeded].push(filename_only(result.filename))
 end
 
-def filenameOnly(filename)
+def filename_only(filename)
   return "" unless filename
 
   File.basename(filename)
