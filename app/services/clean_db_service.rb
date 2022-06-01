@@ -12,6 +12,7 @@ class CleanDbService < ServiceObject
   def call
     clean_tables
     reset_counters
+    reset_exported_data_files
     @result = true
 
     self
@@ -35,6 +36,16 @@ class CleanDbService < ServiceObject
 
   def reset_counters
     ActiveRecord::Base.connection.execute("UPDATE sequence_counters SET file_number=50001, invoice_number=1")
+  end
+
+  def reset_exported_data_files
+    ActiveRecord::Base.connection.execute(
+      "UPDATE export_data_files SET"\
+      " last_exported_at = NULL,"\
+      " status = 0,"\
+      " exported_filename = NULL,"\
+      " exported_filename_hash = NULL"
+    )
   end
 
   def do_not_touch_tables
