@@ -185,6 +185,11 @@ COPY --from=asset_builder /usr/src/app/public ./public
 # This should be set in the project but just in case we ensure entrypoint.sh is executable
 RUN chmod +x entrypoint.sh
 
+# Ensure our app user (non-root user) will be able to write to the tmp folder. This is needed by rails and puma to
+# create pid session files, plus the cache and log files they generate
+# Change onwership of the folder from root to app, and the group to app's group (appgroup)
+RUN chown -R app: tmp
+
 # Specifiy listening port for the container
 EXPOSE 3000
 

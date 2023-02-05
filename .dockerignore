@@ -11,6 +11,7 @@
 !Gemfile
 !Gemfile.lock
 !Rakefile
+!tmp
 
 # re-ignore (!!) these files. Doing it this way means we avoid having to breakdown our entries above. For example, to
 # exclude app/assets the alternate would be to specify `!app/controllers, !app/helpers` etc above. This is less flexible

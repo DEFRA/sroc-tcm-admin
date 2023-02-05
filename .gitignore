@@ -11,6 +11,9 @@
 /log/*
 !/log/.keep
 /tmp/*
+/tmp/pids/*
+!/tmp/.keep
+!/tmp/pids
 !/tmp/pids/.keep
 .DS_Store
 *.log
