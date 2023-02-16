@@ -68,7 +68,7 @@ class AwsFileStore
   end
 
   def aws_region
-    "eu-west-1"
+    ENV["BUCKET_AWS_REGION"]
   end
 
   def aws_access_key
