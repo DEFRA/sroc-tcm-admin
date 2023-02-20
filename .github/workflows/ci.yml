@@ -16,6 +16,7 @@ jobs:
       FILE_UPLOAD_SECRET_KEY: iamanawss3secretkey
       FILE_UPLOAD_BUCKET: file-uploads-example-gov-uk
       ARCHIVE_BUCKET: file-archive-example-gov-uk
+      BUCKET_AWS_REGION: eu-west-1
 
     # Service containers to run with `runner-job`
     services:
