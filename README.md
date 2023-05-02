@@ -82,6 +82,10 @@ To check the current usage of a running instance go to `/coverage`. It is our in
 - confirm our suspicion there is redundant code in the project
 - to identify which classes and methods to target first for removal
 
+## GOV.UK Notify
+
+The TCM uses [Notify](https://www.notifications.service.gov.uk/using-notify/get-started) to send email. It does this using Notify's [web API](https://docs.notifications.service.gov.uk/ruby.html). The key difference is that the templates for all emails are stored in Notify. Any mailer views found in the TCM code are there purely as reference to what the Notify templates contain and to allow us to replicate the email body.
+
 ## Contributing to this project
 
 If you have an idea you'd like to contribute please log an issue.

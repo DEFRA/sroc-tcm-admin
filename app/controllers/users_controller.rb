@@ -72,11 +72,9 @@ class UsersController < AdminController
     user.invite!(current_user) do |u|
       u.skip_invitation = true
     end
-    # invitation token not persisted (or serialized?) so need to grab it now
-    invitation_link = accept_user_invitation_url(
-      invitation_token: user.raw_invitation_token
-    )
-    UserMailer.invitation(user.email, user.full_name, invitation_link).deliver_now
+
+    UserMailer.invitation_instructions(user).deliver_now
+
     user.update(invitation_sent_at: Time.now.utc)
   end
 end

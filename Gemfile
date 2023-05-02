@@ -25,6 +25,8 @@ gem "jbuilder", "~> 2.5"
 gem "jquery-rails"
 gem "jquery-ui-rails"
 gem "kaminari"
+# GOV.UK Notify gem. Allows us to send email via the Notify web API
+gem "notifications-ruby-client"
 gem "rails-i18n"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 5.0"
