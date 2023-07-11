@@ -3,13 +3,10 @@
 source "https://rubygems.org"
 ruby "2.7.1"
 
-# Rails must be v6.1.3.1 or greater to avoid the issue around earlier versions of mimemagic and its use of GPL licensed
-# data. See https://github.com/rails/rails/issues/41750 and https://github.com/DEFRA/sroc-tcm-admin/pull/405 for more
-# details
-gem "rails", ">= 6.1.3.1"
+gem "rails", "~> 7.0"
 
 # Use postgresql as the database for Active Record
-gem "pg", "~> 1.2"
+gem "pg", "~> 1.5"
 
 gem "aws-sdk", "~> 2"
 # bootstrap 4
@@ -18,7 +15,7 @@ gem "bstard"
 gem "devise"
 gem "devise_invitable"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem "jbuilder", "~> 2.5"
+gem "jbuilder", "~> 2.11"
 # jquery needed by bootstrap for rails 5.1+
 gem "jquery-rails"
 gem "jquery-ui-rails"
@@ -31,14 +28,14 @@ gem "puma"
 gem "rails-i18n"
 gem "rails_semantic_logger"
 # Use SCSS for stylesheets
-gem "sass-rails", "~> 5.0"
+gem "sass-rails", "~> 5.1"
 gem "secure_headers"
 # Use Uglifier as compressor for JavaScript assets
-gem "uglifier", ">= 1.3.0"
+gem "uglifier", "~> 4.2"
 gem "whenever", require: false
 
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem "turbolinks", "~> 5"
+gem "turbolinks", "~> 5.2"
 
 group :development do
   # Manages our rubocop style rules for all defra ruby projects
