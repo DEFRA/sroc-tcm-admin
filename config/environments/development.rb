@@ -58,7 +58,19 @@ Rails.application.configure do
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
-  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  #
+  # NOTE: The default for this is ActiveSupport::EventedFileUpdateChecker and it worked fine when we first moved to
+  # Docker. But as of June 30 2023 it now causes an error when launching in development mode and during our Docker
+  # build when compiling the assets. The one clue we found was this
+  #
+  # https://dev.to/chrsgrrtt/rails-views-not-updating-locally-191o
+  #
+  # The writer identified the source as this line in the config being set to EventedFileUpdateChecker. They suggest
+  # it dislikes either Docker volumes or Windows. We already know FS events don't behave the same in Docker as when
+  # working locally so it's most likely true. But whilst they suggest commenting it out (also suggested in this
+  # issue https://github.com/rails/rails/issues/36158) a commenter to the post suggests switching it for
+  # FileUpdateChecker. Like others, this worked for us and means file watching is still enabled.
+  config.file_watcher = ActiveSupport::FileUpdateChecker
 
   # The rails web console allows you to execute arbitrary code on the server. By
   # default, only requests coming from IPv4 and IPv6 localhosts are allowed.
