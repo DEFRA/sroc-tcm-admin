@@ -180,7 +180,7 @@ COPY . .
 # Copy the gems generated in the gem_builder stage from its image to this one
 COPY --from=gem_builder /usr/src/gems /usr/src/gems
 # Copy the assets in the asset_builder stage from its image to this one
-COPY --from=asset_builder /usr/src/app/public ./public
+COPY --from=asset_builder /usr/src/app/public /usr/src/app/public
 
 # This should be set in the project but just in case we ensure entrypoint.sh is executable
 RUN chmod +x entrypoint.sh
