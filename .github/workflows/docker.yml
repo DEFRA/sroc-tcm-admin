@@ -94,7 +94,7 @@ jobs:
           build-args: |
             GIT_COMMIT=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
           push: true
-          labels: ${{ steps.meta_github.outputs.labels }}
+          labels: ${{ steps.meta.outputs.labels }}
           tags: ${{ steps.meta.outputs.tags }}
 
       # Generate a summary that will be displayed against the Job when selected in the Actions tab.
