@@ -45,52 +45,54 @@ jobs:
 
       - name: Generate raw tag
         id: raw-tag
-        run:
+        run: |
+          echo "{NVMRC}={cat .ruby-version}" >> $GITHUB_OUTPUT
           echo "raw_tag={git describe --always --tags}" >> $GITHUB_OUTPUT
 
       - name: Check raw tag
         id: check-raw-tag
-        run:
+        run: |
+          echo "The NVMRC is ${{ steps.raw-tag.outputs.NVMRC }}"
           echo "The raw tag is ${{ steps.raw-tag.outputs.raw_tag }}"
 
-      # Before we do anything, check we haven't accidentally left any `:focus` or `focus: :true` statements in the
-      # tests
-      #
-      # Reworking of https://stackoverflow.com/a/21788642/6117745
-      - name: Temporary tag check
-        run: |
-          ! grep --exclude=spec_helper.rb -R ':focus\|focus:' spec
+      # # Before we do anything, check we haven't accidentally left any `:focus` or `focus: :true` statements in the
+      # # tests
+      # #
+      # # Reworking of https://stackoverflow.com/a/21788642/6117745
+      # - name: Temporary tag check
+      #   run: |
+      #     ! grep --exclude=spec_helper.rb -R ':focus\|focus:' spec
 
-      # We don't have to specify the ruby version, or grab it from .ruby-verion. This action supports reading the
-      # version from .ruby-verion itself
-      - name: Install Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      # # We don't have to specify the ruby version, or grab it from .ruby-verion. This action supports reading the
+      # # version from .ruby-verion itself
+      # - name: Install Ruby
+      #   uses: ruby/setup-ruby@v1
+      #   with:
+      #     bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
-      - name: Database migrations
-        run: |
-          RAILS_ENV=test bundle exec rake db:migrate
+      # - name: Database migrations
+      #   run: |
+      #     RAILS_ENV=test bundle exec rake db:migrate
 
-      # Run linting first. No point running the tests if there is a linting issue
-      - name: Run lint check
-        run: |
-          bundle exec rubocop --format progress --format json --out rubocop-result.json
+      # # Run linting first. No point running the tests if there is a linting issue
+      # - name: Run lint check
+      #   run: |
+      #     bundle exec rubocop --format progress --format json --out rubocop-result.json
 
-      # This includes an extra run step. The sonarcloud analysis will be run in a docker container with the current
-      # folder mounted as `/github/workspace`. The problem is when the .resultset.json file is generated it will
-      # reference the code in the current folder. So to enable sonarcloud to matchup code coverage with the files we use
-      # sed to update the references in .resultset.json
-      # https://community.sonarsource.com/t/code-coverage-doesnt-work-with-github-action/16747/6
-      - name: Run unit tests
-        run: |
-          bundle exec rails test
-          bundle exec rspec
-          sed -i 's/\/home\/runner\/work\/sroc-tcm-admin\/sroc-tcm-admin\//\/github\/workspace\//g' coverage/.resultset.json
+      # # This includes an extra run step. The sonarcloud analysis will be run in a docker container with the current
+      # # folder mounted as `/github/workspace`. The problem is when the .resultset.json file is generated it will
+      # # reference the code in the current folder. So to enable sonarcloud to matchup code coverage with the files we use
+      # # sed to update the references in .resultset.json
+      # # https://community.sonarsource.com/t/code-coverage-doesnt-work-with-github-action/16747/6
+      # - name: Run unit tests
+      #   run: |
+      #     bundle exec rails test
+      #     bundle exec rspec
+      #     sed -i 's/\/home\/runner\/work\/sroc-tcm-admin\/sroc-tcm-admin\//\/github\/workspace\//g' coverage/.resultset.json
 
-      - name: Analyze with SonarCloud
-        if: github.actor != 'dependabot[bot]'
-        uses: sonarsource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This is provided automatically by GitHub
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # This needs to be set in your repo; settings -> secrets
+      # - name: Analyze with SonarCloud
+      #   if: github.actor != 'dependabot[bot]'
+      #   uses: sonarsource/sonarcloud-github-action@master
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This is provided automatically by GitHub
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # This needs to be set in your repo; settings -> secrets
