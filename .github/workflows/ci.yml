@@ -48,10 +48,36 @@ jobs:
         run:
           echo "raw_tag=$(git describe --always --tags)" >> "$GITHUB_OUTPUT"
 
-      - name: Check raw tag
-        id: check-raw-tag
+      # Extract metadata (tags, labels) for Docker
+      # https://github.com/docker/metadata-action
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ steps.login-ecr.outputs.registry }}/${{ env.REPOSITORY }}
+          tags: |
+            type=semver,priority=900,pattern={{raw}}
+            type=raw,priority=800,value=${{ steps.raw-tag.outputs.raw_tag }}
+          labels: |
+            org.opencontainers.image.licenses=OGL-UK-3.0
+
+      - name: Job summary
+        id: summary
         run: |
-          echo "The raw tag is ${{ steps.raw-tag.outputs.raw_tag }}"
+          {
+            echo "### :label: Docker Image details"
+            echo "- **${{ steps.raw-tag.outputs.raw_tag }}**"
+            echo "|Label | Value |"
+            echo "|------|-------|"
+            echo "|created| - |"
+            echo "|description| - |"
+            echo "|licenses| - |"
+            echo "|revision| - |"
+            echo "|source| - |"
+            echo "|title| - |"
+            echo "|url| - |"
+            echo "|version| - |"
+          } >> $GITHUB_STEP_SUMMARY
 
       # # Before we do anything, check we haven't accidentally left any `:focus` or `focus: :true` statements in the
       # # tests
