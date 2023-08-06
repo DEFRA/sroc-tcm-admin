@@ -43,6 +43,16 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of sonarcloud analysis
 
+      - name: Generate raw tag
+        id: raw-tag
+        run:
+          echo "raw_tag={git describe --always --tags}" >> $GITHUB_OUTPUT
+
+      - name: Check raw tag
+        id: check-raw-tag
+        run:
+          echo "The raw tag is ${{ steps.raw-tag.outputs.raw_tag }}"
+
       # Before we do anything, check we haven't accidentally left any `:focus` or `focus: :true` statements in the
       # tests
       #
