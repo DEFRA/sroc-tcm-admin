@@ -47,13 +47,12 @@ jobs:
         id: raw-tag
         run: |
           RAW_TAG=$(git describe --always --tags)
-          echo "NVMRC=$(cat .ruby-version)" >> "$GITHUB_OUTPUT"
           echo "raw_tag=$RAW_TAG" >> "$GITHUB_OUTPUT"
+          echo "Raw tag generated: $RAW_TAG" >> $GITHUB_STEP_SUMMARY
 
       - name: Check raw tag
         id: check-raw-tag
         run: |
-          echo "The NVMRC is ${{ steps.raw-tag.outputs.NVMRC }}"
           echo "The raw tag is ${{ steps.raw-tag.outputs.raw_tag }}"
 
       # # Before we do anything, check we haven't accidentally left any `:focus` or `focus: :true` statements in the
