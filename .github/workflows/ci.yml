@@ -46,8 +46,9 @@ jobs:
       - name: Generate raw tag
         id: raw-tag
         run: |
-          echo "{NVMRC}={cat .ruby-version}" >> $GITHUB_OUTPUT
-          echo "raw_tag={git describe --always --tags}" >> $GITHUB_OUTPUT
+          RAW_TAG=$(git describe --always --tags)
+          echo "NVMRC=$(cat .ruby-version)" >> "$GITHUB_OUTPUT"
+          echo "raw_tag=$RAW_TAG" >> "$GITHUB_OUTPUT"
 
       - name: Check raw tag
         id: check-raw-tag
