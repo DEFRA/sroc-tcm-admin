@@ -67,16 +67,17 @@ jobs:
           {
             echo "### :label: Docker Image details"
             echo "- **${{ steps.raw-tag.outputs.raw_tag }}**"
+            echo "\n"
             echo "|Label | Value |"
             echo "|------|-------|"
-            echo "|created| - |"
-            echo "|description| - |"
-            echo "|licenses| - |"
-            echo "|revision| - |"
-            echo "|source| - |"
-            echo "|title| - |"
-            echo "|url| - |"
-            echo "|version| - |"
+            echo "|created| ${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.created'] }} |"
+            echo "|description| ${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.description'] }} |"
+            echo "|licenses| ${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.licenses'] }} |"
+            echo "|revision| ${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }} |"
+            echo "|source| ${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.source'] }} |"
+            echo "|title| ${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.title'] }} |"
+            echo "|url| ${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.url'] }} |"
+            echo "|version| ${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }} |"
           } >> $GITHUB_STEP_SUMMARY
 
       # # Before we do anything, check we haven't accidentally left any `:focus` or `focus: :true` statements in the
