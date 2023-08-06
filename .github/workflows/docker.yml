@@ -8,10 +8,7 @@ on:
     tags: [ 'v*.*.*' ]
 
 env:
-  # Our main, default container registry
-  GHC_REGISTRY: ghcr.io
-  # github.repository will be <account>/<repo>, for example, DEFRA/sroc-tcm-admin
-  IMAGE_NAME: ${{ github.repository }}
+  REPOSITORY: tactical_charging_module/sroc-tcm-admin
 
 jobs:
   build:
@@ -46,7 +43,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.GHC_REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ steps.login-ecr.outputs.registry }}/${{ env.REPOSITORY }}
 
       # The combination of the original tags plus the sed calculated ones are combined and stored as a multiline string
       # in a new env var.
