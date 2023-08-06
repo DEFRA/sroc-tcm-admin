@@ -66,4 +66,4 @@ jobs:
             GIT_COMMIT=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
           push: true
           labels: ${{ steps.meta_github.outputs.labels }}
-          tags: ${{ env.ALL_TAGS }}
+          tags: ${{ steps.meta.outputs.tags }}
