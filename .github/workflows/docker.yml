@@ -40,7 +40,7 @@ jobs:
       - name: Generate raw tag
         id: raw-tag
         run:
-          echo "raw_tag={git describe --always --tags}" >> $GITHUB_OUTPUT
+          echo "raw_tag=$(git describe --always --tags)" >> $GITHUB_OUTPUT
 
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
