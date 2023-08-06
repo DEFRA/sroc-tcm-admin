@@ -65,6 +65,8 @@ jobs:
       # Extract metadata from Git reference and GitHub events
       # We use it to generate the tags and labels for our Docker image. For reference;
       #
+      # - flavor: defines global behaviour for tags. By default a GitHub tag event would cause metadata-action to
+      #   apply the `latest` tag. But as our AWS ECR has immutable tags we can't use `latest`
       # - images: the base name to use for the full tag. The build-push-action will also use this to determine where
       #   to push the image to
       # - tags: tell the action to generate certain tags dependent on the event. Our config says when a tag is pushed
@@ -77,6 +79,8 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
+          flavor: |
+            latest=false
           images: ${{ steps.login-ecr.outputs.registry }}/${{ env.REPOSITORY }}
           tags: |
             type=semver,priority=900,pattern={{raw}}
