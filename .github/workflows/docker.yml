@@ -44,6 +44,8 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: ${{ steps.login-ecr.outputs.registry }}/${{ env.REPOSITORY }}
+          labels: |
+            org.opencontainers.image.licenses=OGL-UK-3.0
 
       # The combination of the original tags plus the sed calculated ones are combined and stored as a multiline string
       # in a new env var.
