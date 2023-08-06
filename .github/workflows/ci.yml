@@ -48,7 +48,6 @@ jobs:
         run: |
           RAW_TAG=$(git describe --always --tags)
           echo "raw_tag=$RAW_TAG" >> "$GITHUB_OUTPUT"
-          echo "Raw tag generated: $RAW_TAG" >> $GITHUB_STEP_SUMMARY
 
       - name: Check raw tag
         id: check-raw-tag
