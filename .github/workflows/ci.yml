@@ -18,23 +18,23 @@ jobs:
       ARCHIVE_BUCKET: file-archive-example-gov-uk
       BUCKET_AWS_REGION: eu-west-1
 
-    # Service containers to run with `runner-job`
-    services:
-      # Label used to access the service container
-      postgres:
-        # Docker Hub image
-        image: postgres:12.5-alpine
-        # Provide the password for postgres
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: pinafore
-          POSTGRES_DB: sroc_tcm_test
-        # Maps tcp port 5432 on service container to the host
-        ports:
-          - 5432:5432
-        # Set health checks to wait until postgres has started. You must have this so the runner knows to wait till
-        # postgres is up and running before proceeding
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    # # Service containers to run with `runner-job`
+    # services:
+    #   # Label used to access the service container
+    #   postgres:
+    #     # Docker Hub image
+    #     image: postgres:12.5-alpine
+    #     # Provide the password for postgres
+    #     env:
+    #       POSTGRES_USER: postgres
+    #       POSTGRES_PASSWORD: pinafore
+    #       POSTGRES_DB: sroc_tcm_test
+    #     # Maps tcp port 5432 on service container to the host
+    #     ports:
+    #       - 5432:5432
+    #     # Set health checks to wait until postgres has started. You must have this so the runner knows to wait till
+    #     # postgres is up and running before proceeding
+    #     options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       # Downloads a copy of the code in your repository before running CI tests
@@ -45,9 +45,8 @@ jobs:
 
       - name: Generate raw tag
         id: raw-tag
-        run: |
-          RAW_TAG=$(git describe --always --tags)
-          echo "raw_tag=$RAW_TAG" >> "$GITHUB_OUTPUT"
+        run:
+          echo "raw_tag=$(git describe --always --tags)" >> "$GITHUB_OUTPUT"
 
       - name: Check raw tag
         id: check-raw-tag
