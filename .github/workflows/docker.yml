@@ -35,7 +35,7 @@ jobs:
       # https://github.com/aws-actions/amazon-ecr-login
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+        uses: aws-actions/amazon-ecr-login@v2
 
       # Generate a unique tag
       # Most tutorials will suggest you just use the commit sha as a way of creating a unique tag for your image.
