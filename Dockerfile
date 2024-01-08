@@ -31,7 +31,7 @@ RUN addgroup -S appgroup && adduser -S app -G appgroup
 
 # force_ruby_platform:- Ignore the current machine's platform and install only ruby platform gems. As a result, gems
 # with native extensions will be compiled from source. This helps ensure the gems are built for this image
-RUN gem install bundler \
+RUN gem install bundler -v 2.4.22 \
   && bundle config force_ruby_platform true
 
 ################################################################################
