@@ -8,6 +8,7 @@ gem "rails", "~> 7.0"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.5"
 
+gem "airbrake", "~> 13.0"
 gem "aws-sdk", "~> 2"
 # bootstrap 4
 gem "bootstrap", "~> 4.3.1"
@@ -33,7 +34,6 @@ gem "secure_headers"
 # Use Uglifier as compressor for JavaScript assets
 gem "uglifier", "~> 4.2"
 gem "whenever", require: false
-gem "airbrake", "~> 13.0"
 
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem "turbolinks", "~> 5.2"
