@@ -33,6 +33,7 @@ gem "secure_headers"
 # Use Uglifier as compressor for JavaScript assets
 gem "uglifier", "~> 4.2"
 gem "whenever", require: false
+gem "airbrake", "~> 13.0"
 
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem "turbolinks", "~> 5.2"
@@ -72,7 +73,6 @@ group :test do
 end
 
 group :production do
-  gem "airbrake", "~> 13.0"
   # Use passenger as the app server in production. The environment web-ops have
   # built currently expects this to be the case
   gem "passenger", "~> 5.1", require: false
