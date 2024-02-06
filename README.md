@@ -16,6 +16,7 @@ This service is used by billing administration staff and internally facing only.
 Make sure you already have:
 
 - [Ruby 2.7.1](https://www.ruby-lang.org/en/)
+- [Bundler](http://bundler.io/)
 - [PostgreSQL v12](https://www.postgresql.org/)
 
 ## Installation
@@ -26,7 +27,17 @@ First clone the repository and then drop into your new local repo
 git clone https://github.com/DEFRA/sroc-tcm-admin.git && cd sroc-tcm-admin
 ```
 
-Our preference is to run the database and API within Docker, so [install Docker](https://docs.docker.com/get-docker/) if you don't already have it.
+Next download and install the dependencies
+
+```bash
+bundle install
+```
+
+## Running locally
+
+There is a separate project available that will build a fully working TCM environment, including an instance of **PostgreSQL** and [Errbit](https://errbit.com/) (used to capture errors) using [Docker](https://docs.docker.com/get-docker/). We recommend contacting the AWS web-ops team and requesting access to **tcm-dev-environment** on our internal GitLab instance.
+
+Else you can install and run the app directly on the host machine.
 
 ## Configuration
 
@@ -38,52 +49,41 @@ Check out [.env.example](/.env.example) for details of the required things you'l
 
 Refer to the [config files](config) for details of all the configuration used.
 
-## Docker
+## Databases
 
-As [Docker](https://www.docker.com/) is our chosen solution for deploying and managing the app in production we also use it for local development. The following will get an environment up and running quickly ready for development. It assumes 2 things
+> If you are running the **tcm-dev-environment**, you have nothing to do! All databases are already created and the appropriate ports opened for access from the host to the containers.
 
-- you have Docker installed
-- you are using [VSCode](https://code.visualstudio.com/) for development
+If you intend to run it standalone, you'll need to have [PostgreSQL](https://www.postgresql.org/) installed. Then call the following to create the databases for the develop and test environments and seed the DB.
 
-### Initial build
+```bash
+bundle exec rake db:reset
+bundle exec rake db:seed
+```
 
-Open the project in VSCode and then use the [Command palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette) to access the tasks we have provided in [tasks.json](.vscode/tasks.json)
+## Running the app
 
-With the palette open search for **Run test task** and once highlighted select it. From the list that's presented select **⬆️ UP (TCM)**
+> If you are running the **tcm-dev-environment**, you have nothing to do! The environment comes with VSCode custom tasks available from the [command palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette).
 
-You should see a new terminal open up and [Docker Compose](https://docs.docker.com/compose/) begin to start building the images. Once that is done it will switch to running the API in docker.
+Simply start the app using `bundle exec rails s`. If you are in an environment with other Rails apps running you might find the default port of 3000 is in use and so get an error.
 
-### Prep the databases
-
-The main database is automatically created but the 'test' database is not. Plus both need the [DB migrations](/db/migrate) to be run against them, and the main database needs to be [seeded](/db/seeds).
-
-The good news is all this is automated. Again, using the command palette and the **Run test task** option find and select **🗄️ DB (TCM)**. It will setup both databases and leave the API ready for use.
-
-> You can also use this same command to reset the databases at anytime
-
-### Non-vscode users
-
-If you are not a VSCode user it does not mean you cannot use Docker. Refer to [tasks.json](.vscode/tasks.json) for the commands being run and implement them in your preferred tool.
+If that's the case use `bundle exec rails s -p 8000` swapping `8000` for whatever port you want to use.
 
 ## Testing the app
 
 The project originally used [minitest](https://github.com/seattlerb/minitest) for unit testing. Any new tests should be written with [RSpec](https://rspec.info/) as it is the Defra standard for Ruby and Rails based projects. The existing minitests are slowly being reviewed and migrated to RSpec.
 
-To run both suites together use the command palette and the **Run test task** option to find and select
+```bash
+bundle exec rails test
+bundle exec rspec
+```
 
-- **✅ TEST (TCM)**
+Line coverage is combined from the output from both suites.
 
-To run just the minitest suite find and select
+We also use [rubocop](https://github.com/rubocop/rubocop) to lint the code.
 
-- **✅ MINITEST (TCM)**
-
-To run just the RSpec suite find and select
-
-- **✅ RSPEC (TCM)**
-
-We also use [rubocop](https://github.com/rubocop/rubocop) to lint the code. To run it find and select
-
-- **🔎 LINT (TCM)**
+```bash
+bundle exec rubocop
+```
 
 ### Test support endpoints
 
@@ -91,7 +91,7 @@ The app includes endpoints that support our [acceptance tests](https://github.co
 
 #### Non-production only
 
-Either because they are distructive or sensitive these endpoints are only available in non-production environments.
+Either because they are destructive or sensitive these endpoints are only available in non-production environments.
 
 > We are referring to when running it locally or in our development, test or pre-production environments. This is different to the Rails environment specified by `RAILS_ENV`.
 
@@ -100,7 +100,7 @@ Either because they are distructive or sensitive these endpoints are only availa
 
 #### Admin only
 
-Though built to support testing these endpoints are available in production but only by those with the `admin`. There may be times it would be helpful to peform these tasks outside of a test setting.
+Though built to support testing these endpoints are available in production but only by those with the `admin`. There may be times it would be helpful to perform these tasks outside of a test setting.
 
 - `/jobs/import` trigger the transaction file import process
 - `/jobs/export` trigger the transaction file export process

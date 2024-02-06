@@ -92,66 +92,6 @@ COPY . .
 RUN bundle exec rake assets:precompile
 
 ################################################################################
-# Create development rails [app] (final stage)
-#
-FROM rails_base AS development
-
-# Version information for the app. The app will use this information to let us the delivery team know exactly what
-# version we are running. The ARG value needs to be provided to make the value available during build. The ENV will
-# then get baked into the image and made available whenever a container is started. It is the responsibility of
-# whatever calls `docker build` to supply the GIT_COMMIT build arg.
-ARG GIT_COMMIT
-ENV GIT_COMMIT=$GIT_COMMIT
-
-# NOTE: This must always be left commented out. Here for documentation purposes only.
-# With us explicitly setting `RAILS_ENV` in the production stage plus if you follow most examples we'd be expected
-# to set it here. This is because any examples you follow assume you are building an image to run separate to the one
-# you intend to work in. But our intent for the development image is to run it always with a bind mount to our local
-# host so that we can edit locally and run in the docker container. Those same examples will then run the tests using a
-# dedicated test image. Instead we're replicating what we would do locally; running `bundle exec rspec` in the same
-# environment we're running our development instance. Because of this we found that _if_ `RAILS_ENV` is set to
-# `development` in an environment where tests are also being run they will break. The primary error for us was rspec
-# request tests and the fact `www.example.com` (which it uses as the root domain for GET, PATCH, POST requests etc) is
-# not a permitted address in `Rails.config.hosts`. If you don't set `RAILS_ENV` then rails will default to `development`
-# whern starting the server and `test` when running tests.
-# ENV RAILS_ENV=development
-
-# This RUN command adds dependencies we need to allow us to run the integration tests. Installing chrome on Alpine is
-# very difficult but chromimum is fine and just as good for our tests. We only add then to our development image to
-# support running the unit tests. This is not something we'd do in the production image.
-RUN apk add \
-  chromium \
-  chromium-chromedriver \
-  && rm -rf /var/cache/apk/*
-
-# Our chosen root directory for the app in the image
-WORKDIR /usr/src/app
-
-# Copy the gems generated in the gem_builder stage from its image to this one
-COPY --from=gem_builder /usr/src/gems /usr/src/gems
-
-# Copy in our source code last, as it changes the most and this improves build speeds. This means you can build and run
-# a container based on a development image independently. However, generally we'll bind mount to our host when running
-# the development container. This means as we make changes locally and see the changes in the running instance in the
-# development container
-COPY . .
-
-# This should be set in the project but just in case we ensure entrypoint.sh is executable
-RUN chmod +x entrypoint.sh
-
-# Specifiy listening port for the container
-EXPOSE 3000
-
-# This script will _always_ be run when a container is started. In the event we are restarting an existing container
-# there is a chance the `tmp/pids/server.pid` from the previous run remains. If left it would cause the app to error
-# with 'server already running'
-ENTRYPOINT [ "./entrypoint.sh" ]
-
-# This is the default cmd that will be run if an alternate is not passed in at the command line.
-# Use the "exec" form of CMD so rails shuts down gracefully on SIGTERM (i.e. `docker stop`)
-CMD [ "bundle", "exec", "rails", "s", "-b", "0.0.0.0", "-p", "3000" ]
-
-################################################################################
 # Create production rails [app] (final stage)
 #
 FROM rails_base AS production

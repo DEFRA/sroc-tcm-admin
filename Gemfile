@@ -8,6 +8,7 @@ gem "rails", "~> 7.0"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.5"
 
+gem "airbrake", "~> 13.0"
 gem "aws-sdk", "~> 2"
 # bootstrap 4
 gem "bootstrap", "~> 4.3.1"
@@ -72,5 +73,7 @@ group :test do
 end
 
 group :production do
-  gem "airbrake", "~> 13.0"
+  # Use passenger as the app server in production. The environment web-ops have
+  # built currently expects this to be the case
+  gem "passenger", "~> 5.1", require: false
 end

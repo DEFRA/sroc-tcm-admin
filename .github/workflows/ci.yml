@@ -17,6 +17,8 @@ jobs:
       FILE_UPLOAD_BUCKET: file-uploads-example-gov-uk
       ARCHIVE_BUCKET: file-archive-example-gov-uk
       BUCKET_AWS_REGION: eu-west-1
+      AIRBRAKE_HOST: http://errbit:3099
+      AIRBRAKE_KEY: 1ee041dc-3e8e-4e01-a704-2545b81d8909
 
     # Service containers to run with `runner-job`
     services:
