@@ -47,9 +47,8 @@ class AnnualBillingDataFilesController < ApplicationController
     @upload = data_service.upload(file_params)
 
     if @upload.errors.empty? && @upload.save
-      # start background job
-      AnnualBillingDataImportJob.perform_later(current_user.id, @upload.id)
-      # the show page will display progress while importing
+      # start import
+      AnnualBillingDataImportService.call(user: current_user, upload: @upload)
       redirect_to regime_annual_billing_data_file_path(@regime, @upload)
     else
       render "new"
