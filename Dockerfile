@@ -79,6 +79,13 @@ RUN apk del --no-cache build-dependencies
 # changes and see them immediately in the UI when developing
 FROM gem_builder AS asset_builder
 
+# Because the airbrake gem is expect to be used in all environments its initializer (config/initializers/errbit.rb) is
+# called which expects AIRBRAKE_HOST and AIRBRAKE_KEY to be present. Unfortunately, this is the case even when we are
+# just trying to generate the assets. So, to avoid an error during the build we set this to dummy values in this
+# stage. Real values will need to be provided when a container is started else the app will error.
+ENV AIRBRAKE_HOST=https://my-errbit-instance.com
+ENV AIRBRAKE_KEY=013b84e1-7b97-4779-9526-c754d423e8b3
+
 WORKDIR /usr/src/app
 
 # Pre-compile the assets
