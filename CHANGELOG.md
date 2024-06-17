@@ -1,15 +1,233 @@
 # Changelog
 
-## [v3.3.0](https://github.com/DEFRA/sroc-tcm-admin/tree/v3.3.0) (2022-02-23)
+## [v3.4.0](https://github.com/DEFRA/sroc-tcm-admin/tree/v3.4.0) (2024-02-08)
 
-[Full Changelog](https://github.com/DEFRA/sroc-tcm-admin/compare/v3.2.1...v3.3.0)
+[Full Changelog](https://github.com/DEFRA/sroc-tcm-admin/compare/v3.3.2...v3.4.0)
+
+**Implemented enhancements:**
+
+- Add back in Annual billing upload functionality [\#726](https://github.com/DEFRA/sroc-tcm-admin/pull/726) ([Cruikshanks](https://github.com/Cruikshanks))
+
+**Fixed bugs:**
+
+- Fix missing Airbrake env var breaking Docker build [\#725](https://github.com/DEFRA/sroc-tcm-admin/pull/725) ([Cruikshanks](https://github.com/Cruikshanks))
+- Fix local setup of docker environment [\#723](https://github.com/DEFRA/sroc-tcm-admin/pull/723) ([Cruikshanks](https://github.com/Cruikshanks))
 
 **Housekeeping updates:**
 
+- Changes to get back to AWS [\#724](https://github.com/DEFRA/sroc-tcm-admin/pull/724) ([Cruikshanks](https://github.com/Cruikshanks))
+
+**Dependency updates:**
+
+- Bump puma from 6.4.0 to 6.4.1 [\#722](https://github.com/DEFRA/sroc-tcm-admin/pull/722) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump airbrake from 13.0.3 to 13.0.4 [\#720](https://github.com/DEFRA/sroc-tcm-admin/pull/720) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump factory\_bot\_rails from 6.2.0 to 6.4.2 [\#719](https://github.com/DEFRA/sroc-tcm-admin/pull/719) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-rails from 6.0.3 to 6.1.0 [\#718](https://github.com/DEFRA/sroc-tcm-admin/pull/718) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails\_semantic\_logger from 4.13.0 to 4.14.0 [\#716](https://github.com/DEFRA/sroc-tcm-admin/pull/716) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails from 7.0.8 to 7.1.2 [\#715](https://github.com/DEFRA/sroc-tcm-admin/pull/715) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails\_semantic\_logger from 4.12.0 to 4.13.0 [\#714](https://github.com/DEFRA/sroc-tcm-admin/pull/714) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump devise\_invitable from 2.0.8 to 2.0.9 [\#713](https://github.com/DEFRA/sroc-tcm-admin/pull/713) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump devise from 4.9.2 to 4.9.3 [\#711](https://github.com/DEFRA/sroc-tcm-admin/pull/711) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump aws-actions/amazon-ecr-login from 1 to 2 [\#709](https://github.com/DEFRA/sroc-tcm-admin/pull/709) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 6.3.1 to 6.4.0 [\#708](https://github.com/DEFRA/sroc-tcm-admin/pull/708) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump docker/build-push-action from 4 to 5 [\#707](https://github.com/DEFRA/sroc-tcm-admin/pull/707) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump docker/metadata-action from 4 to 5 [\#706](https://github.com/DEFRA/sroc-tcm-admin/pull/706) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump aws-actions/configure-aws-credentials from 3 to 4 [\#705](https://github.com/DEFRA/sroc-tcm-admin/pull/705) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails from 7.0.7.2 to 7.0.8 [\#704](https://github.com/DEFRA/sroc-tcm-admin/pull/704) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump web-console from 4.2.0 to 4.2.1 [\#703](https://github.com/DEFRA/sroc-tcm-admin/pull/703) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump actions/checkout from 3 to 4 [\#702](https://github.com/DEFRA/sroc-tcm-admin/pull/702) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump pg from 1.5.3 to 1.5.4 [\#701](https://github.com/DEFRA/sroc-tcm-admin/pull/701) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump webmock from 3.19.0 to 3.19.1 [\#700](https://github.com/DEFRA/sroc-tcm-admin/pull/700) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump webmock from 3.18.1 to 3.19.0 [\#699](https://github.com/DEFRA/sroc-tcm-admin/pull/699) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump aws-actions/configure-aws-credentials from 2 to 3 [\#698](https://github.com/DEFRA/sroc-tcm-admin/pull/698) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails from 7.0.7 to 7.0.7.2 [\#697](https://github.com/DEFRA/sroc-tcm-admin/pull/697) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 6.3.0 to 6.3.1 [\#696](https://github.com/DEFRA/sroc-tcm-admin/pull/696) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails-i18n from 7.0.7 to 7.0.8 [\#695](https://github.com/DEFRA/sroc-tcm-admin/pull/695) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails from 7.0.6 to 7.0.7 [\#694](https://github.com/DEFRA/sroc-tcm-admin/pull/694) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v3.3.2](https://github.com/DEFRA/sroc-tcm-admin/tree/v3.3.2) (2023-08-06)
+
+[Full Changelog](https://github.com/DEFRA/sroc-tcm-admin/compare/v3.3.1...v3.3.2)
+
+**Fixed bugs:**
+
+- Disable latest tag handling in docker workflow [\#693](https://github.com/DEFRA/sroc-tcm-admin/pull/693) ([Cruikshanks](https://github.com/Cruikshanks))
+
+**Housekeeping updates:**
+
+- Fix docker.yml build labels [\#692](https://github.com/DEFRA/sroc-tcm-admin/pull/692) ([Cruikshanks](https://github.com/Cruikshanks))
+
+## [v3.3.1](https://github.com/DEFRA/sroc-tcm-admin/tree/v3.3.1) (2023-08-06)
+
+[Full Changelog](https://github.com/DEFRA/sroc-tcm-admin/compare/v3.3.0-db-test...v3.3.1)
+
+**Fixed bugs:**
+
+- Fix tags used in build-push-action [\#690](https://github.com/DEFRA/sroc-tcm-admin/pull/690) ([Cruikshanks](https://github.com/Cruikshanks))
+- Fix Docker raw tag generation [\#689](https://github.com/DEFRA/sroc-tcm-admin/pull/689) ([Cruikshanks](https://github.com/Cruikshanks))
+- Fix missed outdated docker workflow reference [\#686](https://github.com/DEFRA/sroc-tcm-admin/pull/686) ([Cruikshanks](https://github.com/Cruikshanks))
+- Fix repo details in Docker workflow [\#685](https://github.com/DEFRA/sroc-tcm-admin/pull/685) ([Cruikshanks](https://github.com/Cruikshanks))
+- Fix asset pre-compile in Docker build [\#677](https://github.com/DEFRA/sroc-tcm-admin/pull/677) ([Cruikshanks](https://github.com/Cruikshanks))
+
+**Housekeeping updates:**
+
+- Add job summary and comments to Docker workflow [\#691](https://github.com/DEFRA/sroc-tcm-admin/pull/691) ([Cruikshanks](https://github.com/Cruikshanks))
+- Amend docker tagging for AWS ECR [\#688](https://github.com/DEFRA/sroc-tcm-admin/pull/688) ([Cruikshanks](https://github.com/Cruikshanks))
+- Set licence label in Docker image [\#687](https://github.com/DEFRA/sroc-tcm-admin/pull/687) ([Cruikshanks](https://github.com/Cruikshanks))
+- Update docker workflow to include OIDC permissions [\#684](https://github.com/DEFRA/sroc-tcm-admin/pull/684) ([Cruikshanks](https://github.com/Cruikshanks))
+- Push built images to AWS ECR instead of GCR [\#683](https://github.com/DEFRA/sroc-tcm-admin/pull/683) ([Cruikshanks](https://github.com/Cruikshanks))
+- Update Dependabot config to check GitHub actions [\#678](https://github.com/DEFRA/sroc-tcm-admin/pull/678) ([Cruikshanks](https://github.com/Cruikshanks))
+
+**Dependency updates:**
+
+- Bump docker/login-action from 1 to 2 [\#682](https://github.com/DEFRA/sroc-tcm-admin/pull/682) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump docker/build-push-action from 2 to 4 [\#681](https://github.com/DEFRA/sroc-tcm-admin/pull/681) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump docker/metadata-action from 3 to 4 [\#680](https://github.com/DEFRA/sroc-tcm-admin/pull/680) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump actions/checkout from 2 to 3 [\#679](https://github.com/DEFRA/sroc-tcm-admin/pull/679) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump mocha from 2.0.4 to 2.1.0 [\#676](https://github.com/DEFRA/sroc-tcm-admin/pull/676) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump word-wrap from 1.2.3 to 1.2.4 [\#675](https://github.com/DEFRA/sroc-tcm-admin/pull/675) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v3.3.0-db-test](https://github.com/DEFRA/sroc-tcm-admin/tree/v3.3.0-db-test) (2023-07-17)
+
+[Full Changelog](https://github.com/DEFRA/sroc-tcm-admin/compare/v3.3.0...v3.3.0-db-test)
+
+**Implemented enhancements:**
+
+- Add non-UI endpoint to trigger data export process [\#569](https://github.com/DEFRA/sroc-tcm-admin/pull/569) ([Cruikshanks](https://github.com/Cruikshanks))
+- Switch to GOV.UK Notify for email [\#546](https://github.com/DEFRA/sroc-tcm-admin/pull/546) ([Cruikshanks](https://github.com/Cruikshanks))
+- Add test-only reset DB endpoint [\#544](https://github.com/DEFRA/sroc-tcm-admin/pull/544) ([Cruikshanks](https://github.com/Cruikshanks))
+- Add non-UI endpoint to trigger file export process [\#534](https://github.com/DEFRA/sroc-tcm-admin/pull/534) ([Cruikshanks](https://github.com/Cruikshanks))
+- Add ability to read last email for testing [\#533](https://github.com/DEFRA/sroc-tcm-admin/pull/533) ([Cruikshanks](https://github.com/Cruikshanks))
+- Update logging and use JSON format [\#529](https://github.com/DEFRA/sroc-tcm-admin/pull/529) ([Cruikshanks](https://github.com/Cruikshanks))
+- Add Docker support to the project [\#515](https://github.com/DEFRA/sroc-tcm-admin/pull/515) ([Cruikshanks](https://github.com/Cruikshanks))
+
+**Fixed bugs:**
+
+- Fix asset compile and running app in Docker [\#673](https://github.com/DEFRA/sroc-tcm-admin/pull/673) ([Cruikshanks](https://github.com/Cruikshanks))
+- Fix github actions not triggering for forks [\#636](https://github.com/DEFRA/sroc-tcm-admin/pull/636) ([Cruikshanks](https://github.com/Cruikshanks))
+- Fix issue with missing pids/ folder for puma [\#627](https://github.com/DEFRA/sroc-tcm-admin/pull/627) ([Cruikshanks](https://github.com/Cruikshanks))
+- Fix broken change password view [\#555](https://github.com/DEFRA/sroc-tcm-admin/pull/555) ([Cruikshanks](https://github.com/Cruikshanks))
+- Fix missing export data file after clean [\#550](https://github.com/DEFRA/sroc-tcm-admin/pull/550) ([Cruikshanks](https://github.com/Cruikshanks))
+- Fix Docker broken by missing Notify key [\#549](https://github.com/DEFRA/sroc-tcm-admin/pull/549) ([Cruikshanks](https://github.com/Cruikshanks))
+- Fix broken accept invitation view [\#547](https://github.com/DEFRA/sroc-tcm-admin/pull/547) ([Cruikshanks](https://github.com/Cruikshanks))
+- Fix missing keys\(\) method in form\_error\_helper [\#542](https://github.com/DEFRA/sroc-tcm-admin/pull/542) ([Cruikshanks](https://github.com/Cruikshanks))
+
+**Security fixes:**
+
+- Bump rack from 2.2.6.2 to 2.2.6.3 [\#639](https://github.com/DEFRA/sroc-tcm-admin/pull/639) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+**Housekeeping updates:**
+
+- Update Gemfile to match lock [\#674](https://github.com/DEFRA/sroc-tcm-admin/pull/674) ([Cruikshanks](https://github.com/Cruikshanks))
+- Remove spring [\#672](https://github.com/DEFRA/sroc-tcm-admin/pull/672) ([Cruikshanks](https://github.com/Cruikshanks))
+- Add auto-merge GitHub workflow [\#663](https://github.com/DEFRA/sroc-tcm-admin/pull/663) ([Cruikshanks](https://github.com/Cruikshanks))
+- Parameterise the AWS bucket region [\#632](https://github.com/DEFRA/sroc-tcm-admin/pull/632) ([sweavers-defra](https://github.com/sweavers-defra))
+- Reset exported\_data\_files table during clean [\#570](https://github.com/DEFRA/sroc-tcm-admin/pull/570) ([Cruikshanks](https://github.com/Cruikshanks))
+- Seed additional test data [\#548](https://github.com/DEFRA/sroc-tcm-admin/pull/548) ([Cruikshanks](https://github.com/Cruikshanks))
+- Use TCM\_ENVIRONMENT for all test endpoints [\#545](https://github.com/DEFRA/sroc-tcm-admin/pull/545) ([Cruikshanks](https://github.com/Cruikshanks))
+- Remove Coverband [\#539](https://github.com/DEFRA/sroc-tcm-admin/pull/539) ([Cruikshanks](https://github.com/Cruikshanks))
+- Fix sonarcloud properties file [\#538](https://github.com/DEFRA/sroc-tcm-admin/pull/538) ([Cruikshanks](https://github.com/Cruikshanks))
+- Update Airbrake project key env var [\#537](https://github.com/DEFRA/sroc-tcm-admin/pull/537) ([Cruikshanks](https://github.com/Cruikshanks))
+- Add build Docker image Github Action to CI [\#536](https://github.com/DEFRA/sroc-tcm-admin/pull/536) ([Cruikshanks](https://github.com/Cruikshanks))
+- Update web console config to allowed\_ips [\#532](https://github.com/DEFRA/sroc-tcm-admin/pull/532) ([Cruikshanks](https://github.com/Cruikshanks))
+- Add restart VSCode task [\#531](https://github.com/DEFRA/sroc-tcm-admin/pull/531) ([Cruikshanks](https://github.com/Cruikshanks))
+- Remove references to vagrant [\#528](https://github.com/DEFRA/sroc-tcm-admin/pull/528) ([Cruikshanks](https://github.com/Cruikshanks))
 - Add exclusion reasons to seeding [\#502](https://github.com/DEFRA/sroc-tcm-admin/pull/502) ([Cruikshanks](https://github.com/Cruikshanks))
 
 **Dependency updates:**
 
+- Bump rails from 7.0.5 to 7.0.6 [\#671](https://github.com/DEFRA/sroc-tcm-admin/pull/671) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump jquery-rails from 4.5.1 to 4.6.0 [\#669](https://github.com/DEFRA/sroc-tcm-admin/pull/669) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump mocha from 2.0.2 to 2.0.4 [\#668](https://github.com/DEFRA/sroc-tcm-admin/pull/668) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump capybara from 3.39.1 to 3.39.2 [\#667](https://github.com/DEFRA/sroc-tcm-admin/pull/667) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 6.2.2 to 6.3.0 [\#666](https://github.com/DEFRA/sroc-tcm-admin/pull/666) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-rails from 6.0.2 to 6.0.3 [\#665](https://github.com/DEFRA/sroc-tcm-admin/pull/665) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails from 7.0.4.3 to 7.0.5 [\#664](https://github.com/DEFRA/sroc-tcm-admin/pull/664) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump capybara from 3.39.0 to 3.39.1 [\#662](https://github.com/DEFRA/sroc-tcm-admin/pull/662) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails-i18n from 7.0.6 to 7.0.7 [\#661](https://github.com/DEFRA/sroc-tcm-admin/pull/661) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-rails from 6.0.1 to 6.0.2 [\#659](https://github.com/DEFRA/sroc-tcm-admin/pull/659) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump pg from 1.5.2 to 1.5.3 [\#657](https://github.com/DEFRA/sroc-tcm-admin/pull/657) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump devise\_invitable from 2.0.7 to 2.0.8 [\#656](https://github.com/DEFRA/sroc-tcm-admin/pull/656) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump pg from 1.5.1 to 1.5.2 [\#655](https://github.com/DEFRA/sroc-tcm-admin/pull/655) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump pg from 1.4.6 to 1.5.1 [\#654](https://github.com/DEFRA/sroc-tcm-admin/pull/654) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump selenium-webdriver from 4.8.6 to 4.9.0 [\#653](https://github.com/DEFRA/sroc-tcm-admin/pull/653) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 6.2.1 to 6.2.2 [\#652](https://github.com/DEFRA/sroc-tcm-admin/pull/652) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump devise from 4.9.0 to 4.9.2 [\#650](https://github.com/DEFRA/sroc-tcm-admin/pull/650) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump capybara from 3.38.0 to 3.39.0 [\#649](https://github.com/DEFRA/sroc-tcm-admin/pull/649) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 6.1.1 to 6.2.1 [\#647](https://github.com/DEFRA/sroc-tcm-admin/pull/647) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump selenium-webdriver from 4.8.3 to 4.8.6 [\#645](https://github.com/DEFRA/sroc-tcm-admin/pull/645) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails\_semantic\_logger from 4.11.0 to 4.12.0 [\#643](https://github.com/DEFRA/sroc-tcm-admin/pull/643) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump selenium-webdriver from 4.8.1 to 4.8.3 [\#642](https://github.com/DEFRA/sroc-tcm-admin/pull/642) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails from 7.0.4.2 to 7.0.4.3 [\#640](https://github.com/DEFRA/sroc-tcm-admin/pull/640) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 6.1.0 to 6.1.1 [\#638](https://github.com/DEFRA/sroc-tcm-admin/pull/638) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump pg from 1.4.5 to 1.4.6 [\#637](https://github.com/DEFRA/sroc-tcm-admin/pull/637) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump devise from 4.8.1 to 4.9.0 [\#635](https://github.com/DEFRA/sroc-tcm-admin/pull/635) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump selenium-webdriver from 4.8.0 to 4.8.1 [\#634](https://github.com/DEFRA/sroc-tcm-admin/pull/634) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump database\_cleaner-active\_record from 2.0.1 to 2.1.0 [\#633](https://github.com/DEFRA/sroc-tcm-admin/pull/633) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 6.0.2 to 6.1.0 [\#631](https://github.com/DEFRA/sroc-tcm-admin/pull/631) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails from 7.0.4.1 to 7.0.4.2 [\#629](https://github.com/DEFRA/sroc-tcm-admin/pull/629) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump selenium-webdriver from 4.7.1 to 4.8.0 [\#628](https://github.com/DEFRA/sroc-tcm-admin/pull/628) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails from 7.0.4 to 7.0.4.1 [\#626](https://github.com/DEFRA/sroc-tcm-admin/pull/626) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump devise\_invitable from 2.0.6 to 2.0.7 [\#625](https://github.com/DEFRA/sroc-tcm-admin/pull/625) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump json5 from 1.0.1 to 1.0.2 [\#624](https://github.com/DEFRA/sroc-tcm-admin/pull/624) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 5.6.5 to 6.0.2 [\#623](https://github.com/DEFRA/sroc-tcm-admin/pull/623) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails-html-sanitizer from 1.4.3 to 1.4.4 [\#621](https://github.com/DEFRA/sroc-tcm-admin/pull/621) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump loofah from 2.19.0 to 2.19.1 [\#620](https://github.com/DEFRA/sroc-tcm-admin/pull/620) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.13.9 to 1.13.10 [\#619](https://github.com/DEFRA/sroc-tcm-admin/pull/619) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump minimatch from 3.0.4 to 3.1.2 [\#618](https://github.com/DEFRA/sroc-tcm-admin/pull/618) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump selenium-webdriver from 4.6.1 to 4.7.1 [\#617](https://github.com/DEFRA/sroc-tcm-admin/pull/617) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump pg from 1.4.4 to 1.4.5 [\#615](https://github.com/DEFRA/sroc-tcm-admin/pull/615) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump jquery-rails from 4.5.0 to 4.5.1 [\#614](https://github.com/DEFRA/sroc-tcm-admin/pull/614) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails\_semantic\_logger from 4.10.0 to 4.11.0 [\#613](https://github.com/DEFRA/sroc-tcm-admin/pull/613) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails-i18n from 7.0.5 to 7.0.6 [\#612](https://github.com/DEFRA/sroc-tcm-admin/pull/612) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump mocha from 2.0.0 to 2.0.2 [\#611](https://github.com/DEFRA/sroc-tcm-admin/pull/611) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump capybara from 3.37.1 to 3.38.0 [\#610](https://github.com/DEFRA/sroc-tcm-admin/pull/610) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump selenium-webdriver from 4.5.0 to 4.6.1 [\#609](https://github.com/DEFRA/sroc-tcm-admin/pull/609) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump mocha from 1.16.0 to 2.0.0 [\#608](https://github.com/DEFRA/sroc-tcm-admin/pull/608) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump secure\_headers from 6.4.0 to 6.5.0 [\#607](https://github.com/DEFRA/sroc-tcm-admin/pull/607) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump mocha from 1.15.0 to 1.16.0 [\#606](https://github.com/DEFRA/sroc-tcm-admin/pull/606) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.13.8 to 1.13.9 [\#605](https://github.com/DEFRA/sroc-tcm-admin/pull/605) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-rails from 5.1.2 to 6.0.1 [\#604](https://github.com/DEFRA/sroc-tcm-admin/pull/604) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump pg from 1.4.3 to 1.4.4 [\#595](https://github.com/DEFRA/sroc-tcm-admin/pull/595) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump notifications-ruby-client from 5.3.0 to 5.4.0 [\#593](https://github.com/DEFRA/sroc-tcm-admin/pull/593) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump selenium-webdriver from 4.4.0 to 4.5.0 [\#592](https://github.com/DEFRA/sroc-tcm-admin/pull/592) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump mocha from 1.14.0 to 1.15.0 [\#591](https://github.com/DEFRA/sroc-tcm-admin/pull/591) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump airbrake from 13.0.2 to 13.0.3 [\#590](https://github.com/DEFRA/sroc-tcm-admin/pull/590) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails from 7.0.3.1 to 7.0.4 [\#589](https://github.com/DEFRA/sroc-tcm-admin/pull/589) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 5.6.4 to 5.6.5 [\#588](https://github.com/DEFRA/sroc-tcm-admin/pull/588) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump webmock from 3.17.1 to 3.18.1 [\#587](https://github.com/DEFRA/sroc-tcm-admin/pull/587) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump pg from 1.4.2 to 1.4.3 [\#586](https://github.com/DEFRA/sroc-tcm-admin/pull/586) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump selenium-webdriver from 4.3.0 to 4.4.0 [\#585](https://github.com/DEFRA/sroc-tcm-admin/pull/585) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump webmock from 3.16.0 to 3.17.1 [\#584](https://github.com/DEFRA/sroc-tcm-admin/pull/584) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump webmock from 3.14.0 to 3.16.0 [\#582](https://github.com/DEFRA/sroc-tcm-admin/pull/582) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump secure\_headers from 6.3.4 to 6.4.0 [\#581](https://github.com/DEFRA/sroc-tcm-admin/pull/581) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump pg from 1.4.1 to 1.4.2 [\#580](https://github.com/DEFRA/sroc-tcm-admin/pull/580) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump dotenv-rails from 2.7.6 to 2.8.1 [\#579](https://github.com/DEFRA/sroc-tcm-admin/pull/579) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails from 7.0.3 to 7.0.3.1 [\#577](https://github.com/DEFRA/sroc-tcm-admin/pull/577) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails-i18n from 7.0.3 to 7.0.5 [\#576](https://github.com/DEFRA/sroc-tcm-admin/pull/576) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump secure\_headers from 6.3.3 to 6.3.4 [\#575](https://github.com/DEFRA/sroc-tcm-admin/pull/575) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump pg from 1.3.5 to 1.4.1 [\#574](https://github.com/DEFRA/sroc-tcm-admin/pull/574) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump selenium-webdriver from 4.2.1 to 4.3.0 [\#573](https://github.com/DEFRA/sroc-tcm-admin/pull/573) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump jmespath from 1.4.0 to 1.6.1 [\#571](https://github.com/DEFRA/sroc-tcm-admin/pull/571) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump selenium-webdriver from 4.2.0 to 4.2.1 [\#568](https://github.com/DEFRA/sroc-tcm-admin/pull/568) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.3 to 2.2.3.1 [\#567](https://github.com/DEFRA/sroc-tcm-admin/pull/567) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump selenium-webdriver from 4.1.0 to 4.2.0 [\#566](https://github.com/DEFRA/sroc-tcm-admin/pull/566) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump jquery-rails from 4.4.0 to 4.5.0 [\#565](https://github.com/DEFRA/sroc-tcm-admin/pull/565) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump airbrake from 13.0.0 to 13.0.2 [\#564](https://github.com/DEFRA/sroc-tcm-admin/pull/564) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump capybara from 3.36.0 to 3.37.1 [\#561](https://github.com/DEFRA/sroc-tcm-admin/pull/561) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails from 7.0.2.3 to 7.0.3 [\#560](https://github.com/DEFRA/sroc-tcm-admin/pull/560) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump mocha from 1.13.0 to 1.14.0 [\#557](https://github.com/DEFRA/sroc-tcm-admin/pull/557) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-rails from 5.1.1 to 5.1.2 [\#556](https://github.com/DEFRA/sroc-tcm-admin/pull/556) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.13.3 to 1.13.4 [\#554](https://github.com/DEFRA/sroc-tcm-admin/pull/554) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump minimist from 1.2.5 to 1.2.6 [\#553](https://github.com/DEFRA/sroc-tcm-admin/pull/553) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump pg from 1.3.4 to 1.3.5 [\#552](https://github.com/DEFRA/sroc-tcm-admin/pull/552) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 5.6.2 to 5.6.4 [\#551](https://github.com/DEFRA/sroc-tcm-admin/pull/551) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump pg from 1.3.3 to 1.3.4 [\#543](https://github.com/DEFRA/sroc-tcm-admin/pull/543) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails from 7.0.2.2 to 7.0.2.3 [\#541](https://github.com/DEFRA/sroc-tcm-admin/pull/541) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-rails from 5.1.0 to 5.1.1 [\#540](https://github.com/DEFRA/sroc-tcm-admin/pull/540) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails-i18n from 7.0.2 to 7.0.3 [\#535](https://github.com/DEFRA/sroc-tcm-admin/pull/535) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.13.1 to 1.13.3 [\#530](https://github.com/DEFRA/sroc-tcm-admin/pull/530) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump pg from 1.3.0 to 1.3.3 [\#527](https://github.com/DEFRA/sroc-tcm-admin/pull/527) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump rails-i18n from 7.0.1 to 7.0.2 [\#525](https://github.com/DEFRA/sroc-tcm-admin/pull/525) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump coverband from 5.2.1 to 5.2.2 [\#524](https://github.com/DEFRA/sroc-tcm-admin/pull/524) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump rails from 7.0.1 to 7.0.2.2 [\#523](https://github.com/DEFRA/sroc-tcm-admin/pull/523) ([dependabot[bot]](https://github.com/apps/dependabot))
@@ -24,8 +242,15 @@
 - Bump rails-i18n from 6.0.0 to 7.0.1 [\#510](https://github.com/DEFRA/sroc-tcm-admin/pull/510) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump jbuilder from 2.11.3 to 2.11.5 [\#508](https://github.com/DEFRA/sroc-tcm-admin/pull/508) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump devise from 4.8.0 to 4.8.1 [\#506](https://github.com/DEFRA/sroc-tcm-admin/pull/506) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Bump devise\_invitable from 2.0.5 to 2.0.6 [\#505](https://github.com/DEFRA/sroc-tcm-admin/pull/505) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump rails from 6.1.4.1 to 6.1.4.4 [\#504](https://github.com/DEFRA/sroc-tcm-admin/pull/504) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+**Merged pull requests:**
+
+- Fix issue with missing pids/ folder \(again!\) [\#630](https://github.com/DEFRA/sroc-tcm-admin/pull/630) ([Cruikshanks](https://github.com/Cruikshanks))
+
+## [v3.3.0](https://github.com/DEFRA/sroc-tcm-admin/tree/v3.3.0) (2023-05-02)
+
+[Full Changelog](https://github.com/DEFRA/sroc-tcm-admin/compare/v3.2.1...v3.3.0)
 
 ## [v3.2.1](https://github.com/DEFRA/sroc-tcm-admin/tree/v3.2.1) (2021-12-02)
 
@@ -69,6 +294,7 @@
 
 **Dependency updates:**
 
+- Bump devise\_invitable from 2.0.5 to 2.0.6 [\#505](https://github.com/DEFRA/sroc-tcm-admin/pull/505) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump selenium-webdriver from 4.0.3 to 4.1.0 [\#501](https://github.com/DEFRA/sroc-tcm-admin/pull/501) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump web-console from 4.1.0 to 4.2.0 [\#500](https://github.com/DEFRA/sroc-tcm-admin/pull/500) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump jbuilder from 2.11.2 to 2.11.3 [\#499](https://github.com/DEFRA/sroc-tcm-admin/pull/499) ([dependabot[bot]](https://github.com/apps/dependabot))
@@ -166,6 +392,7 @@
 - Bump webmock from 3.12.1 to 3.12.2 [\#407](https://github.com/DEFRA/sroc-tcm-admin/pull/407) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump oauth2 from 1.4.4 to 1.4.7 [\#404](https://github.com/DEFRA/sroc-tcm-admin/pull/404) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump rspec-rails from 5.0.0 to 5.0.1 [\#403](https://github.com/DEFRA/sroc-tcm-admin/pull/403) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 5.2.1 to 5.2.2 [\#398](https://github.com/DEFRA/sroc-tcm-admin/pull/398) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [v3.0.0](https://github.com/DEFRA/sroc-tcm-admin/tree/v3.0.0) (2021-03-12)
 
@@ -228,7 +455,6 @@
 - Bump elliptic from 6.5.3 to 6.5.4 [\#402](https://github.com/DEFRA/sroc-tcm-admin/pull/402) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump rspec-rails from 4.0.2 to 5.0.0 [\#401](https://github.com/DEFRA/sroc-tcm-admin/pull/401) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump webmock from 3.11.3 to 3.12.1 [\#400](https://github.com/DEFRA/sroc-tcm-admin/pull/400) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Bump puma from 5.2.1 to 5.2.2 [\#398](https://github.com/DEFRA/sroc-tcm-admin/pull/398) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump webmock from 3.11.2 to 3.11.3 [\#396](https://github.com/DEFRA/sroc-tcm-admin/pull/396) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump rails from 6.0.3.4 to 6.0.3.5 [\#395](https://github.com/DEFRA/sroc-tcm-admin/pull/395) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump eslint-plugin-promise from 4.2.1 to 4.3.1 [\#394](https://github.com/DEFRA/sroc-tcm-admin/pull/394) ([dependabot[bot]](https://github.com/apps/dependabot))
